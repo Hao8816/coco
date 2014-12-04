@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
+    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/Socket.io/socket.io-1.2.0.js"></script>
+    <script type="text/javascript" src="/AngularJs/angular.js"></script>
+    <script type="text/javascript" src="/AngularJs/angular-route.js"></script>
+    <script type="text/javascript">
+        var client = io.connect('http://127.0.0.1:8089');
+        client.on('connect',function() {
+            console.log('Client has connected to the server!');
+        });
+
+
+
+
+    </script>
+</head>
+<body>
+<h1><%= title %></h1>
+
+<p>Welcome to <%= title %></p>
+
+<div style="height: 400px;width: 450px;background-color: #f5f5f5;margin: 10px;padding: 5px;">
+    <div id="chat-history" style="height: 355px;background-color: #fff;width: 100%;">
+
+    </div>
+    <div>
+        <input type="text" class="form-control input-sm-4"/>
+    </div>
+</div>
+</body>
+</html>
