@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
     <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/AngularJs/angular.js"></script>
     <script type="text/javascript">
         $(function(){
 
         });
+        function cocoPageViewNav($scope){
+            alert('this is a test');
+        }
     </script>
     <style type="text/css">
         .coco-nav-list ul{
@@ -23,6 +27,7 @@
             background-color: #eee;
         }
     </style>
+
 </head>
 <body>
 <div class="container-fluid">
@@ -33,10 +38,13 @@
                 <p>Welcome to <%= title %></p>
                 <i style="position: absolute;right: 10px;top:10px;" class="glyphicon glyphicon-cog"></i>
             </div>
+            <div ng-view="">
+
+            </div>
             <div class="coco-toolbar" style="padding: 10px;border-bottom: 1px solid #ddd">
                 <input type="text" class="form-control input-sm" style="border-radius: 15px;" placeholder="coco name"/>
             </div>
-            <div class="coco-nav-list" style="height: 500px;background-color: #fff">
+            <div ng-controller="cocoPageViewNav" class="coco-nav-list" style="height: 500px;background-color: #fff">
                 <ul>
                     <li class="col-xs-3 col-md-12">COCO HOME</li>
                     <li class="col-xs-3 col-md-12">COCO SHARE</li>
