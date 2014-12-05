@@ -9,9 +9,13 @@ io.on('connection',function(socket){
     console.log('receive a socket connection');
     //io.sockets.socket(socket.id).emit('message', 'for your eyes only');
     socket.on('connect',function(){
+        //socket.set('user_name','chenhao');
         console.log(socket.id);
     });
     socket.on('message',function(msg){
+        //socket.get('user_name',function(user_name){
+        //    console.log(user_name);
+        //})
         console.log(msg);
         // 根据不同的发送者，来分发消息
         socket.broadcast.emit('message',msg);

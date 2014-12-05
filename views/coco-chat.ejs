@@ -13,14 +13,27 @@
             console.log('Client has connected to the server!');
         });
        client.on('message',function(data) {
-            console.log(data) 
+            console.log(data);
+           $('#chat-history').append('<li>'+data+'</li>');
         });
        client.on('disconnect',function() {
             console.log('Client has disconnected from the server!');
         });
-       client.send('message from chenhao')
+       //client.send('message from chenhao')
 
+        function bindEnterKeySend(e){
+            var e = e || window.event;
+            if(e.keyCode == 13){
+                sendMessage();
+            }
+        }
 
+        function sendMessage() {
+            var message = $('#chat-input').val();
+            var date = new Date();
+            //client.set('user_name',date.getTime());
+            client.send(message);
+        }
     </script>
 </head>
 <body>
@@ -33,7 +46,13 @@
 
     </div>
     <div>
-        <input type="text" class="form-control input-sm-4"/>
+        <div class="col-md-10">
+            <input id="chat-input" type="text" class="form-control input-sm-4" onkeydown="bindEnterKeySend(event)"/>
+        </div>
+        <div class="col-md-2">
+            <span class="btn btn-success btn-sm" onclick="sendMessage()"> Send</span>
+        </div>
+
     </div>
 </div>
 </body>
