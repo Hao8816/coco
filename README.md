@@ -5,7 +5,7 @@ COCO 是一个基于Nodejs Express，Socket.Io,AngularJs,Bootstrap3构建的一�
 #### Express
 ----
 web application framework for node
-Express [http://expressjs.com/]
+ [Express](http://expressjs.com/)
 
 #### Socket.IO
 ----
