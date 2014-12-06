@@ -12,7 +12,7 @@ io.on('connection',function(socket){
     //io.sockets.socket(socket.id).emit('message', 'for your eyes only');
     socket.on('connect',function(){
         //socket.set('user_name','chenhao');
-        console.log(socket.id);
+        //console.log(socket.id);
     });
     socket.on('LOGIN_MESSAGE_SERVER',function(msg){
         var user_name = msg['user_name'];
@@ -38,9 +38,13 @@ io.on('connection',function(socket){
             if(data == null){
                 console.log('Send Message Error');
             }else{
-                io.sockets.socket(data).emit('CHAT_MESSAGE');
+                if (io.sockets.connected[data]) {
+                    io.sockets.connected[data].emit('CHAT_MESSAGE',chat_message);
+                }else{
+                    console.log('Can not find Socket!')
+                }
             }
-        })
+        });
 
         //socket.broadcast.emit('message',msg);
     });
@@ -48,7 +52,7 @@ io.on('connection',function(socket){
         console.log(msg);
     });
     socket.on('disconnect',function(msg){
-        console.log(msg);
+        console.log(msg+'----');
         io.emit('message',msg);
     });
 });
