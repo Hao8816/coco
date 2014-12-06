@@ -1,4 +1,6 @@
 var app = require('express')();
+var redis = require('redis');
+var redis_client = redis.createClient();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
@@ -12,13 +14,38 @@ io.on('connection',function(socket){
         //socket.set('user_name','chenhao');
         console.log(socket.id);
     });
-    socket.on('message',function(msg){
-        //socket.get('user_name',function(user_name){
-        //    console.log(user_name);
-        //})
+    socket.on('LOGIN_MESSAGE_SERVER',function(msg){
+        var user_name = msg['user_name'];
+        console.log(user_name);
+        this.emit('LOGIN_MESSAGE_SUCCESS',this.id);
+        redis_client.hset('CHAT_USER_STORE',user_name,this.id,function(err){
+            if(err){
+                console.log(err);
+            }
+        })
+    });
+    socket.on('CHAT_MESSAGE',function(msg){
         console.log(msg);
+        // get friend name
+        var friend_name = msg['friend_name'];
+        var chat_message = msg['chat_message'];
         // 根据不同的发送者，来分发消息
-        socket.broadcast.emit('message',msg);
+        // get user session id by name
+        redis_client.hget('CHAT_USER_STORE',friend_name,function(err,data){
+            if(err){
+                console.log(err);
+            }
+            if(data == null){
+                console.log('Send Message Error');
+            }else{
+                io.sockets.socket(data).emit('CHAT_MESSAGE');
+            }
+        })
+
+        //socket.broadcast.emit('message',msg);
+    });
+    socket.on('set_name',function(msg){
+        console.log(msg);
     });
     socket.on('disconnect',function(msg){
         console.log(msg);

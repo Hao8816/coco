@@ -16,6 +16,9 @@
             console.log(data);
            $('#chat-history').append('<li>'+data+'</li>');
         });
+        client.on('LOGIN_MESSAGE_SUCCESS',function(data){
+            $('#login_status').html('<p style="color: #09c"> Session ID:'+data+'</p>');
+        });
        client.on('disconnect',function() {
             console.log('Client has disconnected from the server!');
         });
@@ -24,33 +27,48 @@
         function bindEnterKeySend(e){
             var e = e || window.event;
             if(e.keyCode == 13){
-                sendMessage();
+                sendChatMessage();
             }
         }
 
-        function sendMessage() {
+        function sendChatMessage() {
             var message = $('#chat-input').val();
-            var date = new Date();
-            //client.set('user_name',date.getTime());
-            client.send(message);
+            var friend_name = $('#friend_name').val();
+            client.emit('CHAT_MESSAGE',{'friend_name':friend_name,'chat_message':message});
+            //client.send(message);
         }
+        function loginMessageServer(){
+            var my_name = $('#my_name').val();
+            client.emit('LOGIN_MESSAGE_SERVER',{'user_name':my_name});
+        }
+
     </script>
 </head>
 <body>
 <h1><%= title %></h1>
 
 <p>Welcome to <%= title %></p>
-
+<div class="col-md-12" style="width: 400px;height: 40px;">
+    <div class="col-xs-5 col-sm-5 col-md-5">
+        <input id="my_name" placeholder="Your Name" type="text" class="form-control input-sm"/>
+    </div>
+    <div class="col-xs-5 col-sm-5 col-md-5">
+        <input id="friend_name" placeholder="Friend Name" type="text" class="form-control input-sm"/>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+        <span class="btn btn-sm btn-success" onclick="loginMessageServer()">Login Chat Server</span>
+    </div>
+    <p id="login_status"></p>
+</div>
 <div style="height: 400px;width: 450px;background-color: #f5f5f5;margin: 10px;padding: 5px;">
     <div id="chat-history" style="height: 355px;background-color: #fff;width: 100%;">
-
     </div>
-    <div>
-        <div class="col-md-10">
-            <input id="chat-input" type="text" class="form-control input-sm-4" onkeydown="bindEnterKeySend(event)"/>
+    <div style="padding: 2px;">
+        <div class="col-xs-10 col-sm-10 col-md-10">
+            <input id="chat-input" type="text" class="form-control input-sm" onkeydown="bindEnterKeySend(event)"/>
         </div>
-        <div class="col-md-2">
-            <span class="btn btn-success btn-sm" onclick="sendMessage()"> Send</span>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <span class="btn btn-success btn-sm" onclick="sendChatMessage()"> Send</span>
         </div>
 
     </div>
