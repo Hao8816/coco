@@ -17,7 +17,7 @@ io.on('connection',function(socket){
     socket.on('LOGIN_MESSAGE_SERVER',function(msg){
         var user_name = msg['user_name'];
         console.log(user_name);
-        this.emit('LOGIN_MESSAGE_SUCCESS',this.id);
+        this.emit('LOGIN_MESSAGE_SUCCESS',{'user_name':user_name,'socket_id':this.id});
         redis_client.hset('CHAT_USER_STORE',user_name,this.id,function(err){
             if(err){
                 console.log(err);
@@ -28,6 +28,7 @@ io.on('connection',function(socket){
         console.log(msg);
         // get friend name
         var friend_name = msg['friend_name'];
+        var my_name = msg['my_name'];
         var chat_message = msg['chat_message'];
         // 根据不同的发送者，来分发消息
         // get user session id by name
@@ -39,7 +40,7 @@ io.on('connection',function(socket){
                 console.log('Send Message Error');
             }else{
                 if (io.sockets.connected[data]) {
-                    io.sockets.connected[data].emit('CHAT_MESSAGE',chat_message);
+                    io.sockets.connected[data].emit('CHAT_MESSAGE',{'friend_name':my_name,'my_name':friend_name,'chat_message':chat_message});
                 }else{
                     console.log('Can not find Socket!')
                 }

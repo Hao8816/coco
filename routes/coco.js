@@ -7,7 +7,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/chat/', function(req, res) {
-    res.render('coco-chat.ejs', { title: 'COCO Chat room' });
+    res.render('coco-chat.ejs', { title: 'COCO Chat' });
 });
 
 module.exports = router;

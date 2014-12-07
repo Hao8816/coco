@@ -4,6 +4,7 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
     <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
     <script type="text/javascript" src="/Socket.io/socket.io-1.2.0.js"></script>
     <script type="text/javascript" src="/AngularJs/angular.js"></script>
     <script type="text/javascript" src="/AngularJs/angular-route.js"></script>
@@ -14,10 +15,18 @@
         });
         client.on('CHAT_MESSAGE',function(data) {
             console.log(data);
-            $('#chat-history').append('<li>'+data+'</li>');
+            var chat_message = data['chat_message'];
+            var friend_name = data['friend_name'];
+
+            $('#chat-history').append('<li class="item"><a class="message">'+friend_name+':'+chat_message+'</a></li>');
          });
         client.on('LOGIN_MESSAGE_SUCCESS',function(data){
-            $('#login_status').html('<p style="color: #09c"> Session ID:'+data+'</p>');
+            var user_name = data['user_name'];
+            var socket_id = data['socket_id'];
+            $('#my_name').text(user_name);
+            $('.login_message_server').modal('hide');
+            // 将用户登录信息存入sessionStorage
+            sessionStorage.setItem('LOGIN_USER_INFO',user_name);
         });
         client.on('disconnect',function() {
             console.log('Client has disconnected from the server!');
@@ -31,44 +40,110 @@
         }
         function sendChatMessage() {
             var message = $('#chat-input').val();
-            var friend_name = $('#friend_name').val();
-            client.emit('CHAT_MESSAGE',{'friend_name':friend_name,'chat_message':message});
+            var my_name = $('#my_name').text();
+            var friend_name = $('#friend_name').text();
+            client.emit('CHAT_MESSAGE',{'friend_name':friend_name,'my_name':my_name,'chat_message':message});
         }
         function loginMessageServer(){
-            var my_name = $('#my_name').val();
+            var my_name = $('#login_name').val();
             client.emit('LOGIN_MESSAGE_SERVER',{'user_name':my_name});
         }
 
+        $(function () {
+            $('.friend_list').find('.item').click(function(){
+                var friend_name = $(this).text();
+                $('#friend_name').text(friend_name);
+            });
+            // 从localStorage里面取得用户
+            var user_name = sessionStorage.getItem('LOGIN_USER_INFO');
+            if(user_name != null){
+                client.emit('LOGIN_MESSAGE_SERVER',{'user_name':user_name});
+            }
+        });
+
     </script>
+    <style type="text/css">
+        .friend_list{
+            margin: 0;
+            padding: 0;
+        }
+        .friend_list .item{
+            list-style: none;
+            padding: 8px 10px;
+            border: 1px solid #eee;
+            cursor: pointer;
+        }
+        .friend_list .item:hover{
+            background-color: #f5f5f5;
+        }
+        #chat-history li{
+            list-style: none;
+            margin: 8px;
+        }
+
+        #chat-history .item .message{
+            background-color: #eee;
+            position: relative;
+            padding:5px 15px;
+            border:1px solid #eee;
+            border-radius: 3px;
+        }
+        #chat-history .item .message::before{
+            position: absolute;
+            content:'';
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 6px solid #dddddd;
+            top: 10px;
+            left: -6px;
+        }
+    </style>
 </head>
 <body>
-<h1><%= title %></h1>
-
-<p>Welcome to <%= title %></p>
-<div class="row" style="width: 400px;height: 40px;">
-    <div class="col-xs-5 col-sm-5 col-md-5">
-        <input id="my_name" placeholder="Your Name" type="text" class="form-control input-sm"/>
+<div class="container-fluid">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8 ">
+            <h5>Chat With: <span id="friend_name"></span></h5>
+            <div id="chat-history" style="border: 1px solid #ddd;height: 400px;margin: 10px 0px;"></div>
+            <div class="row">
+                <div class="col-xs-9 col-sm-10 col-md-10">
+                    <input id="chat-input" type="text" class="form-control input-sm" onkeydown="bindEnterKeySend(event)"/>
+                </div>
+                <div class="col-xs-3 col-sm-2 col-md-2">
+                    <span class="btn btn-success btn-sm" onclick="sendChatMessage()"> Send</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3" ng-controller="showFriendListCtrl">
+            <div style="height: 35px;">
+                <i class="glyphicon glyphicon-user" style="font-size: 25px;color: #09c"></i>
+                <span id="my_name"></span>
+                <a data-toggle="modal" data-target=".login_message_server">Login</a>
+            </div>
+            <ul class="friend_list">
+                <li class="item">user1</li>
+                <li class="item">chenhao</li>
+                <li class="item">hao8816</li>
+                <li class="item">smite</li>
+            </ul>
+        </div>
     </div>
-    <div class="col-xs-5 col-sm-5 col-md-5">
-        <input id="friend_name" placeholder="Friend Name" type="text" class="form-control input-sm"/>
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2">
-        <span class="btn btn-sm btn-success" onclick="loginMessageServer()">Login Chat Server</span>
-    </div>
-    <div class="col-md-12" id="login_status"></div>
 </div>
-<div style="height: 400px;width: 450px;background-color: #f5f5f5;margin: 10px;padding: 5px;">
-    <div id="chat-history" style="height: 355px;background-color: #fff;width: 100%;">
-    </div>
-    <div style="padding: 2px;">
-        <div class="col-xs-10 col-sm-10 col-md-10">
-            <input id="chat-input" type="text" class="form-control input-sm" onkeydown="bindEnterKeySend(event)"/>
+<div class="modal fade login_message_server" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="input-group" style="border: 1px solid #ddd;border-radius: 3px;">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" id="login_name" class="form-control input-sm" placeholder="Your Name">
+                <span class="input-group-addon" style="cursor: pointer" onclick="loginMessageServer()">
+                    <i class="glyphicon glyphicon-arrow-right"></i>
+                </span>
+            </div>
         </div>
-        <div class="col-xs-2 col-sm-2 col-md-2">
-            <span class="btn btn-success btn-sm" onclick="sendChatMessage()"> Send</span>
-        </div>
-
     </div>
 </div>
 </body>
 </html>
+
