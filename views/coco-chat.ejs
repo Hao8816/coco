@@ -43,6 +43,7 @@
             var my_name = $('#my_name').text();
             var friend_name = $('#friend_name').text();
             client.emit('CHAT_MESSAGE',{'friend_name':friend_name,'my_name':my_name,'chat_message':message});
+            $('#chat-input').val('');
         }
         function loginMessageServer(){
             var my_name = $('#login_name').val();
