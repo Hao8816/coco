@@ -4,6 +4,21 @@ var redis_client = redis.createClient();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+
+var room_connection = io.of("/chat_room");
+room_connection.on('connection',function(socket){
+    socket.on('connect',function(){
+        //socket.set('user_name','chenhao');
+        console.log('connect to chat room');
+    });
+    socket.on('init_room',function(data){
+       console.log(data);
+    });
+
+});
+
+
+
 // 监听connection的变化
 
 io.on('connection',function(socket){
@@ -65,6 +80,8 @@ io.on('disconnect',function(socket){
 io.on('error',function(socket){
     console.log('error from server');
 });
+
+
 
 // 创建httpserver
 http.listen(8089,function(){
