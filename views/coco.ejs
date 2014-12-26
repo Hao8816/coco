@@ -9,55 +9,104 @@
         $(function(){
 
         });
-        function cocoPageViewNav($scope){
-            alert('this is a test');
-        }
+
     </script>
     <style type="text/css">
-        .coco-nav-list ul{
-            margin: 0;
-            padding: 0;
-        }
-        .coco-nav-list ul li{
-            list-style: none;
-            padding:12px;
+        .device-item{
+            width: 60px;
+            height: 60px;
+            border-radius:100% ;
+            background-color: #b2ebf2;
+            line-height: 60px;
+            text-align: center;
             cursor: pointer;
+            margin: auto;
         }
-        .coco-nav-list ul li:hover{
-            background-color: #eee;
+        .device-item:hover{
+            background-color: #00bcd4;
+        }
+        .device-card{
+            margin: 5px;
+            background-color: #f5f5f5;
+            box-shadow: 1px 1px 1px #ddd;
+            height: 200px;
+        }
+        .footer-link a{
+            padding: 0px 10px;
+            font-size: 13px;
+        }
+        .footer-coryright{
+            font-size: 13px;
+            color: rgba(0,0,0,0.36);
         }
     </style>
 
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: #00bcd4;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+   <div class="row">
+       <div class="col-xs-1 col-sm-1 col-md-1"></div>
+       <div class="col-xs-6 col-sm-6 col-md-6"><h4 style="margin: 0px">COCO 智能家居</h4></div>
+       <div class="col-xs-1 col-sm-1 col-md-1">设备</div>
+       <div class="col-xs-1 col-sm-1 col-md-1">通知</div>
+       <div class="col-xs-1 col-sm-1 col-md-1">监控</div>
+       <div class="col-xs-1 col-sm-1 col-md-1">设置</div>
+   </div>
+</div>
+<div class="container-fluid" style="border-bottom: 1px solid #ddd;padding: 20px 0px;">
     <div class="row">
-        <div class="col-md-3" style="background-color: #f5f5f5;height:620px">
-            <div class="coco-header" style="border-bottom:1px solid #ddd">
-                <h3><%= title %></h3>
-                <p>Welcome to <%= title %></p>
-                <i style="position: absolute;right: 10px;top:10px;" class="glyphicon glyphicon-cog"></i>
-            </div>
-            <div ng-view="">
+        <div class="col-xs-1 col-sm-1 col-md-1"></div>
+        <div class="col-xs-2 col-sm-2 col-md-2"><div class="device-item">客厅</div></div>
+        <div class="col-xs-2 col-sm-2 col-md-2"><div class="device-item">房间</div></div>
+        <div class="col-xs-2 col-sm-2 col-md-2"><div class="device-item">厨房</div></div>
+        <div class="col-xs-2 col-sm-2 col-md-2"><div class="device-item">卫浴</div></div>
+        <div class="col-xs-2 col-sm-2 col-md-2"><div class="device-item">其他</div></div>
+        <div class="col-xs-1 col-sm-1 col-md-1"></div>
+    </div>
+</div>
+<div class="container-fluid" style="background-color: #e0f7fa;padding: 20px 0px;">
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <div class="device-card"></div>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <div class="device-card"></div>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <div class="device-card"></div>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <div class="device-card"></div>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <div class="device-card"></div>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <div class="device-card"></div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="height: 500px;">
+    <div class="row">
+         <div>
+             <h4>设备状态</h4>
+         </div>
 
+    </div>
+
+</div>
+<div class="container-fluid" style="border-top:1px solid #eee;padding: 5px 0px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="padding: 3px;text-align: center;">
+                <p class="footer-link">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">在线客服</a>
+                    <a href="#">销售联盟</a>
+                </p>
+                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号  Copyright © 2004-2014</p>
             </div>
-            <div class="coco-toolbar" style="padding: 10px;border-bottom: 1px solid #ddd">
-                <input type="text" class="form-control input-sm" style="border-radius: 15px;" placeholder="coco name"/>
-            </div>
-            <div ng-controller="cocoPageViewNav" class="coco-nav-list" style="height: 500px;background-color: #fff">
-                <ul>
-                    <li class="col-xs-3 col-md-12">COCO HOME</li>
-                    <li class="col-xs-3 col-md-12">COCO SHARE</li>
-                    <li class="col-xs-3 col-md-12">MY COCO</li>
-                    <li class="col-xs-3 col-md-12">COCO LINE</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <h1>Welcome to COCO!</h1>
-        </div>
-        <div class="col-md-1" style="background-color: #999;height: 620px">
-            <h3>COCO</h3>
         </div>
     </div>
 </div>
