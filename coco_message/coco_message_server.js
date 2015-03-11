@@ -4,6 +4,16 @@ var redis_client = redis.createClient();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var sub = redis.createClient();
+var pub = redis.createClient();
+
+sub.subscribe('CHAT_MESSAGE')
+sub.on("message", function(pattern, key){
+    console.log(pattern)
+    console.log(key)
+    console.log('Chat Message Received')
+})
+
 
 var room_connection = io.of("/chat_room");
 room_connection.on('connection',function(socket){
@@ -14,7 +24,6 @@ room_connection.on('connection',function(socket){
     socket.on('init_room',function(data){
        console.log(data);
     });
-
 });
 
 
@@ -47,10 +56,14 @@ io.on('connection',function(socket){
         var chat_message = msg['chat_message'];
         // 根据不同的发送者，来分发消息
         // get user session id by name
+        pub.publish('CHAT_MESSAGE',chat_message);
+
         redis_client.hget('CHAT_USER_STORE',friend_name,function(err,data){
             if(err){
                 console.log(err);
             }
+            //console.log(io.sockets.connected)
+            //console.log(data)
             if(data == null){
                 console.log('Send Message Error');
             }else{
