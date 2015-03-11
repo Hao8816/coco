@@ -54,6 +54,10 @@
             }
         }
         function sendChatMessage() {
+            if(!checkUserLoginStatus()){
+                return
+            }
+
             var message = $('#chat-input').val();
             var my_name = $('#my_name').text();
             var friend_name = $('#friend_name').text();
@@ -132,6 +136,15 @@
                 message_template.find('.content').text(sender+':'+chat_message)
                 $('#chat-history').append(message_template)
             }
+        }
+
+        function checkUserLoginStatus(){
+            var login_status = true
+            var user_name = sessionStorage.getItem('LOGIN_USER_INFO');
+            if (user_name==null){
+                login_status=false
+            }
+            return login_status
         }
 
         function showUserInfo(){
