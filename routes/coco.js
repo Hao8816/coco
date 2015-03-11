@@ -10,4 +10,11 @@ router.get('/chat/', function(req, res) {
     res.render('coco-chat.ejs', { title: 'COCO Chat' });
 });
 
+
+router.post('/api/', function(req, res) {
+    var params = req.param('data')
+    console.log(params)
+    res.render('coco-chat.ejs', { title: 'COCO Chat' });
+});
+
 module.exports = router;
