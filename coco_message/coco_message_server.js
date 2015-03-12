@@ -14,7 +14,6 @@ room_connection.on('connection',function(socket){
     socket.on('init_room',function(data){
        console.log(data);
     });
-
 });
 
 

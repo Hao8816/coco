@@ -28,6 +28,13 @@
                 message_number = parseInt(message_number)+1
             }
             $('li[u-id='+friend_name+']').find('.badge').text(message_number)
+<<<<<<< HEAD
+=======
+
+            var message_template = $('.message_template').find('.message-item-left').clone()
+            message_template.find('.content').text(friend_name+':'+chat_message)
+            $('#chat-history').append(message_template)
+>>>>>>> 615a4768024f6af4e465fb11106b2dc01ae6d26b
 
             $('#chat-history').append('<div style="padding: 10px;margin: 2px;" class="item"><a class="message">'+friend_name+':'+chat_message+'</a></div>');
          });
@@ -57,6 +64,12 @@
             client.emit('CHAT_MESSAGE',message_dic);
             var cache_key = my_name+'_'+friend_name;
             cacheChatMessage(cache_key,message_dic)
+<<<<<<< HEAD
+=======
+            var message_template = $('.message_template').find('.message-item-right').clone()
+            message_template.find('.content').text(my_name+':'+message)
+            $('#chat-history').append(message_template)
+>>>>>>> 615a4768024f6af4e465fb11106b2dc01ae6d26b
             $('#chat-input').val('');
         }
         function loginMessageServer(){
