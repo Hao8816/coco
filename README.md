@@ -25,3 +25,5 @@ this
 #### 技术调研
 http://blog.sasaplus1.com/2014/12/05/01/
 
+http://stackoverflow.com/questions/26506211/socket-io-passing-events-between-nodes
+
