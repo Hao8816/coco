@@ -29,10 +29,25 @@ io.set('store', new RedisStore({
 
 
 io.sockets.on('connection', function (socket) {
-    console.log(io.sockets.scokets.length)
+    console.log(io.RedisStore)
+            
+var nb_connection = io.sockets.sockets.length
+    for(var i=0;i<nb_connection;i++){
+        console.log(io.sockets.sockets[i]['id'])
+    }
     // simple event: receive a msg and broadcast it to all clients
     socket.on('msg', function (data) {
         console.log(data)
         socket.broadcast.emit('msg', data);
     });
+});
+
+io.sockets.on('disconnect', function (socket) {
+    console.log(io.sockets.sockets.length)
+    var nb_connection = io.sockets.sockets.length
+    for(var i=0;i<nb_connection;i++){
+        console.log(io.sockets.sockets[i]['id'])
+    }
+    io.sockets.sockets.remove(socket)
+    // simple event: receive a msg and broadcast it to all clients
 });
