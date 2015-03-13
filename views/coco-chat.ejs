@@ -1,4 +1,3 @@
-
 <style type="text/css">
     .friend_list{
         margin: 0;
@@ -89,12 +88,15 @@
             $(this).find('.badge').text('');
             var my_name = sessionStorage.getItem('LOGIN_USER_INFO');
             var cache_key = my_name+'_'+friend_name;
-            showChatHistory(cache_key)
-        });
-        // 从localStorage里面取得用户
-        var user_name = sessionStorage.getItem('LOGIN_USER_INFO');
-        if(user_name != null){
-            client.emit('LOGIN_MESSAGE_SERVER',{'user_name':user_name});
+            cacheChatMessage(cache_key,message_dic)
+            var message_template = $('.message_template').find('.message-item-right').clone()
+            message_template.find('.content').text(my_name+':'+message)
+            $('#chat-history').append(message_template)
+            $('#chat-input').val('');
+        }
+        function loginMessageServer(){
+            var my_name = $('#login_name').val();
+            client.emit('LOGIN_MESSAGE_SERVER',{'user_name':my_name});
         }
     });
 </script>
