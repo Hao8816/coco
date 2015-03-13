@@ -21,3 +21,7 @@ Socket.IO enables real-time bidirectional event-based communication. It works on
 ----
 this 
 
+
+#### 技术调研
+http://blog.sasaplus1.com/2014/12/05/01/
+
