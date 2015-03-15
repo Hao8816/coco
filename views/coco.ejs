@@ -3,11 +3,13 @@
 <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
-    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
     <script type="text/javascript" src="/AngularJs/angular.js"></script>
     <script type="text/javascript" src="/AngularJs/angular-route.js"></script>
+    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
     <script type="text/javascript" src="/Socket.io/socket.io-1.2.0.js"></script>
     <script type="text/javascript" src="/js/coco-message-client.js"></script>
+    <script type="text/javascript" src="/js/coco-util.js"></script>
     <script type="text/javascript">
         var mosu_app = angular.module('coco',['ngRoute']);
         mosu_app.config(['$routeProvider',function($routeProvider){
@@ -35,7 +37,47 @@
         });
 
     </script>
+    <script type="text/javascript">
+        function composeBlog($scope,$http){
+            $scope.saveBlog = function(){
+                var title = $scope.blog_title
+                var content = $scope.blog_content
+                $http.post('/ajax/save_blog/',{title:title,content:content}).success(function(data){
+                    if(data['ret'] == '0001'){
+                        console.log(data);
+                        $('.compose_blog_modal').modal('hide');
+                    }else{
+
+                    }
+                });
+            }
+        }
+
+        function showBlog($scope,$http){
+            // get blog from server
+            $http.get('/ajax/get_blog_list',{uid:'1'}).success(function(data){
+                if(data['ret'] == '0001'){
+                    console.log(data);
+                    var blog_list = data['blog_list']
+                    blog_list.forEach(function(obj){
+                        var format_data = new Date(parseInt(obj['time']))
+                        obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+                        console.log(obj['time'])
+                    })
+                    $scope.blog_list = data['blog_list']
+                }else{
+
+                }
+            });
+
+
+        }
+
+    </script>
     <style type="text/css">
+        body{
+            background-color: #fafafa;
+        }
         .device-item{
             width: 60px;
             height: 60px;
@@ -64,23 +106,25 @@
             color: rgba(0,0,0,0.36);
         }
         .nav-kit .item{
-
+            text-align: center;
         }
         .nav-kit .item a{
             color: rgba(255,255,255,0.87);
+            text-align: center;
         }
     </style>
 
 </head>
 <body>
-<div class="container-fluid" style="background-color: #00bcd4;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+<div class="visible-xs-* hidden-sm hidden-md hidden-lg" style="text-align: center;border-bottom:1px solid #ff5277;background-color: #f50057;padding: 5px 0px;color: rgba(255,255,255,0.87)"><h4 style="margin: 0px">COCO </h4></div>
+<div class="container-fluid" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
    <div class="row nav-kit">
-       <div class="col-xs-1 col-sm-1 col-md-1"></div>
-       <div class="col-xs-6 col-sm-6 col-md-6"><h4 style="margin: 0px">COCO </h4></div>
-       <div  class="item col-xs-1 col-sm-1 col-md-1"><a href="#index"><i class="glyphicon glyphicon-home"></i>首页</a></div>
-       <div class="item col-xs-1 col-sm-1 col-md-1"><a href="#blog"><i class="glyphicon glyphicon-align-left"></i>博客</a></div>
-       <div class="item col-xs-1 col-sm-1 col-md-1"><a href="#chat"><i class="glyphicon glyphicon-envelope"></i>消息</a></div>
-       <div class="item col-xs-1 col-sm-1 col-md-1"><a href="#account"><i class="glyphicon glyphicon-cog"></i>设置</a></div>
+       <div class="hidden-xs col-sm-1 col-md-1"></div>
+       <div class="hidden-xs col-sm-3 col-md-6"><h4 style="margin: 0px">COCO </h4></div>
+       <div  class="item col-xs-3 col-sm-2 col-md-1"><a href="#index"><i class="glyphicon glyphicon-home"></i>首页</a></div>
+       <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#blog"><i class="glyphicon glyphicon-align-left"></i>博客</a></div>
+       <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#chat"><i class="glyphicon glyphicon-envelope"></i>消息</a></div>
+       <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#account"><i class="glyphicon glyphicon-cog"></i>设置</a></div>
    </div>
 </div>
 <div class="" ng-view>
