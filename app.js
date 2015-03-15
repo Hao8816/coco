@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var coco = require('./routes/coco');
 var api = require('./routes/api');
+var ajax = require('./routes/coco-ajax');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/coco', coco);
 app.use('/api', api);
+app.use('/ajax', ajax);
 
 
 
