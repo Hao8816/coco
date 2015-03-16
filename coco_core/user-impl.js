@@ -3,19 +3,45 @@ var SHA1 = require('sha1');
 
 var user={};
 var createUser = function createUser(req,res){
+    var date_time = new Date().getTime();
+    var name = req.param('name');
+    var sha1 = SHA1(name+date_time);
+    var password = req.param('password');
+    var phone = req.param('phone');
+    var email = req.param('email');
+
     user_models.User.create([{
-        time          : date_time,    // 微博创建的时间
-        sha1          : sha1,    // blog的sha1
-        title         : blog_title,    // 博客标题
-        content       : blog_content,    // 博客的描述
-        images        : [],    // 博客的图片信息: Object,
-        creator_sha1  : '12345'   // 博客的创建者信息
+        time          : date_time,    // 用户注册的创建的时间
+        sha1          : sha1,    // 用户的sha1
+        name          : name,    // 用户名
+        password      : password,    // 密码
+        first_name    : '',    // 姓
+        last_name     : '',    // 名,
+        head_image    : '',    // 用户的图像
+        email         : email,    // email地址
+        phone         : phone,    // 电话
+        location      : '',    // 位置
+        nb_friend     : 0,    // 好友的数量
+        nb_blog       : 0,    // 博客的数量
+        nb_topic      : 0     // 主题的数量
     }],function (err,item){
         console.log(err);
     });
     res.send({'info':"OK","ret":0001})
     console.log(req)
 };
+
+
+var loginUser = function loginUser(req,res){
+    user_models.User.get({name:'chenhao'},function(err,result){
+        if(err){
+            console.log(err);
+        }
+        console.log(result[0].content);
+        res.send({'info':"OK","ret":0001,"friend_list":result})
+    })
+};
+
 
 
 var getUserInfo = function getUserInfo(req,res){
@@ -52,6 +78,7 @@ var getConcernList = function getConcernList(req,res){
 
 
 user.createUser = createUser;
+user.loginUser = loginUser;
 user.getUserInfo = getUserInfo;
 user.getFriendList = getFriendList;
 user.getConcernList = getConcernList;

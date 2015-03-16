@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
+    <script type="text/javascript" src="/AngularJs/angular.js"></script>
+    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/rsa/jsbn.js"></script>
+    <script type="text/javascript" src="/rsa/rsa.js"></script>
+    <script type="text/javascript" src="/rsa/sha1.js"></script>
+</head>
+<style type="text/css">
+    body{
+        background-color: #fafafa;
+    }
+    .nav-kit a{
+        color: rgba(255,255,255,0.87);
+    }
+    .footer-link a{
+        padding: 0px 10px;
+        font-size: 13px;
+    }
+    .footer-coryright{
+        font-size: 13px;
+        color: rgba(0,0,0,0.36);
+    }
+
+</style>
+<script type="text/javascript">
+    function registerCtrl($scope,$http){
+
+
+        $scope.submit = function(){
+            console.log($scope.user)
+            var password1 = $scope.user.password1;
+            var password2 = $scope.user.password2;
+            if (password1 != password2){
+                alert('Password error')
+                return;
+            }
+            var password = sha1(password1)
+
+            var $pem = "-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMYQWDqtLgDKlQvWzacGeBMQpbicd/uoXAvgLNpFZLM7zuYFDhrYncRsl8LIHK0K3f7e1aFmUVgM4LrKU2WFIw0CAwEAAQ==-----END PUBLIC KEY-----";
+            var $key = RSA.getPublicKey($pem);
+            var encrypt_password = RSA.encrypt(password, $key);
+            console.log(encrypt_password)
+            var userInfo = $scope.user;
+            $http.post('/ajax/register/',userInfo).success(function(data){
+                if(data['ret'] == '0001'){
+                    $scope.user = {name:'',email:'',phone:'',password1:'',password2:''}
+                }
+
+            });
+        }
+
+    }
+
+</script>
+<body>
+<div style="background-color: #ff5277;width: 100%">
+    <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+        <div class="row nav-kit">
+            <div class="hidden-xs col-sm-8 col-md-10"><h4 style="margin: 0px">COCO 注册</h4></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="/coco/help/">帮助</a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="/coco/login/">登录</a></div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="jumbotron" style="background-color: #fff" ng-controller="registerCtrl">
+            <div class="row">
+                <div class="col-sm-8 col-md-8">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <form style="padding: 10px;">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">用户名</label>
+                            <input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1" placeholder="用户昵称">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">邮箱</label>
+                            <input ng-model="user.email" type="text" class="form-control" id="exampleInputPassword1" placeholder="邮箱地址">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">手机</label>
+                            <input ng-model="user.phone" type="text" class="form-control" id="exampleInputPassword1" placeholder="手机号码">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">密码</label>
+                            <input ng-model="user.password1" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">重复密码</label>
+                            <input ng-model="user.password2" type="password" class="form-control" id="exampleInputPassword1" placeholder="重复密码">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">服务条款
+                            </label>
+                        </div>
+                        <div style="text-align: right">
+                            <button type="submit" class="btn btn-danger" ng-click="submit()">点击注册</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="padding: 3px;text-align: center;">
+                <p class="footer-link">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">在线客服</a>
+                    <a href="#">销售联盟</a>
+                </p>
+                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号  Copyright © 2004-2014</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
+    <script type="text/javascript" src="/AngularJs/angular.js"></script>
+    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
+</head>
+<style type="text/css">
+    body{
+        background-color: #fafafa;
+    }
+    .nav-kit a{
+        color: rgba(255,255,255,0.87);
+    }
+    .footer-link a{
+        padding: 0px 10px;
+        font-size: 13px;
+    }
+    .footer-coryright{
+        font-size: 13px;
+        color: rgba(0,0,0,0.36);
+    }
+</style>
+<body>
+<div style="background-color: #ff5277;width: 100%">
+    <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+        <div class="row nav-kit">
+            <div class="hidden-xs col-sm-8 col-md-10"><h4 style="margin: 0px">COCO 登录</h4></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="/coco/help/">帮助</a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="/coco/register/">注册</a></div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="jumbotron" style="background-color: #fff;margin: 0">
+            <div class="row">
+                <div class="col-xs-12 col-sm-7 col-md-8">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-4">
+                    <form style="padding: 10px;background-color: #fff;border-radius: 5px;">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">用户名</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="手机号/邮箱">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">密码</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> 记住密码
+                            </label>
+                        </div>
+                        <button style="float: right" type="submit" class="btn btn-danger">点击登录</button>
+                        <p style="font-size: 13px;color: rgba(0,0,0,0.56);padding: 8px 1px;">还没有账号？<a href="/coco/register/">点击注册</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div style="height: 200px;background-color: #fff;border-top: 1px solid #eee"></div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12" style="margin-top: 20px;">
+            <div style="padding: 3px;text-align: center;">
+                <p class="footer-link">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">在线客服</a>
+                    <a href="#">销售联盟</a>
+                </p>
+                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号  Copyright © 2004-2014</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
