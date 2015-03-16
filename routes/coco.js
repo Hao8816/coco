@@ -18,6 +18,16 @@ router.get('/blog/', function(req, res) {
     res.render('coco-blog.ejs', { title: 'COCO Blog' });
 });
 
+router.get('/login/', function(req, res) {
+    res.render('coco-login.ejs', { title: 'COCO Login' });
+});
+
+
+router.get('/register/', function(req, res) {
+    res.render('coco-register.ejs', { title: 'COCO Register' });
+});
+
+
 
 router.get('/account/', function(req, res) {
     res.render('coco-account.ejs', { title: 'COCO Me' });
