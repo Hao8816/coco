@@ -23,6 +23,27 @@ var saveBlog = function saveBlog(req,res){
     console.log(req)
 };
 
+var saveTopic = function saveTopic(req,res){
+    var date_time = new Date().getTime();
+    var sha1 = SHA1(date_time);
+    var topic_title = req.param('title');
+    var topic_desc = req.param('desc');
+    var creator_sha1 = req.param('creator_sha1');
+    blog_models.Topic.create([{
+        time          : date_time,       // 微博创建的时间
+        sha1          : sha1,            // blog的sha1
+        title         : topic_title,     // 主题标题
+        desc          : topic_desc,      // 主题的描述
+        images        : [],              // 博客的图片信息: Object,
+        creator_sha1  : creator_sha1,    // 创建者信息
+        related       : []               // 和主题相关的主题
+
+    }],function (err,item){
+        console.log(err);
+    });
+    res.send({'info':"OK","ret":0001})
+}
+
 var getBlogList = function getBlogList(req,res){
     blog_models.Blog.all([ "time", "Z" ],function(err,result){
         if(err){
@@ -33,8 +54,22 @@ var getBlogList = function getBlogList(req,res){
     })
 };
 
+var getTopicList = function getTopicList(req,res){
+    blog_models.Topic.all([ "time", "Z" ],function(err,result){
+        if(err){
+            console.log(err);
+        }
+        console.log(result[0].content);
+        res.send({'info':"OK","ret":0001,"topic_list":result})
+    })
+
+};
+
+
 blog.saveBlog = saveBlog;
+blog.saveTopic = saveTopic;
 blog.getBlogList = getBlogList;
+blog.getTopicList = getTopicList;
 
 module.exports = blog
 

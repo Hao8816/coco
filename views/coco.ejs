@@ -38,6 +38,55 @@
 
     </script>
     <script type="text/javascript">
+        function chatPageCtrl($scope){
+            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+            $scope.user = JSON.parse(loginUserInfo);
+
+            // get user friend list
+        }
+        function blogPageCtrl($scope){
+            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+            $scope.user = JSON.parse(loginUserInfo);
+
+        }
+
+
+        function showTopic($scope,$http){
+            $http.get('/ajax/get_topic_list',{uid:'1'}).success(function(data){
+                if(data['ret'] == '0001'){
+                    console.log(data);
+                    var blog_list = data['topic_list']
+                    blog_list.forEach(function(obj){
+                        var format_data = new Date(parseInt(obj['time']))
+                        obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+                        console.log(obj['time'])
+                    })
+                    $scope.topic_list = data['topic_list']
+                }else{
+
+                }
+            });
+        }
+
+
+        function composeTopic($scope,$http){
+            $scope.saveTopic = function(){
+                var topicInfo = $scope.topic;
+                var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                topicInfo['creator_sha1'] = creator_sha1
+                $http.post('/ajax/save_topic/',topicInfo).success(function(data){
+                    if(data['ret'] == '0001'){
+                        $scope.topic.title = '';
+                        $scope.topic.desc = '';
+                        $('.compose_topic_modal').modal('hide');
+                    }else{
+
+                    }
+                });
+            }
+        }
+
+
         function composeBlog($scope,$http){
             $scope.saveBlog = function(){
                 var title = $scope.blog_title
@@ -133,7 +182,7 @@
 
 </div>
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" style="margin-top: 20px;">
         <div class="col-xs-12">
             <div style="padding: 3px;text-align: center;">
                 <p class="footer-link">
