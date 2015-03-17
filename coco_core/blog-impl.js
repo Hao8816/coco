@@ -65,7 +65,6 @@ var getTopicList = function getTopicList(req,res){
         if(err){
             console.log(err);
         }
-        console.log(result[0].content);
         res.send({'info':"OK","ret":0001,"topic_list":result})
     })
 
