@@ -98,9 +98,10 @@
 
         function composeBlog($scope,$http){
             $scope.saveBlog = function(){
-                var title = $scope.blog_title
-                var content = $scope.blog_content
-                $http.post('/ajax/save_blog/',{title:title,content:content}).success(function(data){
+                var title = $scope.blog_title;
+                var content = $scope.blog_content;
+                var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                $http.post('/ajax/save_blog/',{title:title,content:content,creator_sha1:creator_sha1}).success(function(data){
                     if(data['ret'] == '0001'){
                         console.log(data);
                         $('.compose_blog_modal').modal('hide');
@@ -113,7 +114,8 @@
 
         function showBlog($scope,$http){
             // get blog from server
-            $http.get('/ajax/get_blog_list',{uid:'1'}).success(function(data){
+            var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+            $http.get('/ajax/get_blog_list',{creator_sha1:creator_sha1}).success(function(data){
                 if(data['ret'] == '0001'){
                     console.log(data);
                     var blog_list = data['blog_list']
