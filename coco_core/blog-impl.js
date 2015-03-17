@@ -54,7 +54,7 @@ var getBlogList = function getBlogList(req,res){
         if(err){
             console.log(err);
         }
-        console.log(result[0].content);
+        
         res.send({'info':"OK","ret":0001,"blog_list":result})
     })
 };
