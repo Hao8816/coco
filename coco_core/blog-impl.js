@@ -60,7 +60,8 @@ var getBlogList = function getBlogList(req,res){
 };
 
 var getTopicList = function getTopicList(req,res){
-    blog_models.Topic.all([ "time", "Z" ],function(err,result){
+    var creator_sha1 = req.param('creator_sha1');
+    blog_models.Topic.find({creator_sha1:creator_sha1},[ "time", "Z" ],function(err,result){
         if(err){
             console.log(err);
         }
