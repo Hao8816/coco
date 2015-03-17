@@ -1,8 +1,96 @@
-<div class="container">
-    <h4>好友动态</h4>
-    <div class="" style="height: 200px;border: 1px solid #f5f5f5;box-shadow: 0px 0px 5px 3px #ddd;background-color: #eee"></div>
-    <h4>博客更新</h4>
-    <div class="" style="height: 150px;background-color: #fff"></div>
-    <h4>关注话题</h4>
-    <div class="" style="height: 160px;border: 1px solid #eee"></div>
+<style type="text/css">
+    .top-item{
+        background-color: #fff;
+        border-radius: 5px;
+        border: 1px solid #eee;
+        padding: 10px;
+        height: 200px;
+        margin-top: 5px;
+
+    }
+
+</style>
+
+<div class="container" ng-controller="showTopic">
+    <div class="row">
+        <div class="col-md-9">
+            <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
+                <span>我的主题</span>
+            </div>
+            <div style="border-radius: 5px;">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list">
+                        <div class="top-item">
+                            <h4>{{topic.title}}</h4>
+                            <p>{{topic.desc}}</p>
+                            <p>{{topic.time}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;clear: both;width: 100%">
+                <span>热门主题</span>
+            </div>
+            <div style="border-radius: 5px;">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list">
+                        <div class="top-item">
+                            <h4>{{topic.title}}</h4>
+                            <p>{{topic.desc}}</p>
+                            <p>{{topic.time}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="height: 600px;margin-top: 20px;" ng-controller="blogPageCtrl">
+            <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
+                <div style="text-align: center;line-height: 100px;">
+                    <img style="height: 80px;width: 80px;border-radius: 80px;" src="/images/head_image1.jpg" alt=""/>
+                </div>
+                <p style="text-align: center">
+                    <span>好友<a href="">{{user.nb_friend}}</a></span>
+                    <span>主题<a href="">{{user.nb_topic}}</a></span>
+                    <span>博客<a href="">{{user.nb_blog}}</a></span>
+                </p>
+            <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
+                <a style="color: #fff;font-size: 15px;" data-toggle="modal" data-target=".compose_topic_modal">创建主题</a>
+            </span>
+            </div>
+            <div>
+                <h5>我关注的人</h5>
+                <div style="height: 180px;border-radius: 5px;background-color: #fff">
+
+                </div>
+                <h5>我关注的主题</h5>
+                <div style="height: 180px;border-radius: 5px;background-color: #fff"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade compose_topic_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" ng-controller="composeTopic">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">创建主题</h4>
+            </div>
+            <div class="modal-body" style="height: 220px;">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">主题</label>
+                    <input ng-model="topic.title" type="text" class="form-control" id="exampleInputEmail1" placeholder="为你的博客写一段标题">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">描述</label>
+                    <textarea ng-model="topic.desc" class="form-control" placeholder="主题的描述" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="saveTopic()">创建</button>
+            </div>
+        </div>
+    </div>
 </div>

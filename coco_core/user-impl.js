@@ -33,12 +33,19 @@ var createUser = function createUser(req,res){
 
 
 var loginUser = function loginUser(req,res){
-    user_models.User.get({name:'chenhao'},function(err,result){
+    var name = req.param('name')
+    var password = req.param('password')
+    user_models.User.find({name:name,password:password},function(err,result){
         if(err){
             console.log(err);
+            res.send({'info':"ERROR","ret":1001})
+            return
         }
-        console.log(result[0].content);
-        res.send({'info':"OK","ret":0001,"friend_list":result})
+        if (result[0]!=null){
+            res.send({'info':"OK","ret":0001,"user":result[0]})
+        }else{
+            res.send({'info':"ERROR","ret":1001})
+        }
     })
 };
 

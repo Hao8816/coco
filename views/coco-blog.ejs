@@ -58,15 +58,15 @@
                 </ul>
             </nav>
         </div>
-        <div class="col-md-3" style="height: 600px;margin-top: 20px;">
+        <div class="col-md-3" style="height: 600px;margin-top: 20px;" ng-controller="blogPageCtrl">
             <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
                 <div style="text-align: center;line-height: 100px;">
                     <img style="height: 80px;width: 80px;border-radius: 80px;" src="/images/head_image1.jpg" alt=""/>
                 </div>
                 <p style="text-align: center">
-                    <span>好友<a href="">100</a></span>
-                    <span>主题<a href="">20</a></span>
-                    <span>博客<a href="">33</a></span>
+                    <span>好友<a href="">{{user.nb_friend}}</a></span>
+                    <span>主题<a href="">{{user.nb_topic}}</a></span>
+                    <span>博客<a href="">{{user.nb_blog}}</a></span>
                 </p>
                 <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
                     <a style="color: #fff;font-size: 15px;" data-toggle="modal" data-target=".compose_blog_modal">发表博客</a>

@@ -6,8 +6,8 @@
     <script type="text/javascript" src="/AngularJs/angular.js"></script>
     <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
     <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/rsa/jsbn.js"></script>
-    <script type="text/javascript" src="/rsa/rsa.js"></script>
+    <!--<script type="text/javascript" src="/rsa/jsbn.js"></script>-->
+    <!--<script type="text/javascript" src="/rsa/rsa.js"></script>-->
     <script type="text/javascript" src="/rsa/sha1.js"></script>
 </head>
 <style type="text/css">
@@ -40,7 +40,10 @@
                 return;
             }
             var password = sha1(password1)
-
+            var encrypt_password = sha1(password)
+            $scope.user.password = encrypt_password;
+            $scope.user.password1 = encrypt_password
+            $scope.user.password2 = encrypt_password
 //            var $pem = "-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMYQWDqtLgDKlQvWzacGeBMQpbicd/uoXAvgLNpFZLM7zuYFDhrYncRsl8LIHK0K3f7e1aFmUVgM4LrKU2WFIw0CAwEAAQ==-----END PUBLIC KEY-----";
 //            var $key = RSA.getPublicKey($pem);
 //            var encrypt_password = RSA.encrypt(password, $key);
