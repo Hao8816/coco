@@ -41,6 +41,9 @@ var saveTopic = function saveTopic(req,res){
     }],function (err,item){
         console.log(err);
     });
+
+    // 修改user的nb_topic字段
+
     res.send({'info':"OK","ret":0001})
 }
 
