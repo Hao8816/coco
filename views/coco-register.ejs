@@ -41,14 +41,15 @@
             }
             var password = sha1(password1)
 
-            var $pem = "-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMYQWDqtLgDKlQvWzacGeBMQpbicd/uoXAvgLNpFZLM7zuYFDhrYncRsl8LIHK0K3f7e1aFmUVgM4LrKU2WFIw0CAwEAAQ==-----END PUBLIC KEY-----";
-            var $key = RSA.getPublicKey($pem);
-            var encrypt_password = RSA.encrypt(password, $key);
-            console.log(encrypt_password)
+//            var $pem = "-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMYQWDqtLgDKlQvWzacGeBMQpbicd/uoXAvgLNpFZLM7zuYFDhrYncRsl8LIHK0K3f7e1aFmUVgM4LrKU2WFIw0CAwEAAQ==-----END PUBLIC KEY-----";
+//            var $key = RSA.getPublicKey($pem);
+//            var encrypt_password = RSA.encrypt(password, $key);
+            //console.log(encrypt_password)
             var userInfo = $scope.user;
             $http.post('/ajax/register/',userInfo).success(function(data){
                 if(data['ret'] == '0001'){
                     $scope.user = {name:'',email:'',phone:'',password1:'',password2:''}
+                    alert('恭喜你！注册成功')
                 }
 
             });
