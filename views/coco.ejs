@@ -50,6 +50,15 @@
 
         }
 
+        function accountPageCtrl($scope){
+            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+            var info = JSON.parse(loginUserInfo);
+            info['time'] = new Date(parseInt(info['time'])).Format('yyyy-MM-dd')
+            $scope.user = info;
+
+
+        }
+
 
         function showTopic($scope,$http){
             $http.get('/ajax/get_topic_list',{uid:'1'}).success(function(data){
