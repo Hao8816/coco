@@ -61,7 +61,8 @@
 
 
         function showTopic($scope,$http){
-            $http.get('/ajax/get_topic_list',{uid:'1'}).success(function(data){
+            var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+            $http.post('/ajax/get_topic_list/',{creator_sha1:creator_sha1}).success(function(data){
                 if(data['ret'] == '0001'){
                     console.log(data);
                     var blog_list = data['topic_list']
@@ -115,7 +116,7 @@
         function showBlog($scope,$http){
             // get blog from server
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-            $http.get('/ajax/get_blog_list',{creator_sha1:creator_sha1}).success(function(data){
+            $http.post('/ajax/get_blog_list/',{creator_sha1:creator_sha1}).success(function(data){
                 if(data['ret'] == '0001'){
                     console.log(data);
                     var blog_list = data['blog_list']
