@@ -49,6 +49,32 @@ var loginUser = function loginUser(req,res){
     })
 };
 
+var setUserImage = function setUserImage(req,res){
+    var imagesha1 = req.param('imagesha1')
+    var usersha1 = req.param('usersha1')
+    user_models.User.find({sha1:usersha1},function(err,result){
+        if(err){
+            console.log(err);
+            res.send({'info':"ERROR","ret":1001})
+            return
+        }
+        if (result[0]!=null){
+            result[0].head_image = imagesha1;
+            result[0].save(function(err){
+                if(err){
+                    console.log(err)
+                }
+                console.log("saved!")
+            });
+            res.send({'info':"OK","ret":0001,"user":result[0]})
+        }else{
+            res.send({'info':"ERROR","ret":1001})
+        }
+    })
+};
+
+
+
 
 
 var getUserInfo = function getUserInfo(req,res){
@@ -86,6 +112,7 @@ var getConcernList = function getConcernList(req,res){
 
 user.createUser = createUser;
 user.loginUser = loginUser;
+user.setUserImage = setUserImage;
 user.getUserInfo = getUserInfo;
 user.getFriendList = getFriendList;
 user.getConcernList = getConcernList;
