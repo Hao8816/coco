@@ -38,6 +38,32 @@
 
     </script>
     <script type="text/javascript">
+
+//        var blogModule = angular.module('coco',[]);
+//
+//        blogModule.factory('Blog',function(){
+//           Blog.showBlog = function(){
+//               var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+//               $http.post('/ajax/get_blog_list/',{creator_sha1:creator_sha1}).success(function(data){
+//                   if(data['ret'] == '0001'){
+//                       console.log(data);
+//                       var blog_list = data['blog_list']
+//                       blog_list.forEach(function(obj){
+//                           var format_data = new Date(parseInt(obj['time']))
+//                           obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+//                           console.log(obj['time'])
+//                           return blog_list;
+//                       })
+//                       //$scope.blog_list = data['blog_list']
+//                   }else{
+//
+//                   }
+//               });
+//           }
+//
+//        });
+
+
         function chatPageCtrl($scope){
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             $scope.user = JSON.parse(loginUserInfo);
@@ -97,7 +123,7 @@
         }
 
 
-        function composeBlog($scope,$http){
+        function composeBlog($scope,$http,Blog){
             $scope.saveBlog = function(){
                 var title = $scope.blog_title;
                 var content = $scope.blog_content;
@@ -106,6 +132,7 @@
                     if(data['ret'] == '0001'){
                         console.log(data);
                         $('.compose_blog_modal').modal('hide');
+                        $scope.blog_list = Blog.showBlog();
                     }else{
 
                     }
@@ -132,6 +159,48 @@
             });
 
 
+        }
+
+    </script>
+    <script type="text/javascript" src="/Jquery/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="/Jquery/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="/Jquery/jquery.fileupload.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            // 文件上传
+            $('#fileupload').fileupload({
+                url:'/ajax/upload/',
+                sequentialUploads: true,
+                dataType: 'json',
+                done: function (e, data) {
+                    var image_url = "/images/"+data.result['sha1'];
+                    $('.show_image_view').html('<img src='+image_url+'>');
+                    $('.upload-title').text('重新选择');
+                    $('#fileupload').attr("imagesha1",data.result['sha1']);
+                }
+            });
+
+
+
+
+        });
+        // 保存图像
+        function saveImage(){
+            var imagesha1 = $('#fileupload').attr("imagesha1");
+            var usersha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+            $.post('/ajax/set_image/',{imagesha1:imagesha1,usersha1:usersha1},function(data){
+                console.log(data)
+                var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+                // 更新前端的缓存
+                var info = JSON.parse(loginUserInfo);
+                info['head_image'] = imagesha1;
+                sessionStorage.setItem('LOGIN_USER_INFO',JSON.stringify(info));
+                // 更改前端的显示
+                $('#user_head_image').attr('src','/images/'+imagesha1);
+                $('.upload_image_modal').modal('hide');
+
+            });
         }
 
     </script>
@@ -193,7 +262,7 @@
 <div class="" ng-view>
 
 </div>
-<div class="container-fluid">
+<div class="container-fluid" >
     <div class="row" style="margin-top: 20px;">
         <div class="col-xs-12">
             <div style="padding: 3px;text-align: center;">
@@ -208,6 +277,30 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade upload_image_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">换头像</h4>
+            </div>
+            <div class="modal-body" style="height: 300px;">
+                <div class="show_image_view" style="text-align: center;padding: 0px 0px 20px 0px"></div>
+                <div class="upload-btn" style="height: 40px;width: 80%;margin:0px 10%;text-align: center;position: relative;font-size: 16px;line-height: 40px;">
+                    <span class="upload-title">选择照片</span>
+                    <input id="fileupload" type="file" style="width: 100%;height: 100%;opacity: 0;position: absolute;top: 0px;" multiple>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                <button type="button" id="save_image" onclick="saveImage()" class="btn btn-danger btn-sm">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

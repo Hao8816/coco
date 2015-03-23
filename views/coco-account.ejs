@@ -32,7 +32,16 @@
         border: 1px solid #eee;
         padding: 10px;
     }
+    .upload-btn{
+        border-radius: 3px;
+        background-color: #eee;
+        cursor: pointer;
+    }
+    .upload-btn:hover{
+        background-color: #ddd;
+    }
 </style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -41,8 +50,9 @@
             </div>
             <div style="border-radius: 5px;margin-top: 5px;background-color: #fff" ng-controller="accountPageCtrl">
                 <div class="row">
-                    <div class="col-md-4" style="text-align: center;height: 260px;line-height: 260px;">
-                        <img src="/images/head_image1.jpg" style="width: 180px;height: 180px;border-radius: 180px;" alt=""/>
+                    <div class="col-md-4" style="text-align: center;height: 260px;line-height: 260px;position: relative">
+                        <img id="user_head_image" src="/images/{{user.head_image}}" style="width: 180px;height: 180px;border-radius: 180px;" alt=""/>
+                        <a style="position:absolute;color: #fff;font-size: 15px;line-height: 180px;left: 42%;top: 17%;cursor: pointer" data-toggle="modal" data-target=".upload_image_modal">换头像</a>
                     </div>
                     <div class="col-md-8" style="padding:30px 0px;font-size: 15px;">
                         <h4>{{user.name}}</h4>
@@ -82,6 +92,7 @@
                         <span>{{blog.title}}</span>
                         <span style="float: right;font-size: 13px;color: rgba(0,0,0,0.4)">{{blog.time}}</span>
                         <p style="padding-left: 50px;color: rgba(0,0,0,0.56);font-size: 13px;">{{blog.content}}</p>
+
                     </li>
                 </ul>
             </div>
@@ -94,3 +105,4 @@
         </div>
     </div>
 </div>
+
