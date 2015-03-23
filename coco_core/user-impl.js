@@ -90,12 +90,22 @@ var getUserInfo = function getUserInfo(req,res){
 
 
 var getFriendList = function getFriendList(req,res){
-    user_models.Friendship.all([ "name", "Z" ],function(err,result){
+    user_models.Friendship.all([ "time", "Z" ],function(err,result){
         if(err){
             console.log(err);
         }
         console.log(result[0].content);
-        res.send({'info':"OK","ret":0001,"friend_list":result})
+        // 获取用户的详细信息
+        var friend_list = [];
+        for(var i=0;i<result.length;i++){
+            //
+            var firend_sha1 = result[i].friend_sha1;
+            user_models.User.find({sha1:firend_sha1},function(err,friend){
+                friend_list.push(friend[0]);
+            });
+        }
+
+        res.send({'info':"OK","ret":0001,"friend_list":friend_list})
     })
 };
 

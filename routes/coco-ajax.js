@@ -24,8 +24,8 @@ router.post('/get_blog_list/', function(req, res) {
     blog.getBlogList(req,res);
 });
 
-router.get('/get_friend_list/', function(req, res) {
-    blog.getBlogList(req,res);
+router.post('/get_friend_list/', function(req, res) {
+    user.getFriendList(req,res);
 });
 
 router.post('/get_topic_list/', function(req, res) {
