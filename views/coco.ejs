@@ -143,10 +143,10 @@ function blogPageController($scope,$http){
                 $('.compose_blog_modal').modal('hide');
                 $scope.blog_title=''
                 $scope.blog_content=''
-                showBlog();
+                //showBlog();
 
                 // 利用angular刷新
-                $scope.blog_list = $scope.blog_list.concat(data['blog']);
+                $scope.blog_list = data['blog'].concat($scope.blog_list);
             }else{
 
             }
