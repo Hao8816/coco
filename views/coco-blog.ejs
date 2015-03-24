@@ -1,10 +1,10 @@
-
 <style type="text/css">
-    .blog-nav{
+    .blog-nav {
         margin: 0;
         padding: 0;
     }
-    .blog-nav li{
+
+    .blog-nav li {
         list-style: none;
         /*height: 80px;*/
         margin-top: 5px;
@@ -14,16 +14,17 @@
         border: 1px solid #eee;
         padding: 10px;
     }
-    .pagination li a,.pagination a span{
+
+    .pagination li a, .pagination a span {
         color: #666;
     }
 
 </style>
 
 
-<div class="container">
+<div class="container" ng-controller="blogPageController">
     <div class="row">
-        <div class="col-md-9" ng-controller="showBlog">
+        <div class="col-md-9">
             <!--<h4>博客列表</h4>-->
             <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
                 <span>所有博客</span>
@@ -32,9 +33,11 @@
             </div>
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list">
-                    <img src="/images/head_image{{blog.id}}.jpg" style="width:50px;height: 50px;border-radius: 50px;padding: 5px;" alt=""/>
+                    <!--<img src="/images/head_image{{blog.id}}.jpg"-->
+                         <!--style="width:50px;height: 50px;border-radius: 50px;padding: 5px;" alt=""/>-->
                     <span>{{blog.title}}</span>
                     <span style="float: right;font-size: 13px;color: rgba(0,0,0,0.4)">{{blog.time}}</span>
+
                     <p style="padding-left: 50px;color: rgba(0,0,0,0.56);font-size: 13px;">{{blog.content}}</p>
                 </li>
             </ul>
@@ -61,7 +64,8 @@
         <div class="col-md-3" style="height: 600px;margin-top: 20px;" ng-controller="blogPageCtrl">
             <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
                 <div style="text-align: center;line-height: 100px;">
-                    <img style="height: 80px;width: 80px;border-radius: 80px;" src="/images/{{user.head_image}}" alt=""/>
+                    <img style="height: 80px;width: 80px;border-radius: 80px;" src="/images/{{user.head_image}}"
+                         alt=""/>
                 </div>
                 <p style="text-align: center">
                     <span>好友<a href="">{{user.nb_friend}}</a></span>
@@ -69,41 +73,46 @@
                     <span>博客<a href="">{{user.nb_blog}}</a></span>
                 </p>
                 <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
-                    <a style="color: #fff;font-size: 15px;" data-toggle="modal" data-target=".compose_blog_modal">发表博客</a>
+                    <a style="color: #fff;font-size: 15px;" data-toggle="modal"
+                       data-target=".compose_blog_modal">发表博客</a>
                 </span>
             </div>
             <div>
                 <h5>我关注的人</h5>
-                 <div style="height: 180px;border-radius: 5px;background-color: #fff">
 
-                 </div>
+                <div style="height: 180px;border-radius: 5px;background-color: #fff">
+
+                </div>
                 <h5>我关注的主题</h5>
+
                 <div style="height: 180px;border-radius: 5px;background-color: #fff"></div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="modal fade compose_blog_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content" ng-controller="composeBlog">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">写博客</h4>
-            </div>
-            <div class="modal-body" style="height: 300px;">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">标题</label>
-                    <input ng-model="blog_title" type="text" class="form-control" id="exampleInputEmail1" placeholder="为你的博客写一段标题">
+    <div class="modal fade compose_blog_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">写博客</h4>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">内容</label>
-                    <textarea ng-model="blog_content" class="form-control" placeholder="博客内容" rows="8"></textarea>
+                <div class="modal-body" style="height: 300px;">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">标题</label>
+                        <input ng-model="blog_title" type="text" class="form-control" id="exampleInputEmail1"
+                               placeholder="为你的博客写一段标题">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">内容</label>
+                        <textarea ng-model="blog_content" class="form-control" placeholder="博客内容" rows="8"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-danger btn-sm" ng-click="saveBlog()">发表</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger btn-sm" ng-click="saveBlog()">发表</button>
+                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 var user_models = require('./user-models');
 var SHA1 = require('sha1');
+var async = require('async');
 
 var user={};
 var createUser = function createUser(req,res){
@@ -90,23 +91,56 @@ var getUserInfo = function getUserInfo(req,res){
 
 
 var getFriendList = function getFriendList(req,res){
-    user_models.Friendship.all([ "time", "Z" ],function(err,result){
-        if(err){
-            console.log(err);
-        }
-        console.log(result[0].content);
-        // 获取用户的详细信息
-        var friend_list = [];
-        for(var i=0;i<result.length;i++){
-            //
-            var firend_sha1 = result[i].friend_sha1;
-            user_models.User.find({sha1:firend_sha1},function(err,friend){
-                friend_list.push(friend[0]);
-            });
-        }
 
-        res.send({'info':"OK","ret":0001,"friend_list":friend_list})
-    })
+    // get rrecord from redis
+    async.waterfall([
+            function(getFriendInfo){
+                user_models.Friendship.all([ "time", "Z" ],function(err,result){
+                    if(err){
+                        console.log(err);
+                    }
+                    getFriendInfo(result);
+                });
+            },
+            function getFriendInfo(relations,get_result){
+
+                var friendInfoList = []
+                for (var i=0;i<relations.length;i++){
+                    var friend_sha1 = relations[i].friend_sha1;
+                    user_models.User.find({sha1:friend_sha1},function(err,result){
+                        if(err){
+                            console.log(err);
+                        }
+                        friendInfoList.push(result[0])
+                    });
+                }
+                get_result(friendInfoList);
+
+            }
+        ],
+        function get_result(result){
+            res.send({'info':"OK","ret":0001,"friend_list":result})
+        }
+    )
+
+
+    //user_models.Friendship.all([ "time", "Z" ],function(err,result){
+    //    if(err){
+    //        console.log(err);
+    //    }
+    //    console.log(result[0].content);
+    //    // 获取用户的详细信息
+    //    var friend_list = [];
+    //    for(var i=0;i<result.length;i++){
+    //        //
+    //        var firend_sha1 = result[i].friend_sha1;
+    //        user_models.User.find({sha1:firend_sha1},function(err,friend){
+    //            friend_list.push(friend[0]);
+    //        });
+    //    }
+    //
+    //    res.send({'info':"OK","ret":0001,"friend_list":friend_list})
+    //})
 };
 
 var getConcernList = function getConcernList(req,res){

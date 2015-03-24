@@ -128,44 +128,50 @@
             }
         }
 
+function blogPageController($scope,$http){
+    // 显示博客列表
+    $scope.blog_list = []
+    showBlog();
 
-        function composeBlog($scope,$http,Blog){
-            $scope.saveBlog = function(){
-                var title = $scope.blog_title;
-                var content = $scope.blog_content;
-                var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-                $http.post('/ajax/save_blog/',{title:title,content:content,creator_sha1:creator_sha1}).success(function(data){
-                    if(data['ret'] == '0001'){
-                        console.log(data);
-                        $('.compose_blog_modal').modal('hide');
-                        $scope.blog_list = Blog.showBlog();
-                    }else{
+    $scope.saveBlog = function(){
+        var title = $scope.blog_title;
+        var content = $scope.blog_content;
+        var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+        $http.post('/ajax/save_blog/',{title:title,content:content,creator_sha1:creator_sha1}).success(function(data){
+            if(data['ret'] == '0001'){
+                console.log(data);
+                $('.compose_blog_modal').modal('hide');
+                $scope.blog_title=''
+                $scope.blog_content=''
+                showBlog();
 
-                    }
-                });
+                // 利用angular刷新
+                $scope.blog_list = $scope.blog_list.concat(data['blog']);
+            }else{
+
             }
-        }
+        });
+    }
+    function showBlog(){
+        // get blog from server
+        var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+        $http.post('/ajax/get_blog_list/',{creator_sha1:creator_sha1}).success(function(data){
+            if(data['ret'] == '0001'){
+                console.log(data);
+                var blog_list = data['blog_list']
+                blog_list.forEach(function(obj){
+                    var format_data = new Date(parseInt(obj['time']))
+                    obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+                    console.log(obj['time'])
+                })
+                $scope.blog_list = data['blog_list']
+            }else{
 
-        function showBlog($scope,$http){
-            // get blog from server
-            var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-            $http.post('/ajax/get_blog_list/',{creator_sha1:creator_sha1}).success(function(data){
-                if(data['ret'] == '0001'){
-                    console.log(data);
-                    var blog_list = data['blog_list']
-                    blog_list.forEach(function(obj){
-                        var format_data = new Date(parseInt(obj['time']))
-                        obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-                        console.log(obj['time'])
-                    })
-                    $scope.blog_list = data['blog_list']
-                }else{
+            }
+        });
+    }
+}
 
-                }
-            });
-
-
-        }
 
     </script>
     <script type="text/javascript" src="/Jquery/jquery.ui.widget.js"></script>
