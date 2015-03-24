@@ -11,7 +11,7 @@
 
 </style>
 
-<div class="container" ng-controller="showTopic">
+<div class="container" ng-controller="topicPageController">
     <div class="row">
         <div class="col-md-9">
             <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
@@ -68,30 +68,30 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="modal fade compose_topic_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content" ng-controller="composeTopic">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">创建主题</h4>
-            </div>
-            <div class="modal-body" style="height: 220px;">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">主题</label>
-                    <input ng-model="topic.title" type="text" class="form-control" id="exampleInputEmail1" placeholder="为你的博客写一段标题">
+    <div class="modal fade compose_topic_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">创建主题</h4>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">描述</label>
-                    <textarea ng-model="topic.desc" class="form-control" placeholder="主题的描述" rows="4"></textarea>
+                <div class="modal-body" style="height: 220px;">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">主题</label>
+                        <input ng-model="topic.title" type="text" class="form-control" id="exampleInputEmail1" placeholder="为你的博客写一段标题">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">描述</label>
+                        <textarea ng-model="topic.desc" class="form-control" placeholder="主题的描述" rows="4"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-danger btn-sm" ng-click="saveTopic()">创建</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger btn-sm" ng-click="saveTopic()">创建</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
