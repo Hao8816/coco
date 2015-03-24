@@ -91,42 +91,47 @@
             $scope.user = info;
         }
 
+function topicPageController($scope,$http){
+    // 显示所有的主题
+    showTopic();
 
-        function showTopic($scope,$http){
-            var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-            $http.post('/ajax/get_topic_list/',{creator_sha1:creator_sha1}).success(function(data){
-                if(data['ret'] == '0001'){
-                    console.log(data);
-                    var blog_list = data['topic_list']
-                    blog_list.forEach(function(obj){
-                        var format_data = new Date(parseInt(obj['time']))
-                        obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-                        console.log(obj['time'])
-                    })
-                    $scope.topic_list = data['topic_list']
-                }else{
+    function showTopic(){
+        var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+        $http.post('/ajax/get_topic_list/',{creator_sha1:creator_sha1}).success(function(data){
+            if(data['ret'] == '0001'){
+                console.log(data);
+                var blog_list = data['topic_list']
+                blog_list.forEach(function(obj){
+                    var format_data = new Date(parseInt(obj['time']))
+                    obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+                    console.log(obj['time'])
+                })
+                $scope.topic_list = data['topic_list']
+            }else{
 
-                }
-            });
-        }
-
-
-        function composeTopic($scope,$http){
-            $scope.saveTopic = function(){
-                var topicInfo = $scope.topic;
-                var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-                topicInfo['creator_sha1'] = creator_sha1
-                $http.post('/ajax/save_topic/',topicInfo).success(function(data){
-                    if(data['ret'] == '0001'){
-                        $scope.topic.title = '';
-                        $scope.topic.desc = '';
-                        $('.compose_topic_modal').modal('hide');
-                    }else{
-
-                    }
-                });
             }
-        }
+        });
+    }
+
+
+    $scope.saveTopic = function(){
+        var topicInfo = $scope.topic;
+        var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+        topicInfo['creator_sha1'] = creator_sha1
+        $http.post('/ajax/save_topic/',topicInfo).success(function(data){
+            if(data['ret'] == '0001'){
+                $scope.topic.title = '';
+                $scope.topic.desc = '';
+                $('.compose_topic_modal').modal('hide');
+                // 利用angular刷新
+                $scope.topic_list = data['topic'].concat($scope.topic_list);
+            }else{
+
+            }
+        });
+    }
+
+}
 
 function blogPageController($scope,$http){
     // 显示博客列表
