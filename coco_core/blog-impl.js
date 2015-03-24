@@ -18,9 +18,10 @@ var saveBlog = function saveBlog(req,res){
         images        : [],    // 博客的图片信息: Object,
         creator_sha1  : creator_sha1   // 博客的创建者信息
     }],function (err,item){
-        console.log(err);
+        console.log(item);
+        res.send({'info':"OK","ret":0001,"blog":item})
     });
-    res.send({'info':"OK","ret":0001})
+
     console.log(req)
 };
 
@@ -54,6 +55,7 @@ var getBlogList = function getBlogList(req,res){
         if(err){
             console.log(err);
         }
+
         res.send({'info':"OK","ret":0001,"blog_list":result})
     })
 };
