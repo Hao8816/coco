@@ -72,6 +72,7 @@
             $http.post('/ajax/get_friend_list/',{creator_sha1:creator_sha1}).success(function(data){
                 if(data['ret'] == '0001'){
                     console.log(data);
+                    $scope.friend_list = data['friend_list']
                 }else{
 
                 }

@@ -1,7 +1,16 @@
 var user_models = require('./user-models');
 var SHA1 = require('sha1');
 var async = require('async');
-
+var orm = require("orm");
+var settings = require('../config/db-config');
+var db = orm.connect(settings.mysql,function(err,db){
+    if (err){
+        console.log(err)
+        console.log('Can not connect to mysql!');
+    }else{
+        console.log("Connect sucessfully!");
+    }
+});
 var user={};
 var createUser = function createUser(req,res){
     var date_time = new Date().getTime();
@@ -93,35 +102,16 @@ var getUserInfo = function getUserInfo(req,res){
 var getFriendList = function getFriendList(req,res){
 
     // get rrecord from redis
-    async.waterfall([
-            function(getFriendInfo){
-                user_models.Friendship.all([ "time", "Z" ],function(err,result){
-                    if(err){
-                        console.log(err);
-                    }
-                    getFriendInfo(result);
-                });
-            },
-            function getFriendInfo(relations,get_result){
-
-                var friendInfoList = []
-                for (var i=0;i<relations.length;i++){
-                    var friend_sha1 = relations[i].friend_sha1;
-                    user_models.User.find({sha1:friend_sha1},function(err,result){
-                        if(err){
-                            console.log(err);
-                        }
-                        friendInfoList.push(result[0])
-                    });
-                }
-                get_result(friendInfoList);
-
-            }
-        ],
-        function get_result(result){
-            res.send({'info':"OK","ret":0001,"friend_list":result})
+    user_models.Friendship.all([ "time", "Z" ],function(err,result){
+        if(err){
+            console.log(err);
         }
-    )
+        db.driver.execQuery('SELECT * FROM User',function (err, data) {
+            res.send({'info':"OK","ret":0001,"friend_list":data})
+        });
+    });
+
+
 
 
     //user_models.Friendship.all([ "time", "Z" ],function(err,result){
