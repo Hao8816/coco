@@ -106,7 +106,7 @@ var getFriendList = function getFriendList(req,res){
         if(err){
             console.log(err);
         }
-        db.driver.execQuery('SELECT * FROM User',function (err, data) {
+        db.driver.execQuery('SELECT * FROM user',function (err, data) {
             res.send({'info':"OK","ret":0001,"friend_list":data})
         });
     });
