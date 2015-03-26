@@ -17,12 +17,12 @@ client.on('CHAT_MESSAGE',function(data) {
         message_number = parseInt(message_number)+1
     }
     $('li[u-id='+friend_name+']').find('.badge').text(message_number)
-
-    var message_template = $('.message_template').find('.message-item-left').clone()
-    message_template.find('.content').text(friend_name+':'+chat_message)
+    // 从前端的好友列表中获取好友信息
+    var friendImage = getFriendImage(friend_name);
+    var message_template = $('.message_template').find('.message-item-left').clone();
+    message_template.find('.content').text(friend_name+':'+chat_message);
+    message_template.find('.image').attr('src',friendImage);
     $('#chat-history').append(message_template)
-
-    $('#chat-history').append('<div style="padding: 10px;margin: 2px;" class="item"><a class="message">'+friend_name+':'+chat_message+'</a></div>');
 });
 client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     var user_name = data['user_name'];
@@ -30,7 +30,7 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     $('#my_name').text(user_name);
     $('.login_message_server').modal('hide');
     // 将用户登录信息存入sessionStorage
-    sessionStorage.setItem('LOGIN_USER_INFO',user_name);
+    sessionStorage.setItem('LOGIN_USER_INFO_NAME',user_name);
 });
 client.on('disconnect',function() {
     console.log('Client has disconnected from the server!');
@@ -54,8 +54,10 @@ function sendChatMessage() {
     client.emit('CHAT_MESSAGE',message_dic);
     var cache_key = my_name+'_'+friend_name;
     cacheChatMessage(cache_key,message_dic)
-    var message_template = $('.message_template').find('.message-item-right').clone()
-    message_template.find('.content').text(my_name+':'+message)
+    var myImage = getFriendImage(my_name);
+    var message_template = $('.message_template').find('.message-item-right').clone();
+    message_template.find('.content').text(my_name+':'+message);
+    message_template.find('.image').attr('src',myImage);
     $('#chat-history').append(message_template)
     $('#chat-input').val('');
 }
@@ -115,7 +117,7 @@ function showChatHistory(cache_key){
 
 function checkUserLoginStatus(){
     var login_status = true
-    var user_name = sessionStorage.getItem('LOGIN_USER_INFO');
+    var user_name = sessionStorage.getItem('LOGIN_USER_INFO_NAME');
     if (user_name==null){
         login_status=false
     }
@@ -124,4 +126,15 @@ function checkUserLoginStatus(){
 
 function showUserInfo(){
     $('.user_info_modal').modal('show')
+}
+
+function getFriendImage(friend_name){
+    var friend_list = localStorage.getItem('FRIEND_INFO_DICT');
+    var friend_info_dict = JSON.parse(friend_list);
+    var image_url = 'default.jpg';
+    if (friend_info_dict.hasOwnProperty(friend_name)){
+        image_url = friend_info_dict[friend_name].head_image;
+    }
+    return '/images/'+image_url
+
 }

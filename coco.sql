@@ -32,7 +32,7 @@ CREATE TABLE `blog` (
   `topic_sha1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `blog` (
 
 LOCK TABLES `blog` WRITE;
 /*!40000 ALTER TABLE `blog` DISABLE KEYS */;
-INSERT INTO `blog` VALUES ('1426384361941','a9bf2a3fbf9525b090ed866ce398149b53137343','测试1','这是我的第一个博客','[]','12345',NULL,1),('1426384461480','d734cec008fe7a7794ac3af5ef303528829542f3','测试2','格式化(format)是指对磁盘或磁盘中的分区（partition）进行初始化的一种操作，这种操作通常会导致现有的磁盘或分区中所有的文件被清除。格式化通常分为低级格式化和高级格式化。如果没有特别指明，对硬盘的格式化通常是指高级格式化，而对软盘的格式化则通常同时包括这两者。','[]','12345',NULL,2),('1426384645670','407ab82076b6ad7802d75b83acb7e9452c8ad505','AngularJS 是什么？','AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVVM、模块化、自动化双向数据绑定、语义化标签、依赖注入，等等。','[]','12345',NULL,3),('1426384764356','9e6a518d33570aa72c36e412c37c589cd494fe57','红玫瑰（陈奕迅演唱歌曲）','这首歌是台湾填词人李焯雄根据张爱玲的小说《红玫瑰与白玫瑰》所填。讲的是每个男人心中都有两个女人，一个纯情，一个风骚，而红玫瑰象征风骚。“也许每一个男子全都有过这样的两个女人，至少两个。娶了红玫瑰，久而久之，红的变了墙上的一抹蚊子血，白的还是床前明月光；娶了白玫瑰，白的便是衣服上沾的一粒饭黏子，红的却是心口上一颗朱砂痣，”出自张爱玲的小说《红玫瑰与白玫瑰》。《红玫瑰》的粤语版歌曲是《白玫瑰》。','[]','12345',NULL,4),('1426384908227','09f6a581f16f541f9b753233843c7b711ee5f39b','吉他','吉他（意大利语：Chitarra），又译为结他或六弦琴。是一种弹拨乐器，通常有六条弦，形状与提琴相似。\n吉他在流行音乐、摇滚音乐、蓝调、民歌、佛朗明哥中，常被视为主要乐器。而在古典音乐的领域里，吉他常以独奏或二重奏的型式演出；当然，在室内乐和管弦乐中，吉他亦扮演着相当程度的陪衬角色。\n古典吉他与小提琴、钢琴并列为世界著名三大乐器。','[]','12345',NULL,5),('1426384998673','8d8efc7c2bac1f42804584337ec6893ee4c614e9','阴天（莫文蔚演唱歌曲）','作品由李宗盛作词，李宗盛和他当时乐队的领班周国仪合作作曲。和早期的李宗盛作品的简洁相比，《阴天》的文字要长了许多，但其对环境和心理描写的细腻程度，却绝对令人发指。而周国仪合作的作曲，也赋予了早期李宗盛民谣式写作不同的现代感和华彩感 。','[]','12345',NULL,6),('1426385308846','3f926963916ba0eccb36db9d550908220a978c8d','《匆匆那年》是北京小马奔腾影业2014年出品的校园爱情片，改编自九夜茴同名小说。','《匆匆那年》是北京小马奔腾影业2014年出品的校园爱情片，改编自九夜茴同名小说。该影片由张一白执导，彭于晏、倪妮、郑恺、魏晨、张子萱、陈赫等人主演。该影片讲述了阳光少年...','[]','12345',NULL,7),('1426385402796','caa1cf4bdc043e1ca42e4fd37902475e4810a215','node.js','Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台， 用来方便地搭建快速的 易于扩展的网络应用· Node.js 借助事件驱动， 非阻塞I/O 模型变得轻量和高效， 非常适合 运行在分布式设备 的 数据密集型 的实时应用。\nV8引擎执行Javascript的速度非常快，性能非常好。Node对一些特殊用例进行了优化，提供了替代的API，使得V8在非浏览器环境下运行得更好。','[]','12345',NULL,8),('1426385516638','38a9d507df820cd177e92cd0730f0b1df0e002e0','CNode:Node.js专业中文社区','目前有哪些比较好二次开发的NODEJS的WEB系统? 8 / 231 1小时前 问答 使用Node.js做即时通信服务端 那么音频、图片应该如何传输?','[]','12345',NULL,9);
+INSERT INTO `blog` VALUES ('1427207334966','d68e1ac5c2d6815dffedad4662529261eced072a','测试博客','这是一个测试','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,1),('1427207419102','366160fddb80196aa0e7fab76e19f8bf9165642d','测试2','测试我的博客','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,2),('1427207465739','4234a7366b464afd1559acfb57e9092e39ef344d','测试5','测试我的博客d','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,3),('1427207527287','01a20e3f4bde38647285d828c4aa0556db539adf','ceshc','csadc','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,4),('1427207572816','888d87c54a6a9f5f1856e8425391ba4bb6d9a14c','ddceshc','csadcd','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,5),('1427207602776','b3ce0bbb72e2d17c77ee06b078f0d67bf1ef0976','ddceshc12','csadcd','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,6),('1427207638928','7c16a45d8632262f94b39fb146ddf1ddda8b84c1','asdcc','asdcsdc','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,7),('1427207825072','f8e54d0c3255fa7d68fa78327f203ed62396b76b','asdc','casdc','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,8),('1427207846732','7bd2d164d8230f302e96ba14e0faf34eeb4e3ca0','sdcas','cdasdcasdccc','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,9),('1427207910334','0df507fec3613de6361b240a55d17edae0f61937','casdc','asdcasdcascd','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,10),('1427207948323','c12ed241553b4f6acd2cbe0a6ec61180b90278cb','asdccc','cccc','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,11),('1427208044504','c9482087662978d9b337cd187eb02f8bd695fa5c','cascc12121212','ccc','[]','65554e066c6a0542d930f2fe30c1b4b9bddd476d',NULL,12),('1427211439279','4afd018fcd82802679413bdf585ca74eb76e3cd9','asdcasdca','asdc','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7',NULL,13),('1427211445506','6aab91ede14a4a432bcc3ea3cf9b5a468f43b603','asdcas','asdcasd','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7',NULL,14),('1427211457278','aa94dc4292122502c585cfeaf73342f9c86313b6','asdcas','asdc','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7',NULL,15),('1427211489077','0005e46e1f467d00a26364e95d1cb0f36e037da2','123','sadcasdc','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7',NULL,16),('1427211496707','64f3f28c6ecae2cf8bb5ea43d936fff0fece912b','12121111','sdcsdc','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7',NULL,17);
 /*!40000 ALTER TABLE `blog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `friend` (
   `block` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +96,7 @@ CREATE TABLE `friend` (
 
 LOCK TABLES `friend` WRITE;
 /*!40000 ALTER TABLE `friend` DISABLE KEYS */;
+INSERT INTO `friend` VALUES ('1427125862829','5c66f1e602c94f33423b52bbf3759796e607df08','e6a78691c06d430c2bdced993d2362cee11da826','208e3cbced6f0ae48ee0e7156441ec655fb494d7','false',1),('1427125862829','5c66f1e602c94f33423b52bbf3759796e607df08','c2dfccb8afdc721d3b1a9b9fcdcf3a15f9c33779','208e3cbced6f0ae48ee0e7156441ec655fb494d7','false',2),('1427125862829','5c66f1e602c94f33423b52bbf3759796e607df08','447e370b31c9676bf1d9c55272580d7e8f775cf9','208e3cbced6f0ae48ee0e7156441ec655fb494d7','false',3);
 /*!40000 ALTER TABLE `friend` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +117,7 @@ CREATE TABLE `topic` (
   `related` blob,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +126,7 @@ CREATE TABLE `topic` (
 
 LOCK TABLES `topic` WRITE;
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
+INSERT INTO `topic` VALUES ('1427211932846','3bd371bccf45e6397b8ba2daf794455b05be1044','ceshizhuti','ccc','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7','[]',1),('1427211967887','d8aa4bef973382d47972ccd0ea391a0e6969d8ae','风景','美好的风景','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7','[]',2),('1427212009094','fadafd30a72b6407d27e8c32ae68e7f94e46f7f3','阿萨德吃','asdcas','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7','[]',3),('1427212060359','06bac26c358e85825fb6d6bde59acd9526e9869a','测试','asdcas','[]','208e3cbced6f0ae48ee0e7156441ec655fb494d7','[]',4);
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +153,7 @@ CREATE TABLE `user` (
   `nb_topic` float DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,6 +162,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('1427209743521','208e3cbced6f0ae48ee0e7156441ec655fb494d7','user1','9a1ac7f1c57a398c3e5c093f52408984c4186590','','','d696756b5a7557b73d1e7e157afc404ba434acb1.jpg','user1@gmail.com','15238228827','',0,0,0,1),('1427209780690','e6a78691c06d430c2bdced993d2362cee11da826','user2','5c66f1e602c94f33423b52bbf3759796e607df08','','','51a0b3e89f106ba1600f75e2c834a5933aef1c4f.jpg','user2@gmail.com','16279330090','',0,0,0,2),('1427209808475','c2dfccb8afdc721d3b1a9b9fcdcf3a15f9c33779','user3','268fb34f7ccd887c98702bd6aacb36524eb6d01f','','','a308eefe4821db444c7da788a8e93e7278fafd7d.jpg','user3@gmail.com','17622234421','',0,0,0,3),('1427209839677','447e370b31c9676bf1d9c55272580d7e8f775cf9','user4','8d2d1c094282f1512fd7fb3fa0d9af92b0e1ec27','','','6feaf6f31f5907d8b4ab6310dc65d37d5ff28788.jpg','user4@gmail.com','1278330002d','',0,0,0,4);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -172,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-15 22:19:28
+-- Dump completed on 2015-03-26 23:24:33
