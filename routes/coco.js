@@ -2,8 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res) {
-    res.render('coco.ejs', { title: 'COCO' });
+router.get('/', function(req, res){
+    if(req.session.hasOwnProperty('username')){
+        res.render('coco.ejs', { title: 'COCO' });
+    }else{
+        res.render('coco-login.ejs', { title: 'COCO Login' });
+    }
 });
 
 router.get('/chat/', function(req, res) {
@@ -27,6 +31,9 @@ router.get('/register/', function(req, res) {
     res.render('coco-register.ejs', { title: 'COCO Register' });
 });
 
+router.get('/logout/', function(req, res) {
+    res.render('coco-login.ejs', { title: 'COCO Login' });
+});
 
 
 router.get('/account/', function(req, res) {
