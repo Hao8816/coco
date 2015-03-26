@@ -52,6 +52,8 @@ var loginUser = function loginUser(req,res){
             return
         }
         if (result[0]!=null){
+            // 更新sessiong
+            req.session['username'] = name;
             res.send({'info':"OK","ret":0001,"user":result[0]})
         }else{
             res.send({'info':"ERROR","ret":1001})
