@@ -186,8 +186,17 @@
                         $scope.blog_title = ''
                         $scope.blog_content = ''
 
+                        var blog_list = data['blog'].concat($scope.blog_list);
+                        blog_list.every(function(obj){
+                            var user_sha1 = obj.creator_sha1;
+                            var userObj = getUserDetailInfo(user_sha1);
+                            obj['name'] = userObj.name;
+                            obj['head_image'] = userObj.head_image;
+                            return obj;
+                        });
+
                         // 利用angular刷新
-                        $scope.blog_list = data['blog'].concat($scope.blog_list);
+                        $scope.blog_list = blog_list;
                         //
 
                     } else {
