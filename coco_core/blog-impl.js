@@ -49,7 +49,7 @@ var saveTopic = function saveTopic(req,res){
 var getBlogList = function getBlogList(req,res){
     var creator_sha1 = req.param('creator_sha1');
     var page = req.param('page')-1;
-    blog_models.Blog.find([ "time", "Z" ]).limit(10).offset(10*page).run(function(err,result){
+    blog_models.Blog.find([ "time", "Z" ]).limit(6).offset(6*page).run(function(err,result){
             if(err){
                 console.log(err);
             }
