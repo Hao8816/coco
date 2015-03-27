@@ -32,6 +32,20 @@
     .oprate-bar span:hover{
         text-decoration: underline;
     }
+    .blog-nav-bar{
+
+    }
+    .blog-nav-bar .nav-item{
+        cursor: pointer;
+    }
+    .blog-nav-bar .nav-item a{
+        color: rgba(0,0,0,0.87);
+        line-height: 30px;
+    }
+    .blog-nav-bar input{
+        border-radius: 15px;
+        border-color:#ff7997;
+    }
 
 </style>
 
@@ -40,10 +54,16 @@
     <div class="row">
         <div class="col-md-9">
             <!--<h4>博客列表</h4>-->
-            <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
-                <span>所有博客</span>
-                <em>/</em>
-                <span>我的博客</span>
+            <div class="row blog-nav-bar" style="margin-top: 20px;">
+                <div class="col-md-4">
+                    <span class="nav-item"><a ng-click="showAllBlog()">所有博客</a></span>
+                    <em>/</em>
+                    <span class="nav-item"><a ng-click="showMyBlog()">我的博客</a></span>
+                </div>
+                <div class="col-md-5"></div>
+                <div class="col-md-3">
+                    <input style="margin: 5px 0px" class="form-control input-sm" placeholder="搜索博客" type="text"/>
+                </div>
             </div>
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list">
