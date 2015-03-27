@@ -54,11 +54,14 @@
                     $scope.friend_list = friend_list;
 
                     var friend_info_dict = {}
+                    var all_user_info_dict = {}
                     friend_list.forEach(function(obj){
                         friend_info_dict[obj.name] = obj
+                        all_user_info_dict[obj.sha1] = obj
                     })
 
                     localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
+                    localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
                 } else {
 
                 }
@@ -80,6 +83,21 @@
 
         }
 
+        function getUserDetailInfo(usersha1){
+            var user_list = localStorage.getItem('ALL_USER_INFO_DICT');
+            var user_info_dict = JSON.parse(user_list);
+            var user_object = {}
+
+            if (user_info_dict.hasOwnProperty(usersha1)){
+                user_object = user_info_dict[usersha1]
+            }else{
+                user_object['head_image'] = 'default.jpg';
+                user_object['name'] = '未知';
+            }
+            return user_object;
+
+        }
+
         function accountPageCtrl($scope) {
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             var info = JSON.parse(loginUserInfo);
@@ -90,6 +108,25 @@
         function topicPageController($scope, $http) {
             // 显示所有的主题
             showTopic();
+
+            var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+            $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
+                if (data['ret'] == '0001') {
+                    console.log(data);
+                    var friend_list = data['friend_list'];
+                    var friend_info_dict = {}
+                    var all_user_info_dict = {}
+                    friend_list.forEach(function(obj){
+                        friend_info_dict[obj.name] = obj
+                        all_user_info_dict[obj.sha1] = obj
+                    })
+
+                    localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
+                    localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
+                } else {
+
+                }
+            });
 
             function showTopic() {
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
@@ -132,7 +169,7 @@
         function blogPageController($scope, $http) {
             // 显示博客列表
             $scope.blog_list = []
-            showBlog();
+            showBlog(1);
 
             $scope.saveBlog = function () {
                 var title = $scope.blog_title;
@@ -148,19 +185,29 @@
                         $('.compose_blog_modal').modal('hide');
                         $scope.blog_title = ''
                         $scope.blog_content = ''
-                        //showBlog();
 
                         // 利用angular刷新
                         $scope.blog_list = data['blog'].concat($scope.blog_list);
+                        //
+
                     } else {
 
                     }
                 });
             }
-            function showBlog() {
+
+            $scope.changePage = function(offset){
+                var page = $scope.current_page + offset;
+                showBlog(page);
+            }
+
+            function showBlog(page) {
+                if(page<0){
+                    return;
+                }
                 // get blog from server
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-                $http.post('/ajax/get_blog_list/', {creator_sha1: creator_sha1}).success(function (data) {
+                $http.post('/ajax/get_blog_list/', {creator_sha1: creator_sha1,page:page}).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);
                         var blog_list = data['blog_list']
@@ -168,8 +215,18 @@
                             var format_data = new Date(parseInt(obj['time']))
                             obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
                             console.log(obj['time'])
-                        })
-                        $scope.blog_list = data['blog_list']
+                        });
+                        var blog_list = data['blog_list'];
+                        blog_list.every(function(obj){
+                            var user_sha1 = obj.creator_sha1;
+                            var userObj = getUserDetailInfo(user_sha1);
+                            obj['name'] = userObj.name;
+                            obj['head_image'] = userObj.head_image;
+                            return obj;
+                        });
+
+                        $scope.blog_list = blog_list;
+                        $scope.current_page = page
                     } else {
 
                     }

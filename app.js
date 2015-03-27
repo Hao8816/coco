@@ -17,19 +17,7 @@ var RedisStore = require('connect-redis')(session);
 
 var app = express();
 
-// 设置 Session
-//app.use(session({
-//    store: new RedisStore({
-//        host: "127.0.0.1",
-//        port: 6379,
-//        db: "coco_session"
-//    }),
-//    resave:false,
-//    saveUninitialized:false,
-//    secret: ''
-//}));
-
-app.use(session({ secret: 'coco', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'coco', cookie: { maxAge: 600000 }}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
