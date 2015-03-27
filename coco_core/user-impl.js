@@ -113,9 +113,6 @@ var getFriendList = function getFriendList(req,res){
         });
     });
 
-
-
-
     //user_models.Friendship.all([ "time", "Z" ],function(err,result){
     //    if(err){
     //        console.log(err);

@@ -48,24 +48,25 @@ var saveTopic = function saveTopic(req,res){
 
 var getBlogList = function getBlogList(req,res){
     var creator_sha1 = req.param('creator_sha1');
-    blog_models.Blog.find({creator_sha1:creator_sha1},[ "time", "Z" ],function(err,result){
-        if(err){
-            console.log(err);
-        }
+    var page = req.param('page')-1;
+    blog_models.Blog.find([ "time", "Z" ]).limit(5).offset(5*page).run(function(err,result){
+            if(err){
+                console.log(err);
+            }
 
-        res.send({'info':"OK","ret":0001,"blog_list":result})
-    })
+            res.send({'info':"OK","ret":0001,"blog_list":result})
+    });
 };
 
 var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
-    blog_models.Topic.find({creator_sha1:creator_sha1},[ "time", "Z" ],function(err,result){
+    blog_models.Topic.find([ "time", "Z" ]).limit(5).offset(0).run(function(err,result){
         if(err){
             console.log(err);
         }
         res.send({'info':"OK","ret":0001,"topic_list":result})
-    })
 
+    });
 };
 
 
