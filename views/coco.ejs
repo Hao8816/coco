@@ -185,7 +185,11 @@
                         $('.compose_blog_modal').modal('hide');
                         $scope.blog_title = ''
                         $scope.blog_content = ''
-
+                        data['blog'].forEach(function (obj) {
+                            var format_data = new Date(parseInt(obj['time']))
+                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+                            console.log(obj['time'])
+                        });
                         var blog_list = data['blog'].concat($scope.blog_list);
                         blog_list.every(function(obj){
                             var user_sha1 = obj.creator_sha1;
