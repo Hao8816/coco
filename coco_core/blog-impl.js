@@ -60,7 +60,7 @@ var getBlogList = function getBlogList(req,res){
 
 var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
-    blog_models.Topic.find([ "time", "Z" ]).limit(5).offset(0).run(function(err,result){
+    blog_models.Topic.find([ "time", "Z" ]).limit(10).offset(0).run(function(err,result){
         if(err){
             console.log(err);
         }
