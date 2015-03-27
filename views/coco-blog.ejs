@@ -37,10 +37,17 @@
     }
     .blog-nav-bar .nav-item{
         cursor: pointer;
+        margin-right: 5px;
+        padding: 5px 3px;
+        font-size: 16px;
     }
-    .blog-nav-bar .nav-item a{
+    .blog-nav-bar .nav-active{
+        border-bottom: 2px solid #ff7997;
+    }
+    .blog-nav-bar .nav-item{
         color: rgba(0,0,0,0.87);
         line-height: 40px;
+        font-size: 14px;
     }
     .blog-nav-bar input{
         border-radius: 15px;
@@ -56,9 +63,8 @@
             <!--<h4>博客列表</h4>-->
             <div class="row blog-nav-bar" style="margin-top: 10px;">
                 <div class="col-md-4">
-                    <span class="nav-item"><a ng-click="showAllBlog()">所有博客</a></span>
-                    <em>/</em>
-                    <span class="nav-item"><a ng-click="showMyBlog()">我的博客</a></span>
+                    <span class="nav-item nav-active" ng-click="showAllBlog()">所有博客</span>
+                    <span class="nav-item" ng-click="showMyBlog()">我的博客</span>
                 </div>
                 <div class="col-md-5"></div>
                 <div class="col-md-3">
