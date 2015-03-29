@@ -4,17 +4,35 @@ var elasticsearch = require('elasticsearch');
 // for the rest of the cluster right away, and
 // again every 5 minutes
 var client = elasticsearch.Client({
-    host: 'xinhua4.tmlsystem.com:9090',
+    host: 'onekoko.com:9200',
     sniffOnStart: true,
-    sniffInterval: 3000000
+    sniffInterval: 30000
 });
+
+
+//// index a document
+//client.index({
+//    index: 'blog',
+//    type: 'post',
+//    id: 1,
+//    body: {
+//        title: 'JavaScript Everywhere!',
+//        content: 'It all started when...',
+//        date: '2013-12-17'
+//    }
+//}, function (err, resp) {
+//    // ...
+//});
+
+
+
 client.search({
-    index: 'tml-engine',
+    index: 'blog',
     size: 10,
     body: {
         query: {
             match: {
-                content: '南阳市'
+                title: 'JavaScript'
             }
         }
     }
