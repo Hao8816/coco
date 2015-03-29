@@ -157,9 +157,6 @@
                                 return obj;
                             });
                             $scope.topic_list = topic_list;
-
-
-
                             var topic_info_dict = {};
                             topic_list.forEach(function(obj){
                                 topic_info_dict[obj.sha1] = obj
@@ -193,6 +190,7 @@
                             topic_info_dict[obj.sha1] = obj
                         })
                         localStorage.setItem('TOPIC_INFO_DICT',JSON.stringify(topic_info_dict));
+                        localStorage.setItem('TOPIC_INFO_LIST',JSON.stringify(topic_list));
                     } else {
 
                     }
