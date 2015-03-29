@@ -1,9 +1,9 @@
 <style type="text/css">
     .topic-item{
-        background-color: #fff;
-        border-radius: 5px;
+        background-color: #fefefe;
+        border-radius: 3px;
         border: 1px solid #eee;
-        padding: 10px;
+        padding: 8px;
         /*height: 160px;*/
         margin-top: 10px;
         cursor: pointer;
@@ -11,6 +11,9 @@
     }
     .topic-item:hover{
         box-shadow: 0px 0px 10px 3px #ddd;
+    }
+    .topic-item .topic-link{
+        text-decoration: none;
     }
 
 </style>
@@ -27,14 +30,16 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list">
                         <div class="topic-item">
-                            <p><img style="width: 30px;height: 30px;border-radius:30px;" ng-src="/images/{{topic.head_image}}" alt=""/>
-                                <span style="font-weight: bold;padding: 0px 10px">{{topic.name}}</span>
-                            </p>
-                            <h5 style="text-align: center;line-height: 40px;border-bottom: 1px solid #eee">
-                                <a href="#/blog/{{topic.sha1}}">{{topic.title}}</a></h5>
-                            <p style="font-size: 13px;text-align: center;color: rgba(0,0,0,0.56)">{{topic.time}}</p>
+                            <a class="topic-link" href="#/blog/{{topic.sha1}}">
+                                <p style="font-size: 13px;color: rgba(0,0,0,0.56)">创建时间:{{topic.time}}</p>
+                                <p style="border-bottom: 1px solid #eee;padding:8px 5px">
+                                    <img style="width: 30px;height: 30px;border-radius:30px;" ng-src="/images/{{topic.head_image}}" alt=""/>
+                                    <span style="padding: 0px 10px">{{topic.name}}</span>
+                                </p>
+                                <p style="font-size: 15px;color: rgba(0,0,0,0.87)">标题:{{topic.title}}</p>
+                                <p style="font-size: 13px;color: rgba(0,0,0,0.56)">描述:{{topic.desc}}</p>
 
-                            <p style="margin: 0px;font-size: 13px;color: rgba(0,0,0,0.87)">{{topic.desc}}</p>
+                            </a>
                         </div>
                     </div>
                 </div>
