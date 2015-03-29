@@ -105,8 +105,6 @@
         }
 
         function topicPageController($scope, $http) {
-            // 显示所有的主题
-            showTopic();
 
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
             $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
@@ -122,11 +120,14 @@
 
                     localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
                     localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
+
+                    // 显示所有的主题
+                    showTopic();
                 } else {
 
                 }
             });
-
+            
             function showTopic() {
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                 $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1}).success(function (data) {
