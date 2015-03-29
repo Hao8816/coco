@@ -192,11 +192,16 @@
 
                         // 利用angular刷新
                         var topic_list = data['topic'].concat($scope.topic_list);
-                        $scope.topic_list = topic_list;
                         var topic_info_dict = {};
-                        topic_list.forEach(function(obj){
-                            topic_info_dict[obj.sha1] = obj
+                        topic_list.every(function(obj){
+                            topic_info_dict[obj.sha1] = obj;
+                            if (obj.hasOwnProperty('$$hashKey')){
+                                delete  obj['$$hashKey'];
+                            }
+                            return obj;
                         })
+
+                        $scope.topic_list = topic_list;
                         localStorage.setItem('TOPIC_INFO_DICT',JSON.stringify(topic_info_dict));
                         localStorage.setItem('TOPIC_INFO_LIST',JSON.stringify(topic_list));
                     } else {
