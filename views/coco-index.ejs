@@ -4,14 +4,18 @@
         border-radius: 5px;
         border: 1px solid #eee;
         padding: 10px;
-        height: 160px;
+        /*height: 160px;*/
         margin-top: 10px;
+        cursor: pointer;
 
+    }
+    .topic-item:hover{
+        box-shadow: 0px 0px 10px 3px #ddd;
     }
 
 </style>
 
-<div class="container" ng-controller="topicPageController">
+<div class="container" ng-controller="topicPageController as mainCtrl">
     <div class="row">
         <div class="col-md-9">
             <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
@@ -21,8 +25,13 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list">
                         <div class="topic-item">
+                            <p><img style="width: 30px;height: 30px;border-radius:30px;" ng-src="/images/{{topic.head_image}}" alt=""/>
+                                <span style="font-weight: bold;padding: 0px 10px">{{topic.name}}</span>
+                            </p>
+                            <h4 style="text-align: center;line-height: 40px;border-bottom: 1px solid #eee">
+                                <a href="#/blog/{{topic.sha1}}">{{topic.title}}</a></h4>
                             <p style="font-size: 13px;text-align: center;color: rgba(0,0,0,0.56)">{{topic.time}}</p>
-                            <h4 style="text-align: center;line-height: 70px;border-bottom: 1px solid #eee">{{topic.title}}</h4>
+
                             <p style="margin: 0px;font-size: 13px;color: rgba(0,0,0,0.87)">{{topic.desc}}</p>
                         </div>
                     </div>
@@ -31,18 +40,18 @@
             <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;clear: both;width: 100%">
                 <span>热门主题</span>
             </div>
-            <div style="border-radius: 5px;">
-                <div class="row">
-                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list">
-                        <div class="topic-item">
-                            <p style="font-size: 13px;text-align: center;color: rgba(0,0,0,0.56)">{{topic.time}}</p>
-                            <h4 style="text-align: center;line-height: 70px;border-bottom: 1px solid #eee">{{topic.title}}</h4>
-                            <p style="margin: 0px;font-size: 13px;color: rgba(0,0,0,0.87)">{{topic.desc}}</p>
+            <!--<div style="border-radius: 5px;">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list">-->
+                        <!--<div class="topic-item">-->
+                            <!--<p style="font-size: 13px;text-align: center;color: rgba(0,0,0,0.56)">{{topic.time}}</p>-->
+                            <!--<h4 style="text-align: center;line-height: 70px;border-bottom: 1px solid #eee">{{topic.title}}</h4>-->
+                            <!--<p style="margin: 0px;font-size: 13px;color: rgba(0,0,0,0.87)">{{topic.desc}}</p>-->
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <div class="col-md-3" style="height: 600px;margin-top: 20px;" ng-controller="blogPageCtrl">
             <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">

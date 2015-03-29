@@ -33,22 +33,25 @@
         text-decoration: underline;
     }
     .blog-nav-bar{
+        padding: 5px;
 
     }
     .blog-nav-bar .nav-item{
         cursor: pointer;
         margin-right: 5px;
-        padding: 5px 3px;
+        padding: 4px 8px;
+        border-radius: 35px;
     }
     .blog-nav-bar .nav-active{
-        border-bottom: 2px solid #ff7997;
-        font-size: 16px;
+        /*border-bottom: 2px solid #ff7997;*/
+        background-color: #ff7997;
         font-weight: bold;
+        color: rgba(255,255,255,0.87);
     }
     .blog-nav-bar .nav-item{
-        color: rgba(0,0,0,0.87);
+        /*color: rgba(0,0,0,0.87);*/
         line-height: 40px;
-        font-size: 14px;
+        font-size: 13px;
     }
     .blog-nav-bar input{
         border-radius: 15px;
@@ -58,23 +61,33 @@
 </style>
 
 
-<div class="container" ng-controller="blogPageController">
+<div class="container">
     <div class="row">
         <div class="col-md-9">
             <!--<h4>博客列表</h4>-->
-            <div class="row blog-nav-bar" style="margin-top: 10px;">
+            <div class="row">
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
+                        <li><a href="#index/">所有主题</a></li>
+                        <li class="active">主题:{{topic.title}}</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row blog-nav-bar" style="margin-top: 5px;">
                 <div class="col-md-4">
                     <span class="nav-item nav-active" ng-click="showAllBlog()">所有博客</span>
                     <span class="nav-item" ng-click="showMyBlog()">我的博客</span>
                 </div>
-                <div class="col-md-5"></div>
+                <div class="col-md-5">
+                </div>
                 <div class="col-md-3">
                     <input style="margin: 5px 0px" class="form-control input-sm" placeholder="搜索博客" type="text"/>
                 </div>
             </div>
+
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list">
-                    <img src="/images/{{blog.head_image}}" title="{{blog.name}}" style="width:50px;height: 50px;border-radius: 50px;padding: 5px;" alt=""/>
+                    <img ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" style="width:50px;height: 50px;border-radius: 50px;padding: 5px;" alt=""/>
                     <span style="max-width: 70%;text-overflow: ellipsis;display: inline-block;overflow: hidden;white-space: nowrap;">{{blog.title}}</span>
                     <span style="float: right;font-size: 13px;color: rgba(0,0,0,0.4)">{{blog.time}}</span>
                     <p style="padding-left: 50px;color: rgba(0,0,0,0.56);font-size: 13px;">{{blog.content}}</p>
