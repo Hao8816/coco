@@ -182,6 +182,14 @@
                         $scope.topic.title = '';
                         $scope.topic.desc = '';
                         $('.compose_topic_modal').modal('hide');
+                        data['topic'].every(function(obj){
+                            var userSha1 = obj.creator_sha1;
+                            var userObject = getUserDetailInfo(userSha1);
+                            obj['name'] = userObject['name']
+                            obj['head_image'] = userObject['head_image']
+                           return obj;
+                        });
+
                         // 利用angular刷新
                         var topic_list = data['topic'].concat($scope.topic_list);
                         $scope.topic_list = topic_list;
