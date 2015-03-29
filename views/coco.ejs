@@ -106,60 +106,73 @@
 
         function topicPageController($scope, $http) {
 
+            var user_info_cache = localStorage.getItem('ALL_USER_INFO_DICT')
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-            $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
-                if (data['ret'] == '0001') {
-                    console.log(data);
-                    var friend_list = data['friend_list'];
-                    var friend_info_dict = {}
-                    var all_user_info_dict = {}
-                    friend_list.forEach(function(obj){
-                        friend_info_dict[obj.name] = obj
-                        all_user_info_dict[obj.sha1] = obj
-                    })
 
-                    localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
-                    localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
-
-                    // 显示所有的主题
-                    showTopic();
-                } else {
-
-                }
-            });
-            
-            function showTopic() {
-                var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-                $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1}).success(function (data) {
+            if(user_info_cache == null){
+                $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);
-                        var blog_list = data['topic_list']
-                        blog_list.forEach(function (obj) {
-                            var format_data = new Date(parseInt(obj['time']))
-                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-                            console.log(obj['time'])
+                        var friend_list = data['friend_list'];
+                        var friend_info_dict = {}
+                        var all_user_info_dict = {}
+                        friend_list.forEach(function(obj){
+                            friend_info_dict[obj.name] = obj
+                            all_user_info_dict[obj.sha1] = obj
                         })
-                        var topic_list = data['topic_list'];
-                        topic_list.every(function(obj){
-                            var userSha1 = obj.creator_sha1;
-                            var userObject = getUserDetailInfo(userSha1);
-                            obj['name'] = userObject['name']
-                            obj['head_image'] = userObject['head_image']
-                            return obj;
-                        });
-                        $scope.topic_list = topic_list;
 
-
-
-                        var topic_info_dict = {};
-                        topic_list.forEach(function(obj){
-                            topic_info_dict[obj.sha1] = obj
-                        })
-                        localStorage.setItem('TOPIC_INFO_DICT',JSON.stringify(topic_info_dict));
+                        localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
+                        localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
+                        // 显示所有的主题
+                        showTopic();
                     } else {
 
                     }
                 });
+
+            }else{
+                // 显示所有的主题
+                showTopic();
+            }
+
+            function showTopic() {
+                var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                var topic_info_cache = localStorage.getItem('TOPIC_INFO_LIST');
+                if(topic_info_cache == null){
+                    $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1}).success(function (data) {
+                        if (data['ret'] == '0001') {
+                            console.log(data);
+                            var blog_list = data['topic_list']
+                            blog_list.forEach(function (obj) {
+                                var format_data = new Date(parseInt(obj['time']))
+                                obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+                                console.log(obj['time'])
+                            })
+                            var topic_list = data['topic_list'];
+                            topic_list.every(function(obj){
+                                var userSha1 = obj.creator_sha1;
+                                var userObject = getUserDetailInfo(userSha1);
+                                obj['name'] = userObject['name']
+                                obj['head_image'] = userObject['head_image']
+                                return obj;
+                            });
+                            $scope.topic_list = topic_list;
+
+
+
+                            var topic_info_dict = {};
+                            topic_list.forEach(function(obj){
+                                topic_info_dict[obj.sha1] = obj
+                            })
+                            localStorage.setItem('TOPIC_INFO_DICT',JSON.stringify(topic_info_dict));
+                            localStorage.setItem('TOPIC_INFO_LIST',JSON.stringify(topic_list));
+                        } else {
+
+                        }
+                    });
+                }else{
+                    $scope.topic_list = JSON.parse(topic_info_cache);
+                }
             }
 
 
