@@ -34,6 +34,9 @@ router.get('/logout/', function(req, res) {
     res.render('coco-login.ejs', { title: 'COCO Login' });
 });
 
+router.get('/help/', function(req, res) {
+    res.render('coco-help.ejs', { title: 'COCO Help' });
+});
 
 router.get('/account/', function(req, res) {
     res.render('coco-account.ejs', { title: 'COCO Me' });
