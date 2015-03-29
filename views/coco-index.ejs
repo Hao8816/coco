@@ -18,8 +18,10 @@
 <div class="container" ng-controller="topicPageController as mainCtrl">
     <div class="row">
         <div class="col-md-9">
-            <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
-                <span>我的主题</span>
+            <div style="margin-top: 20px">
+                <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
+                    <li class="active ng-binding">我的主题</li>
+                </ol>
             </div>
             <div style="border-radius: 5px;">
                 <div class="row">
@@ -28,8 +30,8 @@
                             <p><img style="width: 30px;height: 30px;border-radius:30px;" ng-src="/images/{{topic.head_image}}" alt=""/>
                                 <span style="font-weight: bold;padding: 0px 10px">{{topic.name}}</span>
                             </p>
-                            <h4 style="text-align: center;line-height: 40px;border-bottom: 1px solid #eee">
-                                <a href="#/blog/{{topic.sha1}}">{{topic.title}}</a></h4>
+                            <h5 style="text-align: center;line-height: 40px;border-bottom: 1px solid #eee">
+                                <a href="#/blog/{{topic.sha1}}">{{topic.title}}</a></h5>
                             <p style="font-size: 13px;text-align: center;color: rgba(0,0,0,0.56)">{{topic.time}}</p>
 
                             <p style="margin: 0px;font-size: 13px;color: rgba(0,0,0,0.87)">{{topic.desc}}</p>
@@ -37,8 +39,10 @@
                     </div>
                 </div>
             </div>
-            <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;clear: both;width: 100%">
-                <span>热门主题</span>
+            <div style="margin-top: 20px">
+                <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
+                    <li class="active ng-binding">热门主题</li>
+                </ol>
             </div>
             <!--<div style="border-radius: 5px;">-->
                 <!--<div class="row">-->
@@ -56,7 +60,7 @@
         <div class="col-md-3" style="height: 600px;margin-top: 20px;" ng-controller="blogPageCtrl">
             <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
                 <div style="text-align: center;line-height: 100px;">
-                    <img style="height: 80px;width: 80px;border-radius: 80px;" src="/images/{{user.head_image}}" alt=""/>
+                    <img style="height: 80px;width: 80px;border-radius: 80px;" ng-src="/images/{{user.head_image}}" alt=""/>
                 </div>
                 <p style="text-align: center">
                     <span>好友<a href="">{{user.nb_friend}}</a></span>
