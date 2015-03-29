@@ -23,6 +23,12 @@
         font-size: 13px;
         color: rgba(0,0,0,0.36);
     }
+    pre{
+        background-color: #fff;
+        border: none;
+        padding: 8px 5px;
+        width: 90%;
+    }
 </style>
 <script type="text/javascript">
     function loginCtrl($scope,$http){
@@ -66,26 +72,19 @@
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-8">
                     <p style="font-size: 17px;padding: 5px;">主人寄语:</p>
-                    <p style="font-size: 15px;padding: 5px;width: 80%;line-height: 28px;font-family: STKaiti;">如何让你遇见我
-                        在我最美丽的时刻,
-                        为这,
-                        我已在佛前求了五百年,
-                        求它让我们结一段尘缘,
-                        佛于是把我化作一棵树,
-                        长在你必经的路旁,
-                        阳光下慎重地开满了花,
-                        朵朵都是我前世的盼望,
-                        当你走近,
-                        请你细听,
-                        颤抖的叶是我等待的热情,
-                        而你终于无视地走过,
-                        在你身后落了一地的,
-                        朋友啊 那不是花瓣,
-                        是我凋零的心。</p>
-
+                    <pre style="font-size: 15px;line-height: 26px;font-family: STKaiti;">
+                        我打江南走过
+                        那等在季节里的容颜如莲花的开落
+                        东风不来，三月的柳絮不飞
+                        你底心如小小的寂寞的城
+                        恰若青石的街道向晚
+                        跫音不响，三月的春帷不揭
+                        你底心是小小的窗扉紧掩
+                        我达达的马蹄，是美丽的错误
+                        我不是归人，是个过客……</pre>
                     <p style="font-size: 17px;padding: 5px;width: 80%;text-align: right">2015.03.29</p>
                 </div>
-                <div class="col-xs-12 col-sm-5 col-md-4" ng-controller="loginCtrl">
+                <div class="col-xs-12 col-sm-5 col-md-4" ng-controller="loginCtrl" style="margin-top: 20px;">
                     <div style="padding: 10px;background-color: #fff;border-radius: 5px;">
                         <div class="form-group">
                             <label for="exampleInputEmail1">用户名</label>
