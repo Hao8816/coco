@@ -14,7 +14,7 @@ client.search({
     body: {
         query: {
             match: {
-                content: '南阳市'
+                site: '东方网'
             }
         }
     }
