@@ -1,11 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var redis = require('redis');
-var client = redis.createClient();
-
-client.on("error", function (err) {
-    console.log("Error " + err);
-});
+var blog = require('../coco_core/blog-impl');
+var user = require('../coco_core/user-impl');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -17,29 +13,13 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
     // api 里面的参数传递在body里面
     var rsdic = {}
-    var params = req.body
+    var params = req.body;
     if (params.hasOwnProperty('action') == false){
         rsdic['info'] = "params error"
         rsdic['ret'] = '0001'
         res.send(rsdic)
     }
-    var action = params['action']
-    console.log(params)
-    client.hvals('FOOD_OBJECT_LIST',function(err,result){
-        if (err){
-            console.log('Get Value By Key Error'+err);
-        }
-        console.log('----read from redis ----');
-        var json_data = result.map(function(obj){
-            return JSON.parse(obj)
-        })
-        console.log(result)
-        rsdic['data'] = json_data.slice(0,10)
-        rsdic['action'] = action
-        rsdic['info'] = "ok"
-        rsdic['ret'] = '0000'
-        res.send(rsdic)
-    })
+    blog.getBlogList(req,res);
 });
 
 var apiURL = {
