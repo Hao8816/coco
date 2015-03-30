@@ -23,6 +23,12 @@
         font-size: 13px;
         color: rgba(0,0,0,0.36);
     }
+    pre{
+        background-color: #fff;
+        border: none;
+        padding: 8px 5px;
+        width: 90%;
+    }
 </style>
 <script type="text/javascript">
     function loginCtrl($scope,$http){
@@ -51,25 +57,38 @@
 <div style="background-color: #ff5277;width: 100%">
     <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
         <div class="row nav-kit">
-            <div class="hidden-xs col-sm-8 col-md-10"><h4 style="margin: 0px">COCO 登录</h4></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="/coco/help/">帮助</a></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="/coco/register/">注册</a></div>
+            <div class="col-xs-8 col-sm-8 col-md-10"><h4 style="margin: 0px">COCO 登录</h4></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/help/">帮助</a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/register/">注册</a></div>
         </div>
     </div>
 </div>
 <div class="container">
-    <div class="row" style="margin-top: 20px;">
-        <div class="jumbotron" style="background-color: #fff;margin: 0;padding-top: 100px;">
+    <div class="row" style="margin-top: 0px;">
+        <div class="jumbotron" style="background-color: #fff;margin: 0;padding-top: 0px;">
             <div class="row">
-                <div class="col-xs-12 col-sm-7 col-md-8">
-                    <h1>Hello, world!</h1>
-                    <p>...</p>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h2 style="color: #ff5277;padding: 30px 0px">COCO,不一样的博客</h2>
                 </div>
-                <div class="col-xs-12 col-sm-5 col-md-4" ng-controller="loginCtrl">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <p style="font-size: 17px;padding: 5px;">主人寄语:</p>
+                    <pre style="font-size: 15px;line-height: 26px;font-family: STKaiti;">
+                        我打江南走过
+                        那等在季节里的容颜如莲花的开落
+                        东风不来，三月的柳絮不飞
+                        你的心如小小的寂寞的城
+                        恰若青石的街道向晚
+                        跫音不响，三月的春帷不揭
+                        你的心是小小的窗扉紧掩
+                        我达达的马蹄，是美丽的错误
+                        我不是归人，是个过客……</pre>
+                    <p style="font-size: 17px;padding: 5px;width: 80%;text-align: right">2015.03.29</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-controller="loginCtrl" style="margin-top: 20px;">
                     <div style="padding: 10px;background-color: #fff;border-radius: 5px;">
                         <div class="form-group">
                             <label for="exampleInputEmail1">用户名</label>
-                            <input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1" placeholder="手机号/邮箱">
+                            <input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1" placeholder="用户名">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">密码</label>
@@ -88,7 +107,7 @@
         </div>
     </div>
     <div class="row">
-        <div style="height: 200px;background-color: #fff;border-top: 1px solid #eee"></div>
+        <div style="height: 200px;background-color: #fff;border-top: 1px solid #f5f5f5"></div>
     </div>
 </div>
 

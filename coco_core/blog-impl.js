@@ -7,6 +7,7 @@ var saveBlog = function saveBlog(req,res){
     var date_time = new Date().getTime();
     var sha1 = SHA1(date_time);
     console.log(req.param)
+    var topic_sha1 = req.param('topic_sha1');
     var blog_title = req.param('title');
     var blog_content = req.param('content');
     var creator_sha1 = req.param('creator_sha1');
@@ -16,7 +17,8 @@ var saveBlog = function saveBlog(req,res){
         title         : blog_title,    // 博客标题
         content       : blog_content,    // 博客的描述
         images        : [],    // 博客的图片信息: Object,
-        creator_sha1  : creator_sha1   // 博客的创建者信息
+        creator_sha1  : creator_sha1,   // 博客的创建者信息
+        topic_sha1  : topic_sha1   // 博客的主题
     }],function (err,item){
         console.log(item);
         res.send({'info':"OK","ret":0001,"blog":item})
@@ -48,24 +50,38 @@ var saveTopic = function saveTopic(req,res){
 
 var getBlogList = function getBlogList(req,res){
     var creator_sha1 = req.param('creator_sha1');
-    blog_models.Blog.find({creator_sha1:creator_sha1},[ "time", "Z" ],function(err,result){
-        if(err){
-            console.log(err);
-        }
+    var topic_sha1 = req.param('topic_sha1');
+    var page = req.param('page')-1;
+    // 查询主题对应的博客
+    if(topic_sha1 == 0){
+        blog_models.Blog.find([ "time", "Z" ]).limit(6).offset(6*page).run(function(err,result){
+            if(err){
+                console.log(err);
+            }
 
-        res.send({'info':"OK","ret":0001,"blog_list":result})
-    })
+            res.send({'info':"OK","ret":0001,"blog_list":result})
+        });
+    }else{
+        blog_models.Blog.find({topic_sha1:topic_sha1},[ "time", "Z" ]).limit(6).offset(6*page).run(function(err,result){
+            if(err){
+                console.log(err);
+            }
+
+            res.send({'info':"OK","ret":0001,"blog_list":result})
+        });
+    }
+
 };
 
 var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
-    blog_models.Topic.find({creator_sha1:creator_sha1},[ "time", "Z" ],function(err,result){
+    blog_models.Topic.find([ "time", "Z" ]).run(function(err,result){
         if(err){
             console.log(err);
         }
         res.send({'info':"OK","ret":0001,"topic_list":result})
-    })
 
+    });
 };
 
 
