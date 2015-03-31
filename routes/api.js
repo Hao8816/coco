@@ -14,22 +14,31 @@ router.post('/', function(req, res) {
     // api 里面的参数传递在body里面
     var rsdic = {}
     var params = req.body;
+    console.log(params)
+    console.log(req.param('data'))
     if (params.hasOwnProperty('action') == false){
         rsdic['info'] = "params error"
         rsdic['ret'] = '0001'
         res.send(rsdic)
     }
-    blog.getBlogList(req,res);
+    var action = req.param('action');
+    if(action == 'index'){
+        blog.getTopicList(req,res);
+    }else if(action == 'blog'){
+        blog.getBlogList(req,res);
+    }
+
+    //apiRouter[action]()(req,res)
 });
 
-var apiURL = {
-    "index" : "",
+var apiRouter = {
+    "index" : "getBlogList",
     "share" : ""
-}
+};
 
-function apiRoute(){
-
-
+function getBlogList(req,res){
+    console.log('this is a function -----');
+    blog.getTopicList(req,res);
 }
 
 module.exports = router;
