@@ -52,9 +52,10 @@ var getBlogList = function getBlogList(req,res){
     var creator_sha1 = req.param('creator_sha1');
     var topic_sha1 = req.param('topic_sha1');
     var page = req.param('page')-1;
+    console.log(page)
     // 查询主题对应的博客
     if(topic_sha1 == 0){
-        blog_models.Blog.find([ "time", "Z" ]).limit(6).offset(6*page).run(function(err,result){
+        blog_models.Blog.find([ "time", "Z" ]).limit(16).offset(6*page).run(function(err,result){
             if(err){
                 console.log(err);
             }
@@ -62,7 +63,7 @@ var getBlogList = function getBlogList(req,res){
             res.send({'info':"OK","ret":0001,"blog_list":result})
         });
     }else{
-        blog_models.Blog.find({topic_sha1:topic_sha1},[ "time", "Z" ]).limit(6).offset(6*page).run(function(err,result){
+        blog_models.Blog.find({topic_sha1:topic_sha1},[ "time", "Z" ]).limit(16).offset(6*page).run(function(err,result){
             if(err){
                 console.log(err);
             }
@@ -75,6 +76,7 @@ var getBlogList = function getBlogList(req,res){
 
 var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
+    console.log(creator_sha1)
     blog_models.Topic.find([ "time", "Z" ]).run(function(err,result){
         if(err){
             console.log(err);
