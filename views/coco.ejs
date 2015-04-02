@@ -120,7 +120,9 @@
                             friend_info_dict[obj.name] = obj
                             all_user_info_dict[obj.sha1] = obj
                         })
+                        $scope.friend_list = friend_list;
 
+                        localStorage.setItem('FRIEND_INFO_LIST',JSON.stringify(friend_list));
                         localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
                         localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
                         // 显示所有的主题
@@ -131,6 +133,7 @@
                 });
 
             }else{
+                $scope.friend_list = JSON.parse(localStorage.getItem('FRIEND_INFO_LIST'));
                 // 显示所有的主题
                 showTopic();
             }
@@ -157,6 +160,7 @@
                                 return obj;
                             });
                             $scope.topic_list = topic_list;
+                            $scope.nb_topic = topic_list.length;
                             var topic_info_dict = {};
                             topic_list.forEach(function(obj){
                                 topic_info_dict[obj.sha1] = obj
@@ -168,7 +172,9 @@
                         }
                     });
                 }else{
-                    $scope.topic_list = JSON.parse(topic_info_cache);
+                    var topic_list = JSON.parse(topic_info_cache);
+                    $scope.nb_topic = topic_list.length;
+                    $scope.topic_list = topic_list;
                 }
             }
 
@@ -192,6 +198,7 @@
 
                         // 利用angular刷新
                         var topic_list = data['topic'].concat($scope.topic_list);
+                        $scope.nb_topic = topic_list.length;
                         var topic_info_dict = {};
                         topic_list.every(function(obj){
                             topic_info_dict[obj.sha1] = obj;
@@ -296,11 +303,11 @@
                     if (data['ret'] == '0001') {
                         console.log(data);
                         var blog_list = data['blog_list']
-                        blog_list.forEach(function (obj) {
-                            var format_data = new Date(parseInt(obj['time']))
-                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-                            console.log(obj['time'])
-                        });
+//                        blog_list.forEach(function (obj) {
+//                            var format_data = new Date(parseInt(obj['time']))
+//                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+//                            console.log(obj['time'])
+//                        });
                         var blog_list = data['blog_list'];
                         blog_list.every(function(obj){
                             var user_sha1 = obj.creator_sha1;
@@ -410,7 +417,7 @@
             <div  class="item col-xs-3 col-sm-2 col-md-1"><a href="#index"><i class="glyphicon glyphicon-home"></i>首页</a></div>
             <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#blog/0"><i class="glyphicon glyphicon-align-left"></i>博客</a></div>
             <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#chat"><i class="glyphicon glyphicon-envelope"></i>消息</a></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#account"><i class="glyphicon glyphicon-cog"></i>设置</a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#account"><i class="glyphicon glyphicon-cog"></i>帐号</a></div>
         </div>
     </div>
 </div>

@@ -88,7 +88,7 @@
                 <div class="col-xs-1 col-sm-3 col-md-5">
                 </div>
                 <div class="col-xs-5 col-sm-4 col-md-3">
-                    <input style="margin: 5px 0px" class="form-control input-sm" placeholder="搜索博客" type="text"/>
+                    <input ng-model="query" style="margin: 5px 0px" class="form-control input-sm" placeholder="搜索博客" type="text"/>
                     <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
                         <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
                     </span>
@@ -96,10 +96,10 @@
             </div>
 
             <ul class="blog-nav">
-                <li ng-repeat="blog in blog_list">
+                <li ng-repeat="blog in blog_list | filter:query">
                     <img ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" style="width:50px;height: 50px;border-radius: 50px;padding: 5px;" alt=""/>
                     <span style="max-width: 70%;text-overflow: ellipsis;display: inline-block;overflow: hidden;white-space: nowrap;">{{blog.title}}</span>
-                    <span style="float: right;font-size: 13px;color: rgba(0,0,0,0.4)">{{blog.time}}</span>
+                    <span style="float: right;font-size: 13px;color: rgba(0,0,0,0.4)">{{blog.time | date:"yyyy-MM-dd hh:mm"}}</span>
                     <p style="padding-left: 50px;color: rgba(0,0,0,0.56);font-size: 13px;">{{blog.content}}</p>
                     <p class="oprate-bar"><span>评论</span><span>转发</span><span>收藏</span></p>
                 </li>
