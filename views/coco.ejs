@@ -54,6 +54,13 @@
                 if (data['ret'] == '0001') {
                     console.log(data);
                     var friend_list = data['friend_list'];
+                    friend_list.every(function(obj){
+                        if (obj['head_image'] == ''){
+                            obj['head_image'] = 'default.jpg';
+                        }
+                        return obj
+                    })
+
                     $scope.friend_list = friend_list;
 
                     var friend_info_dict = {}
