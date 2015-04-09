@@ -105,7 +105,7 @@
                         </span>
                     </div>
                 </div>
-                <ul class="friend_list" id="friend_nav_list" style="background-color: #fff;">
+                <ul class="friend_list" id="friend_nav_list" style="background-color: #fff;overflow-y: scroll">
                     <li ng-click="openChat(this)" u-id="{{friend.name}}" class="item" ng-repeat="friend in friend_list">
                         <img style="width: 30px;height: 30px;border-radius: 30px;" ng-src="/images/{{friend.head_image}}" alt=""/>
                         {{friend.name}}<span class="badge pull-right"></span>

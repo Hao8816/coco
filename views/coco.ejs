@@ -40,6 +40,8 @@
             $('#friend_nav_list').height(height-130)
             $('#chat-history').height(height-190)
 
+            $scope.chat_image = 'default.jpg'
+
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             var userInfo = JSON.parse(loginUserInfo);
             $scope.user = userInfo;
