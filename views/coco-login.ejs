@@ -42,6 +42,9 @@
                 if(data['ret'] = '0001'){
                     $scope.user.name = '';
                     $scope.user.password = '';
+                    if (data['user']['head_image'] == ''){
+                        data['user']['head_image'] = 'default.jpg'
+                    }
                     var loginUserInfo = JSON.stringify(data['user'])
                     sessionStorage.setItem('LOGIN_USER_SHA1',data['user']['sha1']);
                     sessionStorage.setItem('LOGIN_USER_INFO',loginUserInfo);
