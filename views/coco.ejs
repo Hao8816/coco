@@ -95,6 +95,9 @@
 
             if (user_info_dict.hasOwnProperty(usersha1)){
                 user_object = user_info_dict[usersha1]
+                if (user_object['head_image'] == ''){
+                    user_object['head_image'] = 'default.jpg';
+                }
             }else{
                 user_object['head_image'] = 'default.jpg';
                 user_object['name'] = '未知';
