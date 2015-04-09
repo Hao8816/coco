@@ -341,7 +341,7 @@
                 dataType: 'json',
                 done: function (e, data) {
                     var image_url = "/images/"+data.result['sha1'];
-                    $('.show_image_view').html('<img style="max-width:120px;max-height:120px;" src='+image_url+'>');
+                    $('.show_image_view').html('<img style="max-width:220px;max-height:220px;" src='+image_url+'>');
                     $('.upload-title').text('重新选择');
                     $('#fileupload').attr("imagesha1",data.result['sha1']);
                 }
