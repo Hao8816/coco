@@ -36,6 +36,10 @@
     </script>
     <script type="text/javascript">
         function chatPageCtrl($scope, $http) {
+            var height = document.documentElement.clientHeight;
+            $('#friend_nav_list').height(height-130)
+            $('#chat-history').height(height-190)
+
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             var userInfo = JSON.parse(loginUserInfo);
             $scope.user = userInfo;
@@ -67,7 +71,9 @@
 
             $scope.openChat = function (obj) {
                 var friend_name = $(obj)[0].friend.name;
-                $scope.chat = friend_name;
+                var head_image = $(obj)[0].friend.head_image;
+                $scope.chat_name = friend_name;
+                $scope.chat_image = head_image;
 
                 //
             }
