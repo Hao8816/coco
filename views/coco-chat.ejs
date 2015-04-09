@@ -41,6 +41,9 @@
         line-height: 50px;
         font-size: 18px;
     }
+    #chat-tool i{
+        margin: 5px 10px;
+    }
     .message-item-left,
     .message-item-right{
         clear: both;
@@ -117,6 +120,7 @@
             <div style="height: 50px;background-color: #eee;padding:10px;border-bottom: 1px solid #eee">
                 <img style="height: 30px;width: 30px;border-radius: 30px" ng-src="/images/{{chat_image}}" alt=""/>
                 <span id="friend_name" ng-bind="chat_name"></span>
+                <span id="chat-tool" style="float: right;font-size: 20px"><i class="glyphicon glyphicon-time"></i><i class="glyphicon glyphicon-envelope"></i></span>
             </div>
             <div id="chat-history" style="height: 510px;overflow-y:auto;background-color:#fff;border: 1px solid #eee"></div>
             <div class="row">
