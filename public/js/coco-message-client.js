@@ -1,5 +1,5 @@
-var client = io.connect('http://127.0.0.1:8089');
-//var client = io.connect('http://coco.smitechow.com:8089');
+//var client = io.connect('http://127.0.0.1:8089');
+var client = io.connect('http://onekoko.com:8089');
 client.on('connect',function() {
     console.log('Client has connected to the server!');
 });
@@ -44,7 +44,7 @@ function bindEnterKeySend(e){
 }
 function sendChatMessage() {
     if(!checkUserLoginStatus()){
-        return
+//        return
     }
 
     var message = $('#chat-input').val();
@@ -68,8 +68,8 @@ function loginMessageServer(){
 
 
 
-var room_client = io.connect('http://127.0.0.1:8089/chat_room');
-//var room_client = io.connect('http://coco.smitechow.com:8089/chat_room');
+//var room_client = io.connect('http://127.0.0.1:8089/chat_room');
+var room_client = io.connect('http://onekoko.com:8089/chat_room');
 console.log(room_client);
 room_client.on('connect',function(data){
     console.log(data);

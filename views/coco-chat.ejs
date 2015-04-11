@@ -5,16 +5,20 @@
     }
     .friend_list .item{
         list-style: none;
-        padding: 15px 10px;
+        padding: 15px 20px;
         border-bottom: 1px solid #eee;
         cursor: pointer;
     }
     .friend_list .item:hover{
-        background-color: #fafafa;
+        /*background-color: #fefefe;*/
+        border-right: 2px solid #ff5277;
     }
     #chat-history li{
         list-style: none;
         margin: 8px;
+    }
+    .friend_list .nav-active{
+        background-color: #ddd;
     }
 
     #chat-history .item .message{
@@ -32,6 +36,16 @@
         border-right: 6px solid #dddddd;
         top: 10px;
         left: -6px;
+    }
+    #send_message_btn{
+        display: inline-block;
+        width: 100%;
+        height: 60px;
+        line-height: 50px;
+        font-size: 18px;
+    }
+    #chat-tool i{
+        margin: 5px 10px;
     }
     .message-item-left,
     .message-item-right{
@@ -80,61 +94,48 @@
         border: 1px solid #333;
     }
 </style>
-<script type="text/javascript">
-    $(function () {
-        loginMessageServer();
-
-        $('.friend_list').find('.item').click(function(){
-            var friend_name = $(this).attr('u-id');
-            $('#friend_name').text(friend_name);
-            $(this).find('.badge').text('');
-            var my_name = sessionStorage.getItem('LOGIN_USER_INFO');
-            var cache_key = my_name+'_'+friend_name;
-            cacheChatMessage(cache_key,message_dic)
-            var message_template = $('.message_template').find('.message-item-right').clone()
-            message_template.find('.content').text(my_name+':'+message)
-            $('#chat-history').append(message_template)
-            $('#chat-input').val('');
-        }
-
-    });
-    function loginMessageServer(){
-        var my_name = $('#my_name').text();
-        client.emit('LOGIN_MESSAGE_SERVER',{'user_name':my_name});
-    }
-</script>
 <div class="container" style="margin-top: 20px;margin-bottom:10px;border-radius: 5px;" ng-controller="chatPageCtrl">
     <div class="row">
-        <div class="col-xs-8 col-sm-8 col-md-9 " style="border: 1px solid #f5f5f5;border-radius:5px;height: 700px;">
-            <div style="height: 40px;background-color: #fff;padding:10px;border-bottom: 1px solid #eee">
-                <span id="friend_name" ng-bind="chat"></span>
-            </div>
-            <div id="chat-history" style="height: 510px;margin: 10px 0px;overflow-y:auto"></div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <textarea placeholder="请输入消息内容" id="chat-input" style="padding:5px;width: 100%;height: 120px;box-shadow: none;border: none;outline: none;border-top: 1px solid #eee" onkeydown="bindEnterKeySend(event)"></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-3" style="height: 700px;">
+        <div class="col-xs-4 col-sm-4 col-md-3">
             <div style="background-color: #eee;border-radius: 5px;border: 1px solid #f5f5f5;" >
-                <div style="padding:10px;line-height: 60px;border-bottom: 1px solid #eee">
+                <div style="padding:10px;line-height: 60px;border-bottom: 1px solid #eee;display: none">
                     <img style="height: 60px;width: 60px;border-radius: 60px;" ng-src="/images/{{user.head_image}}" alt=""/>
                     <span id="my_name" style="padding: 5px 10px;font-weight: bold">{{user.name}}</span>
                     <span>[在线]</span>
                 </div>
-                <div style="padding: 6px 10px;background-color: #eee;position: relative">
-                    <!--<input type="text" class="form-control input-sm" style="border-radius: 20px;">-->
-                    <i class="glyphicon glyphicon-search"></i>
+                <div style="padding: 5px 10px;background-color: #eee;">
+                    <div class="" style="position: relative">
+                        <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" class="form-control input-sm ng-pristine ng-valid" placeholder="搜索好友" type="text">
+                        <span class="search-btn" style="display: inline-block;position: absolute;top: 0px;right: 5px;padding: 5px 10px">
+                            <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
+                        </span>
+                    </div>
                 </div>
-                <ul class="friend_list" style="background-color: #fff;min-height: 582px;">
+                <ul class="friend_list" id="friend_nav_list" style="background-color: #fff;overflow-y: scroll">
                     <li ng-click="openChat(this)" u-id="{{friend.name}}" class="item" ng-repeat="friend in friend_list">
-                        <img style="width: 40px;height: 40px;border-radius: 40px;" ng-src="/images/{{friend.head_image}}" alt=""/>
+                        <img style="width: 30px;height: 30px;border-radius: 30px;" ng-src="/images/{{friend.head_image}}" alt=""/>
                         {{friend.name}}<span class="badge pull-right"></span>
                     </li>
                 </ul>
             </div>
         </div>
+        <div class="col-xs-8 col-sm-8 col-md-9 " style="border-radius:5px;">
+            <div style="height: 50px;background-color: #eee;padding:10px;border-bottom: 1px solid #eee">
+                <img style="height: 30px;width: 30px;border-radius: 30px" ng-src="/images/{{chat_image}}" alt=""/>
+                <span id="friend_name" ng-bind="chat_name"></span>
+                <span id="chat-tool" style="float: right;font-size: 20px"><i class="glyphicon glyphicon-time"></i><i class="glyphicon glyphicon-envelope"></i></span>
+            </div>
+            <div id="chat-history" style="height: 510px;overflow-y:auto;background-color:#fff;border: 1px solid #eee"></div>
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <textarea placeholder="请输入消息内容" id="chat-input" style="padding:5px;width: 100%;height: 60px;box-shadow: none;border:none;outline: none;" onkeydown="bindEnterKeySend(event)"></textarea>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding: 0px;margin-left: -15px;">
+                    <span id="send_message_btn" class="btn btn-danger" onclick="sendChatMessage()">发送</span>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <div class="modal fade login_message_server" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

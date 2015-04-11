@@ -15,13 +15,13 @@ router.post('/', function(req, res) {
     var rsdic = {}
     var params = req.body;
     console.log(params)
-    console.log(req.param('data'))
-    if (params.hasOwnProperty('action') == false){
+    var action = req.param('action');
+
+    if (action == undefined){
         rsdic['info'] = "params error"
         rsdic['ret'] = '0001'
         res.send(rsdic)
     }
-    var action = req.param('action');
     if(action == 'index'){
         blog.getTopicList(req,res);
     }else if(action == 'blog'){
