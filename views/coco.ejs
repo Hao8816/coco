@@ -206,6 +206,8 @@
                         $scope.topic.title = '';
                         $scope.topic.desc = '';
                         $('.compose_topic_modal').modal('hide');
+                        // 发送消息通知
+                        sendTopicMessage('add_topic',data['topic'][0].sha1);
                         data['topic'].every(function(obj){
                             var userSha1 = obj.creator_sha1;
                             var userObject = getUserDetailInfo(userSha1);
@@ -280,6 +282,8 @@
                     if (data['ret'] == '0001') {
                         console.log(data);
                         $('.compose_blog_modal').modal('hide');
+                        // 发送博客更细通知
+                        sendBlogMessage('add_blog',data['blog'][0].sha1);
                         $scope.blog_title = ''
                         $scope.blog_content = ''
                         data['blog'].forEach(function (obj) {
@@ -427,15 +431,15 @@
 
 </head>
 <body>
-<div class="visible-xs-* hidden-sm hidden-md hidden-lg" style="text-align: center;border-bottom:1px solid #ff5277;background-color: #f50057;padding: 5px 0px;color: rgba(255,255,255,0.87)"><h4 style="margin: 0px">COCO </h4></div>
+<div class="visible-xs-* hidden-sm hidden-md hidden-lg" style="text-align: center;border-bottom:1px solid #ff5277;background-color: #f50057;padding: 10px 0px;color: rgba(255,255,255,0.87)"><h4 style="margin: 0px">COCO </h4></div>
 <div style="background-color: #ff5277;width: 100%">
     <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
         <div class="row nav-kit">
             <div class="hidden-xs col-sm-4 col-md-8"><h4 style="margin: 0px">COCO </h4></div>
-            <div  class="item col-xs-3 col-sm-2 col-md-1"><a href="#index"><i class="glyphicon glyphicon-home"></i>主题</a></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#blog/0"><i class="glyphicon glyphicon-align-left"></i>博客</a></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#chat"><i class="glyphicon glyphicon-envelope"></i>消息</a></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#account"><i class="glyphicon glyphicon-cog"></i>帐号</a></div>
+            <div  class="item col-xs-3 col-sm-2 col-md-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#chat">消息 <span class="badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#account">帐号 <span class="badge"></span></a></div>
         </div>
     </div>
 </div>

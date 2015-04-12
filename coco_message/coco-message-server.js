@@ -3,6 +3,7 @@ var redis = require('redis');
 var redis_client = redis.createClient();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var async = require('async');
 
 var sub = redis.createClient();
 var pub = redis.createClient();
@@ -34,21 +35,36 @@ io.on('connection',function(socket){
     //console.log(socket)
     console.log('receive a socket connection');
     //io.sockets.socket(socket.id).emit('message', 'for your eyes only');
-    socket.on('CONNECT',function(){
+    socket.on('connect',function(){
         //socket.set('user_name','chenhao');
         //console.log(socket.id);
-        io.sockets.connected[socket.id].emit('LOGIN_SUCESS',{'socket_id':socket.id});
-
     });
     socket.on('LOGIN_MESSAGE_SERVER',function(msg){
         var user_name = msg['user_name'];
-        console.log(user_name);
-        this.emit('LOGIN_MESSAGE_SUCCESS',{'user_name':user_name,'socket_id':this.id});
+        var socket_id = this.id;
+        // 更新用户信息
         redis_client.hset('CHAT_USER_STORE',user_name,this.id,function(err){
             if(err){
                 console.log(err);
             }
-        })
+        });
+        // 检查用户消息盒子
+        async.series({
+                message_box: function(callback){
+                    redis_client.hget('MESSAGE_BOX_STORE',user_name,function(err,data){
+                        if(err){
+                            console.log(err);
+                        }
+                        callback(null, data);
+                    });
+                }
+            },
+            function(err, results) {
+               // if(results['message_box'])
+                var message_box = JSON.parse(results['message_box'])
+                io.sockets.connected[socket_id].emit('LOGIN_MESSAGE_SUCCESS',{'user_name':user_name,'socket_id':this.id,'message_box':message_box});
+                // results is now equal to: {one: 1, two: 2}
+            });
     });
     socket.on('CHAT_MESSAGE',function(msg){
         console.log(msg);
@@ -72,7 +88,32 @@ io.on('connection',function(socket){
                 if (io.sockets.connected[data]) {
                     io.sockets.connected[data].emit('CHAT_MESSAGE',{'friend_name':my_name,'my_name':friend_name,'chat_message':chat_message});
                 }else{
-                    console.log('Can not find Socket!')
+                    console.log('Can not find Socket!');
+                    // 检查用户消息盒子
+                    async.series({
+                            message_box: function(callback){
+                                redis_client.hget('MESSAGE_BOX_STORE',friend_name,function(err,data){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    callback(null, data);
+                                });
+                            }
+                        },
+                        function(err, results) {
+                            var message_box = {}
+                            if(results['message_box'] != null){
+                                message_box = JSON.parse(results['message_box'])
+                            }
+                            var nb_message = message_box['chat-message'] || 0;
+                            message_box['chat-message'] = nb_message + 1;
+
+                            redis_client.hset('MESSAGE_BOX_STORE',friend_name,JSON.stringify(message_box),function(err){
+                                if(err){
+                                    console.log(err);
+                                }
+                            });
+                        });
                 }
             }
         });
@@ -81,15 +122,25 @@ io.on('connection',function(socket){
     });
 
     socket.on('BLOG_MESSAGE',function(msg){
+        var action = msg['action'];
+        var blog_sha1 = msg['blog_sha1'];
+        // 取得用户的好友关系，给在线好友发送通知
+        redis_client.hget('USER_FRIEND_STORE','',function(err,data){
+            if(err){
+                console.log(err)
+            }
+        });
 
+        socket.broadcast.emit('BLOG_MESSAGE',{'action':action,'blog_sha1':blog_sha1});
     });
 
     socket.on('TOPIC_MESSAGE',function(msg){
-
-
+        var action = msg['action'];
+        var topic_sha1 = msg['topic_sha1'];
+        socket.broadcast.emit('TOPIC_MESSAGE',{'action':action,'topic_sha1':topic_sha1});
     });
 
-    socket.on('DISCONNECT',function(msg){
+    socket.on('disconnect',function(msg){
         console.log(msg+'----');
         io.emit('message',msg);
     });

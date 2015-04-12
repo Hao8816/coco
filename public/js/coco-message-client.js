@@ -1,13 +1,11 @@
-var client = io.connect('http://127.0.0.1:8089');
-//var client = io.connect('http://onekoko.com:8089');
+//var client = io.connect('http://127.0.0.1:8089');
+var client = io.connect('http://onekoko.com:8089');
 
-client.on('CONNECT',function(data) {
+// 定义一个消息盒子，并且初始化在缓存中的数据
+var MESSAGE_BOX = {};
+
+client.on('connect',function(data) {
     console.log('Client has connected to the server!');
-    console.log(data)
-
-});
-
-client.on('LOGIN_SUCESS',function(data){
     console.log(data);
 });
 
@@ -39,22 +37,40 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     $('.login_message_server').modal('hide');
     // 将用户登录信息存入sessionStorage
     sessionStorage.setItem('LOGIN_USER_INFO_NAME',user_name);
+    // 用户登录message server之后，检查用户的消息更新
+    var message_box = data['message_box'];
+    MESSAGE_BOX = message_box;
 });
 
 client.on('BLOG_MESSAGE',function(data){
-
-
+    console.log(data);
+    if(data['action'] == 'add_blog'){
+         var nb_blog_message = parseInt($('.blog-badge').text())||0;
+         $('.blog-badge').text(nb_blog_message+1);
+    }
 });
 
 client.on('TOPIC_MESSAGE',function(data){
-
-
+    console.log(data);
+    if(data['action'] == 'add_topic'){
+        var nb_topic_message = parseInt($('.topic-badge').text())||0;
+        $('.topic-badge').text(nb_topic_message+1);
+    }
 });
-client.on('DISCONNECT',function() {
+client.on('disconnect',function() {
     console.log('Client has disconnected from the server!');
 });
 
 
+function sendBlogMessage(action,blog_sha1){
+    var message_dic = {'action':action,'blog_sha1':blog_sha1};
+    client.emit('BLOG_MESSAGE',message_dic);
+}
+
+function sendTopicMessage(action,topic_sha1){
+    var message_dic = {'action':action,'topic_sha1':topic_sha1};
+    client.emit('TOPIC_MESSAGE',message_dic);
+}
 
 
 function bindEnterKeySend(e){
@@ -135,6 +151,7 @@ function showChatHistory(cache_key){
         $('#chat-history').append(message_template)
     }
 }
+
 
 function checkUserLoginStatus(){
     var login_status = true
