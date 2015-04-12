@@ -160,6 +160,7 @@
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                 var topic_info_cache = localStorage.getItem('TOPIC_INFO_LIST');
                 if(topic_info_cache == null){
+                    $('.topic-badge').text('');
                     $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1}).success(function (data) {
                         if (data['ret'] == '0001') {
                             console.log(data);
