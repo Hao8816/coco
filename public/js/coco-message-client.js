@@ -55,6 +55,7 @@ client.on('TOPIC_MESSAGE',function(data){
     if(data['action'] == 'add_topic'){
         var nb_topic_message = parseInt($('.topic-badge').text())||0;
         $('.topic-badge').text(nb_topic_message+1);
+        localStorage.removeItem('TOPIC_INFO_LIST');
     }
 });
 client.on('disconnect',function() {
