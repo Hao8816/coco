@@ -1,8 +1,16 @@
-//var client = io.connect('http://127.0.0.1:8089');
-var client = io.connect('http://onekoko.com:8089');
-client.on('connect',function() {
+var client = io.connect('http://127.0.0.1:8089');
+//var client = io.connect('http://onekoko.com:8089');
+
+client.on('CONNECT',function(data) {
     console.log('Client has connected to the server!');
+    console.log(data)
+
 });
+
+client.on('LOGIN_SUCESS',function(data){
+    console.log(data);
+});
+
 client.on('CHAT_MESSAGE',function(data) {
     console.log(data);
     var chat_message = data['chat_message'];
@@ -32,9 +40,22 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     // 将用户登录信息存入sessionStorage
     sessionStorage.setItem('LOGIN_USER_INFO_NAME',user_name);
 });
-client.on('disconnect',function() {
+
+client.on('BLOG_MESSAGE',function(data){
+
+
+});
+
+client.on('TOPIC_MESSAGE',function(data){
+
+
+});
+client.on('DISCONNECT',function() {
     console.log('Client has disconnected from the server!');
 });
+
+
+
 
 function bindEnterKeySend(e){
     var e = e || window.event;
@@ -69,12 +90,12 @@ function loginMessageServer(){
 
 
 //var room_client = io.connect('http://127.0.0.1:8089/chat_room');
-var room_client = io.connect('http://onekoko.com:8089/chat_room');
-console.log(room_client);
-room_client.on('connect',function(data){
-    console.log(data);
-    this.emit('init_room',{'name':'chat_room'});
-});
+//var room_client = io.connect('http://onekoko.com:8089/chat_room');
+//console.log(room_client);
+//room_client.on('connect',function(data){
+//    console.log(data);
+//    this.emit('init_room',{'name':'chat_room'});
+//});
 
 function cacheChatMessage(cache_key,message){
     var message_record = localStorage.getItem(cache_key+'_chat_message')

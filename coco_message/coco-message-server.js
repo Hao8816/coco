@@ -34,9 +34,11 @@ io.on('connection',function(socket){
     //console.log(socket)
     console.log('receive a socket connection');
     //io.sockets.socket(socket.id).emit('message', 'for your eyes only');
-    socket.on('connect',function(){
+    socket.on('CONNECT',function(){
         //socket.set('user_name','chenhao');
         //console.log(socket.id);
+        io.sockets.connected[socket.id].emit('LOGIN_SUCESS',{'socket_id':socket.id});
+
     });
     socket.on('LOGIN_MESSAGE_SERVER',function(msg){
         var user_name = msg['user_name'];
@@ -77,10 +79,17 @@ io.on('connection',function(socket){
 
         //socket.broadcast.emit('message',msg);
     });
-    socket.on('set_name',function(msg){
-        console.log(msg);
+
+    socket.on('BLOG_MESSAGE',function(msg){
+
     });
-    socket.on('disconnect',function(msg){
+
+    socket.on('TOPIC_MESSAGE',function(msg){
+
+
+    });
+
+    socket.on('DISCONNECT',function(msg){
         console.log(msg+'----');
         io.emit('message',msg);
     });
