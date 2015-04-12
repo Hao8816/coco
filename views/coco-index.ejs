@@ -4,7 +4,7 @@
         /*border-radius: 3px;*/
         padding: 8px;
         /*height: 160px;*/
-        margin-top: 10px;
+        margin: 5px 0px;
         cursor: pointer;
         border-left: 4px solid #eee;
 
@@ -36,26 +36,42 @@
     p{
         margin: 0;
     }
+    .topic-category{
+        padding: 5px;
+    }
+    .topic-category .item{
+        padding: 0px 10px;
+        font-size: 12px;
+    }
 
 </style>
 
 <div class="container" ng-controller="topicPageController as mainCtrl">
     <div class="row">
         <div class="col-md-9">
-            <div style="margin-top: 20px">
+            <div style="margin-top: 20px;border: 1px solid #eee;background-color: #fff">
                 <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
                     <li class="active ng-binding">我的主题 <span style="font-size: 12px;padding: 5px;">总共 {{nb_topic}} 个主题</span></li>
                 </ol>
                 <div class="row blog-nav-bar" style="margin-top: 5px;">
+                    <div class="col-xs-7 col-sm-8 col-md-9">
+                        <p class="topic-category" style="font-size: 12px">
+                            <span>主题分类：</span>
+                            <a class="item" href="">全部 (19)</a>
+                            <a class="item" href="">科技 (3)</a>
+                            <a class="item" href="">技术 (5)</a>
+                        </p>
+                        <p class="topic-category" style="font-size: 12px">
+                            <span>发表时间：</span>
+                            <a class="item" href="">一周之内 (19)</a>
+                            <a class="item" href="">一个月之内 (6)</a>
+                            <a class="item" href="">三个月之内 (15)</a>
+                        </p>
+                    </div>
                     <div class="col-xs-5 col-sm-4 col-md-3">
                         <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" class="form-control input-sm" placeholder="搜索主题" type="text">
                     <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
                         <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i></span>
-                    </div>
-                    <div class="col-xs-1 col-sm-3 col-md-5">
-                    </div>
-                    <div class="col-xs-6 col-sm-5 col-md-4">
-
                     </div>
                 </div>
             </div>
@@ -68,10 +84,9 @@
                             <div class="row">
                                 <div class="col-md-1" style="text-align: center">
                                     <img style="width: 30px;height: 30px;border-radius:30px;" ng-src="/images/{{topic.head_image}}" alt=""/>
-                                    <!--<p style="padding: 0px 5px;">{{topic.name}}</p>-->
                                 </div>
                                 <div class="col-md-8" style="padding: 0">
-                                    <p style="font-size: 13px;font-weight: bold;">标题:{{topic.title}}</p>
+                                    <p style="font-size: 13px;font-weight: bold;">[{{topic.name}}] {{topic.title}}</p>
                                     <p style="font-size: 13px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 30px;">描述:{{topic.desc}}</p>
 
                                 </div>
