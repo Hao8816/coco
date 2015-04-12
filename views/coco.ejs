@@ -320,6 +320,7 @@
                 if(page<1){
                     return;
                 }
+                $('.blog-badge').text('');
                 // get blog from server
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                 $http.post('/ajax/get_blog_list/', {creator_sha1: creator_sha1,page:page,topic_sha1:topic_sha1}).success(function (data) {
