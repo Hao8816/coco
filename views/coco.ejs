@@ -134,9 +134,14 @@
                         var friend_list = data['friend_list'];
                         var friend_info_dict = {}
                         var all_user_info_dict = {}
-                        friend_list.forEach(function(obj){
-                            friend_info_dict[obj.name] = obj
-                            all_user_info_dict[obj.sha1] = obj
+                        friend_list.every(function(obj){
+                            if (obj['head_image'] == ''){
+                                obj['head_image'] = 'default.jpg';
+                            }
+                            friend_info_dict[obj.name] = obj;
+                            all_user_info_dict[obj.sha1] = obj;
+                            return obj;
+
                         })
                         $scope.friend_list = friend_list;
 
