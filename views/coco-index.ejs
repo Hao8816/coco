@@ -33,11 +33,9 @@
     .concren-item:hover{
         background-color: #eee;
     }
-    p{
-        margin: 0;
-    }
     .topic-category{
         padding: 5px;
+        margin: 0;
     }
     .topic-category .item{
         padding: 0px 10px;
@@ -53,7 +51,7 @@
                 <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
                     <li class="active ng-binding">我的主题 <span style="font-size: 12px;padding: 5px;">总共 {{nb_topic}} 个主题</span></li>
                 </ol>
-                <div class="row blog-nav-bar" style="margin-top: 5px;">
+                <div class="row blog-nav-bar" style="margin-top: 5px;padding: 5px">
                     <div class="col-xs-7 col-sm-8 col-md-9">
                         <p class="topic-category" style="font-size: 12px">
                             <span>主题分类：</span>
@@ -70,8 +68,9 @@
                     </div>
                     <div class="col-xs-5 col-sm-4 col-md-3">
                         <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" class="form-control input-sm" placeholder="搜索主题" type="text">
-                    <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
-                        <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i></span>
+                        <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
+                            <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -82,13 +81,12 @@
                         <div class="topic-item">
                             <a class="topic-link" href="#/blog/{{topic.sha1}}">
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center">
-                                    <img style="width: 30px;height: 30px;border-radius:30px;" ng-src="/images/{{topic.head_image}}" alt=""/>
+                                <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
+                                    <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{topic.head_image}}" alt=""/>
                                 </div>
-                                <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8" style="padding: 0">
-                                    <p style="font-size: 13px;font-weight: bold;">[{{topic.name}}] {{topic.title}}</p>
-                                    <p style="font-size: 13px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 30px;">描述:{{topic.desc}}</p>
-
+                                <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
+                                    <p style="font-size: 14px">[{{topic.name}}] {{topic.title}}</p>
+                                    <p style="margin:0px;font-size: 12px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 30px;">描述:{{topic.desc}}</p>
                                 </div>
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="text-align: right">
                                     <p style="font-size: 13px;color: rgba(0,0,0,0.56)">{{topic.time}}</p>

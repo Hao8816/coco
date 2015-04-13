@@ -10,9 +10,13 @@
         margin-top: 5px;
         background-color: #fff;
         /*box-shadow: 0px 0px 5px 1px #ddd;*/
-        border-radius: 5px;
-        border: 1px solid #eee;
+        /*border-radius: 5px;*/
+        /*border: 1px solid #eee;*/
         padding: 10px;
+        border-left: 4px solid #eee;
+    }
+    .blog-nav li:hover{
+        border-left-color:#ff5277;
     }
 
     .pagination li a, .pagination a span {
@@ -97,11 +101,19 @@
 
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list | filter:query">
-                    <img ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" style="width:50px;height: 50px;border-radius: 50px;padding: 5px;" alt=""/>
-                    <span style="max-width: 70%;text-overflow: ellipsis;display: inline-block;overflow: hidden;white-space: nowrap;">{{blog.title}}</span>
-                    <span style="float: right;font-size: 13px;color: rgba(0,0,0,0.4)">{{blog.time | date:"yyyy-MM-dd hh:mm"}}</span>
-                    <p style="padding-left: 50px;color: rgba(0,0,0,0.56);font-size: 13px;">{{blog.content}}</p>
-                    <p class="oprate-bar"><span>评论</span><span>转发</span><span>收藏</span></p>
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
+                            <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" alt=""/>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
+                            <p style="font-size: 14px">[{{blog.name}}] {{blog.title}}</p>
+                            <p style="margin:0px;font-size: 12px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 30px;">{{blog.content}}</p>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="text-align: right">
+                            <p style="font-size: 13px;color: rgba(0,0,0,0.56)">{{blog.time | date:"yyyy-MM-dd hh:mm"}}</p>
+                            <p class="oprate-bar"><span>评论</span><span>转发</span><span>收藏</span></p>
+                        </div>
+                    </div>
                 </li>
             </ul>
             <nav style="margin: auto;text-align: center">

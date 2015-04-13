@@ -52,6 +52,28 @@
                 }
             });
         }
+        $scope.enterLogin = function(e){
+            var e = e || window.event
+            if (e.keyCode == 13){
+                var password = sha1($scope.user.password);
+                var encrypt_password = sha1(password);
+                $scope.user.password = encrypt_password;
+                var userInfo = $scope.user;
+                $http.post('/ajax/login/',userInfo).success(function(data){
+                    if(data['ret'] = '0001'){
+                        $scope.user.name = '';
+                        $scope.user.password = '';
+                        if (data['user']['head_image'] == ''){
+                            data['user']['head_image'] = 'default.jpg'
+                        }
+                        var loginUserInfo = JSON.stringify(data['user'])
+                        sessionStorage.setItem('LOGIN_USER_SHA1',data['user']['sha1']);
+                        sessionStorage.setItem('LOGIN_USER_INFO',loginUserInfo);
+                        location.href = '/coco/';
+                    }
+                });
+            }
+        }
     }
 
 
@@ -95,7 +117,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">密码</label>
-                            <input ng-model="user.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
+                            <input ng-keydown="enterLogin(event)" ng-model="user.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
                         </div>
                         <div class="checkbox">
                             <label>
