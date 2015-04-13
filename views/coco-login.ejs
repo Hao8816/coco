@@ -96,7 +96,7 @@
                     <h2 style="color: #ff5277;padding: 30px 0px">COCO,不一样的博客</h2>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <p style="font-size: 17px;padding: 5px;">主人寄语:</p>
+                    <p style="font-size: 17px;padding: 5px;margin: 0">主人寄语:</p>
                     <pre style="font-size: 15px;line-height: 26px;font-family: STKaiti;">
                         我打江南走过
                         那等在季节里的容颜如莲花的开落
@@ -107,10 +107,10 @@
                         你的心是小小的窗扉紧掩
                         我达达的马蹄，是美丽的错误
                         我不是归人，是个过客……</pre>
-                    <p style="font-size: 17px;padding: 5px;width: 80%;text-align: right">2015.03.29</p>
+                    <!--<p style="font-size: 17px;padding: 5px;width: 80%;text-align: right">2015.03.29</p>-->
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-controller="loginCtrl" style="margin-top: 20px;">
-                    <div style="padding: 10px;background-color: #fff;border-radius: 5px;">
+                    <div style="padding: 10px;background-color: #fff;border-radius: 5px;margin-top: 60px;">
                         <div class="form-group">
                             <label for="exampleInputEmail1">用户名</label>
                             <input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1" placeholder="用户名">
@@ -118,11 +118,6 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">密码</label>
                             <input ng-keydown="enterLogin(event)" ng-model="user.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> 记住密码
-                            </label>
                         </div>
                         <button style="float: right" class="btn btn-danger" ng-click="login()">点击登录</button>
                         <p style="font-size: 13px;color: rgba(0,0,0,0.56);padding: 8px 1px;">还没有账号？<a href="/coco/register/">点击注册</a></p>
@@ -136,7 +131,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: #eee">
     <div class="row">
         <div class="col-xs-12" style="margin-top: 20px;">
             <div style="padding: 3px;text-align: center;">

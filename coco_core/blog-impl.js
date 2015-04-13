@@ -44,6 +44,9 @@ var saveTopic = function saveTopic(req,res){
 
     }],function (err,item){
         console.log(err);
+        // 更新用户表的数据
+
+
         res.send({'info':"OK","ret":0001,"topic":item})
     });
 }
