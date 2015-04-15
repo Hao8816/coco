@@ -288,6 +288,18 @@
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             $scope.user = JSON.parse(loginUserInfo);
 
+            // 博客主题的信息
+            var topic_sha1 = $routeParams.topic_sha1;
+
+            // 显示博客列表
+            $scope.blog_list = [];
+
+            // 显示主题的信息
+            var topic_object = getTopicObjectInfo(topic_sha1);
+
+            $scope.topic = topic_object;
+
+
             if(user_info_cache == null){
                 $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
                     if (data['ret'] == '0001') {
@@ -321,17 +333,6 @@
                 // 显示所有的主题
                 showBlog(1);
             }
-
-            // 博客主题的信息
-            var topic_sha1 = $routeParams.topic_sha1;
-
-            // 显示博客列表
-            $scope.blog_list = [];
-
-            // 显示主题的信息
-            var topic_object = getTopicObjectInfo(topic_sha1);
-
-            $scope.topic = topic_object;
 
             $scope.saveBlog = function () {
                 var title = $scope.blog_title;
