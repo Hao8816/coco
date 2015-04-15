@@ -71,7 +71,7 @@ var getBlogList = function getBlogList(req,res){
     console.log(page)
     // 查询主题对应的博客
     if(topic_sha1 == 0){
-        blog_models.Blog.find([ "time", "Z" ]).limit(16).offset(6*page).run(function(err,result){
+        blog_models.Blog.find([ "time", "Z" ]).limit(10).offset(10*page).run(function(err,result){
             if(err){
                 console.log(err);
             }
@@ -79,7 +79,7 @@ var getBlogList = function getBlogList(req,res){
             res.send({'info':"OK","ret":0001,"blog_list":result})
         });
     }else{
-        blog_models.Blog.find({topic_sha1:topic_sha1},[ "time", "Z" ]).limit(16).offset(6*page).run(function(err,result){
+        blog_models.Blog.find({topic_sha1:topic_sha1},[ "time", "Z" ]).limit(0).offset(10*page).run(function(err,result){
             if(err){
                 console.log(err);
             }
