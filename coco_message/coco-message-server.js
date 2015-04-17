@@ -1,8 +1,8 @@
-var app = require('express')();
+//var app = require('express')();
 var redis = require('redis');
 var redis_client = redis.createClient();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+//var http = require('http').Server(app);
+//var io = require('socket.io')(http);
 var async = require('async');
 
 var sub = redis.createClient();
@@ -15,6 +15,9 @@ var pub = redis.createClient();
 //    console.log('Chat Message Received')
 //})
 
+var io = require('socket.io')(8089);
+var redisClient = require('socket.io-redis');
+io.adapter(redisClient({ host: 'localhost', port: 6379 }));
 
 var room_connection = io.of("/chat_room");
 room_connection.on('connection',function(socket){
@@ -156,7 +159,7 @@ io.on('error',function(socket){
 
 
 
-// 创建httpserver
-http.listen(8089,function(){
-    console.log('start message server successfully, port 8089');
-});
+//// 创建httpserver
+//http.listen(8089,function(){
+//    console.log('start message server successfully, port 8089');
+//});
