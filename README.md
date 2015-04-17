@@ -13,7 +13,7 @@ Socket.IO enables real-time bidirectional event-based communication. It works on
 ----
 关于分布式socket.io
 https://github.com/NetEase/pomelo/wiki/Distributed-Chat
-
+http://goldfirestudios.com/blog/136/Horizontally-Scaling-Node.js-and-WebSockets-with-Redis
 
 #### AngularJs
 ----
