@@ -2,11 +2,13 @@
 
     .info-item span{
         padding: 10px 10px 10px 0px;
-        font-size: 18px;
+        font-size: 16px;
+        color: #333;
 
     }
     .info-item span a{
         margin-left: 5px;
+
 
     }
     .topic-item{
@@ -42,67 +44,58 @@
     }
 </style>
 
-<div class="container">
+<div class="container" ng-controller="accountPageCtrl">
     <div class="row">
         <div class="col-md-9">
             <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
                 <span>个人信息</span>
             </div>
-            <div style="border-radius: 5px;margin-top: 5px;background-color: #fff" ng-controller="accountPageCtrl">
+            <div style="border-radius: 5px;margin-top: 5px;background-color: #fff">
                 <div class="row">
-                    <div class="col-md-4" style="text-align: center;height: 260px;line-height: 260px;position: relative">
+                    <div class="col-xs-12 col-sm-4 col-md-4" style="text-align: center;height: 260px;line-height: 260px;position: relative">
                         <img id="user_head_image" ng-src="/images/{{user.head_image}}" style="width: 180px;height: 180px;border-radius: 180px;" alt=""/>
                         <a style="position:absolute;color: #000;font-size: 15px;line-height: 180px;left: 42%;top: 17%;cursor: pointer" data-toggle="modal" data-target=".upload_image_modal">换头像</a>
                     </div>
-                    <div class="col-md-8" style="padding:30px 0px;font-size: 15px;">
-                        <h4>{{user.name}}</h4>
-                        <p><span>邮箱:</span>{{user.email}}</p>
-                        <p><span>手机:</span>{{user.phone}}</p>
-                        <p><span>注册时间:</span>{{user.time}}</p>
-                        <p class="info-item">
-                            <span>好友<a href="">{{user.nb_friend}}</a></span>
-                            <span>主题<a href="">{{user.nb_topic}}</a></span>
-                            <span>博客<a href="">{{user.nb_blog}}</a></span>
-                        </p>
+                    <div class="col-xs-12 col-sm-8 col-md-8" style="font-size: 15px;">
+                        <div style="padding: 30px;">
+                            <h3>{{user.name}}</h3>
+                            <p><span>邮箱:</span><span ng-bind="user.email"></span></p>
+                            <p><span>手机:</span><span ng-bind="user.phone"></span></p>
+                            <p><span>注册时间:</span><span ng-bind="user.time"></span></p>
+                            <p class="info-item">
+                                <span>主题<a href="" ng-bind="user.nb_topic"></a></span>
+                                <span>博客<a href="" ng-bind="user.nb_blog"></a></span>
+                                <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;clear: both;width: 100%">
-                <span>我的主题</span>
+                <span>详细信息</span>
             </div>
-            <div style="border-radius: 5px;">
+            <div style="border-radius: 5px;height: 400px;background-color: #fff;margin-top: 5px">
                 <div class="row">
-                    <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list">-->
-                        <!--<div class="topic-item">-->
-                            <!--<p style="font-size: 13px;text-align: center;color: rgba(0,0,0,0.56)">{{topic.time}}</p>-->
-                            <!--<h4 style="text-align: center;line-height: 100px;border-bottom: 1px solid #eee">{{topic.title}}</h4>-->
-                            <!--<p style="margin: 0px;font-size: 13px;color: rgba(0,0,0,0.87)">{{topic.desc}}</p>-->
-
-                        <!--</div>-->
-                    <!--</div>-->
                 </div>
             </div>
-            <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;clear: both;width: 100%">
-                <span>我的博客</span>
-            </div>
-            <!--<div style="border-radius: 5px;" ng-controller="showBlog">-->
-                <!--<ul class="blog-nav">-->
-                    <!--<li ng-repeat="blog in blog_list">-->
-                        <!--<img src="/images/head_image{{blog.id}}.jpg" style="width:50px;height: 50px;border-radius: 50px;padding: 5px;" alt=""/>-->
-                        <!--<span>{{blog.title}}</span>-->
-                        <!--<span style="float: right;font-size: 13px;color: rgba(0,0,0,0.4)">{{blog.time}}</span>-->
-                        <!--<p style="padding-left: 50px;color: rgba(0,0,0,0.56);font-size: 13px;">{{blog.content}}</p>-->
-
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
         </div>
-        <div class="col-md-3" style="height: 600px;margin-top: 20px;">
-            <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
-            <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
-                    <a style="color: #fff;font-size: 15px;" href="/coco/logout/">退出</a>
-                </span>
+        <div class="col-md-3" style="margin-top: 20px;">
+            <div style="background-color: #fff;border-radius: 5px;padding: 10px;">
+                <p>当前位置：<a ng-bind="infos.location">北京</a></p>
+                <p>{{infos.date | date:"yyyy-MM-dd hh:mma"}}</p>
+                <p>天气</p>
+                <div style="text-align: center">
+                    <img src="/images/weather/cloud.png" alt=""/>
+                </div>
+                <p>多云转阴</p>
 
+                <div style="margin-top: 15px;border-top: 1px solid #ddd;padding: 10px;">
+                    <p>当前登录账号: <a href="" ng-bind="infos.name"></a></p>
+                    <p>登录IP: <a href="" ng-bind="infos.ip"></a></p>
+                <span style="width: 70%;margin: 10px 15%;" class="btn btn-danger">
+                    <a style="color: #fff;font-size: 15px;" href="/coco/logout/">切换账号</a>
+                </span>
+                </div>
             </div>
         </div>
     </div>

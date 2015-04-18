@@ -10,9 +10,13 @@
         margin-top: 5px;
         background-color: #fff;
         /*box-shadow: 0px 0px 5px 1px #ddd;*/
-        border-radius: 5px;
-        border: 1px solid #eee;
+        /*border-radius: 5px;*/
+        /*border: 1px solid #eee;*/
         padding: 10px;
+        border-left: 4px solid #eee;
+    }
+    .blog-nav li:hover{
+        border-left-color:#ff5277;
     }
 
     .pagination li a, .pagination a span {
@@ -64,6 +68,15 @@
     .search-btn:hover {
         opacity: 1;
     }
+    .friend-item{
+        padding-top: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .friend-item:hover{
+        background-color: #eee;
+    }
 
 </style>
 
@@ -97,11 +110,22 @@
 
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list | filter:query">
-                    <img ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" style="width:50px;height: 50px;border-radius: 50px;padding: 5px;" alt=""/>
-                    <span style="max-width: 70%;text-overflow: ellipsis;display: inline-block;overflow: hidden;white-space: nowrap;">{{blog.title}}</span>
-                    <span style="float: right;font-size: 13px;color: rgba(0,0,0,0.4)">{{blog.time | date:"yyyy-MM-dd hh:mm"}}</span>
-                    <p style="padding-left: 50px;color: rgba(0,0,0,0.56);font-size: 13px;">{{blog.content}}</p>
-                    <p class="oprate-bar"><span>评论</span><span>转发</span><span>收藏</span></p>
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
+                            <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" alt=""/>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-9 col-lg-9">
+                            <p style="font-size: 14px">[{{blog.name}}] {{blog.title}}</p>
+                            <p style="margin:0px;font-size: 13px;color: rgba(0,0,0,0.56);">{{blog.content}}</p>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2" style="text-align: right">
+                            <p style="font-size: 13px;color: rgba(0,0,0,0.56)">{{blog.time | date:"yyyy-MM-dd hh:mm"}}</p>
+                            <p class="oprate-bar"><span>转发</span><span>收藏</span></p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        </div>
+                    </div>
                 </li>
             </ul>
             <nav style="margin: auto;text-align: center">
@@ -120,16 +144,16 @@
                 </ul>
             </nav>
         </div>
-        <div class="col-md-3" style="height: 600px;margin-top: 20px;" ng-controller="blogPageCtrl">
+        <div class="col-md-3" style="height: 600px;margin-top: 20px;">
             <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
                 <div style="text-align: center;line-height: 100px;">
                     <img style="height: 80px;width: 80px;border-radius: 80px;" ng-src="/images/{{user.head_image}}"
                          alt=""/>
                 </div>
                 <p style="text-align: center">
-                    <span>好友<a href="">{{user.nb_friend}}</a></span>
                     <span>主题<a href="">{{user.nb_topic}}</a></span>
                     <span>博客<a href="">{{user.nb_blog}}</a></span>
+                    <span>好友<a href="">{{user.nb_friend}}</a></span>
                 </p>
                 <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
                     <a style="color: #fff;font-size: 15px;" data-toggle="modal"
@@ -138,13 +162,19 @@
             </div>
             <div>
                 <h5>我关注的人</h5>
-
-                <div style="height: 180px;border-radius: 5px;background-color: #fff">
-
+                <div style="border-radius: 5px;background-color: #fff;padding: 5px;">
+                    <div class="friend-item" style="width: 25%;display: inline-block;text-align: center" ng-repeat="friend in friend_list">
+                        <img style="width: 60%;margin:0 10%;border-radius: 100%" src="/images/{{friend.head_image}}" alt=""/>
+                        <span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" ng-bind="friend.name"></span>
+                    </div>
                 </div>
-                <h5>我关注的主题</h5>
-
-                <div style="height: 180px;border-radius: 5px;background-color: #fff"></div>
+                <h5>最热主题</h5>
+                <div style="border-radius: 5px;background-color: #fff">
+                    <li class="concren-item" ng-repeat="concern in topic_list|limitTo:10">
+                        <a href="#/blog/{{concern.sha1}}"><span>{{concern.title}}</span></a>
+                        <span style="font-size: 12px;color: rgba(0,0,0,0.56);float: right">{{concern.time|date:"hh:mm"}}</span>
+                    </li>
+                </div>
             </div>
         </div>
     </div>

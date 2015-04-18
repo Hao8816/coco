@@ -3,8 +3,8 @@
  * receives and emits the 'msg' event
  */
 
-var PORT = 8090;
-var HOST = 'localhost';
+var PORT = 8088;
+var HOST = 'http://onekoko.com';
 
 var port = parseInt(process.argv[2]) || PORT;
 

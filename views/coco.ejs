@@ -46,7 +46,6 @@
             var userInfo = JSON.parse(loginUserInfo);
             $scope.user = userInfo;
 
-
             client.emit('LOGIN_MESSAGE_SERVER', {'user_name': userInfo.name});
 
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
@@ -120,12 +119,25 @@
             var info = JSON.parse(loginUserInfo);
             info['time'] = new Date(parseInt(info['time'])).Format('yyyy-MM-dd')
             $scope.user = info;
+
+            var date = new Date().getTime();
+            var other_info = {
+                location : "北京",
+                date : date,
+                name : info['name'],
+                ip : "192.168.1.22"
+            }
+            $scope.infos = other_info;
+
         }
 
         function topicPageController($scope, $http) {
 
             var user_info_cache = localStorage.getItem('ALL_USER_INFO_DICT')
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+
+            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+            $scope.user = JSON.parse(loginUserInfo);
 
             if(user_info_cache == null){
                 $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
@@ -134,9 +146,14 @@
                         var friend_list = data['friend_list'];
                         var friend_info_dict = {}
                         var all_user_info_dict = {}
-                        friend_list.forEach(function(obj){
-                            friend_info_dict[obj.name] = obj
-                            all_user_info_dict[obj.sha1] = obj
+                        friend_list.every(function(obj){
+                            if (obj['head_image'] == ''){
+                                obj['head_image'] = 'default.jpg';
+                            }
+                            friend_info_dict[obj.name] = obj;
+                            all_user_info_dict[obj.sha1] = obj;
+                            return obj;
+
                         })
                         $scope.friend_list = friend_list;
 
@@ -160,6 +177,7 @@
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                 var topic_info_cache = localStorage.getItem('TOPIC_INFO_LIST');
                 if(topic_info_cache == null){
+                    $('.topic-badge').text('');
                     $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1}).success(function (data) {
                         if (data['ret'] == '0001') {
                             console.log(data);
@@ -206,6 +224,8 @@
                         $scope.topic.title = '';
                         $scope.topic.desc = '';
                         $('.compose_topic_modal').modal('hide');
+                        // 发送消息通知
+                        sendTopicMessage('add_topic',data['topic'][0].sha1);
                         data['topic'].every(function(obj){
                             var userSha1 = obj.creator_sha1;
                             var userObject = getUserDetailInfo(userSha1);
@@ -229,6 +249,14 @@
                         $scope.topic_list = topic_list;
                         localStorage.setItem('TOPIC_INFO_DICT',JSON.stringify(topic_info_dict));
                         localStorage.setItem('TOPIC_INFO_LIST',JSON.stringify(topic_list));
+
+                        // 更新用户博客的数量
+                        var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+                        var user_obj = JSON.parse(loginUserInfo);
+                        user_obj.nb_topic = user_obj.nb_topic+1;
+                        sessionStorage.setItem('LOGIN_USER_INFO',JSON.stringify(user_obj));
+                        $scope.user = user_obj;
+
                     } else {
 
                     }
@@ -254,6 +282,12 @@
 
         function blogPageController($scope, $http, $routeParams) {
 
+            var user_info_cache = localStorage.getItem('ALL_USER_INFO_DICT')
+            var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+
+            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+            $scope.user = JSON.parse(loginUserInfo);
+
             // 博客主题的信息
             var topic_sha1 = $routeParams.topic_sha1;
 
@@ -265,7 +299,40 @@
 
             $scope.topic = topic_object;
 
-            showBlog(1);
+
+            if(user_info_cache == null){
+                $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        console.log(data);
+                        var friend_list = data['friend_list'];
+                        var friend_info_dict = {}
+                        var all_user_info_dict = {}
+                        friend_list.every(function(obj){
+                            if (obj['head_image'] == ''){
+                                obj['head_image'] = 'default.jpg';
+                            }
+                            friend_info_dict[obj.name] = obj;
+                            all_user_info_dict[obj.sha1] = obj;
+                            return obj;
+
+                        })
+                        $scope.friend_list = friend_list;
+
+                        localStorage.setItem('FRIEND_INFO_LIST',JSON.stringify(friend_list));
+                        localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
+                        localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
+                        // 显示所有的主题
+                        showBlog(1);
+                    } else {
+
+                    }
+                });
+
+            }else{
+                $scope.friend_list = JSON.parse(localStorage.getItem('FRIEND_INFO_LIST'));
+                // 显示所有的主题
+                showBlog(1);
+            }
 
             $scope.saveBlog = function () {
                 var title = $scope.blog_title;
@@ -280,6 +347,8 @@
                     if (data['ret'] == '0001') {
                         console.log(data);
                         $('.compose_blog_modal').modal('hide');
+                        // 发送博客更细通知
+                        sendBlogMessage('add_blog',data['blog'][0].sha1);
                         $scope.blog_title = ''
                         $scope.blog_content = ''
                         data['blog'].forEach(function (obj) {
@@ -298,7 +367,13 @@
 
                         // 利用angular刷新
                         $scope.blog_list = blog_list;
-                        //
+
+                        // 更新用户博客的数量
+                        var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+                        var user_obj = JSON.parse(loginUserInfo);
+                        user_obj.nb_blog = user_obj.nb_blog+1;
+                        sessionStorage.setItem('LOGIN_USER_INFO',JSON.stringify(user_obj));
+                        $scope.user = user_obj;
 
                     } else {
 
@@ -315,17 +390,12 @@
                 if(page<1){
                     return;
                 }
+                $('.blog-badge').text('');
                 // get blog from server
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                 $http.post('/ajax/get_blog_list/', {creator_sha1: creator_sha1,page:page,topic_sha1:topic_sha1}).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);
-                        var blog_list = data['blog_list']
-//                        blog_list.forEach(function (obj) {
-//                            var format_data = new Date(parseInt(obj['time']))
-//                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-//                            console.log(obj['time'])
-//                        });
                         var blog_list = data['blog_list'];
                         blog_list.every(function(obj){
                             var user_sha1 = obj.creator_sha1;
@@ -423,19 +493,24 @@
             color: rgba(255,255,255,0.87);
             text-align: center;
         }
+        .btn a{
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+        }
     </style>
 
 </head>
 <body>
-<div class="visible-xs-* hidden-sm hidden-md hidden-lg" style="text-align: center;border-bottom:1px solid #ff5277;background-color: #f50057;padding: 5px 0px;color: rgba(255,255,255,0.87)"><h4 style="margin: 0px">COCO </h4></div>
+<div class="visible-xs-* hidden-sm hidden-md hidden-lg" style="text-align: center;border-bottom:1px solid #ff5277;background-color: #f50057;padding: 10px 0px;color: rgba(255,255,255,0.87)"><h4 style="margin: 0px">COCO </h4></div>
 <div style="background-color: #ff5277;width: 100%">
     <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
         <div class="row nav-kit">
             <div class="hidden-xs col-sm-4 col-md-8"><h4 style="margin: 0px">COCO </h4></div>
-            <div  class="item col-xs-3 col-sm-2 col-md-1"><a href="#index"><i class="glyphicon glyphicon-home"></i>首页</a></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#blog/0"><i class="glyphicon glyphicon-align-left"></i>博客</a></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#chat"><i class="glyphicon glyphicon-envelope"></i>消息</a></div>
-            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#account"><i class="glyphicon glyphicon-cog"></i>帐号</a></div>
+            <div  class="item col-xs-3 col-sm-2 col-md-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#chat">消息 <span class="badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#account">帐号 <span class="badge"></span></a></div>
         </div>
     </div>
 </div>

@@ -7,9 +7,14 @@ var PORT = 8090;
 var port = parseInt(process.argv[2]) || PORT;
 var io = require('socket.io').listen(port);
 
-var redis = require('socket.io-redis');
-io.adapter(redis({ host: 'localhost', port: 6379 }));
+//var redis = require('socket.io-redis');
+//io.adapter(redis({ host: 'localhost', port: 6379 }));
 
+var redis = require('redis').createClient;
+var adapter = require('socket.io-redis');
+var pub = redis('6379', '127.0.0.1', { auth_pass: "coco" });
+var sub = redis('6379', '127.0.0.1', { detect_buffers: true, auth_pass: "coco" });
+io.adapter(adapter({ pubClient: pub, subClient: sub }));
 
 io.sockets.on('connection', function (socket) {
     console.log(io.RedisStore)

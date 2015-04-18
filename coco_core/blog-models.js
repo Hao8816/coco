@@ -12,7 +12,7 @@ var db = orm.connect(settings.mysql,function(err,db){
 var blog_models = {};
 
 
-// 用户信息表
+// 博客信息表
 var Blog = db.define("blog", {
     time          : String,    // 微博创建的时间
     sha1          : String,    // blog的sha1
@@ -21,6 +21,19 @@ var Blog = db.define("blog", {
     images        : Object,    // 博客的图片信息: Object,
     creator_sha1  : String,    // 博客的创建者信息
     topic_sha1    : String     // 博客的所属的主题
+
+}, {
+    // with in model method
+});
+
+// 评论信息表
+var Comment = db.define("comment", {
+    time          : String,    // 微博创建的时间
+    sha1          : String,    // blog的sha1
+    content       : String,    // 博客的内容
+    images        : Object,    // 博客的图片信息: Object,
+    creator_sha1  : String,    // 博客的创建者信息
+    blog_sha1    : String     // 博客的所属的主题
 
 }, {
     // with in model method

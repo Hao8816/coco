@@ -86,9 +86,6 @@ var setUserImage = function setUserImage(req,res){
 };
 
 
-
-
-
 var getUserInfo = function getUserInfo(req,res){
     user_models.User.get({name:'chenhao'},function(err,result){
         if(err){

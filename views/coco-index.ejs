@@ -1,16 +1,17 @@
 <style type="text/css">
     .topic-item{
         background-color: #fefefe;
-        border-radius: 3px;
-        border: 1px solid #eee;
+        /*border-radius: 3px;*/
         padding: 8px;
         /*height: 160px;*/
-        margin-top: 10px;
+        margin: 5px 0px;
         cursor: pointer;
+        border-left: 4px solid #eee;
 
     }
     .topic-item:hover{
-        box-shadow: 0px 0px 10px 3px #ddd;
+        /*box-shadow: 0px 0px 10px 3px #ddd;*/
+        border-left-color: #ff5277;
     }
     .topic-item .topic-link{
         text-decoration: none;
@@ -32,73 +33,81 @@
     .concren-item:hover{
         background-color: #eee;
     }
+    .topic-category{
+        padding: 5px;
+        margin: 0;
+    }
+    .topic-category .item{
+        padding: 0px 10px;
+        font-size: 12px;
+    }
 
 </style>
 
 <div class="container" ng-controller="topicPageController as mainCtrl">
     <div class="row">
         <div class="col-md-9">
-            <div style="margin-top: 20px">
+            <div style="margin-top: 20px;border: 1px solid #eee;background-color: #fff">
                 <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
                     <li class="active ng-binding">我的主题 <span style="font-size: 12px;padding: 5px;">总共 {{nb_topic}} 个主题</span></li>
                 </ol>
-                <div class="row blog-nav-bar" style="margin-top: 5px;">
+                <div class="row blog-nav-bar" style="margin-top: 5px;padding: 5px">
+                    <div class="col-xs-7 col-sm-8 col-md-9">
+                        <p class="topic-category" style="font-size: 12px">
+                            <span>主题分类：</span>
+                            <a class="item" href="">全部 (19)</a>
+                            <a class="item" href="">科技 (3)</a>
+                            <a class="item" href="">技术 (5)</a>
+                        </p>
+                        <p class="topic-category" style="font-size: 12px">
+                            <span>发表时间：</span>
+                            <a class="item" href="">一周之内 (19)</a>
+                            <a class="item" href="">一个月之内 (6)</a>
+                            <a class="item" href="">三个月之内 (15)</a>
+                        </p>
+                    </div>
                     <div class="col-xs-5 col-sm-4 col-md-3">
                         <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" class="form-control input-sm" placeholder="搜索主题" type="text">
-                    <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
-                        <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i></span>
-                    </div>
-                    <div class="col-xs-1 col-sm-3 col-md-5">
-                    </div>
-                    <div class="col-xs-6 col-sm-5 col-md-4">
-
+                        <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
+                            <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
+                        </span>
                     </div>
                 </div>
             </div>
             <div style="border-radius: 5px;">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list|filter:query">
+                    <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list|filter:query">-->
+                    <div class="col-md-12" ng-repeat="topic in topic_list|filter:query">
                         <div class="topic-item">
                             <a class="topic-link" href="#/blog/{{topic.sha1}}">
-                                <p style="font-size: 13px;color: rgba(0,0,0,0.56)">创建时间:{{topic.time}}</p>
-                                <p style="border-bottom: 1px solid #eee;padding:8px 5px">
-                                    <img style="width: 30px;height: 30px;border-radius:30px;" ng-src="/images/{{topic.head_image}}" alt=""/>
-                                    <span style="padding: 0px 10px;">{{topic.name}}</span>
-                                </p>
-                                <p style="font-size: 13px;color: rgba(0,0,0,0.87)">标题:{{topic.title}}</p>
-                                <p style="font-size: 13px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 30px;">描述:{{topic.desc}}</p>
+                            <div class="row">
+                                <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
+                                    <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{topic.head_image}}" alt=""/>
+                                </div>
+                                <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
+                                    <p style="font-size: 14px">[{{topic.name}}] {{topic.title}}</p>
+                                    <p style="margin:0px;font-size: 12px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 30px;">描述:{{topic.desc}}</p>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="text-align: right">
+                                    <p style="font-size: 13px;color: rgba(0,0,0,0.56)">{{topic.time}}</p>
+
+                                </div>
+                            </div>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--<div style="margin-top: 20px">-->
-                <!--<ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">-->
-                    <!--<li class="active ng-binding">热门主题</li>-->
-                <!--</ol>-->
-            <!--</div>-->
-            <!--<div style="border-radius: 5px;">-->
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list">-->
-                        <!--<div class="topic-item">-->
-                            <!--<p style="font-size: 13px;text-align: center;color: rgba(0,0,0,0.56)">{{topic.time}}</p>-->
-                            <!--<h4 style="text-align: center;line-height: 70px;border-bottom: 1px solid #eee">{{topic.title}}</h4>-->
-                            <!--<p style="margin: 0px;font-size: 13px;color: rgba(0,0,0,0.87)">{{topic.desc}}</p>-->
-
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
         </div>
-        <div class="col-md-3" style="height: 600px;margin-top: 20px;" ng-controller="blogPageCtrl">
+        <div class="col-md-3" style="margin-top: 20px;">
             <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
                 <div style="text-align: center;line-height: 100px;">
                     <img style="height: 80px;width: 80px;border-radius: 80px;" ng-src="/images/{{user.head_image}}" alt=""/>
                 </div>
                 <p style="text-align: center">
-                    <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
                     <span>主题<a href="" ng-bind="user.nb_topic"></a></span>
                     <span>博客<a href="" ng-bind="user.nb_blog"></a></span>
+                    <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
                 </p>
             <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
                 <a style="color: #fff;font-size: 15px;" data-toggle="modal" data-target=".compose_topic_modal">创建主题</a>
@@ -109,7 +118,7 @@
                 <div style="border-radius: 5px;background-color: #fff;padding: 5px;">
                     <div class="friend-item" style="width: 25%;display: inline-block;text-align: center" ng-repeat="friend in friend_list">
                         <img style="width: 60%;margin:0 10%;border-radius: 100%" src="/images/{{friend.head_image}}" alt=""/>
-                        <span style="color:rgba(0,0,0,0.56)" ng-bind="friend.name"></span>
+                        <span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" ng-bind="friend.name"></span>
                     </div>
                 </div>
                 <h5>最热主题</h5>
