@@ -26,9 +26,13 @@ var message_server_url = host+":"+port
 
 // 每个不同的消息服务器，根据ip和端口，订阅不同的通道信息
 
-sub.on("subscribe", function (channel, count) {
+sub.on('subscribe', function (channel, count) {
     console.log(channel)
     console.log(count)
+});
+sub.on('message',function(channel, message){
+    console.log(channel)
+    console.log(message)
 });
 sub.subscribe(message_server_url);
 
