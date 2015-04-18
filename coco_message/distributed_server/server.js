@@ -26,12 +26,18 @@ var message_server_url = host+":"+port
 
 // 每个不同的消息服务器，根据ip和端口，订阅不同的通道信息
 
-sub.on("subscribe", function (channel, count) {
+io.adapter.subClient.on('subscribe',function(channel){
     console.log(channel)
     console.log(count)
 });
-sub.subscribe(message_server_url);
+io.adapter.subClient.sub(message_server_url)
 
+//sub.on("subscribe", function (channel, count) {
+//    console.log(channel)
+//    console.log(count)
+//});
+//sub.subscribe(message_server_url);
+//
 
 io.sockets.on('connection', function (socket) {
     var nb_connection = io.sockets.sockets.length
@@ -43,7 +49,7 @@ io.sockets.on('connection', function (socket) {
         // 以后从redis中查询用户所在的服务器
         message_servers.forEach(function(obj){
             if (obj != message_server_url){
-                pub.publish(obj,data)
+                io.adapter.pubClient.publish(obj,data)
                 console.log(data)
             }
 
