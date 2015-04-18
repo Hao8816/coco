@@ -26,9 +26,13 @@ var message_server_url = host+":"+port
 
 // 每个不同的消息服务器，根据ip和端口，订阅不同的通道信息
 
-sub.subscribe(message_server_url,function(data){
-    console.log("receive message" + data)
+sub.on("subscribe", function (channel, count) {
+    client2.publish("a nice channel", "I am sending a message.");
+    client2.publish("a nice channel", "I am sending a second message.");
+    client2.publish("a nice channel", "I am sending my last message.");
 });
+sub.subscribe(message_server_url);
+
 
 io.sockets.on('connection', function (socket) {
     var nb_connection = io.sockets.sockets.length
