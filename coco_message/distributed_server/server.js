@@ -21,23 +21,17 @@ var redis = require('redis').createClient;
 var adapter = require('socket.io-redis');
 var pub = redis('6379', '127.0.0.1', { auth_pass: "coco" });
 var sub = redis('6379', '127.0.0.1', { detect_buffers: true, auth_pass: "coco" });
-io.adapter(adapter({ pubClient: pub, subClient: sub }));
+//io.adapter(adapter({ pubClient: pub, subClient: sub }));
 var message_server_url = host+":"+port
 
 // 每个不同的消息服务器，根据ip和端口，订阅不同的通道信息
 
-io.adapter.subClient.on('subscribe',function(channel){
+sub.on("subscribe", function (channel, count) {
     console.log(channel)
     console.log(count)
 });
-io.adapter.subClient.sub(message_server_url)
+sub.subscribe(message_server_url);
 
-//sub.on("subscribe", function (channel, count) {
-//    console.log(channel)
-//    console.log(count)
-//});
-//sub.subscribe(message_server_url);
-//
 
 io.sockets.on('connection', function (socket) {
     var nb_connection = io.sockets.sockets.length
@@ -49,7 +43,7 @@ io.sockets.on('connection', function (socket) {
         // 以后从redis中查询用户所在的服务器
         message_servers.forEach(function(obj){
             if (obj != message_server_url){
-                io.adapter.pubClient.publish(obj,data)
+                pub.publish(obj,data)
                 console.log(data)
             }
 
