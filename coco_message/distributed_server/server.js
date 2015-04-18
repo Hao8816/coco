@@ -40,14 +40,11 @@ io.sockets.on('connection', function (socket) {
     }
     // simple event: receive a msg and broadcast it to all clients
     socket.on('msg', function (data) {
-        console.log(data)
-        socket.broadcast.emit('msg', data);
-
         // 以后从redis中查询用户所在的服务器
         message_servers.forEach(function(obj){
-            console.log(obj)
             if (obj != message_server_url){
                 pub.publish(obj,data)
+                console.log(data)
             }
 
         });
