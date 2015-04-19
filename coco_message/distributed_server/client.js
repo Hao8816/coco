@@ -8,8 +8,8 @@ var HOST = 'http://onekoko.com';
 var NAME = 'jack'
 var TO_NAME = 'rose'
 
-var name = parseInt(process.argv[2]) || NAME;
-var to_name = parseInt(process.argv[3]) || TO_NAME;
+var name = process.argv[2] || NAME;
+var to_name = process.argv[3] || TO_NAME;
 
 var io = require('socket.io-client');
 var socket = io.connect(HOST + ':' + PORT);

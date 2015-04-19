@@ -77,7 +77,7 @@ io.sockets.on('connection', function (socket) {
         var to_name = data['to_name'];
         var message = data['message'];
         // 获取用户登录message server
-        redis_client.hget('CONNECTED_USERS','',function(err,result){
+        redis_client.hget('CONNECTED_USERS',to_name,function(err,result){
             if(err){
                 console.log(err)
             }
