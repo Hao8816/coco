@@ -21,6 +21,7 @@ var redis = require('redis').createClient;
 var adapter = require('socket.io-redis');
 var pub = redis('6379', '127.0.0.1', { auth_pass: "coco" });
 var sub = redis('6379', '127.0.0.1', { detect_buffers: true, auth_pass: "coco" });
+var redis_client = redis('6379', '127.0.0.1');
 //io.adapter(adapter({ pubClient: pub, subClient: sub }));
 var message_server_url = host+":"+port
 
@@ -29,10 +30,23 @@ var message_server_url = host+":"+port
 sub.on('subscribe', function (channel, count) {
     console.log(channel)
     console.log(count)
+
 });
 sub.on('message',function(channel, message){
     console.log(channel)
     console.log(message.toString())
+    var data = JSON.parse(message.toString())
+    var to_name = data['to_name']
+    client.hget('CONNECTED_USER_IDS',to_name,function(err,result){
+       if (err){
+           console.log(err)
+       }
+
+        io.sockets.connected[result].emit('message',data)
+    });
+
+
+
 });
 sub.subscribe(message_server_url);
 
@@ -42,17 +56,36 @@ io.sockets.on('connection', function (socket) {
     for(var i=0;i<nb_connection;i++){
         console.log(io.sockets.sockets[i]['id'])
     }
-    // simple event: receive a msg and broadcast it to all clients
-    socket.on('msg', function (data) {
-        // 以后从redis中查询用户所在的服务器
-        message_servers.forEach(function(obj){
-            if (obj != message_server_url){
-                pub.publish(obj,data)
-                console.log(data)
+    socket.on('login',function(data){
+        console.log(data)
+        var user_name = data['name']
+        redis_client.hset('CONNECTED_USERS',user_name,message_server_url,function(err){
+            if (err){
+
             }
+        });
+        redis_client.hset('CONNECTED_USER_IDS',user_name,this.id,function(err){
+            if (err){
+
+            }
+        });
+    });
+    // simple event: receive a msg and broadcast it to all clients
+    socket.on('message', function (data) {
+        // 以后从redis中查询用户所在的服务器
+        var user_name = data['name'];
+        var to_name = data['to_name'];
+        var message = data['message'];
+        // 获取用户登录message server
+        redis_client.hget('CONNECTED_USERS','',function(err,result){
+            if(err){
+                console.log(err)
+            }
+            console.log(result)
+
+            pub.publish(data,JSON.stringify(data))
 
         });
-
     });
 
 });
