@@ -88,7 +88,9 @@ io.sockets.on('connection', function (socket) {
                     if (err){
                         console.log(err)
                     }
-                    io.sockets.connected[result].emit('message',data)
+                    if (io.sockets.connected.hasOwnProperty(result)){
+                        io.sockets.connected[result].emit('message',data)
+                    }
                 });
             }else {
 
