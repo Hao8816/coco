@@ -37,7 +37,7 @@ sub.on('message',function(channel, message){
     console.log(message.toString())
     var data = JSON.parse(message.toString())
     var to_name = data['to_name']
-    client.hget('CONNECTED_USER_IDS',to_name,function(err,result){
+    redis_client.hget('CONNECTED_USER_IDS',to_name,function(err,result){
        if (err){
            console.log(err)
        }
@@ -84,7 +84,7 @@ io.sockets.on('connection', function (socket) {
             }
             console.log(result)
             if (result == message_server_url){
-                client.hget('CONNECTED_USER_IDS',to_name,function(err,result){
+                redis_client.hget('CONNECTED_USER_IDS',to_name,function(err,result){
                     if (err){
                         console.log(err)
                     }
