@@ -32,7 +32,7 @@ sub.on('subscribe', function (channel, count) {
 });
 sub.on('message',function(channel, message){
     console.log(channel)
-    console.log(message)
+    console.log(message.toJson())
 });
 sub.subscribe(message_server_url);
 
