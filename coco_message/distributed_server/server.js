@@ -77,14 +77,23 @@ io.sockets.on('connection', function (socket) {
         var to_name = data['to_name'];
         var message = data['message'];
         // 获取用户登录message server
+
         redis_client.hget('CONNECTED_USERS',to_name,function(err,result){
             if(err){
                 console.log(err)
             }
             console.log(result)
+            if (result == message_server_url){
+                client.hget('CONNECTED_USER_IDS',to_name,function(err,result){
+                    if (err){
+                        console.log(err)
+                    }
+                    io.sockets.connected[result].emit('message',data)
+                });
+            }else {
 
-            pub.publish(data,JSON.stringify(data))
-
+                pub.publish(data, JSON.stringify(data))
+            }
         });
     });
 

@@ -27,6 +27,7 @@ socket.on('connect', function () {
     // wait for messages
     socket.on('message', function(data) {
         console.log('new message received');
+        console.log(data)
 
     });
 });
