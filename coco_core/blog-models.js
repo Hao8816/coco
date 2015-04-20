@@ -53,10 +53,26 @@ var Topic = db.define("topic", {
     // with in model method
 });
 
+// 文件信息表
+var File = db.define("file",{
+    time          : String,    // 微博创建的时间
+    sha1          : String,    // blog的sha1
+    name          : String,    // 文件名称
+    size          : String,    // 文件的大小
+    type          : String,    // 文件类型
+    path          : String,    // 文件的存储路径
+    creator_sha1  : String,    // 创建者信息
+    blog_sha1     : String     // 文件所属的博客的sha1
+},{
+
+    // with in model method
+})
+
 
 db.sync();
 
 blog_models['Blog'] = Blog;
 blog_models['Topic'] = Topic;
+blog_models['File'] = File;
 
 module.exports = blog_models;

@@ -103,10 +103,45 @@ var getTopicList = function getTopicList(req,res){
 };
 
 
+var deleteFile = function deleteFile(req,res){
+    var file_sha1 = req.param('file_sha1');
+    var usersha1 = req.param('usersha1');
+    blog_models.File.find({"sha1":file_sha1}).run(function(err,result){
+        if(err){
+            console.log(err);
+        }
+        res.send({'info':"OK","ret":0001,"topic_list":result})
+
+    });
+};
+
+var saveFile = function saveFile(obj){
+    var date_time = new Date().getTime();
+    blog_models.File.create([{
+        time          : date_time,    // 微博创建的时间
+        sha1          : obj['sha1'],    // blog的sha1
+        name          : obj['name'],    // 文件名称
+        size          : obj['size'],    // 文件的大小
+        type          : obj['mime'],    // 文件类型
+        path          : obj['path'],    // 文件的存储路径
+        creator_sha1  : "",    // 创建者信息
+        blog_sha1     : ""     // 文件所属的博客的sha1
+
+    }],function (err,item){
+        console.log(err);
+
+        //res.send({'info':"OK","ret":0001})
+    });
+};
+
+
+
 blog.saveBlog = saveBlog;
 blog.saveTopic = saveTopic;
 blog.getBlogList = getBlogList;
 blog.getTopicList = getTopicList;
+blog.saveFile = saveFile;
+blog.deleteFile = deleteFile;
 
 module.exports = blog
 
