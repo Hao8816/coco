@@ -281,6 +281,25 @@
         }
 
         function blogPageController($scope, $http, $routeParams) {
+            //var file_list = []
+            // 博客相关图片的上传
+            // 文件上传
+            $('#blog_fileupload').fileupload({
+                url:'/ajax/upload/',
+                sequentialUploads: true,
+                dataType: 'json',
+                done: function (e, data) {
+                    var image_url = "/images/"+data.result['sha1'];
+                    var file =  data['result'];
+                    //$('#blog_files_area').append('<img style="max-width:220px;max-height:220px;" src='+image_url+'>');
+                    var file_size =  (file['size']/1024).toFixed(1) + 'KB'
+                    $('#blog_files_area').append('<p class="file-item" style="margin: 2px;font-size: 13px;padding: 5px"><span>'+file["name"]+'</span><a file_sha1="'+file['sha1']+'" style="float: right" onclick="deleteFile(this)">删除</a><span style="float: right;padding: 0px 10px">'+file_size+'</span></p>');
+                    //var file_list = $scope.file_list
+                    //file_list.push(file)
+                    $scope.file_list = file_list.push(file)
+                }
+            })
+
 
             var user_info_cache = localStorage.getItem('ALL_USER_INFO_DICT')
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
@@ -335,22 +354,24 @@
             }
 
             $scope.saveBlog = function () {
-                var title = $scope.blog_title;
-                var content = $scope.blog_content;
+                var title = $scope.blog.title;
+                var content = $scope.blog.content;
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                var file_list = []
                 $http.post('/ajax/save_blog/', {
                     title: title,
                     content: content,
                     creator_sha1: creator_sha1,
-                    topic_sha1:topic_sha1
+                    topic_sha1:topic_sha1,
+                    files : file_list
                 }).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);
                         $('.compose_blog_modal').modal('hide');
                         // 发送博客更细通知
                         sendBlogMessage('add_blog',data['blog'][0].sha1);
-                        $scope.blog_title = ''
-                        $scope.blog_content = ''
+                        $scope.blog.title = ''
+                        $scope.blog.content = ''
                         data['blog'].forEach(function (obj) {
                             var format_data = new Date(parseInt(obj['time']))
                             obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
@@ -434,7 +455,6 @@
                     $('#fileupload').attr("imagesha1",data.result['sha1']);
                 }
             });
-
         });
         // 保存图像
         function saveImage(){
@@ -452,6 +472,20 @@
                 $('.upload_image_modal').modal('hide');
 
             });
+        }
+
+        // 删除已经上传的文件
+        function deleteFile(obj){
+            var delete_confirm = window.confirm("删除文件？")
+            if (delete_confirm){
+                var file_sha1 = $(obj).attr('file_sha1')
+                var usersha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                $(obj).parent('.file-item').remove()
+//                $.post('/ajax/delete_file/',{file_sha1:file_sha1,usersha1:usersha1},function(data){
+//                    console.log(data)
+//
+//                });
+            }
         }
 
     </script>
@@ -546,7 +580,7 @@
                 <div class="show_image_view" style="text-align: center;padding: 0px 0px 20px 0px"></div>
                 <div class="upload-btn" style="height: 40px;width: 80%;margin:0px 10%;text-align: center;position: relative;font-size: 16px;line-height: 40px;">
                     <span class="upload-title">选择照片</span>
-                    <input id="fileupload" type="file" style="width: 100%;height: 100%;opacity: 0;position: absolute;top: 0px;" multiple>
+                    <input id="blog_fileupload" type="file" style="width: 100%;height: 100%;opacity: 0;position: absolute;top: 0px;" multiple>
                 </div>
             </div>
             <div class="modal-footer">
