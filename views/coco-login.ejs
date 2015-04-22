@@ -65,9 +65,19 @@
 </style>
 <script type="text/javascript">
     function loginCtrl($scope,$http){
-
         $scope.login = function(){
-            var password = sha1($scope.user.password);
+            loginMain()
+        }
+        $scope.enterLogin = function(e){
+            var e = e || window.event
+            if (e.keyCode == 13){
+                loginMain()
+            }
+        }
+
+        function loginMain(){
+            var userInfo = $scope.user;
+            var password = sha1(userInfo.password);
             var encrypt_password = sha1(password);
             $scope.user.password = encrypt_password;
             var userInfo = $scope.user;
@@ -86,6 +96,13 @@
 
         function loginMain(userInfo){
             $scope.error = false
+            // 检查用户名
+            var username = userInfo.name;
+            if (username == "" || userInfo.password == ""){
+                $scope.message = "请检查用户名输入格式"
+                return
+            }
+
             $http.post('/ajax/login/',userInfo).success(function(data){
                 if(data['ret'] == '0001'){
                     $scope.user.name = '';
@@ -121,7 +138,7 @@
     <div class="row" style="margin-top: 0px;padding-bottom: 40px;">
         <div class="jumbotron" style="background-color: #fff;margin: 0;padding: 10px;">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-bottom: 1px solid #ddd;margin-bottom: 20px;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-bottom: 2px solid #ff5277;margin-bottom: 20px;">
                     <h2 style="color: #ff5277;padding: 20px 0px">COCO,不一样的生活</h2>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -166,7 +183,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">密码</label>
-                            <input ng-keydown="enterLogin(event)" ng-model="user.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
+                            <input ng-model="user.password" ng-keydown="enterLogin(event)" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
                         </div>
                         <p style="font-size: 13px;color: red" ng-show="error" ng-bind="message"></p>
                         <button style="float: right" class="btn btn-danger" ng-click="login()">点击登录</button>
@@ -177,7 +194,7 @@
         </div>
     </div>
     <div class="row ad-items" style="margin-bottom: 40px;">
-        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ddd;padding: 10px">产品特性</p>
+        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ff5277;padding: 10px">产品特性</p>
         <div class="col-xs-6 col-sm-3 col-md-3">
             <a class="item">
                 <img src="/images/icons/pin-drop.png" alt=""/>
@@ -204,7 +221,7 @@
         </div>
     </div>
     <div class="row ad-items" style="margin-bottom: 40px;">
-        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ddd;padding: 10px">产品介绍</p>
+        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ff5277;padding: 10px">产品介绍</p>
         <div class="col-md-12">
             <p style="padding: 10px;color: rgba(0,0,0,0.56)">
                 COCO致力于构建一个实时的博客系统，在博客中融入社交元素，提供好友，分享，实时聊天等功能。在内容结构上，使用主题来管理博客，通过标签来对主题和博客进行分类，方便查询和阅读。从应用的结构上，我们除了网站，还提供Android和IOS的客户端，方便用户的操作。（现阶段只开发出来了网站）
@@ -212,7 +229,7 @@
         </div>
     </div>
     <div class="row ad-items" style="margin-bottom: 40px;">
-        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ddd;padding: 10px">技术介绍</p>
+        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ff5277;padding: 10px">技术介绍</p>
         <div class="col-md-12">
             <ol class="tech-desc">
                 <li>前端框架 : <a href="http://angularjs.apjs.net/" target="_blank">AngularJS</a> 诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVVM、模块化、自动化双向数据绑定、语义化标签、依赖注入，等等。</li>

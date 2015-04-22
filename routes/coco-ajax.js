@@ -29,7 +29,6 @@ router.post('/get_friend_list/', function(req, res) {
 });
 
 router.post('/get_topic_list/', function(req, res) {
-    console.log(req.param('creator_sha1'))
     blog.getTopicList(req,res);
 });
 
@@ -45,6 +44,11 @@ router.post('/login/',function(req,res){
 
 router.post('/set_image/',function(req,res){
     user.setUserImage(req,res);
+});
+
+
+router.post('/delete_file/',function(req,res){
+    blog.deleteFile(req,res);
 });
 
 
@@ -80,12 +84,8 @@ router.post('/upload/',jfum.postHandler.bind(jfum),function(req, res) {
                 var sha1 = fileSha1+"."+fileType
                 file['sha1'] = sha1
                 fs.writeFileSync("public/images/"+sha1,tempFile)
-                //fs.renameSync(tempFilePath,"/"+fileName)
-                // file.field - form field name
-                // file.path - full path to file on disk
-                // file.name - original file name
-                // file.size - file size on disk
-                // file.mime - file mime type
+                // 保存文件的信息
+                blog.saveFile(file)
             }
             console.log(file)
             res.send(file);
@@ -93,9 +93,6 @@ router.post('/upload/',jfum.postHandler.bind(jfum),function(req, res) {
     }
 
 });
-
-
-
 
 
 module.exports = router;

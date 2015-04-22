@@ -187,15 +187,29 @@
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">写博客</h4>
                 </div>
-                <div class="modal-body" style="height: 300px;">
+                <div class="modal-body" style="min-height: 300px;">
                     <div class="form-group">
                         <label for="exampleInputEmail1">标题</label>
-                        <input ng-model="blog_title" type="text" class="form-control" id="exampleInputEmail1"
+                        <input ng-model="blog.title" type="text" class="form-control" id="exampleInputEmail1"
                                placeholder="为你的博客写一段标题">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">内容</label>
-                        <textarea ng-model="blog_content" class="form-control" placeholder="博客内容" rows="8"></textarea>
+                        <textarea ng-model="blog.content" class="form-control" placeholder="博客内容" rows="6"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">附件</label>
+                        <div class="upload-btn" style="height: 40px;width: 100px;border-radius:2px;cursor:pointer;background-color:#eee;text-align: center;position: relative;font-size: 16px;line-height: 40px;">
+                            <span class="upload-title">选择照片</span>
+                            <input id="blog_fileupload" type="file" style="width: 100px;height: 40px;margin:0px;opacity: 0;position: absolute;top: 0px;" multiple>
+                        </div>
+                        <div id="blog_files_area">
+                            <p class="file-item" style="margin: 2px;font-size: 13px;padding: 5px" ng-repeat="file in file_list">
+                                <span ng-bind="file.name"></span>
+                                <a file_sha1="{{file.sha1}}" style="float: right" onclick="deleteFile(this)">删除</a>
+                                <span style="float: right;padding: 0px 10px" ng-bind="file.size"></span>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
