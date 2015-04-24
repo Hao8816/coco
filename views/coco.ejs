@@ -386,6 +386,7 @@
                 }).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);
+                        $('#blog_files_area').empty()
                         $('.compose_blog_modal').modal('hide');
                         // 发送博客更细通知
                         sendBlogMessage('add_blog',data['blog'][0].sha1);
