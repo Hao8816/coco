@@ -66,18 +66,7 @@
 <script type="text/javascript">
     function loginCtrl($scope,$http){
         $scope.login = function(){
-            loginMain()
-        }
-        $scope.enterLogin = function(e){
-            var e = e || window.event
-            if (e.keyCode == 13){
-                loginMain()
-            }
-        }
-
-        function loginMain(){
-            var userInfo = $scope.user;
-            var password = sha1(userInfo.password);
+            var password = sha1($scope.user.password);
             var encrypt_password = sha1(password);
             $scope.user.password = encrypt_password;
             var userInfo = $scope.user;

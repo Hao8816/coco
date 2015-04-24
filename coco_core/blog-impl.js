@@ -13,12 +13,13 @@ var saveBlog = function saveBlog(req,res){
     var blog_title = req.param('title');
     var blog_content = req.param('content');
     var creator_sha1 = req.param('creator_sha1');
+    var file_list = req.param('file_list');
     blog_models.Blog.create([{
         time          : date_time,    // 微博创建的时间
         sha1          : sha1,    // blog的sha1
         title         : blog_title,    // 博客标题
         content       : blog_content,    // 博客的描述
-        images        : [],    // 博客的图片信息: Object,
+        images        : file_list,    // 博客的图片信息: Object,
         creator_sha1  : creator_sha1,   // 博客的创建者信息
         topic_sha1  : topic_sha1   // 博客的主题
     }],function (err,item){
