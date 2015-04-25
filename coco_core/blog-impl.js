@@ -107,11 +107,11 @@ var getTopicList = function getTopicList(req,res){
 var deleteFile = function deleteFile(req,res){
     var file_sha1 = req.param('file_sha1');
     var usersha1 = req.param('usersha1');
-    blog_models.File.find({"sha1":file_sha1}).run(function(err,result){
+    blog_models.File.find({"sha1":file_sha1}).remove(function(err){
         if(err){
             console.log(err);
         }
-        res.send({'info':"OK","ret":0001,"topic_list":result})
+        res.send({'info':"OK","ret":0001})
 
     });
 };

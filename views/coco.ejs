@@ -283,7 +283,6 @@
         }
 
         function blogPageController($scope, $http, $routeParams) {
-            var file_list = []
             // 博客相关图片的上传
             // 文件上传
             $('#blog_fileupload').fileupload({
@@ -294,25 +293,28 @@
                     var image_url = "/images/"+data.result['sha1'];
                     var file =  data['result'];
                     var file_size =  (file['size']/1024).toFixed(1) + 'KB'
-                    $('#blog_files_area').append('<p class="file-item" style="margin: 2px;font-size: 13px;padding: 5px"><span>'+file["name"]+'</span><a file_sha1="'+file['sha1']+'" style="float: right" onclick="deleteFile(this)">删除</a><span style="float: right;padding: 0px 10px">'+file_size+'</span></p>');
+                    $('#blog_files_area').append('<p class="file-item" style="margin: 2px;font-size: 13px;padding: 5px"><span style="display: inline-block;max-width: 60%;overflow: hidden;text-overflow: ellipsis">'+file["name"]+'</span><a style="cursor: pointer" onclick="deleteFile(this)" file_sha1="'+file['sha1']+'" style="float: right" >删除</a><span style="float: right;padding: 0px 10px">'+file_size+'</span></p>');
                     file_list.push(file)
                 }
             })
 
 
             // 删除已经上传的文件
-            function deleteFile(obj){
+            $scope.deleteFile = function (obj){
                 var delete_confirm = window.confirm("删除文件？")
                 if (delete_confirm){
                     var file_sha1 = $(obj).attr('file_sha1')
                     var usersha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                     $(obj).parent('.file-item').remove()
+                    for(var i=0;i<file_list.length;i++){
+                        if (file_list[i].sha1 == file_sha1){
+                            file_list.remove(i)
+                        }
+                    }
+                    $.post('/ajax/delete_file/',{file_sha1:file_sha1,usersha1:usersha1},function(data){
+                        console.log(data)
 
-
-//                $.post('/ajax/delete_file/',{file_sha1:file_sha1,usersha1:usersha1},function(data){
-//                    console.log(data)
-//
-//                });
+                    });
                 }
             }
 
@@ -462,7 +464,7 @@
     <script type="text/javascript" src="/Jquery/jquery.iframe-transport.js"></script>
     <script type="text/javascript" src="/Jquery/jquery.fileupload.js"></script>
     <script type="text/javascript">
-
+        var file_list = []
         $(function () {
             // 文件上传
             $('#fileupload').fileupload({
@@ -493,6 +495,25 @@
                 $('.upload_image_modal').modal('hide');
 
             });
+        }
+
+        function deleteFile(obj){
+            var delete_confirm = window.confirm("删除文件？")
+            if (delete_confirm){
+                var file_sha1 = $(obj).attr('file_sha1')
+                var usersha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                $(obj).parent('.file-item').remove()
+                for(var i=0;i<file_list.length;i++){
+                    if (file_list[i].sha1 == file_sha1){
+                        // 删除前端存储的文件信息
+                        file_list.splice(i)
+                    }
+                }
+                $.post('/ajax/delete_file/',{file_sha1:file_sha1,usersha1:usersha1},function(data){
+                    console.log(data)
+
+                });
+            }
         }
 
 
