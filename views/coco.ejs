@@ -293,7 +293,7 @@
                     var image_url = "/images/"+data.result['sha1'];
                     var file =  data['result'];
                     var file_size =  (file['size']/1024).toFixed(1) + 'KB'
-                    $('#blog_files_area').append('<p class="file-item" style="margin: 2px;font-size: 13px;padding: 5px"><span style="display: inline-block;max-width: 60%;overflow: hidden;text-overflow: ellipsis">'+file["name"]+'</span><a style="cursor: pointer" onclick="deleteFile(this)" file_sha1="'+file['sha1']+'" style="float: right" >删除</a><span style="float: right;padding: 0px 10px">'+file_size+'</span></p>');
+                    $('#blog_files_area').append('<p class="file-item" style="margin: 2px;font-size: 13px;padding: 5px"><span style="display: inline-block;max-width: 60%;overflow: hidden;text-overflow: ellipsis">'+file["name"]+'</span><a style="cursor: pointer;float: right" onclick="deleteFile(this)" file_sha1="'+file['sha1']+'" style="float: right" >删除</a><span style="float: right;padding: 0px 10px">'+file_size+'</span></p>');
                     file_list.push(file)
                 }
             })
