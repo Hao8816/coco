@@ -506,7 +506,7 @@
                 for(var i=0;i<file_list.length;i++){
                     if (file_list[i].sha1 == file_sha1){
                         // 删除前端存储的文件信息
-                        file_list.splice(i)
+                        file_list.splice(i,1)
                     }
                 }
                 $.post('/ajax/delete_file/',{file_sha1:file_sha1,usersha1:usersha1},function(data){
