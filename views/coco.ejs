@@ -13,8 +13,8 @@
     <script type="text/javascript" src="/js/coco-message-client.js"></script>
     <script type="text/javascript" src="/js/coco-util.js"></script>
     <script type="text/javascript">
-        var mosu_app = angular.module('coco',['ngRoute']);
-        mosu_app.config(['$routeProvider',function($routeProvider){
+        var coco_app = angular.module('coco',['ngRoute']);
+        coco_app.config(['$routeProvider',function($routeProvider){
             $routeProvider.
                     when('/chat/',{
                         templateUrl:'/coco/chat/',

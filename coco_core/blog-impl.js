@@ -16,14 +16,25 @@ var saveBlog = function saveBlog(req,res){
     var file_list = req.param('file_list');
     blog_models.Blog.create([{
         time          : date_time,    // 微博创建的时间
-        sha1          : sha1,    // blog的sha1
-        title         : blog_title,    // 博客标题
-        content       : blog_content,    // 博客的描述
+        sha1          : sha1,         // blog的sha1
+        title         : blog_title,   // 博客标题
+        content       : blog_content, // 博客的描述
         images        : file_list,    // 博客的图片信息: Object,
-        creator_sha1  : creator_sha1,   // 博客的创建者信息
-        topic_sha1  : topic_sha1   // 博客的主题
+        creator_sha1  : creator_sha1, // 博客的创建者信息
+        topic_sha1    : topic_sha1      // 博客的主题
     }],function (err,item){
         console.log(item);
+        // 更新主题的信息
+        blog_models.Topic.find({ sha1: topic_sha1 }).each(function (topic) {
+            var related_sha1s = topic.related
+            related_sha1s.push(sha1)
+            topic.related = JSON.stringify(related_sha1s);
+            topic.update_time = date_time;
+        }).save(function (err) {
+            // done!
+            console.log('update topic update_time success')
+        });
+
         // 更新用户表的数据
         user_models.User.find({ sha1: creator_sha1 }).each(function (user) {
             user.nb_blog = user.nb_blog + 1;
