@@ -141,6 +141,26 @@
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             $scope.user = JSON.parse(loginUserInfo);
 
+
+            $scope.changeOrder = function(index) {
+                switch (index){
+                    case  0:
+                        $scope.order = "time"
+                        break;
+                    case 1:
+                        $scope.order = "update_time"
+                        break;
+                    case  2:
+                        $scope.order = "title"
+                        break;
+                    default :
+                        $scope.order = "sha1"
+                        break;
+                }
+                $('.topic-category').find('.item-active').removeClass('item-active');
+                $('.topic-category').find('.item').eq(index).addClass('item-active');
+            }
+
             if(user_info_cache == null){
                 $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
                     if (data['ret'] == '0001') {

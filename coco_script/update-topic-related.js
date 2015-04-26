@@ -23,16 +23,10 @@ blog_models.Topic.all(function(err,result){
             console.log(data)
             blog_models.Topic.find({ sha1: topic_sha1 }).each(function (topic) {
                 topic.related = JSON.stringify(data["get_blog_sha1"]);
-
             }).save(function (err) {
                 // done!
                 console.log('update nb_blog success')
             });
         });
-
-
-
     })
-
-
 });
