@@ -17,7 +17,7 @@ blog_models.Blog.all(function(err,result){
         // 获取用户的博客的数量
         blog_models.Topic.find({ sha1: topic_sha1 }).each(function (topic) {
 
-            var related_sha1s = topic.related
+            var related_sha1s = JSON.parse(topic.related)
             related_sha1s.push(blog_sha1)
             topic.related = JSON.stringify(related_sha1s);
             topic.update_time = obj.time;
