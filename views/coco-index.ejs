@@ -68,12 +68,6 @@
                             <a class="item" ng-click="changeOrder(1)">最热主题</a>
                             <a class="item" ng-click="changeOrder(2)">最新主题</a>
                         </p>
-                        <!--<p class="topic-category" style="font-size: 12px">-->
-                            <!--<span>发表时间：</span>-->
-                            <!--<a class="item" href="">一周之内 (19)</a>-->
-                            <!--<a class="item" href="">一个月之内 (6)</a>-->
-                            <!--<a class="item" href="">三个月之内 (15)</a>-->
-                        <!--</p>-->
                     </div>
                     <div class="col-xs-5 col-sm-4 col-md-3">
                         <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" class="form-control input-sm" placeholder="搜索主题" type="text">
@@ -86,7 +80,7 @@
             <div style="border-radius: 5px;">
                 <div class="row">
                     <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list|filter:query">-->
-                    <div class="col-md-12" ng-repeat="topic in topic_list|filter:query | orderBy:order">
+                    <div class="col-md-12" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                         <div class="topic-item">
                             <a class="topic-link" href="#/blog/{{topic.sha1}}">
                             <div class="row">
@@ -99,7 +93,7 @@
                                 </div>
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="text-align: right">
                                     <p style="font-size: 13px;color: rgba(0,0,0,0.56)">{{topic.time}}</p>
-
+                                    <p style="font-size: 13px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</p>
                                 </div>
                             </div>
                             </a>
