@@ -26,6 +26,8 @@ router.post('/', function(req, res) {
         blog.getTopicList(req,res);
     }else if(action == 'blog'){
         blog.getBlogList(req,res);
+    }else if(action == 'save_blog'){
+        blog.saveBlog(req,res)
     }
 
     //apiRouter[action]()(req,res)
