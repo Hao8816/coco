@@ -28,6 +28,8 @@ router.post('/', function(req, res) {
         blog.getBlogList(req,res);
     }else if(action == 'save_blog'){
         blog.saveBlog(req,res)
+    }else if(action == 'user_list'){
+        user.getFriendList(req,res)
     }
 
     //apiRouter[action]()(req,res)
