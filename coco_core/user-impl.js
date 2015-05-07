@@ -47,7 +47,7 @@ var loginUser = function loginUser(req,res){
     if (req.param('password_app')){
         var password = SHA1(SHA1(req.param('password_app')))
     }else{
-        var password = req.param('password')||req.param('password_app')
+        var password = req.param('password')
     }
     user_models.User.find({name:name,password:password},function(err,result){
         if(err){
