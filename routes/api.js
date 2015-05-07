@@ -24,6 +24,8 @@ router.post('/', function(req, res) {
     }
     if(action == 'index'){
         blog.getTopicList(req,res);
+    }else if(action == "login"){
+        user.loginUser(req,res)
     }else if(action == 'blog'){
         blog.getBlogList(req,res);
     }else if(action == 'save_blog'){
