@@ -37,12 +37,15 @@ sub.on('message',function(channel, message){
     console.log(message.toString())
     var data = JSON.parse(message.toString())
     var to_name = data['to_name']
+    console.log('push message from redis pub/sub')
     redis_client.hget('CONNECTED_USER_IDS',to_name,function(err,result){
        if (err){
            console.log(err)
        }
-
-        io.sockets.connected[result].emit('message',data)
+       console.log('pull message from redis pub/sub')
+       if (io.sockets.connected.hasOwnProperty(result)){
+            io.sockets.connected[result].emit('message',data)
+       }
     });
 
 
@@ -82,19 +85,22 @@ io.sockets.on('connection', function (socket) {
             if(err){
                 console.log(err)
             }
-            console.log(result)
+            console.log('push message from redis pub/sub')
+            console.log('---'+result)
+            
             if (result == message_server_url){
                 redis_client.hget('CONNECTED_USER_IDS',to_name,function(err,result){
                     if (err){
                         console.log(err)
                     }
+                    console.log('find socket in redis'+result)
                     if (io.sockets.connected.hasOwnProperty(result)){
                         io.sockets.connected[result].emit('message',data)
                     }
                 });
             }else {
 
-                pub.publish(data, JSON.stringify(data))
+                pub.publish(result, JSON.stringify(data))
             }
         });
     });

@@ -44,7 +44,11 @@ var createUser = function createUser(req,res){
 
 var loginUser = function loginUser(req,res){
     var name = req.param('name')
-    var password = req.param('password')
+    if (req.param('password_app')){
+        var password = SHA1(SHA1(req.param('password_app')))
+    }else{
+        var password = req.param('password')||req.param('password_app')
+    }
     user_models.User.find({name:name,password:password},function(err,result){
         if(err){
             console.log(err);
