@@ -1,6 +1,8 @@
 var blog_models = require('./blog-models');
 var user_models = require('./user-models');
 
+var search = require('./search-impl');
+
 var SHA1 = require('sha1');
 
 var blog={};
@@ -42,6 +44,10 @@ var saveBlog = function saveBlog(req,res){
             // done!
             console.log('update user nb_blog success')
         });
+
+        // 把新的博客添加到索引库众
+        search.indexBlog(item);
+
         res.send({'info':"OK","ret":0001,"blog":item})
     });
 
@@ -72,6 +78,10 @@ var saveTopic = function saveTopic(req,res){
             // done!
             console.log('update user nb_topic success')
         });
+
+        // 把新的主题添加到索引库众
+        search.indexTopic(item);
+        
         res.send({'info':"OK","ret":0001,"topic":item})
     });
 };
