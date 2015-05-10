@@ -17,7 +17,7 @@ var saveBlog = function saveBlog(req,res){
     var creator_sha1 = req.param('creator_sha1');
     var file_list = req.param('file_list');
     blog_models.Blog.create([{
-        time          : date_time,    // 微博创建的时间
+        time          : date_time.toString(),    // 微博创建的时间
         sha1          : sha1,         // blog的sha1
         title         : blog_title,   // 博客标题
         content       : blog_content, // 博客的描述
@@ -63,7 +63,7 @@ var saveTopic = function saveTopic(req,res){
     var topic_desc = req.param('desc');
     var creator_sha1 = req.param('creator_sha1');
     blog_models.Topic.create([{
-        time          : date_time,       // 微博创建的时间
+        time          : date_time.toString(),       // 微博创建的时间
         sha1          : sha1,            // blog的sha1
         title         : topic_title,     // 主题标题
         desc          : topic_desc,      // 主题的描述
@@ -73,7 +73,7 @@ var saveTopic = function saveTopic(req,res){
 
     }],function (err,item){
         console.log(err);
-        console.log(item)
+        console.log(item);
         // 更新用户表的数据
         user_models.User.find({ sha1: creator_sha1 }).each(function (user) {
             user.nb_topic = user.nb_topic + 1;

@@ -17,12 +17,12 @@ client.search({
                     {
                         "query_string": {
                             "default_field": "post.desc",
-                            "query": "测"
+                            "query": "效果"
                         }
                     },{
                         "query_string": {
                             "default_field": "post.title",
-                            "query": "测试"
+                            "query": "效果"
                         }
                     }
                 ]
