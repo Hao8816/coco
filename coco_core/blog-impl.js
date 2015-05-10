@@ -71,6 +71,7 @@ var saveTopic = function saveTopic(req,res){
 
     }],function (err,item){
         console.log(err);
+        console.log(item)
         // 更新用户表的数据
         user_models.User.find({ sha1: creator_sha1 }).each(function (user) {
             user.nb_topic = user.nb_topic + 1;
@@ -81,7 +82,7 @@ var saveTopic = function saveTopic(req,res){
 
         // 把新的主题添加到索引库众
         search.indexTopic(item);
-        
+
         res.send({'info':"OK","ret":0001,"topic":item})
     });
 };
