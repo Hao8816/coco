@@ -1,13 +1,13 @@
 var settings = {}
 var mysql_settings = {
     //host     : "106.185.27.152",
-    host     : "onekoko.com",
+    host     : "127.0.0.1",
     database : "coco",
     user     : "chenhao",
     password : "chenhao",
     protocol : "mysql",
     //socketPath: '/var/run/mysqld/mysqld.sock',
-    port     : "3305"
+    port     : "3306"
 };
 
 var redis_settings = {
