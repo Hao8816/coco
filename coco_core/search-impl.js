@@ -17,8 +17,7 @@ var searchTopic = function searchTopic(req,res){
         body: {
             query: {
                 match: {
-                    title: keyword,
-                    desc: keyword
+                    title: keyword
                 }
             }
         }
