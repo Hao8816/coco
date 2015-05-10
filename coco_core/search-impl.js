@@ -16,9 +16,20 @@ var searchTopic = function searchTopic(req,res){
         size: 10,
         body: {
             query: {
-                match: {
-                    title: keyword
-                }
+                "should": [
+                    {
+                        "query_string": {
+                            "default_field": "post.title",
+                            "query": keyword
+                        }
+                    },
+                    {
+                        "query_string": {
+                            "default_field": "post.desc",
+                            "query": keyword
+                        }
+                    }
+                ]
             }
         }
     }).then(function (response) {
