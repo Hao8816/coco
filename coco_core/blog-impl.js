@@ -46,7 +46,9 @@ var saveBlog = function saveBlog(req,res){
         });
 
         // 把新的博客添加到索引库众
-        search.indexBlog(item);
+        item.forEach(function(obj){
+            search.indexBlog(obj);
+        });
 
         res.send({'info':"OK","ret":0001,"blog":item})
     });
@@ -81,7 +83,9 @@ var saveTopic = function saveTopic(req,res){
         });
 
         // 把新的主题添加到索引库众
-        search.indexTopic(item);
+        item.forEach(function(obj){
+            search.indexTopic(obj);
+        });
 
         res.send({'info':"OK","ret":0001,"topic":item})
     });
