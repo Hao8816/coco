@@ -11,11 +11,27 @@ client.search({
     index: 'topic',
     size: 10,
     body: {
-        query: {
-            match: {
-                title: "昊哥"
+        "query": {
+            "bool": {
+                "should": [
+                    {
+                        "query_string": {
+                            "default_field": "post.desc",
+                            "query": "测"
+                        }
+                    },{
+                        "query_string": {
+                            "default_field": "post.title",
+                            "query": "测试"
+                        }
+                    }
+                ]
             }
-        }
+        },
+        "from": 0,
+        "size": 10,
+        "sort": [{"time":"desc"}],
+        "facets": {}
     }
 }).then(function (response) {
     //console.log(resp)
