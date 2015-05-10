@@ -40,7 +40,7 @@ var searchTopic = function searchTopic(req,res){
             "size": 5000,
             "sort": [ ],
             "facets": { }
-        };
+        }
     }).then(function (response) {
         //console.log(resp)
         var hits = response.hits;
