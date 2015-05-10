@@ -15,31 +15,12 @@ var searchTopic = function searchTopic(req,res){
         index: 'topic',
         size: 10,
         body: {
-            "query": {
-                "bool": {
-                    "must": [ ],
-                    "must_not": [ ],
-                    "should": [
-                        {
-                            "query_string": {
-                                "default_field": "post.desc",
-                                "query": keyword
-                            }
-                        }
-                        ,
-                        {
-                            "query_string": {
-                                "default_field": "post.title",
-                                "query": keyword
-                            }
-                        }
-                    ]
+            query: {
+                match: {
+                    title: keyword,
+                    desc: keyword
                 }
-            },
-            "from": 0,
-            "size": 5000,
-            "sort": [ ],
-            "facets": { }
+            }
         }
     }).then(function (response) {
         //console.log(resp)
