@@ -32,6 +32,8 @@ router.post('/', function(req, res) {
         blog.saveBlog(req,res)
     }else if(action == 'user_list'){
         user.getFriendList(req,res)
+    }else if(action == "search_topic"){
+        blog.searchTopic(req,res)
     }
 
     //apiRouter[action]()(req,res)

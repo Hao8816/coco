@@ -147,9 +147,24 @@ var saveFile = function saveFile(obj){
 };
 
 
+var searchTopic = function searchTopic(req,res){
+    var keyword = req.param('keyword');
+    var page = parseInt(req.param('page'));
+
+    blog_models.Topic.find([ "time", "Z" ]).limit(10).offset(10*page).run(function(err,result){
+        if(err){
+            console.log(err);
+        }
+        res.send({'info':"OK","ret":0001,"topic_list":result})
+
+    });
+};
+
+
 
 blog.saveBlog = saveBlog;
 blog.saveTopic = saveTopic;
+blog.searchTopic = searchTopic;
 blog.getBlogList = getBlogList;
 blog.getTopicList = getTopicList;
 blog.saveFile = saveFile;
