@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var blog = require('../coco_core/blog-impl');
 var user = require('../coco_core/user-impl');
+var search = require('../coco_core/search-impl');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -32,6 +33,8 @@ router.post('/', function(req, res) {
         blog.saveBlog(req,res)
     }else if(action == 'user_list'){
         user.getFriendList(req,res)
+    }else if(action == "search_topic"){
+        search.searchTopic(req,res)
     }
 
     //apiRouter[action]()(req,res)
