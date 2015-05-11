@@ -51,6 +51,11 @@ router.post('/delete_file/',function(req,res){
     blog.deleteFile(req,res);
 });
 
+router.post('/validate_account/',function(req,res){
+    user.validateAccount(req,res);
+});
+
+
 
 
 /* GET home page. */

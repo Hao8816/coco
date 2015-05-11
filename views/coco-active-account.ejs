@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
+    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/rsa/sha1.js"></script>
+    <style type="text/css">
+        body{
+            background-color: #fafafa;
+        }
+        .device-item{
+            width: 60px;
+            height: 60px;
+            border-radius:100% ;
+            background-color: #b2ebf2;
+            line-height: 60px;
+            text-align: center;
+            cursor: pointer;
+            margin: auto;
+        }
+        .device-item:hover{
+            background-color: #00bcd4;
+        }
+        .device-card{
+            margin: 5px;
+            background-color: #f5f5f5;
+            box-shadow: 1px 1px 1px #ddd;
+            height: 200px;
+        }
+        .footer-link a{
+            padding: 0px 10px;
+            font-size: 13px;
+        }
+        .footer-coryright{
+            font-size: 13px;
+            color: rgba(0,0,0,0.36);
+        }
+        .nav-kit .item{
+            text-align: center;
+        }
+        .nav-kit .item a{
+            color: rgba(255,255,255,0.87);
+            text-align: center;
+        }
+        .btn a{
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+        }
+    </style>
+    <script type="text/javascript">
+        function validateAccount(){
+            var user_name = $('#validate_username').text();
+            var password = sha1($('#validate_password').val());
+            var encrypt_password = sha1(password);
+
+            $.post('/ajax/validate_account/',{name:user_name,password:encrypt_password}).success(function(data){
+                if(data['ret'] == '0001'){
+                    if (data['user']['head_image'] == ''){
+                        data['user']['head_image'] = 'default.jpg'
+                    }
+                    var loginUserInfo = JSON.stringify(data['user'])
+                    sessionStorage.setItem('LOGIN_USER_SHA1',data['user']['sha1']);
+                    sessionStorage.setItem('LOGIN_USER_INFO',loginUserInfo);
+                    location.href = '/coco/';
+                }else{
+                    alert("验证失败")
+                    //$scope.message = "请检查用户名或者密码"
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+<div style="background-color: #ff5277;width: 100%">
+    <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+        <div class="row nav-kit">
+            <div class="col-xs-8 col-sm-8 col-md-10"><h4 style="margin: 0px">COCO 账号管理</h4></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/help/">帮助</a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/login/">登录</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="min-height: 500px;">
+    <div style="width: 450px;margin: auto;padding: 100px;">
+        <div style="text-align: center">
+            <img src="http://onekoko.com/images/default.jpg" style="width: 80px;height: 80px;border-radius: 40px;border: 1px solid #ddd;" alt=""/>
+        </div>
+        <p style="text-align: center;font-weight: bold" id="validate_username"><%= user.name %></p>
+        <div class="form-group">
+            <label for="exampleInputPassword1">验证密码</label>
+            <input type="password" class="form-control" id="validate_password" placeholder="验证密码">
+        </div>
+        <p style="text-align: right">
+            <span class="btn btn-danger btn-sm" onclick="validateAccount()">验证账号</span>
+        </p>
+    </div>
+</div>
+<div class="container-fluid" >
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-xs-12">
+            <div style="padding: 3px;text-align: center;">
+                <p class="footer-link">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">在线客服</a>
+                    <a href="#">销售联盟</a>
+                </p>
+                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号  Copyright © 2004-2014</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

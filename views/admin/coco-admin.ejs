@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html ng-app="coco-admin">
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/stylesheets/lightbox.css"/>
+    <script type="text/javascript" src="/AngularJs/angular.js"></script>
+    <script type="text/javascript" src="/AngularJs/angular-route.js"></script>
+    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/Jquery/lightbox.min.js"></script>
+    <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Socket.io/socket.io-1.2.0.js"></script>
+    <script type="text/javascript" src="/js/coco-message-client.js"></script>
+    <script type="text/javascript" src="/js/coco-util.js"></script>
+    <script type="text/javascript">
+        var coco_app = angular.module('coco-admin',['ngRoute']);
+        coco_app.config(['$routeProvider',function($routeProvider){
+            $routeProvider.
+                    when('/message_manage/',{
+                        templateUrl:'/admin/email/',
+                        controller:''
+                    }).
+                    when('/message/',{
+                        templateUrl:'/admin/message/',
+                        controller:''
+                    }).
+                    when('/email/',{
+                        templateUrl:'/admin/email/',
+                        controller:''
+                    }).
+                    otherwise({redirectTo:'/admin/'});
+        }]);
+
+    </script>
+    <script type="text/javascript">
+
+        function adminEmailCtrl($scope,$http){
+
+            $http.get('/admin/ajax/all_users/').success(function (data) {
+                $scope.users = data["user_list"]
+            });
+
+            $scope.selectUser = function(obj){
+                var email_to = $(obj)[0].user.email;
+                //$scope.email.to = email_to;
+                $('#email_to').val(email_to);
+            }
+
+            $scope.sendEmail = function(){
+                var options = $scope.email
+                options['from'] = '15238228816@163.com';
+                options['html'] = ''
+                $http.post('/admin/ajax/send_email/', {options: options}).success(function (data) {
+                    if(data['ret'] == '0001'){
+                        alert("邮件发送成功");
+                    }
+                    $scope.email.to = ""
+                    $scope.email.subject = ""
+                    $scope.email.text = ""
+
+                });
+            }
+        }
+
+    </script>
+    <style type="text/css">
+        body{
+            background-color: #fafafa;
+        }
+        .device-item{
+            width: 60px;
+            height: 60px;
+            border-radius:100% ;
+            background-color: #b2ebf2;
+            line-height: 60px;
+            text-align: center;
+            cursor: pointer;
+            margin: auto;
+        }
+        .device-item:hover{
+            background-color: #00bcd4;
+        }
+        .device-card{
+            margin: 5px;
+            background-color: #f5f5f5;
+            box-shadow: 1px 1px 1px #ddd;
+            height: 200px;
+        }
+        .footer-link a{
+            padding: 0px 10px;
+            font-size: 13px;
+        }
+        .footer-coryright{
+            font-size: 13px;
+            color: rgba(0,0,0,0.36);
+        }
+        .nav-kit .item{
+            text-align: center;
+        }
+        .nav-kit .item a{
+            color: rgba(255,255,255,0.87);
+            text-align: center;
+        }
+        .btn a{
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+<body>
+<div class="visible-xs-* hidden-sm hidden-md hidden-lg" style="text-align: center;border-bottom:1px solid #ff5277;background-color: #f50057;padding: 10px 0px;color: rgba(255,255,255,0.87)"><h4 style="margin: 0px">COCO 管理员</h4></div>
+<div style="background-color: #ff5277;width: 100%">
+    <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+        <div class="row nav-kit">
+            <div class="hidden-xs col-sm-4 col-md-8"><h4 style="margin: 0px">COCO 管理员</h4></div>
+            <div  class="item col-xs-3 col-sm-2 col-md-1"><a href="#index">主题管理 <span class="badge topic-badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#blog/">博客管理 <span class="badge blog-badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#message_manage">消息管理 <span class="badge"></span></a></div>
+            <div class="item col-xs-3 col-sm-2 col-md-1"><a href="#account">帐号管理 <span class="badge"></span></a></div>
+        </div>
+    </div>
+</div>
+
+<div class="" ng-view style="min-height: 500px;">
+
+</div>
+<div class="container-fluid" >
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-xs-12">
+            <div style="padding: 3px;text-align: center;">
+                <p class="footer-link">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">在线客服</a>
+                    <a href="#">销售联盟</a>
+                </p>
+                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号  Copyright © 2004-2014</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade upload_image_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">换头像</h4>
+            </div>
+            <div class="modal-body" style="height: 300px;">
+                <div class="show_image_view" style="text-align: center;padding: 0px 0px 20px 0px"></div>
+                <div class="upload-btn" style="height: 40px;width: 80%;margin:0px 10%;text-align: center;position: relative;font-size: 16px;line-height: 40px;">
+                    <span class="upload-title">选择照片</span>
+                    <input id="fileupload" type="file" style="width: 100%;height: 100%;opacity: 0;position: absolute;top: 0px;" multiple>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                <button type="button" id="save_image" onclick="saveImage()" class="btn btn-danger btn-sm">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

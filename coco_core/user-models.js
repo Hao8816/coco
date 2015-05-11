@@ -26,7 +26,8 @@ var User = db.define("user", {
     location      : String,    // 位置
     nb_friend     : Number,    // 好友的数量
     nb_blog       : Number,    // 博客的数量
-    nb_topic      : Number     // 主题的数量
+    nb_topic      : Number,    // 主题的数量
+    status        : Number     // 用户的账号状态
 
 }, {
     // with in model method

@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var user = require('../coco_core/user-impl');
+
 
 /* GET home page. */
 router.get('/', function(req, res){
@@ -40,6 +42,10 @@ router.get('/help/', function(req, res) {
 
 router.get('/account/', function(req, res) {
     res.render('coco-account.ejs', { title: 'COCO Me' });
+});
+
+router.get('/active/account/', function(req, res) {
+    user.activeUserAccount(req,res);
 });
 
 
