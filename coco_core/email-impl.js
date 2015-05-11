@@ -1,5 +1,6 @@
 var nodemailer = require('nodemailer');
-
+var logger = require('./logger-impl');
+var email = {};
 
 var transporter = nodemailer.createTransport({
     host:"mail.onekoko.com",
@@ -18,13 +19,20 @@ var mailOptions = {
     html: '<b>Hello world ✔</b>' // html body
 };
 
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        console.log(error);
-    }else{
-        console.log('Message sent: ' + info.response);
-    }
-});
 
 
-//module.exports = transporter
+// 发送邮件的接口
+var sendEmail = function sendEmail(options){
+    transporter.sendMail(options, function(error, info){
+        if(error){
+            logger.error(error)
+        }else{
+            logger.info('Message sent: ' + info.response)
+        }
+    });
+};
+
+
+email["sendEmail"] = sendEmail;
+
+module.exports = email;
