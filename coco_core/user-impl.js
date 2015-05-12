@@ -89,7 +89,7 @@ var validateAccount = function validateAccount(req,res){
     }
     user_models.User.find({name:name,password:password},function(err,result){
         if(err){
-            console.log(err);
+            logger.error(err);
             res.send({'info':"ERROR","ret":1001});
             return
         }
