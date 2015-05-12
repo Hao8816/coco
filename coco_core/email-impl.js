@@ -85,7 +85,7 @@ var sendValidateEmail = function sendValidateEmail(uid,address){
     var date_string = date.getFullYear()+"-"+month+"-"+date.getDate();
     var active_link = "http://onekoko.com/coco/active/account/?uid="+uid;
     var text_content = "欢迎大家使用COCO博客!";
-    var html_content = "<div style='width:50%;margin: auto;border: 1px solid #f5f5f5;border-radius: 5px;padding: 30px'>" +
+    var html_content = "<div style='max-width: 450px ;margin: auto;border: 1px solid #f5f5f5;border-radius: 5px;padding: 30px'>" +
         "<p>亲爱的VIP用户:</p>" +
         "<p style='padding-left: 60px;'>谢谢你对COCO的支持，点击<a href="+active_link+">"+active_link+"</a>来激活你的账号，开始你的COCO之旅。</p>" +
         "<p style='text-align: right'>COCO博客</p>"+
