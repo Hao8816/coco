@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <ul class="friend_list" id="friend_nav_list" style="background-color: #fff;overflow-y: scroll">
-                    <li ng-click="openChat(this)" u-id="{{friend.name}}" class="item" ng-repeat="friend in friend_list | filter:query">
+                    <li ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query">
                         <img style="width: 30px;height: 30px;border-radius: 30px;" ng-src="/images/{{friend.head_image}}" alt=""/>
                         {{friend.name}}<span class="badge pull-right"></span>
                     </li>
@@ -123,7 +123,7 @@
         <div class="col-xs-8 col-sm-8 col-md-9 " style="border-radius:5px;">
             <div style="height: 50px;background-color: #eee;padding:10px;border-bottom: 1px solid #eee">
                 <img style="height: 30px;width: 30px;border-radius: 30px" ng-src="/images/{{chat_image}}" alt=""/>
-                <span id="friend_name" ng-bind="chat_name"></span>
+                <span id="friend_name" fid="{{fid}}" ng-bind="chat_name"></span>
                 <span id="chat-tool" style="float: right;font-size: 20px"><i class="glyphicon glyphicon-time"></i><i class="glyphicon glyphicon-envelope"></i></span>
             </div>
             <div id="chat-history" style="height: 510px;overflow-y:auto;background-color:#fff;border: 1px solid #eee"></div>
