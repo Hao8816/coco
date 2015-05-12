@@ -5,6 +5,8 @@ var orm = require("orm");
 var settings = require('../config/db-config');
 var email_client = require('./email-impl');
 
+var logger = require('./logger-impl');
+
 
 var db = orm.connect(settings.mysql,function(err,db){
     if (err){
