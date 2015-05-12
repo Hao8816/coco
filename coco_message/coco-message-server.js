@@ -139,6 +139,7 @@ io.on('connection',function(socket){
                logger.error("get cache user info error:",err);
             }
             result.forEach(function(obj){
+                logger.debug("cached user info:",obj)
                 async.series({
                         message_box: function(callback){
                             redis_client.hget('MESSAGE_BOX_STORE',obj,function(err,data){
@@ -194,6 +195,7 @@ io.on('connection',function(socket){
                         if (results['message_box'] != null) {
                             message_box = JSON.parse(results['message_box'])
                         }
+
                         var nb_message = message_box['topic-message'] || 0;
                         message_box['topic-message'] = nb_message + 1;
 
