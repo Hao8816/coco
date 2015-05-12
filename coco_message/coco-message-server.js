@@ -65,7 +65,7 @@ io.on('connection',function(socket){
             function(err, results) {
                // if(results['message_box'])
                 var message_box = JSON.parse(results['message_box'])
-                io.sockets.connected[socket_id].emit('LOGIN_MESSAGE_SUCCESS',{'user_name':user_sha1,'socket_id':this.id,'message_box':message_box});
+                io.sockets.connected[socket_id].emit('LOGIN_MESSAGE_SUCCESS',{'user_sha1':user_sha1,'socket_id':this.id,'message_box':message_box});
                 // results is now equal to: {one: 1, two: 2}
             });
     });
