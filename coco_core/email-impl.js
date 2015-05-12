@@ -46,7 +46,7 @@ var sendNotificationEmail = function sendNotificationEmail(options){
     var text_content = "欢迎大家使用COCO博客!";
     var html_content = "<div style='width: 500px;margin: auto;border: 1px solid #f5f5f5;border-radius: 5px;padding: 30px'>" +
         "<p>亲爱的VIP用户:</p>" +
-        "<p style='padding-left: 60px;'>不好意思！刚刚的测试影响到大家了。如果有任何不满，请到<a href='http://onekoko.com'>http://onekoko.com</a>发博客来宣泄一下。</p>" +
+        "<p style='padding-left: 60px;font-size: 13px;'>不好意思！刚刚的测试影响到大家了。如果有任何不满，请到<a href='http://onekoko.com'>http://onekoko.com</a>发博客来宣泄一下。</p>" +
         "<p style='text-align: right'>COCO博客</p>"+
         "<p style='text-align: right'>"+date_string+"</p>"+
         "</div>";
@@ -88,7 +88,7 @@ var sendValidateEmail = function sendValidateEmail(uid,address){
     var text_content = "欢迎大家使用COCO博客!";
     var html_content = "<div style='max-width: 450px ;margin: auto;border: 1px solid #f5f5f5;border-radius: 5px;padding: 30px'>" +
         "<p>亲爱的VIP用户:</p>" +
-        "<p style='padding-left: 60px;'>谢谢你对COCO的支持，点击<a href="+active_link+">"+active_link+"</a>来激活你的账号，开始你的COCO之旅。</p>" +
+        "<p style='padding-left: 60px;font-size: 13px;'>谢谢你对COCO的支持，点击<a href="+active_link+">"+active_link+"</a>来激活你的账号，开始你的COCO之旅。</p>" +
         "<p style='text-align: right'>COCO博客</p>"+
         "<p style='text-align: right'>"+date_string+"</p>"+
         "</div>";
