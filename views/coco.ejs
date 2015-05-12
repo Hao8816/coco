@@ -48,7 +48,7 @@
             var userInfo = JSON.parse(loginUserInfo);
             $scope.user = userInfo;
 
-            client.emit('LOGIN_MESSAGE_SERVER', {'user_name': userInfo.name});
+            client.emit('LOGIN_MESSAGE_SERVER', {'user_sha1': userInfo.sha1});
 
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
             $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
