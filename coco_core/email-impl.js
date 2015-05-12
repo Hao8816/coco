@@ -86,9 +86,9 @@ var sendValidateEmail = function sendValidateEmail(uid,address){
     var active_link = "http://onekoko.com/coco/active/account/?uid="+uid;
     var text_content = "欢迎大家使用COCO博客!";
     var html_content = "<div style='max-width: 500px ;margin: auto;border: 1px solid #f5f5f5;border-radius: 5px;'>" +
-        "<div style='text-align: center;padding: 10px;'><img src='http://onekoko.com/images/icons/logo.png' style='width: 60px;height: 60px;'></div>"+
-        "<div style='padding: 20px 10px;background-color: #f5f5f5'><p style='color: #ff5277'>亲爱的VIP用户:</p>" +
-        "<p style='padding-left: 60px;font-size: 13px;'>谢谢你对COCO的支持，点击<a href="+active_link+">"+active_link+"</a>来激活你的账号，开始你的COCO之旅。</p>" +
+        "<div style='text-align: center;padding: 10px;border-bottom: 1px solid #eee'><img src='http://onekoko.com/images/icons/logo.png' style='width: 60px;height: 60px;'></div>"+
+        "<div style='padding: 10px 20px;'><p style='color: #ff5277'>亲爱的VIP用户:</p>" +
+        "<p style='padding-left: 30px;font-size: 13px;'>谢谢你对COCO的支持，点击<a href="+active_link+">"+active_link+"</a>来激活你的账号，开始你的COCO之旅。</p>" +
         "<p style='text-align: right'>COCO博客</p>"+
         "<p style='text-align: right'>"+date_string+"</p>"+
         "</div></div>";
