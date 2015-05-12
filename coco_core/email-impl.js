@@ -43,7 +43,7 @@ var sendNotificationEmail = function sendNotificationEmail(options){
     var month = date.getMonth()+1;
     var date_string = date.getFullYear()+"-"+month+"-"+date.getDate();
     var text_content = "欢迎大家使用COCO博客!";
-    var html_content = "<div style='width: 500px;margin: auto;border: 1px solid #f5f5f5;border-radius: 5px;padding: 30px'>" +
+    var html_content = "<div style='width: 500px;margin: auto;border: 1px solid #ddd;border-radius: 5px;padding: 30px'>" +
         "<p>亲爱的VIP用户:</p>" +
         "<p style='padding-left: 60px;font-size: 13px;'>不好意思！刚刚的测试影响到大家了。如果有任何不满，请到<a href='http://onekoko.com'>http://onekoko.com</a>发博客来宣泄一下。</p>" +
         "<p style='text-align: right'>COCO博客</p>"+
