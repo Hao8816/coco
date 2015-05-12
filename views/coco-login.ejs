@@ -103,6 +103,9 @@
                     sessionStorage.setItem('LOGIN_USER_SHA1',data['user']['sha1']);
                     sessionStorage.setItem('LOGIN_USER_INFO',loginUserInfo);
                     location.href = '/coco/';
+                }else if(data['ret'] == '1002'){
+                    $scope.error = true
+                    $scope.message = "你的账号尚未激活，请到邮箱点击激活链接，完成账号激活"
                 }else{
                     $scope.error = true
                     $scope.message = "请检查用户名或者密码"
