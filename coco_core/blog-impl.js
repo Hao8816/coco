@@ -15,7 +15,7 @@ var saveBlog = function saveBlog(req,res){
     var blog_title = req.param('title');
     var blog_content = req.param('content');
     var creator_sha1 = req.param('creator_sha1');
-    var file_list = req.param('file_list');
+    var file_list = req.param('file_list')||[];
     blog_models.Blog.create([{
         time          : date_time.toString(),    // 微博创建的时间
         sha1          : sha1,         // blog的sha1
