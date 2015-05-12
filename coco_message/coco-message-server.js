@@ -178,31 +178,32 @@ io.on('connection',function(socket){
             if(err){
                 logger.error("get cache user info error:",err);
             }
-            result.forEach(function(obj){
+            result.forEach(function(obj) {
                 async.series({
-                        message_box: function(callback){
-                            redis_client.hget('MESSAGE_BOX_STORE',obj,function(err,data){
-                                if(err){
+                        message_box: function (callback) {
+                            redis_client.hget('MESSAGE_BOX_STORE', obj, function (err, data) {
+                                if (err) {
                                     console.log(err);
                                 }
                                 callback(null, data);
                             });
                         }
                     },
-                    function(err, results) {
+                    function (err, results) {
                         var message_box = {}
-                        if(results['message_box'] != null){
+                        if (results['message_box'] != null) {
                             message_box = JSON.parse(results['message_box'])
                         }
                         var nb_message = message_box['topic-message'] || 0;
                         message_box['topic-message'] = nb_message + 1;
 
-                        redis_client.hset('MESSAGE_BOX_STORE',obj,JSON.stringify(message_box),function(err){
-                            if(err){
+                        redis_client.hset('MESSAGE_BOX_STORE', obj, JSON.stringify(message_box), function (err) {
+                            if (err) {
                                 console.log(err);
                             }
                         });
                     });
+                });
             });
 
 
