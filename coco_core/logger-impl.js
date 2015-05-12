@@ -6,7 +6,7 @@ log4js.configure({
         { type: 'console' },
         {
             type: 'file',
-            filename: 'message_server.log',
+            filename: 'coco.log',
             maxLogSize: 20480,
             backups:4,
             category: 'app'

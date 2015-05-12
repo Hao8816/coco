@@ -36,7 +36,8 @@ var createUser = function createUser(req,res){
         location      : '',    // 位置
         nb_friend     : 0,    // 好友的数量
         nb_blog       : 0,    // 博客的数量
-        nb_topic      : 0     // 主题的数量
+        nb_topic      : 0,     // 主题的数量
+        status        : 0     // 主题的数量
     }],function (err,item){
         console.log(err);
     });
