@@ -40,6 +40,15 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     // 用户登录message server之后，检查用户的消息更新
     var message_box = data['message_box'];
     MESSAGE_BOX = message_box;
+    // 需要清空前段的主题缓存
+    if(message_box.hasOwnProperty('blog-message')){
+        
+    }else if(message_box.hasOwnProperty('topic-message')){
+        localStorage.removeItem('TOPIC_INFO_LIST');
+    }else if(message_box.hasOwnProperty('friend-message')){
+
+    };
+
 });
 
 client.on('BLOG_MESSAGE',function(data){
