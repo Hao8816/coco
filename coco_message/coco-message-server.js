@@ -4,6 +4,7 @@ var redis_client = redis.createClient();
 //var http = require('http').Server(app);
 //var io = require('socket.io')(http);
 var async = require('async');
+var logger = require('../coco_core/logger-impl');
 
 var sub = redis.createClient();
 var pub = redis.createClient();
