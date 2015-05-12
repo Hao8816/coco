@@ -35,21 +35,21 @@
     <script type="text/javascript">
 
         function adminEmailCtrl($scope,$http){
-
+            $scope.email = {}
             $http.get('/admin/ajax/all_users/').success(function (data) {
                 $scope.users = data["user_list"]
             });
 
             $scope.selectUser = function(obj){
                 var email_to = $(obj)[0].user.email;
-                //$scope.email.to = email_to;
-                $('#email_to').val(email_to);
+                $scope.email.to = email_to;
+                //$('#email_to').val(email_to);
             }
 
             $scope.sendEmail = function(){
-                var options = $scope.email
+                var options = $scope.email;
                 options['from'] = '15238228816@163.com';
-                options['html'] = ''
+                options['html'] = '';
                 $http.post('/admin/ajax/send_email/', {options: options}).success(function (data) {
                     if(data['ret'] == '0001'){
                         alert("邮件发送成功");
