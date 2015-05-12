@@ -5,6 +5,8 @@ var orm = require("orm");
 var settings = require('../config/db-config');
 var email_client = require('./email-impl');
 
+var logger = require('./logger-impl');
+
 
 var db = orm.connect(settings.mysql,function(err,db){
     if (err){
@@ -89,7 +91,7 @@ var validateAccount = function validateAccount(req,res){
     }
     user_models.User.find({name:name,password:password},function(err,result){
         if(err){
-            console.log(err);
+            logger.error(err);
             res.send({'info':"ERROR","ret":1001});
             return
         }
