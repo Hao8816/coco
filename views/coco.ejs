@@ -82,8 +82,10 @@
             $scope.openChat = function (obj) {
                 var friend_name = $(obj)[0].friend.name;
                 var head_image = $(obj)[0].friend.head_image;
+                var friend_sha1 = $(obj)[0].friend.sha1;
                 $scope.chat_name = friend_name;
                 $scope.chat_image = head_image;
+                $scope.fid = friend_sha1;
 
                 //
             }

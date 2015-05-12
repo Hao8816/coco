@@ -12,31 +12,31 @@ client.on('connect',function(data) {
 client.on('CHAT_MESSAGE',function(data) {
     console.log(data);
     var chat_message = data['chat_message'];
-    var friend_name = data['friend_name'];
-    var my_name = data['my_name']
-    var cache_key = my_name+'_'+friend_name;
+    var friend_sha1 = data['friend_sha1'];
+    var my_sha1 = data['my_sha1']
+    var cache_key = my_sha1+'_'+friend_sha1;
     cacheChatMessage(cache_key,data)
-    var message_number = $('li[u-id='+friend_name+']').find('.badge').text()
+    var message_number = $('li[u-id='+friend_sha1+']').find('.badge').text()
     if(message_number == ''){
         message_number = 1
     }else{
         message_number = parseInt(message_number)+1
     }
-    $('li[u-id='+friend_name+']').find('.badge').text(message_number)
+    $('li[u-id='+friend_sha1+']').find('.badge').text(message_number)
     // 从前端的好友列表中获取好友信息
-    var friendImage = getFriendImage(friend_name);
+    var friendImage = getFriendImage(friend_sha1);
     var message_template = $('.message_template').find('.message-item-left').clone();
-    message_template.find('.content').text(friend_name+':'+chat_message);
+    message_template.find('.content').text(chat_message);
     message_template.find('.image').attr('src',friendImage);
     $('#chat-history').append(message_template)
 });
 client.on('LOGIN_MESSAGE_SUCCESS',function(data){
-    var user_name = data['user_name'];
+    var user_sha1 = data['user_sha1'];
     var socket_id = data['socket_id'];
-    $('#my_name').text(user_name);
+    $('#my_name').attr('uid',user_sha1);
     $('.login_message_server').modal('hide');
     // 将用户登录信息存入sessionStorage
-    sessionStorage.setItem('LOGIN_USER_INFO_NAME',user_name);
+    sessionStorage.setItem('LOGIN_USER_INFO_SHA1',user_sha1);
     // 用户登录message server之后，检查用户的消息更新
     var message_box = data['message_box'];
     MESSAGE_BOX = message_box;
@@ -86,15 +86,15 @@ function sendChatMessage() {
     }
 
     var message = $('#chat-input').val();
-    var my_name = $('#my_name').text();
-    var friend_name = $('#friend_name').text();
-    var message_dic = {'friend_name':friend_name,'my_name':my_name,'chat_message':message,'is_mine':true}
+    var my_sha1 = $('#my_name').attr('uid');
+    var friend_sha1 = $('#friend_name').attr('fid');
+    var message_dic = {'friend_sha1':friend_sha1,'my_sha1':my_sha1,'chat_message':message,'is_mine':true}
     client.emit('CHAT_MESSAGE',message_dic);
-    var cache_key = my_name+'_'+friend_name;
+    var cache_key = my_sha1+'_'+friend_sha1;
     cacheChatMessage(cache_key,message_dic)
-    var myImage = getFriendImage(my_name);
+    var myImage = getFriendImage(my_sha1);
     var message_template = $('.message_template').find('.message-item-right').clone();
-    message_template.find('.content').text(my_name+':'+message);
+    message_template.find('.content').text(message);
     message_template.find('.image').attr('src',myImage);
     $('#chat-history').append(message_template)
     $('#chat-input').val('');
@@ -167,12 +167,12 @@ function showUserInfo(){
     $('.user_info_modal').modal('show')
 }
 
-function getFriendImage(friend_name){
+function getFriendImage(friend_sha1){
     var friend_list = localStorage.getItem('FRIEND_INFO_DICT');
     var friend_info_dict = JSON.parse(friend_list);
     var image_url = 'default.jpg';
     if (friend_info_dict.hasOwnProperty(friend_name)){
-        image_url = friend_info_dict[friend_name].head_image;
+        image_url = friend_info_dict[friend_sha1].head_image;
     }
     return '/images/'+image_url
 
