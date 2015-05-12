@@ -25,6 +25,7 @@ var mailOptions = {
 
 // 发送邮件的接口
 var sendEmail = function sendEmail(options){
+    logger.debug("this is email options :",options)
     transporter.sendMail(options, function(error, info){
         if(error){
             logger.error(error)
