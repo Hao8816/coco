@@ -49,7 +49,15 @@
             $scope.sendEmail = function(){
                 var options = $scope.email;
                 options['from'] = '15238228816@163.com';
-                options['html'] = '';
+                var text_temp = $scope.email.text;
+                var html_temp = "<div style='max-width: 500px ;margin: auto;border: 1px solid #dd;border-radius: 5px;'>" +
+                        "<div style='text-align: center;padding: 10px;border-bottom: 1px solid #eee'><img src='http://onekoko.com/images/icons/logo.png' style='width: 60px;height: 60px;'></div>"+
+                        "<div style='padding: 10px 20px;'><p style='color: #ff5277'>亲爱的VIP用户:</p>" +
+                        "<p style='padding-left: 30px;font-size: 13px;'>"+text_temp+"</p>" +
+                        "<p style='text-align: right'>COCO博客</p>"+
+                        "<p style='text-align: right'>"+date_string+"</p>"+
+                        "</div></div>";
+                options['html'] = html_temp;
                 $http.post('/admin/ajax/send_email/', {options: options}).success(function (data) {
                     if(data['ret'] == '0001'){
                         alert("邮件发送成功");
