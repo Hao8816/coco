@@ -61,6 +61,7 @@ client.on('BLOG_MESSAGE',function(data){
     }
 });
 
+
 client.on('TOPIC_MESSAGE',function(data){
     console.log(data);
     if(data['action'] == 'add_topic'){
@@ -69,6 +70,8 @@ client.on('TOPIC_MESSAGE',function(data){
         localStorage.removeItem('TOPIC_INFO_LIST');
     }
 });
+
+
 client.on('disconnect',function() {
     console.log('Client has disconnected from the server!');
 });
