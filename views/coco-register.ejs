@@ -65,8 +65,8 @@
             $http.post('/ajax/register/',userInfo).success(function(data){
                 if(data['ret'] == '0001'){
                     $scope.user = {name:'',email:'',phone:'',password1:'',password2:''}
-                    alert('恭喜你！注册成功')
-                    location.href = '/coco/login/'
+                    $('#register_area').html('<p style="color: rgba(255,255,255,0.8);font-size: 26px;">恭喜你！注册成功</p><p style="color: rgba(255,255,255,0.8);font-size: 16px;">请注意查收邮件，点击邮箱的激活链接来激活你的账号</p>');
+
                 }
 
             });
@@ -90,14 +90,14 @@
     </div>
 </div>
 <div style="width: 100%;background-color: rgba(255,82,119,0.8);">
-<div class="container">
+<div class="container" style="min-height: 604px">
     <div class="row" style="margin-top: 0px;">
         <div ng-controller="registerCtrl">
             <div class="row" style="padding-top: 60px;padding-bottom: 60px">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: center">
                     <img src="/images/icons/adpic.png" alt=""/>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="margin-top: 20px;">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="margin-top: 20px;" id="register_area">
                     <form style="padding: 10px;">
                         <div class="form-group">
                             <label for="exampleInputEmail1">用户名</label>
