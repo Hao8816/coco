@@ -23,6 +23,11 @@
         font-size: 13px;
         color: rgba(0,0,0,0.36);
     }
+    .nav-kit .item{
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
     pre{
         background-color: #fff;
         border: none;
@@ -69,6 +74,27 @@
     }
     .carousel-indicators .active{
         background-color: #666;
+    }
+    .ad-items .ad-title{
+        position: relative;
+    }
+    .ad-items .ad-title::before{
+        position: absolute;
+        content: "";
+        height: 1px;
+        background-color: #000;
+
+    }
+    #site-center{
+        background-color: rgba(255,82,119,0.6);
+        /*background: -moz-linear-gradient(top, #ff5277, #ad1457);*/
+        /* Safari 4-5, Chrome 1-9 */
+        /* -webkit-gradient(,  [, ]?,  [, ]? [, ]*) */
+        /*background: -webkit-gradient(linear,top,from(#ff5277),to(#ad1457));*/
+        /* Safari 5.1+, Chrome 10+ */
+        /*background: -webkit-linear-gradient(top, #ff5277, #ad1457);*/
+        /* Opera 11.10+ */
+        /*background: -o-linear-gradient(top, #ff5277, #ad1457);*/
     }
 </style>
 <script type="text/javascript">
@@ -122,105 +148,131 @@
         }
     }
 
+
+    // #ad1457
 </script>
 <body>
-<div style="background-color: #ff5277;width: 100%">
-    <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+<div id="site-center" style="background-color: #ff5277;width: 100%">
+
+    <div class="container" style="padding: 12px 0px;color: rgba(255,255,255,0.87)">
+
         <div class="row nav-kit">
-            <div class="col-xs-8 col-sm-8 col-md-10"><h4 style="margin: 0px">COCO 登录</h4></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/help/">帮助</a></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/register/">注册</a></div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></div>
+
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <img style="width: 40px;height: 40px;" src="/images/icons/logo_white.png" alt=""/>
+            </div>
+            <div class="item col-xs-2 col-sm-2 col-md-offset-3 col-md-1 col-lg-offset-3 col-lg-1"><a data-toggle="modal" style="cursor: pointer" data-target=".login_modal" >登录</a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1 col-lg-1"><a href="/coco/register/">注册</a></div>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="row" style="margin-top: 0px;padding-bottom: 40px;">
-        <div class="jumbotron" style="background-color: #fff;margin: 0;padding: 10px;">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-bottom: 2px solid #ff5277;margin-bottom: 20px;">
-                    <h2 style="color: #ff5277;padding: 20px 0px">COCO,不一样的生活</h2>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active" style="background: #ddd">
-                                <img  class="img-responsive" src="/images/pictures/pic1.png" alt=""/>
-                                <div class="carousel-caption">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img  class="img-responsive" src="/images/pictures/pic2.png" alt=""/>
-                                <div class="carousel-caption">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img  class="img-responsive" src="/images/pictures/pic3.png" alt=""/>
-                                <div class="carousel-caption">
-                                </div>
-                            </div>
-                        </div>
-                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+    <div class="container">
+        <div class="row" style="margin-top: 0px;padding-bottom: 40px;">
+            <div  style="margin: 0;padding: 10px;height: 400px">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                         style="border-bottom: 2px solid #ff5277;margin-bottom: 20px;">
+                        <h3 style="color:rgba(255,255,255,0.8);padding: 20px 0px">COCO , 不一样的博客</h3>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-controller="loginCtrl" style="margin-top: 20px;">
-                    <div style="padding: 10px;background-color: #fff;border-radius: 5px;">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">用户名</label>
-                            <input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1" placeholder="用户名">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">密码</label>
-                            <input ng-model="user.password" ng-keydown="enterLogin(event)" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
-                        </div>
-                        <p style="font-size: 13px;color: red" ng-show="error" ng-bind="message"></p>
-                        <button style="float: right" class="btn btn-danger" ng-click="login()">点击登录</button>
-                        <p style="font-size: 13px;color: rgba(0,0,0,0.56);padding: 8px 1px;">还没有账号？<a href="/coco/register/">点击注册</a></p>
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                        <!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">-->
+                            <!--<ol class="carousel-indicators">-->
+                                <!--<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
+                                <!--<li data-target="#carousel-example-generic" data-slide-to="1"></li>-->
+                                <!--<li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
+                            <!--</ol>-->
+                            <!--<div class="carousel-inner" role="listbox">-->
+                                <!--<div class="item active" style="background: #ddd">-->
+                                    <!--<img class="img-responsive" src="/images/pictures/pic1.png" alt=""/>-->
+
+                                    <!--<div class="carousel-caption">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="item">-->
+                                    <!--<img class="img-responsive" src="/images/pictures/pic2.png" alt=""/>-->
+
+                                    <!--<div class="carousel-caption">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="item">-->
+                                    <!--<img class="img-responsive" src="/images/pictures/pic3.png" alt=""/>-->
+
+                                    <!--<div class="carousel-caption">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<a class="left carousel-control" href="#carousel-example-generic" role="button"-->
+                               <!--data-slide="prev">-->
+                                <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
+                                <!--<span class="sr-only">Previous</span>-->
+                            <!--</a>-->
+                            <!--<a class="right carousel-control" href="#carousel-example-generic" role="button"-->
+                               <!--data-slide="next">-->
+                                <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+                                <!--<span class="sr-only">Next</span>-->
+                            <!--</a>-->
+                        <!--</div>-->
                     </div>
+                    <!--<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-controller="loginCtrl"-->
+                         <!--style="margin-top: 20px;">-->
+                        <!--<div style="padding: 10px;background-color: #fff;border-radius: 5px;">-->
+                            <!--<div class="form-group">-->
+                                <!--<label for="exampleInputEmail1">用户名</label>-->
+                                <!--<input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1"-->
+                                       <!--placeholder="用户名">-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label for="exampleInputPassword1">密码</label>-->
+                                <!--<input ng-model="user.password" ng-keydown="enterLogin(event)" type="password"-->
+                                       <!--class="form-control" id="exampleInputPassword1" placeholder="密码">-->
+                            <!--</div>-->
+                            <!--<p style="font-size: 13px;color: red" ng-show="error" ng-bind="message"></p>-->
+                            <!--<button style="float: right" class="btn btn-danger" ng-click="login()">点击登录</button>-->
+                            <!--<p style="font-size: 13px;color: rgba(0,0,0,0.56);padding: 8px 1px;">还没有账号？<a-->
+                                        <!--href="/coco/register/">点击注册</a></p>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="container">
     <div class="row ad-items" style="margin-bottom: 40px;padding-top: 20px">
-        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ff5277;padding: 10px">产品特性</p>
+        <!--<p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ff5277;padding: 10px">-->
+            <!--产品特性</p>-->
+
         <div class="col-xs-6 col-sm-3 col-md-3 warp">
             <a class="item">
                 <img src="/images/icons/pin-drop.png" alt=""/>
             </a>
+
             <p class="desc">基于地理位置的分享</p>
         </div>
         <div class="col-xs-6 col-sm-3 col-md-3 warp">
             <a class="item">
                 <img src="/images/icons/local-offer.png" alt=""/>
             </a>
+
             <p class="desc">基于标签的分类和查找</p>
         </div>
         <div class="col-xs-6 col-sm-3 col-md-3 warp">
             <a class="item">
                 <img src="/images/icons/group.png" alt=""/>
             </a>
+
             <p class="desc">基于社交网络的分享</p>
         </div>
         <div class="col-xs-6 col-sm-3 col-md-3 warp">
             <a class="item">
                 <img src="/images/icons/redeem.png" alt=""/>
             </a>
+
             <p class="desc">基于用户行为习惯的推荐</p>
         </div>
     </div>
     <div class="row ad-items" style="margin-bottom: 40px;">
-        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ff5277;padding: 10px">产品介绍</p>
+        <p class="ad-title" style="font-size: 16px;font-weight: bold;color: #ff5277;padding: 10px">产品介绍</p>
         <div class="col-md-12">
             <p style="padding: 10px;color: rgba(0,0,0,0.56)">
                 COCO致力于构建一个实时的博客系统，在博客中融入社交元素，提供好友，分享，实时聊天等功能。在内容结构上，使用主题来管理博客，通过标签来对主题和博客进行分类，方便查询和阅读。从应用的结构上，我们除了网站，还提供Android和IOS的客户端，方便用户的操作。（现阶段只开发出来了网站）
@@ -228,24 +280,57 @@
         </div>
     </div>
     <div class="row ad-items" style="margin-bottom: 40px;">
-        <p style="font-size: 16px;font-weight: bold;color: #ff5277;border-bottom: 1px solid #ff5277;padding: 10px">技术介绍</p>
+        <p class="ad-title" style="font-size: 16px;font-weight: bold;color: #ff5277;padding: 10px">应用展示</p>
+
+        <div class="col-md-12">
+            <p style="padding: 10px;color: rgba(0,0,0,0.56)">
+                COCO致力于构建一个实时的博客系统，在博客中融入社交元素，提供好友，分享，实时聊天等功能。在内容结构上，使用主题来管理博客，通过标签来对主题和博客进行分类，方便查询和阅读。从应用的结构上，我们除了网站，还提供Android和IOS的客户端，方便用户的操作。（现阶段只开发出来了网站）
+            </p>
+        </div>
+    </div>
+    <div class="row ad-items" style="margin-bottom: 40px;">
+        <p class="ad-title" style="font-size: 16px;font-weight: bold;color: #ff5277;padding: 10px">
+            技术介绍</p>
         <div class="col-md-12">
             <ol class="tech-desc">
-                <li>前端框架 : <a href="http://angularjs.apjs.net/" target="_blank">AngularJS</a> 诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVVM、模块化、自动化双向数据绑定、语义化标签、依赖注入，等等。</li>
-                <li>前端缓存 : <a href="http://www.w3school.com.cn/html5/html_5_webstorage.asp" target="_blank">HTML 5 Web 存储</a> HTML5 提供了两种在客户端存储数据的新方法：localStorage - 没有时间限制的数据存储,sessionStorage - 针对一个 session 的数据存储.</li>
-                <li>后端框架 : <a href="http://expressjs.com/" target="_blank">Express</a> 是一个简洁而灵活的 node.js Web应用框架, 提供一系列强大特性帮助你创建各种Web应用。</li>
-                <li>HTTP服务器 : <a href="http://nginx.org/" target="_blank">Nginx</a> ("engine x") 是一个高性能的 HTTP 和 反向代理 服务器，也是一个 IMAP/POP3/SMTP 代理服务器。因它的稳定性、丰富的功能集、示例配置文件和低系统资源的消耗而闻名。</li>
-                <li>消息服务器 : <a href="http://socket.io/" target="_blank">Socket.IO</a> enables real-time bidirectional event-based communication.It works on every platform, browser or device, focusing equally on reliability and speed.</li>
-                <li>缓存服务器 : <a href="http://redis.io/" target="_blank">Redis</a> 是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set 有序集合)和hash（哈希类型）。</li>
-                <li>索引服务器 : <a href="https://www.elastic.co/learn/" target="_blank">ElasticSearch</a> 是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是第二流行的企业搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。</li>
-                <li>邮件服务器 : <a href="http://www.postfix.org/" target="_blank">Postfix</a> 是一种电子邮件服务器，它是由任职于IBM华生研究中心（T.J. Watson Research Center）的荷兰籍研究员Wietse Venema为了改良sendmail邮件服务器而产生的。</li>
-                <li>数据库服务器 : <a href="http://www.mysql.com/" target="_blank">MySQL</a> 是一个关系型数据库管理系统，由瑞典 MySQL AB 公司开发，目前属于 Oracle 公司。MySQL 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS (Relational Database Management System，关系数据库管理系统) 应用软件之一。</li>
-                <li>版本管理工具 : <a href="http://git-scm.com/download/" target="_blank">Git</a> 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。</li>
+                <li>前端框架 : <a href="http://angularjs.apjs.net/" target="_blank">AngularJS</a> 诞生于2009年，由Misko Hevery
+                    等人创建，后为Google所收购。是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVVM、模块化、自动化双向数据绑定、语义化标签、依赖注入，等等。
+                </li>
+                <li>前端缓存 : <a href="http://www.w3school.com.cn/html5/html_5_webstorage.asp" target="_blank">HTML 5 Web
+                        存储</a> HTML5 提供了两种在客户端存储数据的新方法：localStorage - 没有时间限制的数据存储,sessionStorage - 针对一个 session 的数据存储.
+                </li>
+                <li>后端框架 : <a href="http://expressjs.com/" target="_blank">Express</a> 是一个简洁而灵活的 node.js Web应用框架,
+                    提供一系列强大特性帮助你创建各种Web应用。
+                </li>
+                <li>HTTP服务器 : <a href="http://nginx.org/" target="_blank">Nginx</a> ("engine x") 是一个高性能的 HTTP 和 反向代理
+                    服务器，也是一个 IMAP/POP3/SMTP 代理服务器。因它的稳定性、丰富的功能集、示例配置文件和低系统资源的消耗而闻名。
+                </li>
+                <li>消息服务器 : <a href="http://socket.io/" target="_blank">Socket.IO</a> enables real-time bidirectional
+                    event-based communication.It works on every platform, browser or device, focusing equally on
+                    reliability and speed.
+                </li>
+                <li>缓存服务器 : <a href="http://redis.io/" target="_blank">Redis</a>
+                    是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set
+                    有序集合)和hash（哈希类型）。
+                </li>
+                <li>索引服务器 : <a href="https://www.elastic.co/learn/" target="_blank">ElasticSearch</a>
+                    是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful
+                    web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是第二流行的企业搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。
+                </li>
+                <li>邮件服务器 : <a href="http://www.postfix.org/" target="_blank">Postfix</a>
+                    是一种电子邮件服务器，它是由任职于IBM华生研究中心（T.J. Watson Research Center）的荷兰籍研究员Wietse Venema为了改良sendmail邮件服务器而产生的。
+                </li>
+                <li>数据库服务器 : <a href="http://www.mysql.com/" target="_blank">MySQL</a> 是一个关系型数据库管理系统，由瑞典 MySQL AB
+                    公司开发，目前属于 Oracle 公司。MySQL 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS (Relational Database
+                    Management System，关系数据库管理系统) 应用软件之一。
+                </li>
+                <li>版本管理工具 : <a href="http://git-scm.com/download/" target="_blank">Git</a>
+                    是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。
+                </li>
             </ol>
         </div>
     </div>
 </div>
-
 <div class="container-fluid" style="background-color: #eee">
     <div class="row">
         <div class="col-xs-12" style="margin-top: 20px;">
@@ -256,7 +341,38 @@
                     <a href="#">在线客服</a>
                     <a href="#">销售联盟</a>
                 </p>
-                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号  Copyright © 2004-2014</p>
+
+                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号 Copyright © 2004-2014</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade login_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">用户登录</h4>
+            </div>
+            <div class="modal-body" style="min-height: 300px;" ng-controller="loginCtrl">
+                <div style="padding: 10px 30px;background-color: #fff;border-radius: 5px;">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">用户名</label>
+                        <input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1"
+                               placeholder="用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">密码</label>
+                        <input ng-model="user.password" ng-keydown="enterLogin(event)" type="password"
+                               class="form-control" id="exampleInputPassword1" placeholder="密码">
+                    </div>
+                    <p style="font-size: 13px;color: red" ng-show="error" ng-bind="message"></p>
+                    <button style="float: right" class="btn btn-danger" ng-click="login()">点击登录</button>
+                    <p style="font-size: 13px;color: rgba(0,0,0,0.56);padding: 8px 1px;">还没有账号？<a
+                                href="/coco/register/">点击注册</a></p>
+                </div>
             </div>
         </div>
     </div>
