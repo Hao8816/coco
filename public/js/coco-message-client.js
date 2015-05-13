@@ -43,9 +43,11 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     // 需要清空前段的主题缓存
     if(message_box.hasOwnProperty('blog-message')){
         
-    }else if(message_box.hasOwnProperty('topic-message')){
+    }
+    if(message_box.hasOwnProperty('topic-message')){
         localStorage.removeItem('TOPIC_INFO_LIST');
-    }else if(message_box.hasOwnProperty('friend-message')){
+    }
+    if(message_box.hasOwnProperty('friend-message')){
 
     };
 
