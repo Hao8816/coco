@@ -44,7 +44,7 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     if(message_box.hasOwnProperty('blog-message')){
         
     }else if(message_box.hasOwnProperty('topic-message')){
-        localStorage.removeItem('TOPIC_INFO_LIST');
+        localStorage.removeItem('TOPIC_LIST_INFO');
     }else if(message_box.hasOwnProperty('friend-message')){
 
     };
