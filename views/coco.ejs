@@ -465,7 +465,9 @@
                         var blog_list = data['blog_list'];
                         var has_next = data['has_next'];
                         if(has_next){
-                            
+                            $scope.pagger.next = true
+                        }else{
+                            $scope.pagger.next = false
                         }
                         blog_list.every(function(obj){
                             var user_sha1 = obj.creator_sha1;
