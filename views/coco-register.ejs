@@ -14,8 +14,14 @@
     body{
         /*background-color: #fafafa;*/
     }
-    .nav-kit a{
-        color: rgba(255,255,255,0.87);
+    .nav-kit .item{
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: right;
+    }
+    .nav-kit .item a{
+        color: rgba(255,82,119,0.8)
     }
     .footer-link a{
         padding: 0px 10px;
@@ -30,6 +36,9 @@
         border: none;
         padding: 8px 5px;
         width: 90%;
+    }
+    .form-group label,.checkbox label{
+        color: rgba(255,255,255,1);
     }
 
 </style>
@@ -56,8 +65,8 @@
             $http.post('/ajax/register/',userInfo).success(function(data){
                 if(data['ret'] == '0001'){
                     $scope.user = {name:'',email:'',phone:'',password1:'',password2:''}
-                    alert('恭喜你！注册成功')
-                    location.href = '/coco/login/'
+                    $('#register_area').html('<p style="color: rgba(255,255,255,0.8);font-size: 26px;">恭喜你！注册成功</p><p style="color: rgba(255,255,255,0.8);font-size: 16px;">请注意查收邮件，点击邮箱的激活链接来激活你的账号</p>');
+
                 }
 
             });
@@ -67,44 +76,28 @@
 
 </script>
 <body>
-<div style="background-color: #ff5277;width: 100%">
-    <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+<div style="width: 100%;background-color: #f5f5f5">
+    <div class="container" style="padding: 12px 0px;">
         <div class="row nav-kit">
-            <div class="col-xs-8 col-sm-8 col-md-10"><h4 style="margin: 0px">COCO 注册</h4></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/help/">帮助</a></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/login/">登录</a></div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 26px;color: rgba(255,82,119,0.8)">COCO</span></div>
+
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="text-align: center;">
+                <img style="width: 40px;height: 40px;" src="/images/icons/logo_bg.png" alt=""/>
+            </div>
+            <div class="item col-xs-2 col-sm-2 col-md-offset-3 col-md-1 col-lg-offset-3 col-lg-1"><a href="/coco/help/">帮助</a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1 col-lg-1"><a href="/coco/login/">登录</a></div>
         </div>
     </div>
 </div>
-<div class="container">
+<div style="width: 100%;background-color: rgba(255,82,119,0.8);">
+<div class="container" style="min-height: 604px">
     <div class="row" style="margin-top: 0px;">
-        <div class="jumbotron" style="background-color: #fff;padding-top: 0px" ng-controller="registerCtrl">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h2 style="color: #ff5277;padding: 30px 0px">COCO,不一样的博客</h2>
+        <div ng-controller="registerCtrl">
+            <div class="row" style="padding-top: 60px;padding-bottom: 60px">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: center">
+                    <img src="/images/icons/adpic.png" alt=""/>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <p style="font-size: 17px;padding: 5px;">主人寄语:</p>
-                    <pre style="font-size: 15px;line-height: 26px;font-family: STKaiti;">
-                        如何让你遇见我
-                        在我最美丽的时刻
-                        为这
-                        我已在佛前求了五百年
-                        求它让我们结一段尘缘
-                        佛于是把我化作一棵树
-                        长在你必经的路旁
-                        阳光下慎重地开满了花
-                        朵朵都是我前世的盼望
-                        当你走近
-                        请你细听
-                        颤抖的叶是我等待的热情
-                        而你终于无视地走过
-                        在你身后落了一地的
-                        朋友啊 那不是花瓣
-                        是我凋零的心</pre>
-                    <p style="font-size: 17px;padding: 5px;width: 80%;text-align: right">2015.03.29</p>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin-top: 20px;">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="margin-top: 20px;" id="register_area">
                     <form style="padding: 10px;">
                         <div class="form-group">
                             <label for="exampleInputEmail1">用户名</label>
@@ -131,13 +124,14 @@
                                 <input type="checkbox">服务条款
                             </label>
                         </div>
-                        <button style="float: right" class="btn btn-danger" ng-click="submit()">点击注册</button>
-                        <p style="font-size: 13px;color: rgba(0,0,0,0.56);padding: 8px 1px;">已经有账号？<a href="/coco/login/">点击登录</a></p>
+                        <button style="float: right" class="btn btn-default" ng-click="submit()">点击注册</button>
+                        <p style="font-size: 13px;color: rgba(255,255,255,1);padding: 8px 1px;">已经有账号？<a href="/coco/login/">点击登录</a></p>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div class="container-fluid" style="background-color: #eee">
     <div class="row">
