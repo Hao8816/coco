@@ -351,6 +351,8 @@
 
             // 显示博客列表
             $scope.blog_list = [];
+            $scope.pagger.prev = true;
+            $scope.pagger.next = true;
 
             // 显示主题的信息
             var topic_object = getTopicObjectInfo(topic_sha1);
