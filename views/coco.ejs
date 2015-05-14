@@ -468,10 +468,13 @@
                         var has_next = data['has_next'];
                         if(has_next){
                             $scope.next = true
-                            $scope.prev = true
                         }else{
                             $scope.next = false
+                        }
+                        if(page == 1){
                             $scope.prev = false
+                        }else{
+                            $scope.prev = true
                         }
                         blog_list.every(function(obj){
                             var user_sha1 = obj.creator_sha1;
