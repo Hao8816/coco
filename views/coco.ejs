@@ -463,6 +463,10 @@
                     if (data['ret'] == '0001') {
                         console.log(data);
                         var blog_list = data['blog_list'];
+                        var has_next = data['has_next'];
+                        if(has_next){
+                            
+                        }
                         blog_list.every(function(obj){
                             var user_sha1 = obj.creator_sha1;
                             var userObj = getUserDetailInfo(user_sha1);
