@@ -12,8 +12,8 @@ var saveBlog = function saveBlog(req,res){
     var sha1 = SHA1(date_time);
     console.log(req.param)
     var topic_sha1 = req.param('topic_sha1');
-    var blog_title = req.param('title');
-    var blog_content = req.param('content');
+    var blog_title = req.param('title')||"";
+    var blog_content = req.param('content')||"";
     var creator_sha1 = req.param('creator_sha1');
     var file_list = req.param('file_list')||[];
     blog_models.Blog.create([{
@@ -59,8 +59,8 @@ var saveBlog = function saveBlog(req,res){
 var saveTopic = function saveTopic(req,res){
     var date_time = new Date().getTime();
     var sha1 = SHA1(date_time);
-    var topic_title = req.param('title');
-    var topic_desc = req.param('desc');
+    var topic_title = req.param('title')||"";
+    var topic_desc = req.param('desc')||"";
     var creator_sha1 = req.param('creator_sha1');
     blog_models.Topic.create([{
         time          : date_time.toString(),       // 微博创建的时间
