@@ -151,13 +151,13 @@
             <nav style="margin: auto;text-align: center">
                 <ul class="pagination">
                     <li>
-                        <a style="cursor: pointer;" ng-click="changePage(-1)" aria-label="Previous">
+                        <a ng-show="pagger.prev" style="cursor: pointer;" ng-click="changePage(-1)" aria-label="Previous">
                             <span aria-hidden="true">上一页</span>
                         </a>
                     </li>
                     <li><a href="#" ng-bind="current_page"></a></li>
                     <li>
-                        <a style="cursor: pointer;" ng-click="changePage(1)" aria-label="Next">
+                        <a ng-show="pagger.next" style="cursor: pointer;" ng-click="changePage(1)" aria-label="Next">
                             <span aria-hidden="true">下一页</span>
                         </a>
                     </li>
