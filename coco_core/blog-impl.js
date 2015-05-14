@@ -102,16 +102,22 @@ var getBlogList = function getBlogList(req,res){
             if(err){
                 console.log(err);
             }
-
-            res.send({'info':"OK","ret":0001,"blog_list":result})
+            var has_next = true;
+            if(result.length<10){
+                has_next = false;
+            }
+            res.send({'info':"OK","ret":0001,"blog_list":result,"has_next":has_next})
         });
     }else{
         blog_models.Blog.find({topic_sha1:topic_sha1},[ "time", "Z" ]).limit(10).offset(10*page).run(function(err,result){
             if(err){
                 console.log(err);
             }
-
-            res.send({'info':"OK","ret":0001,"blog_list":result})
+            var has_next = true;
+            if(result.length<10){
+                has_next = false;
+            }
+            res.send({'info':"OK","ret":0001,"blog_list":result,"has_next":has_next})
         });
     }
 
