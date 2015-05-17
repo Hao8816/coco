@@ -119,7 +119,7 @@ var getBlogList = function getBlogList(req,res){
             }
             // 遍历博客列表，取得博客里面的回复
             async.each(result, function(obj,callback) {
-                blog_models.Comment.find({blog_sha1:obj.sha1},function(err,results){
+                blog_models.Comment.find({blog_sha1:obj.sha1},[ "time", "Z" ],function(err,results){
                     obj['comment_list'] = results || [];
                     callback()
                 });
