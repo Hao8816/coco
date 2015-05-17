@@ -45,7 +45,8 @@ var Comment = db.define("comment", {
     content       : String,    // 博客的内容
     images        : Object,    // 博客的图片信息: Object,
     creator_sha1  : String,    // 博客的创建者信息
-    blog_sha1     : String     // 博客的所属的主题
+    blog_sha1     : String,    // 博客的所属的主题
+    parent_sha1   : String     // 博客的父节点的sha1
 
 }, {
     // with in model method
@@ -100,5 +101,6 @@ blog_models['BlogAction'] = BlogAction;
 blog_models['Topic'] = Topic;
 blog_models['TopicAction'] = TopicAction;
 blog_models['File'] = File;
+blog_models['Comment'] = Comment;
 
 module.exports = blog_models;

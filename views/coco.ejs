@@ -216,7 +216,7 @@
                                 var userSha1 = obj.creator_sha1;
                                 var userObject = getUserDetailInfo(userSha1);
                                 obj['name'] = userObject['name']
-                                obj['head_image'] = userObject['head_image']
+                                obj['head_image'] = userObject['head_image'];
                                 return obj;
                             });
                             $scope.topic_list = topic_list;
@@ -353,6 +353,8 @@
             $scope.blog_list = [];
             $scope.prev = true;
             $scope.next = true;
+            $scope.comment_blog_sha1 = "";
+            $scope.comment_parent_sha1 = "";
 
             // 显示主题的信息
             var topic_object = getTopicObjectInfo(topic_sha1);
@@ -449,6 +451,67 @@
                 });
             }
 
+            $scope.showCommentModal = function(blog_obj){
+                $scope.comment_blog_sha1 = blog_obj.blog.sha1;
+                $scope.comment_parent_sha1 = "";
+                $('.comment_modal').modal('show');
+            }
+
+            $scope.saveComment = function (comment_obj) {
+                var content = $scope.comment.content;
+                var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                var file_sha1_list = [];
+                comment_file_list.forEach(function(obj){
+                    file_sha1_list.push(obj.sha1)
+                })
+                var parent_sha1 = $scope.comment_parent_sha1;
+                var blog_sha1 = $scope.comment_blog_sha1;
+                $http.post('/ajax/save_comment/', {
+                    content: content,
+                    creator_sha1: creator_sha1,
+                    parent_sha1:parent_sha1,
+                    blog_sha1:blog_sha1,
+                    file_list : file_sha1_list
+                }).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        console.log(data);
+                        //$('#blog_files_area').empty()
+                        comment_file_list = []
+                        $('.comment_modal').modal('hide');
+//                        // 发送博客更细通知
+//                        sendBlogMessage('add_blog',data['blog'][0].sha1);
+//                        $scope.blog.title = ''
+//                        $scope.blog.content = ''
+//                        data['blog'].forEach(function (obj) {
+//                            var format_data = new Date(parseInt(obj['time']))
+//                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+//                            console.log(obj['time'])
+//                        });
+//                        var blog_list = data['blog'].concat($scope.blog_list);
+//                        blog_list.every(function(obj){
+//                            var user_sha1 = obj.creator_sha1;
+//                            var userObj = getUserDetailInfo(user_sha1);
+//                            obj['name'] = userObj.name;
+//                            obj['head_image'] = userObj.head_image;
+//                            return obj;
+//                        });
+//
+//                        // 利用angular刷新
+//                        $scope.blog_list = blog_list;
+//
+//                        // 更新用户博客的数量
+//                        var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+//                        var user_obj = JSON.parse(loginUserInfo);
+//                        user_obj.nb_blog = user_obj.nb_blog+1;
+//                        sessionStorage.setItem('LOGIN_USER_INFO',JSON.stringify(user_obj));
+//                        $scope.user = user_obj;
+
+                    } else {
+
+                    }
+                });
+            }
+
             $scope.changePage = function(offset){
                 var page = $scope.current_page + offset;
                 showBlog(page);
@@ -481,6 +544,14 @@
                             var userObj = getUserDetailInfo(user_sha1);
                             obj['name'] = userObj.name;
                             obj['head_image'] = userObj.head_image;
+                            var comment_list = obj['comment_list'];
+                            comment_list.every(function(comment_obj){
+                                var commentUserSha1 = comment_obj.creator_sha1;
+                                var commentUObject = getUserDetailInfo(commentUserSha1);
+                                comment_obj['name'] = commentUObject['name']
+                                comment_obj['head_image'] = commentUObject['head_image'];
+                                return comment_obj;
+                            })
                             return obj;
                         });
 
@@ -499,7 +570,8 @@
     <script type="text/javascript" src="/Jquery/jquery.iframe-transport.js"></script>
     <script type="text/javascript" src="/Jquery/jquery.fileupload.js"></script>
     <script type="text/javascript">
-        var file_list = []
+        var file_list = [];
+        var comment_file_list = [];
         $(function () {
             // 文件上传
             $('#fileupload').fileupload({

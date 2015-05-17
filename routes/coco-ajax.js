@@ -20,6 +20,10 @@ router.post('/save_topic/', function(req, res) {
     blog.saveTopic(req,res);
 });
 
+router.post('/save_comment/', function(req, res) {
+    blog.saveComment(req,res);
+});
+
 router.post('/get_blog_list/', function(req, res) {
     blog.getBlogList(req,res);
 });
