@@ -1,8 +1,8 @@
 var blog_models = require('./blog-models');
 var user_models = require('./user-models');
-
+var async = require('async');
 var search = require('./search-impl');
-
+var logger = require('./logger-impl');
 var SHA1 = require('sha1');
 
 var blog={};
@@ -117,10 +117,22 @@ var getBlogList = function getBlogList(req,res){
             if(result.length<10){
                 has_next = false;
             }
-            res.send({'info':"OK","ret":0001,"blog_list":result,"has_next":has_next})
+            // 遍历博客列表，取得博客里面的回复
+            async.each(result, function(obj,callback) {
+                blog_models.Comment.find({blog_sha1:obj.sha1},function(err,results){
+                    obj['comment_list'] = results || [];
+                    callback()
+                });
+            }, function(err){
+                if( err ) {
+                    console.log('A file failed to process');
+                } else {
+                    logger.error("blog_result:",result)
+                    res.send({'info':"OK","ret":0001,"blog_list":result,"has_next":has_next})
+                }
+            });
         });
     }
-
 };
 
 var getTopicList = function getTopicList(req,res){
@@ -151,7 +163,7 @@ var deleteFile = function deleteFile(req,res){
 var saveFile = function saveFile(obj){
     var date_time = new Date().getTime();
     blog_models.File.create([{
-        time          : date_time,    // 微博创建的时间
+        time          : date_time.toString(),    // 微博创建的时间
         sha1          : obj['sha1'],    // blog的sha1
         name          : obj['name'],    // 文件名称
         size          : obj['size'],    // 文件的大小
@@ -182,6 +194,46 @@ var searchTopic = function searchTopic(req,res){
 };
 
 
+var saveComment = function saveComment(req,res){
+    var parent_sha1 = req.param('parent_sha1')||"";
+    var images = req.param('file_list');
+    var blog_sha1 = req.param('blog_sha1');
+    var creator_sha1 = req.param('creator_sha1');
+    var content = req.param('content')||"";
+    var date_time = new Date().getTime();
+    var sha1 = SHA1(date_time+creator_sha1);
+    blog_models.Comment.create([{
+        time          : date_time.toString(),    // 微博创建的时间
+        sha1          : sha1,                    // blog的sha1
+        content       : content,                 // 博客的内容
+        images        : images,                  // 博客的图片信息: Object,
+        creator_sha1  : creator_sha1,            // 博客的创建者信息
+        blog_sha1     : blog_sha1,               // 博客的所属的主题
+        parent_sha1   : parent_sha1              // 博客的父节点的sha1
+
+    }],function (err,item){
+        console.log(err);
+        console.log(item);
+        // 把新的评论添加到索引库众
+        item.forEach(function(obj){
+            search.indexComment(obj);
+        });
+
+        res.send({'info':"OK","ret":0001,"comment":item})
+    });
+};
+
+var getBlogCommentList = function getBlogCommentList(req,res){
+    var blog_sha1 = req.param('blog_sha1');
+    blog_models.Comment.find({blog_sha1:blog_sha1},[ "time", "Z" ]).run(function(err,result){
+        if(err){
+            console.log(err);
+        }
+        res.send({'info':"OK","ret":0001,"topic_list":result})
+
+    });
+};
+
 
 blog.saveBlog = saveBlog;
 blog.saveTopic = saveTopic;
@@ -190,7 +242,9 @@ blog.getBlogList = getBlogList;
 blog.getTopicList = getTopicList;
 blog.saveFile = saveFile;
 blog.deleteFile = deleteFile;
+blog.saveComment = saveComment;
+blog.getBlogCommentList = getBlogCommentList;
 
-module.exports = blog
+module.exports = blog;
 
 

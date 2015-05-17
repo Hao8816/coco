@@ -93,6 +93,44 @@ var searchBlog = function searchBlog(req,res){
 };
 
 
+// 查询关键词对应的博客
+var searchComment = function searchComment(req,res){
+    var keyword = req.param('keyword');
+    var page = parseInt(req.param('page'));
+    client.search({
+        index: 'comment',
+        size: 10,
+        body: {
+            "query": {
+                "bool": {
+                    "should": [
+                        {
+                            "query_string": {
+                                "default_field": "post.content",
+                                "query": keyword
+                            }
+                        }
+                    ]
+                }
+            },
+            "from": (page-1)*10,
+            "size": 10,
+            "sort": [{"time":"desc"}],
+            "facets": {}
+        }
+    }).then(function (response) {
+        //console.log(resp)
+        var hits = response.hits;
+        var result_list = [];
+        hits['hits'].forEach(function(obj){
+            var comment_obj = obj['_source'];
+            result_list.push(comment_obj)
+        });
+        res.send({'info':"OK","ret":0001,"comment_list":result_list})
+    });
+};
+
+
 // 给主题建立索引
 var indexTopic = function indexTopic(obj){
     client.index({
@@ -122,9 +160,25 @@ var indexBlog = function indexBlog(obj){
     });
 };
 
+var indexComment = function indexComment(obj){
+
+    client.index({
+        index: 'comment',
+        type: 'post',
+        id: obj.sha1,
+        body: obj
+    }, function (err, resp) {
+        if(err){
+            console.log(err)
+        }
+    });
+};
+
 elastic["searchTopic"] = searchTopic;
 elastic["searchBlog"] = searchBlog;
+elastic["searchComment"] = searchComment;
 elastic["indexTopic"] = indexTopic;
 elastic["indexBlog"] = indexBlog;
+elastic["indexComment"] = indexComment;
 
 module.exports = elastic;

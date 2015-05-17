@@ -28,7 +28,7 @@ user_models.User.all(function(err,result){
                     });
                 }
             },function(err,result){
-                console.log(result)
+                console.log(result);
                 user_models.User.find({ sha1: user_sha1 }).each(function (user) {
                     user.nb_blog = result['get_blog_num'];
                     user.nb_topic = result['get_topic_num'];
