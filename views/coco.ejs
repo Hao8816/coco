@@ -478,15 +478,10 @@
                         //$('#blog_files_area').empty()
                         comment_file_list = []
                         $('.comment_modal').modal('hide');
-//                        // 发送博客更细通知
+                        showBlog(1);
+// 发送博客更细通知
 //                        sendBlogMessage('add_blog',data['blog'][0].sha1);
-//                        $scope.blog.title = ''
-//                        $scope.blog.content = ''
-//                        data['blog'].forEach(function (obj) {
-//                            var format_data = new Date(parseInt(obj['time']))
-//                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-//                            console.log(obj['time'])
-//                        });
+
 //                        var blog_list = data['blog'].concat($scope.blog_list);
 //                        blog_list.every(function(obj){
 //                            var user_sha1 = obj.creator_sha1;
