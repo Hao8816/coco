@@ -11,7 +11,7 @@ var options = {
 var date = new Date();
 var month = date.getMonth()+1;
 var date_string = date.getFullYear()+"-"+month+"-"+date.getDate();
-var text_content = "欢迎大家使用COCO博客!";
+var text_content = "新增博客的评论的功能!";
 var html_content = "<div style='max-width: 500px ;margin: auto;border: 1px solid #f5f5f5;border-radius: 5px;'>" +
                    "<div style='text-align: center;padding: 10px;border-bottom: 1px solid #eee'><img src='http://onekoko.com/images/icons/logo.png' style='width: 60px;height: 60px;'></div>"+
                    "<div style='padding: 10px 20px;'><p style='color: #ff5277'>亲爱的VIP用户:</p>" +
