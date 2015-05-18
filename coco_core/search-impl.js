@@ -1,5 +1,8 @@
 var elasticsearch = require('elasticsearch');
 var blog_models = require('./blog-models');
+var async = require('async');
+var logger = require('./logger-impl');
+
 
 var elastic = {}
 var client = elasticsearch.Client({
