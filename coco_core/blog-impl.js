@@ -151,8 +151,13 @@ var getBlogList = function getBlogList(req,res){
 
 var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
-    console.log(creator_sha1)
-    blog_models.Topic.find([ "time", "Z" ]).run(function(err,result){
+    console.log(creator_sha1);
+    if (!req.hasOwnProperty('page')){
+        var page = 1;
+    }else{
+        var page = req.param('page')-1;
+    }
+    blog_models.Topic.find([ "time", "Z" ]).limit(10).offset(10*page).run(function(err,result){
         if(err){
             console.log(err);
         }
@@ -192,21 +197,6 @@ var saveFile = function saveFile(obj){
         //res.send({'info':"OK","ret":0001})
     });
 };
-
-
-var searchTopic = function searchTopic(req,res){
-    var keyword = req.param('keyword');
-    var page = parseInt(req.param('page'));
-
-    blog_models.Topic.find([ "time", "Z" ]).limit(10).offset(10*page).run(function(err,result){
-        if(err){
-            console.log(err);
-        }
-        res.send({'info':"OK","ret":0001,"topic_list":result})
-
-    });
-};
-
 
 var saveComment = function saveComment(req,res){
     var parent_sha1 = req.param('parent_sha1')||"";
