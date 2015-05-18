@@ -1,4 +1,5 @@
 var elasticsearch = require('elasticsearch');
+var blog_models = require('./blog-models');
 
 var elastic = {}
 var client = elasticsearch.Client({
@@ -89,6 +90,22 @@ var searchBlog = function searchBlog(req,res){
             result_list.push(blog_obj)
         });
         res.send({'info':"OK","ret":0001,"blog_list":result_list})
+
+        // 遍历博客列表，取得博客里面的回复
+        async.each(result_list, function(obj,callback) {
+            blog_models.Comment.find({blog_sha1:obj.sha1},[ "time", "Z" ],function(err,results){
+                obj['comment_list'] = results || [];
+                callback()
+            });
+        }, function(err){
+            if( err ) {
+                console.log('A file failed to process');
+            } else {
+                logger.error("blog_result:",result_list)
+                res.send({'info':"OK","ret":0001,"blog_list":result_list,"has_next":has_next})
+            }
+        });
+
     });
 };
 
