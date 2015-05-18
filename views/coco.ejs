@@ -567,13 +567,13 @@
                 var e = e || window.event
                 if (e.keyCode == 13){
                     var keyword = $scope.query;
-                    $scope.page = 1;
+                    $scope.current_page = 1;
                     searchBlog(keyword);
                 }
             }
 
             function searchBlog(keyword){
-                var page = $scope.page || 1;
+                var page = $scope.current_page || 1;
                 $http.post('/ajax/search_blog/', {keyword:keyword,page:page}).success(function (data) {
                     if (data['ret'] == '0001') {
                         var blog_list = data['blog_list'];
@@ -593,7 +593,7 @@
                             var userObj = getUserDetailInfo(user_sha1);
                             obj['name'] = userObj.name;
                             obj['head_image'] = userObj.head_image;
-                            var comment_list = obj['comment_list'];
+                            var comment_list = obj['comment_list'] || [];
                             comment_list.every(function(comment_obj){
                                 var commentUserSha1 = comment_obj.creator_sha1;
                                 var commentUObject = getUserDetailInfo(commentUserSha1);
@@ -638,7 +638,7 @@
                             var userObj = getUserDetailInfo(user_sha1);
                             obj['name'] = userObj.name;
                             obj['head_image'] = userObj.head_image;
-                            var comment_list = obj['comment_list'];
+                            var comment_list = obj['comment_list'] || [];
                             comment_list.every(function(comment_obj){
                                 var commentUserSha1 = comment_obj.creator_sha1;
                                 var commentUObject = getUserDetailInfo(commentUserSha1);
