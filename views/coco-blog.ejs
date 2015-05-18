@@ -199,13 +199,6 @@
                         <span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" ng-bind="friend.name"></span>
                     </div>
                 </div>
-                <h5>最热主题</h5>
-                <div style="border-radius: 5px;background-color: #fff">
-                    <li class="concren-item" ng-repeat="concern in topic_list|limitTo:10">
-                        <a href="#/blog/{{concern.sha1}}"><span>{{concern.title}}</span></a>
-                        <span style="font-size: 12px;color: rgba(0,0,0,0.56);float: right">{{concern.time|date:"hh:mm"}}</span>
-                    </li>
-                </div>
             </div>
         </div>
     </div>
