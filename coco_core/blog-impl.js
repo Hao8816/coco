@@ -106,6 +106,20 @@ var getBlogList = function getBlogList(req,res){
             if(result.length<10){
                 has_next = false;
             }
+            // 遍历博客列表，取得博客里面的回复
+            async.each(result, function(obj,callback) {
+                blog_models.Comment.find({blog_sha1:obj.sha1},[ "time", "Z" ],function(err,results){
+                    obj['comment_list'] = results || [];
+                    callback()
+                });
+            }, function(err){
+                if( err ) {
+                    console.log('A file failed to process');
+                } else {
+                    logger.error("blog_result:",result)
+                    res.send({'info':"OK","ret":0001,"blog_list":result,"has_next":has_next})
+                }
+            });
             res.send({'info':"OK","ret":0001,"blog_list":result,"has_next":has_next})
         });
     }else{
