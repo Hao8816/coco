@@ -41,9 +41,9 @@ router.post('/search_topic/', function(req, res) {
     search.searchTopic(req,res);
 });
 
-
-
-
+router.post('/search_blog/', function(req, res) {
+    search.searchBlog(req,res);
+});
 
 router.post('/register/',function(req,res){
     user.createUser(req,res);
