@@ -212,12 +212,6 @@
                     $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1,page:page}).success(function (data) {
                         if (data['ret'] == '0001') {
                             console.log(data);
-                            var blog_list = data['topic_list']
-                            blog_list.forEach(function (obj) {
-                                var format_data = new Date(parseInt(obj['time']))
-                                obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-                                console.log(obj['time'])
-                            })
                             var topic_list = data['topic_list'];
                             topic_list.every(function(obj){
                                 var userSha1 = obj.creator_sha1;
@@ -269,12 +263,6 @@
                 var page = $scope.page || 1;
                 $http.post('/ajax/search_topic/', {keyword:keyword,page:page}).success(function (data) {
                     if (data['ret'] == '0001') {
-                        var blog_list = data['topic_list']
-                        blog_list.forEach(function (obj) {
-                            var format_data = new Date(parseInt(obj['time']))
-                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-                            console.log(obj['time'])
-                        })
                         var topic_list = data['topic_list'];
                         topic_list.every(function(obj){
                             var userSha1 = obj.creator_sha1;
@@ -574,6 +562,54 @@
                 var page = $scope.current_page + offset;
                 showBlog(page);
             }
+
+            $scope.enterSearchBlog = function(e){
+                var e = e || window.event
+                if (e.keyCode == 13){
+                    var keyword = $scope.query;
+                    $scope.page = 1;
+                    searchBlog(keyword);
+                }
+            }
+
+            function searchBlog(keyword){
+                var page = $scope.page || 1;
+                $http.post('/ajax/search_blog/', {keyword:keyword,page:page}).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        var blog_list = data['blog_list'];
+                        var has_next = data['has_next'];
+                        if(has_next){
+                            $scope.next = true
+                        }else{
+                            $scope.next = false
+                        }
+                        if(page == 1){
+                            $scope.prev = false
+                        }else{
+                            $scope.prev = true
+                        }
+                        blog_list.every(function(obj){
+                            var user_sha1 = obj.creator_sha1;
+                            var userObj = getUserDetailInfo(user_sha1);
+                            obj['name'] = userObj.name;
+                            obj['head_image'] = userObj.head_image;
+                            var comment_list = obj['comment_list'];
+                            comment_list.every(function(comment_obj){
+                                var commentUserSha1 = comment_obj.creator_sha1;
+                                var commentUObject = getUserDetailInfo(commentUserSha1);
+                                comment_obj['name'] = commentUObject['name']
+                                comment_obj['head_image'] = commentUObject['head_image'];
+                                return comment_obj;
+                            })
+                            return obj;
+                        });
+
+                        $scope.blog_list = blog_list;
+                        $scope.current_page = page
+                    }
+                })
+            }
+
 
             function showBlog(page) {
                 if(page<1){

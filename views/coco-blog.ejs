@@ -116,7 +116,7 @@
                 <div class="col-xs-1 col-sm-3 col-md-5">
                 </div>
                 <div class="col-xs-5 col-sm-4 col-md-3">
-                    <input ng-model="query" style="margin: 5px 0px" class="form-control input-sm" placeholder="搜索博客" type="text"/>
+                    <input ng-model="query" style="margin: 5px 0px" class="form-control input-sm" ng-keydown="enterSearchBlog(event)" placeholder="搜索博客" type="text"/>
                     <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
                         <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
                     </span>
