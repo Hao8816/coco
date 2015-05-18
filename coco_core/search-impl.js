@@ -92,6 +92,10 @@ var searchBlog = function searchBlog(req,res){
             var blog_obj = obj['_source'];
             result_list.push(blog_obj)
         });
+        var has_next = true;
+        if(result_list.length<10){
+            has_next = false;
+        }
 
         // 遍历博客列表，取得博客里面的回复
         async.each(result_list, function(obj,callback) {
@@ -103,8 +107,8 @@ var searchBlog = function searchBlog(req,res){
             if( err ) {
                 console.log('A file failed to process');
             } else {
-                logger.error("blog_result:",result_list)
-                res.send({'info':"OK","ret":0001,"blog_list":result_list})
+                logger.error("blog_result:",result_list);
+                res.send({'info':"OK","ret":0001,"blog_list":result_list,has_next:has_next})
             }
         });
 
