@@ -70,7 +70,7 @@
                         </p>
                     </div>
                     <div class="col-xs-5 col-sm-4 col-md-3">
-                        <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" class="form-control input-sm" placeholder="搜索主题" type="text">
+                        <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" ng-keydown="enterSearchTopic(event)" class="form-control input-sm" placeholder="搜索主题" type="text">
                         <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
                             <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
                         </span>
@@ -99,6 +99,21 @@
                             </a>
                         </div>
                     </div>
+                    <nav style="margin: auto;text-align: center">
+                        <ul class="pagination">
+                            <li>
+                                <a ng-show="prev" style="cursor: pointer;" ng-click="changePage(-1)" aria-label="Previous">
+                                    <span aria-hidden="true">上一页</span>
+                                </a>
+                            </li>
+                            <li><a href="#" ng-bind="current_page"></a></li>
+                            <li>
+                                <a ng-show="next" style="cursor: pointer;" ng-click="changePage(1)" aria-label="Next">
+                                    <span aria-hidden="true">下一页</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

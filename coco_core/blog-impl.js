@@ -152,16 +152,16 @@ var getBlogList = function getBlogList(req,res){
 var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
     console.log(creator_sha1);
-    if (!req.hasOwnProperty('page')){
-        var page = 1;
-    }else{
-        var page = req.param('page')-1;
-    }
+    var page = req.param('page')-1 ||1;
     blog_models.Topic.find([ "time", "Z" ]).limit(10).offset(10*page).run(function(err,result){
         if(err){
             console.log(err);
         }
-        res.send({'info':"OK","ret":0001,"topic_list":result})
+        var has_next = true;
+        if(result.length<10){
+            has_next = false;
+        }
+        res.send({'info':"OK","ret":0001,"topic_list":result,"has_next":has_next})
 
     });
 };
@@ -241,7 +241,6 @@ var getBlogCommentList = function getBlogCommentList(req,res){
 
 blog.saveBlog = saveBlog;
 blog.saveTopic = saveTopic;
-blog.searchTopic = searchTopic;
 blog.getBlogList = getBlogList;
 blog.getTopicList = getTopicList;
 blog.saveFile = saveFile;

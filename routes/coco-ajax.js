@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var blog = require('../coco_core/blog-impl');
 var user = require('../coco_core/user-impl');
+var search = require('../coco_core/search-impl');
 
 var fs = require('fs');
 var SHA1 = require('sha1')
@@ -35,6 +36,13 @@ router.post('/get_friend_list/', function(req, res) {
 router.post('/get_topic_list/', function(req, res) {
     blog.getTopicList(req,res);
 });
+
+router.post('/search_topic/', function(req, res) {
+    search.searchTopic(req,res);
+});
+
+
+
 
 
 router.post('/register/',function(req,res){
