@@ -197,10 +197,17 @@
                 showTopic(1);
             }
 
+            $scope.changePage = function(offset){
+                var page = $scope.current_page + offset;
+                showTopic(page);
+            }
+
             function showTopic(page) {
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                 var topic_info_cache = localStorage.getItem('TOPIC_INFO_LIST');
-                if(topic_info_cache == null){
+                $scope.prev = true;
+                $scope.next = true;
+                //if(topic_info_cache == null){
                     $('.topic-badge').text('');
                     $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1,page:page}).success(function (data) {
                         if (data['ret'] == '0001') {
@@ -219,6 +226,18 @@
                                 obj['head_image'] = userObject['head_image'];
                                 return obj;
                             });
+                            var has_next = data['has_next'];
+                            if(has_next){
+                                $scope.next = true
+                            }else{
+                                $scope.next = false
+                            }
+                            if(page == 1){
+                                $scope.prev = false
+                            }else{
+                                $scope.prev = true
+                            }
+                            $scope.current_page = page;
                             $scope.topic_list = topic_list;
                             $scope.nb_topic = topic_list.length;
                             var topic_info_dict = {};
@@ -231,11 +250,55 @@
 
                         }
                     });
-                }else{
-                    var topic_list = JSON.parse(topic_info_cache);
-                    $scope.nb_topic = topic_list.length;
-                    $scope.topic_list = topic_list;
+//                }else{
+//                    var topic_list = JSON.parse(topic_info_cache);
+//                    $scope.nb_topic = topic_list.length;
+//                    $scope.topic_list = topic_list;
+//                }
+            }
+
+            $scope.enterSearchTopic = function(e){
+                var e = e || window.event
+                if (e.keyCode == 13){
+                    var keyword = $scope.query;
+                    searchTopic(keyword);
                 }
+            }
+
+            function searchTopic(keyword){
+                var page = $scope.page || 1;
+                $http.post('/ajax/search_topic/', {keyword:keyword,page:page}).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        var blog_list = data['topic_list']
+                        blog_list.forEach(function (obj) {
+                            var format_data = new Date(parseInt(obj['time']))
+                            obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
+                            console.log(obj['time'])
+                        })
+                        var topic_list = data['topic_list'];
+                        topic_list.every(function(obj){
+                            var userSha1 = obj.creator_sha1;
+                            var userObject = getUserDetailInfo(userSha1);
+                            obj['name'] = userObject['name']
+                            obj['head_image'] = userObject['head_image'];
+                            return obj;
+                        });
+                        var has_next = data['has_next'];
+                        if(has_next){
+                            $scope.next = true
+                        }else{
+                            $scope.next = false
+                        }
+                        if(page == 1){
+                            $scope.prev = false
+                        }else{
+                            $scope.prev = true
+                        }
+                        $scope.current_page = page;
+                        $scope.topic_list = topic_list;
+                        $scope.nb_topic = topic_list.length;
+                    }
+                })
             }
 
 
