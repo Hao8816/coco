@@ -152,8 +152,8 @@ var getBlogList = function getBlogList(req,res){
 var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
     console.log(creator_sha1);
-    var page = req.param('page')-1 ||1;
-    blog_models.Topic.find([ "time", "Z" ]).limit(10).offset(10*page).run(function(err,result){
+    var page = req.param('page') ||1;
+    blog_models.Topic.find([ "time", "Z" ]).limit(10).offset(10*(page-1)).run(function(err,result){
         if(err){
             console.log(err);
         }
