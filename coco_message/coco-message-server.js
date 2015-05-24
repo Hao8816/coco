@@ -119,8 +119,6 @@ io.on('connection',function(socket){
                 }
             }
         });
-
-        //socket.broadcast.emit('message',msg);
     });
 
     socket.on('BLOG_MESSAGE',function(msg){
