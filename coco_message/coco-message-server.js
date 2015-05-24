@@ -90,7 +90,7 @@ io.on('connection',function(socket){
                 console.log('Send Message Error');
             }else{
                 if (io.sockets.connected[data]) {
-                    io.sockets.connected[data].emit('CHAT_MESSAGE',{'friend_name':my_sha1,'my_name':friend_sha1,'chat_message':chat_message});
+                    io.sockets.connected[data].emit('CHAT_MESSAGE',{'friend_sha1':my_sha1,'my_sha1':friend_sha1,'chat_message':chat_message});
                 }else{
                     console.log('Can not find Socket!');
                     // 检查用户消息盒子
