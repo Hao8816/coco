@@ -67,7 +67,7 @@
                     var friend_info_dict = {}
                     var all_user_info_dict = {}
                     friend_list.forEach(function(obj){
-                        friend_info_dict[obj.name] = obj
+                        friend_info_dict[obj.sha1] = obj
                         all_user_info_dict[obj.sha1] = obj
                     })
 
@@ -80,14 +80,22 @@
             // get user friend list
 
             $scope.openChat = function (obj) {
+                $('#all_friend_list').slideUp();
+                $('#current_chat_area').slideDown();
                 var friend_name = $(obj)[0].friend.name;
                 var head_image = $(obj)[0].friend.head_image;
                 var friend_sha1 = $(obj)[0].friend.sha1;
                 $scope.chat_name = friend_name;
                 $scope.chat_image = head_image;
                 $scope.fid = friend_sha1;
+                var my_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                showChatHistory(my_sha1+'_'+friend_sha1);
+                $('div[uid='+friend_sha1+']').find('.message-badge').text('');
+            }
 
-                //
+            $scope.backBtn = function () {
+                $('#all_friend_list').slideDown();
+                $('#current_chat_area').slideUp();
             }
 
 
@@ -174,7 +182,7 @@
                             if (obj['head_image'] == ''){
                                 obj['head_image'] = 'default.jpg';
                             }
-                            friend_info_dict[obj.name] = obj;
+                            friend_info_dict[obj.sha1] = obj;
                             all_user_info_dict[obj.sha1] = obj;
                             return obj;
 
@@ -424,7 +432,7 @@
                             if (obj['head_image'] == ''){
                                 obj['head_image'] = 'default.jpg';
                             }
-                            friend_info_dict[obj.name] = obj;
+                            friend_info_dict[obj.sha1] = obj;
                             all_user_info_dict[obj.sha1] = obj;
                             return obj;
 
@@ -771,14 +779,14 @@
 <div style="width: 100%;background-color: rgba(255,82,119,0.8);position: fixed;z-index: 10">
     <div class="container" style="padding: 8px 0px;">
         <div class="row nav-kit">
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(255,255,255,0.87)">COCO</span></div>
-            <div class="col-xs-7 col-sm-7 col-md-2 col-lg-2" style="text-align: center;">
+            <div class="hidden-xs hidden-sm col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(255,255,255,0.87)">COCO</span></div>
+            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2" style="text-align: center;">
                 <img style="width: 32px;height: 32px;" src="/images/icons/logo_white.png" alt=""/>
             </div>
-            <div  class="item col-xs-3 col-sm-3 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
-            <div class="item col-xs-3 col-sm-3 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
-            <div class="item col-xs-3 col-sm-3 col-md-1"><a href="#chat">消息 <span class="badge"></span></a></div>
-            <div class="item col-xs-3 col-sm-3 col-md-1"><a href="#account">帐号 <span class="badge"></span></a></div>
+            <div  class="item col-xs-2 col-sm-2 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#chat">好友 <span class="badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#account">帐号 <span class="badge"></span></a></div>
         </div>
     </div>
 </div>

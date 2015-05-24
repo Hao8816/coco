@@ -41,8 +41,8 @@
     #send_message_btn{
         display: inline-block;
         width: 100%;
-        height: 50px;
-        line-height: 40px;
+        height: 40px;
+        line-height: 30px;
         font-size: 18px;
         border-radius: 0px;
     }
@@ -99,27 +99,51 @@
 <div class="container" style="margin-top: 20px;margin-bottom:10px;border-radius: 5px;" ng-controller="chatPageCtrl">
     <div class="row">
         <div class="col-xs-8 col-sm-8 col-md-9 " style="border-radius:5px;">
-            <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
-                <li class="active ng-binding">我的消息 <span style="font-size: 12px;padding: 5px;">总共 {{nb_topic}} 未读消息</span></li>
-            </ol>
-            <div id="chat-history" style="height: 610px;overflow-y:auto;background-color:#fff;border: 1px solid #eee"></div>
-            <div style="height: 50px;background-color: #f5f5f5;padding:10px;border-bottom: 1px solid #eee">
-                <img style="height: 30px;width: 30px;border-radius: 30px" ng-src="/images/{{chat_image}}" alt=""/>
-                <span id="friend_name" fid="{{fid}}" ng-bind="chat_name"></span>
-                <!--<span id="chat-tool" style="float: right;font-size: 20px"><i class="glyphicon glyphicon-time"></i><i class="glyphicon glyphicon-envelope"></i></span>-->
-            </div>
-            <div class="row">
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                    <textarea placeholder="请输入消息内容" id="chat-input" style="padding:5px;width: 100%;height: 50px;box-shadow: none;border:none;outline: none;" onkeydown="bindEnterKeySend(event)"></textarea>
+            <div id="all_friend_list" class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height: 500px;">
+                    <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
+                        <li class="active ng-binding">博客达人<span style="font-size: 12px;padding: 5px;">总共 {{nb_topic}} 未读消息</span></li>
+                    </ol>
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding: 5px;cursor: pointer;text-align: center" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query">
+                        <div  style="background-color: #fff;border: 1px solid #ddd;padding-top: 10px;margin: 5px 0px;position: relative">
+                            <a style="position: absolute;top: 5px;right: 10px;"><span class="badge message-badge"></span></a>
+                            <img style="width: 40px;height: 40px;border-radius: 30px;" ng-src="/images/{{friend.head_image}}" alt=""/>
+                            <p style="text-align: center;white-space: nowrap;text-overflow: ellipsis;overflow: hidden">{{friend.name}}</p>
+                            <p>
+                                <span>博客 <a href="">{{friend.nb_blog}}</a></span>
+                                <span>主题 <a href="">{{friend.nb_topic}}</a></span>
+                                <span>好友 <a href="">{{friend.nb_friend}}</a></span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding: 0px;margin-left: -15px;">
-                    <span id="send_message_btn" class="btn btn-danger" onclick="sendChatMessage()">发送</span>
+            </div>
+            <div id="current_chat_area" style="display: none;" class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div style="height: 50px;background-color: #f5f5f5;padding:10px;border-bottom: 1px solid #eee">
+                        <span ng-click="backBtn()" style="cursor: pointer"><i class="glyphicon glyphicon-chevron-left"></i><a>返回</a></span>
+                        <img style="height: 30px;width: 30px;border-radius: 30px;margin-left: 10px" ng-src="/images/{{chat_image}}" alt=""/>
+                        <span id="friend_name" fid="{{fid}}" ng-bind="chat_name"></span>
+                    </div>
+                    <div id="chat-history" style="height: 510px;overflow-y:auto;background-color:#fff;border: 1px solid #eee"></div>
+                        <div style="padding: 10px 10px 5px 5px;background-color: #f5f5f5;overflow: auto">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <span style="padding: 5px"><i class="glyphicon glyphicon-camera" style="font-size: 22px;"></i></span>
+                                <span style="padding: 5px"><i class="glyphicon glyphicon-tag" style="font-size: 22px;"></i></span>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                <textarea placeholder="请输入消息内容" id="chat-input" style="width: 100%;height: 40px;box-shadow: none;border:none;outline: none;margin: 0px" onkeydown="bindEnterKeySend(event)"></textarea>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="">
+                                <span id="send_message_btn" class="btn btn-danger" onclick="sendChatMessage()">发送</span>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-3">
             <div style="border-radius: 5px;border: 1px solid #f5f5f5;" >
-                <div style="background-color: #fff;border-radius: 5px;height: 140px;padding: 10px 0px;">
+                <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
                     <div style="text-align: center;line-height: 100px;">
                         <img style="height: 80px;width: 80px;border-radius: 80px;" ng-src="/images/{{user.head_image}}"
                              alt=""/>
@@ -129,26 +153,19 @@
                         <span>博客<a href="">{{user.nb_blog}}</a></span>
                         <span>好友<a href="">{{user.nb_friend}}</a></span>
                     </p>
+                    <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
+                        <a style="color: #fff;font-size: 15px;" data-toggle="modal" data-target=".compose_topic_modal">添加好友</a>
+                    </span>
                 </div>
-                <div style="padding:10px;line-height: 60px;border-bottom: 1px solid #eee;display: none">
-                    <img style="height: 60px;width: 60px;border-radius: 60px;" ng-src="/images/{{user.head_image}}" alt=""/>
-                    <span id="my_name" style="padding: 5px 10px;font-weight: bold">{{user.name}}</span>
-                    <span>[在线]</span>
-                </div>
-                <div style="padding: 5px 10px;">
-                    <div class="" style="position: relative">
-                        <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" class="form-control input-sm ng-pristine ng-valid" placeholder="搜索好友" type="text">
-                        <span class="search-btn" style="display: inline-block;position: absolute;top: 0px;right: 5px;padding: 5px 10px">
-                            <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
-                        </span>
+                <div>
+                    <h5>我关注的人</h5>
+                    <div style="border-radius: 5px;background-color: #fff;padding: 5px;">
+                        <div class="friend-item" style="width: 25%;display: inline-block;text-align: center" ng-repeat="friend in friend_list">
+                            <img title="{{friend.name}}" style="width: 60%;margin:0 10%;border-radius: 100%;border: 1px solid #f5f5f5" src="/images/{{friend.head_image}}" alt=""/>
+                            <span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" ng-bind="friend.name"></span>
+                        </div>
                     </div>
                 </div>
-                <ul class="friend_list" id="friend_nav_list" style="background-color: #fff;overflow-y: scroll">
-                    <li style="display: inline-block;width:24%;" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query">
-                        <img style="width: 30px;height: 30px;border-radius: 30px;" ng-src="/images/{{friend.head_image}}" alt=""/>
-                        <p style="text-align: center;white-space: nowrap;text-overflow: ellipsis;overflow: hidden">{{friend.name}}</p><span class="badge pull-right"></span>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
