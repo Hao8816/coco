@@ -46,6 +46,7 @@ io.on('connection',function(socket){
     socket.on('LOGIN_MESSAGE_SERVER',function(msg){
         var user_sha1 = msg['user_sha1'];
         var socket_id = this.id;
+        console.log("user id is:",user_sha1)
         // 更新用户信息
         redis_client.hset('CHAT_USER_STORE',user_sha1,this.id,function(err){
             if(err){
