@@ -46,6 +46,7 @@ io.on('connection',function(socket){
     socket.on('LOGIN_MESSAGE_SERVER',function(msg){
         var user_sha1 = msg['user_sha1'];
         var socket_id = this.id;
+        console.log("user id is:",user_sha1)
         // 更新用户信息
         redis_client.hset('CHAT_USER_STORE',user_sha1,this.id,function(err){
             if(err){
@@ -67,7 +68,6 @@ io.on('connection',function(socket){
                // if(results['message_box'])
                 var message_box = JSON.parse(results['message_box'])
                 io.sockets.connected[socket_id].emit('LOGIN_MESSAGE_SUCCESS',{'user_sha1':user_sha1,'socket_id':this.id,'message_box':message_box});
-                // results is now equal to: {one: 1, two: 2}
             });
     });
     socket.on('CHAT_MESSAGE',function(msg){
@@ -77,9 +77,7 @@ io.on('connection',function(socket){
         var my_sha1 = msg['my_sha1'];
         var chat_message = msg['chat_message'];
         // 根据不同的发送者，来分发消息
-        // get user session id by name
-        //pub.publish('CHAT_MESSAGE',chat_message);
-
+        var time = new Date().getTime();
         redis_client.hget('CHAT_USER_STORE',friend_sha1,function(err,data){
             if(err){
                 console.log(err);
@@ -90,7 +88,7 @@ io.on('connection',function(socket){
                 console.log('Send Message Error');
             }else{
                 if (io.sockets.connected[data]) {
-                    io.sockets.connected[data].emit('CHAT_MESSAGE',{'friend_name':my_sha1,'my_name':friend_sha1,'chat_message':chat_message});
+                    io.sockets.connected[data].emit('CHAT_MESSAGE',{'friend_sha1':my_sha1,'my_sha1':friend_sha1,'chat_message':chat_message,"time":time.toString()});
                 }else{
                     console.log('Can not find Socket!');
                     // 检查用户消息盒子
@@ -121,8 +119,6 @@ io.on('connection',function(socket){
                 }
             }
         });
-
-        //socket.broadcast.emit('message',msg);
     });
 
     socket.on('BLOG_MESSAGE',function(msg){

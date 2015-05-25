@@ -13,16 +13,16 @@ client.on('CHAT_MESSAGE',function(data) {
     console.log(data);
     var chat_message = data['chat_message'];
     var friend_sha1 = data['friend_sha1'];
-    var my_sha1 = data['my_sha1']
+    var my_sha1 = data['my_sha1'];
     var cache_key = my_sha1+'_'+friend_sha1;
     cacheChatMessage(cache_key,data)
-    var message_number = $('li[u-id='+friend_sha1+']').find('.badge').text()
+    var message_number = $('div[uid='+friend_sha1+']').find('.message-badge').text();
     if(message_number == ''){
-        message_number = 1
+        message_number = 1;
     }else{
-        message_number = parseInt(message_number)+1
+        message_number = parseInt(message_number)+1;
     }
-    $('li[u-id='+friend_sha1+']').find('.badge').text(message_number)
+    $('div[uid='+friend_sha1+']').find('.message-badge').text(message_number);
     // 从前端的好友列表中获取好友信息
     var friendImage = getFriendImage(friend_sha1);
     var message_template = $('.message_template').find('.message-item-left').clone();
@@ -39,7 +39,7 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     // 将用户登录信息存入sessionStorage
     sessionStorage.setItem('LOGIN_USER_INFO_SHA1',user_sha1);
     // 用户登录message server之后，检查用户的消息更新
-    var message_box = data['message_box'];
+    var message_box = data['message_box'] || {};
     MESSAGE_BOX = message_box;
     // 需要清空前段的主题缓存
     if(message_box.hasOwnProperty('blog-message')){
@@ -101,7 +101,7 @@ function sendChatMessage() {
     }
 
     var message = $('#chat-input').val();
-    var my_sha1 = $('#my_name').attr('uid');
+    var my_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
     var friend_sha1 = $('#friend_name').attr('fid');
     var message_dic = {'friend_sha1':friend_sha1,'my_sha1':my_sha1,'chat_message':message,'is_mine':true}
     client.emit('CHAT_MESSAGE',message_dic);
@@ -143,28 +143,26 @@ function cacheChatMessage(cache_key,message){
 }
 
 function showChatHistory(cache_key){
-    var message_list = []
-    var message_record = localStorage.getItem(cache_key+'_chat_message')
+    var message_list = [];
+    var message_record = localStorage.getItem(cache_key+'_chat_message');
     if (message_record!=null){
         message_list = JSON.parse(message_record);
     }
     //return message_list;
-    $('#chat-history').empty()
+    $('#chat-history').empty();
     for(var i=0;i<message_list.length;i++){
         var message = message_list[i];
-        var chat_message = message.chat_message
-        var sender = message.friend_name
+        var chat_message = message.chat_message;
         if (message.is_mine){
-            sender = message.my_name
-            var message_template = $('.message_template').find('.message-item-right').clone()
-            //$('#chat-history').append('<div style="padding: 10px;margin: 2px;" class="item"><a class="message">'+sender+':'+chat_message+'</a></div>');
+            var message_template = $('.message_template').find('.message-item-right').clone();
+            var image_url = getFriendImage(message.my_sha1);
         }else{
-            var message_template = $('.message_template').find('.message-item-left').clone()
-            //$('#chat-history').append('<div style="padding: 10px;margin: 2px;width: 50%" class="item"><a class="message">'+sender+':'+chat_message+'</a></div>');
+            var message_template = $('.message_template').find('.message-item-left').clone();
+            var image_url = getFriendImage(message.friend_sha1);
         }
-        //var message_template = $('.message_template').find('.message-item-left').clone()
-        message_template.find('.content').text(sender+':'+chat_message)
-        $('#chat-history').append(message_template)
+        message_template.find('.image').attr('src',image_url);
+        message_template.find('.content').text(chat_message);
+        $('#chat-history').append(message_template);
     }
 }
 
@@ -186,7 +184,7 @@ function getFriendImage(friend_sha1){
     var friend_list = localStorage.getItem('FRIEND_INFO_DICT');
     var friend_info_dict = JSON.parse(friend_list);
     var image_url = 'default.jpg';
-    if (friend_info_dict.hasOwnProperty(friend_name)){
+    if (friend_info_dict.hasOwnProperty(friend_sha1)){
         image_url = friend_info_dict[friend_sha1].head_image;
     }
     return '/images/'+image_url

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var blog = require('../coco_core/blog-impl');
 var user = require('../coco_core/user-impl');
+var search = require('../coco_core/search-impl');
 
 var fs = require('fs');
 var SHA1 = require('sha1')
@@ -20,6 +21,10 @@ router.post('/save_topic/', function(req, res) {
     blog.saveTopic(req,res);
 });
 
+router.post('/save_comment/', function(req, res) {
+    blog.saveComment(req,res);
+});
+
 router.post('/get_blog_list/', function(req, res) {
     blog.getBlogList(req,res);
 });
@@ -32,6 +37,13 @@ router.post('/get_topic_list/', function(req, res) {
     blog.getTopicList(req,res);
 });
 
+router.post('/search_topic/', function(req, res) {
+    search.searchTopic(req,res);
+});
+
+router.post('/search_blog/', function(req, res) {
+    search.searchBlog(req,res);
+});
 
 router.post('/register/',function(req,res){
     user.createUser(req,res);

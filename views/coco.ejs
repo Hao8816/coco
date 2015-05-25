@@ -39,8 +39,8 @@
     <script type="text/javascript">
         function chatPageCtrl($scope, $http) {
             var height = document.documentElement.clientHeight;
-            $('#friend_nav_list').height(height-130)
-            $('#chat-history').height(height-190)
+//            $('#friend_nav_list').height(height-130)
+//            $('#chat-history').height(height-190)
 
             $scope.chat_image = 'default.jpg'
 
@@ -67,7 +67,7 @@
                     var friend_info_dict = {}
                     var all_user_info_dict = {}
                     friend_list.forEach(function(obj){
-                        friend_info_dict[obj.name] = obj
+                        friend_info_dict[obj.sha1] = obj
                         all_user_info_dict[obj.sha1] = obj
                     })
 
@@ -80,14 +80,22 @@
             // get user friend list
 
             $scope.openChat = function (obj) {
+                $('#all_friend_list').slideUp();
+                $('#current_chat_area').slideDown();
                 var friend_name = $(obj)[0].friend.name;
                 var head_image = $(obj)[0].friend.head_image;
                 var friend_sha1 = $(obj)[0].friend.sha1;
                 $scope.chat_name = friend_name;
                 $scope.chat_image = head_image;
                 $scope.fid = friend_sha1;
+                var my_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                showChatHistory(my_sha1+'_'+friend_sha1);
+                $('div[uid='+friend_sha1+']').find('.message-badge').text('');
+            }
 
-                //
+            $scope.backBtn = function () {
+                $('#all_friend_list').slideDown();
+                $('#current_chat_area').slideUp();
             }
 
 
@@ -174,7 +182,7 @@
                             if (obj['head_image'] == ''){
                                 obj['head_image'] = 'default.jpg';
                             }
-                            friend_info_dict[obj.name] = obj;
+                            friend_info_dict[obj.sha1] = obj;
                             all_user_info_dict[obj.sha1] = obj;
                             return obj;
 
@@ -194,31 +202,44 @@
             }else{
                 $scope.friend_list = JSON.parse(localStorage.getItem('FRIEND_INFO_LIST'));
                 // 显示所有的主题
-                showTopic();
+                showTopic(1);
             }
 
-            function showTopic() {
+            $scope.changePage = function(offset){
+                var page = $scope.current_page + offset;
+                showTopic(page);
+            }
+
+            function showTopic(page) {
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                 var topic_info_cache = localStorage.getItem('TOPIC_INFO_LIST');
-                if(topic_info_cache == null){
+                $scope.prev = true;
+                $scope.next = true;
+                //if(topic_info_cache == null){
                     $('.topic-badge').text('');
-                    $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1}).success(function (data) {
+                    $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1,page:page}).success(function (data) {
                         if (data['ret'] == '0001') {
                             console.log(data);
-                            var blog_list = data['topic_list']
-                            blog_list.forEach(function (obj) {
-                                var format_data = new Date(parseInt(obj['time']))
-                                obj['time'] = format_data.Format('yyyy/MM/dd hh:mm')
-                                console.log(obj['time'])
-                            })
                             var topic_list = data['topic_list'];
                             topic_list.every(function(obj){
                                 var userSha1 = obj.creator_sha1;
                                 var userObject = getUserDetailInfo(userSha1);
                                 obj['name'] = userObject['name']
-                                obj['head_image'] = userObject['head_image']
+                                obj['head_image'] = userObject['head_image'];
                                 return obj;
                             });
+                            var has_next = data['has_next'];
+                            if(has_next){
+                                $scope.next = true
+                            }else{
+                                $scope.next = false
+                            }
+                            if(page == 1){
+                                $scope.prev = false
+                            }else{
+                                $scope.prev = true
+                            }
+                            $scope.current_page = page;
                             $scope.topic_list = topic_list;
                             $scope.nb_topic = topic_list.length;
                             var topic_info_dict = {};
@@ -231,11 +252,49 @@
 
                         }
                     });
-                }else{
-                    var topic_list = JSON.parse(topic_info_cache);
-                    $scope.nb_topic = topic_list.length;
-                    $scope.topic_list = topic_list;
+//                }else{
+//                    var topic_list = JSON.parse(topic_info_cache);
+//                    $scope.nb_topic = topic_list.length;
+//                    $scope.topic_list = topic_list;
+//                }
+            }
+
+            $scope.enterSearchTopic = function(e){
+                var e = e || window.event
+                if (e.keyCode == 13){
+                    var keyword = $scope.query;
+                    searchTopic(keyword);
                 }
+            }
+
+            function searchTopic(keyword){
+                var page = $scope.page || 1;
+                $http.post('/ajax/search_topic/', {keyword:keyword,page:page}).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        var topic_list = data['topic_list'];
+                        topic_list.every(function(obj){
+                            var userSha1 = obj.creator_sha1;
+                            var userObject = getUserDetailInfo(userSha1);
+                            obj['name'] = userObject['name']
+                            obj['head_image'] = userObject['head_image'];
+                            return obj;
+                        });
+                        var has_next = data['has_next'];
+                        if(has_next){
+                            $scope.next = true
+                        }else{
+                            $scope.next = false
+                        }
+                        if(page == 1){
+                            $scope.prev = false
+                        }else{
+                            $scope.prev = true
+                        }
+                        $scope.current_page = page;
+                        $scope.topic_list = topic_list;
+                        $scope.nb_topic = topic_list.length;
+                    }
+                })
             }
 
 
@@ -351,6 +410,10 @@
 
             // 显示博客列表
             $scope.blog_list = [];
+            $scope.prev = true;
+            $scope.next = true;
+            $scope.comment_blog_sha1 = "";
+            $scope.comment_parent_sha1 = "";
 
             // 显示主题的信息
             var topic_object = getTopicObjectInfo(topic_sha1);
@@ -369,7 +432,7 @@
                             if (obj['head_image'] == ''){
                                 obj['head_image'] = 'default.jpg';
                             }
-                            friend_info_dict[obj.name] = obj;
+                            friend_info_dict[obj.sha1] = obj;
                             all_user_info_dict[obj.sha1] = obj;
                             return obj;
 
@@ -447,10 +510,114 @@
                 });
             }
 
+            $scope.showCommentModal = function(blog_obj){
+                $scope.comment_blog_sha1 = blog_obj.blog.sha1;
+                $scope.comment_parent_sha1 = "";
+                $('.comment_modal').modal('show');
+            }
+
+            $scope.saveComment = function (comment_obj) {
+                var content = $scope.comment.content;
+                var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                var file_sha1_list = [];
+                comment_file_list.forEach(function(obj){
+                    file_sha1_list.push(obj.sha1)
+                })
+                var parent_sha1 = $scope.comment_parent_sha1;
+                var blog_sha1 = $scope.comment_blog_sha1;
+                $http.post('/ajax/save_comment/', {
+                    content: content,
+                    creator_sha1: creator_sha1,
+                    parent_sha1:parent_sha1,
+                    blog_sha1:blog_sha1,
+                    file_list : file_sha1_list
+                }).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        console.log(data);
+                        //$('#blog_files_area').empty()
+                        comment_file_list = []
+                        $('.comment_modal').modal('hide');
+                        showBlog(1);
+// 发送博客更细通知
+//                        sendBlogMessage('add_blog',data['blog'][0].sha1);
+
+//                        var blog_list = data['blog'].concat($scope.blog_list);
+//                        blog_list.every(function(obj){
+//                            var user_sha1 = obj.creator_sha1;
+//                            var userObj = getUserDetailInfo(user_sha1);
+//                            obj['name'] = userObj.name;
+//                            obj['head_image'] = userObj.head_image;
+//                            return obj;
+//                        });
+//
+//                        // 利用angular刷新
+//                        $scope.blog_list = blog_list;
+//
+//                        // 更新用户博客的数量
+//                        var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+//                        var user_obj = JSON.parse(loginUserInfo);
+//                        user_obj.nb_blog = user_obj.nb_blog+1;
+//                        sessionStorage.setItem('LOGIN_USER_INFO',JSON.stringify(user_obj));
+//                        $scope.user = user_obj;
+
+                    } else {
+
+                    }
+                });
+            }
+
             $scope.changePage = function(offset){
                 var page = $scope.current_page + offset;
                 showBlog(page);
             }
+
+            $scope.enterSearchBlog = function(e){
+                var e = e || window.event
+                if (e.keyCode == 13){
+                    var keyword = $scope.query;
+                    $scope.current_page = 1;
+                    searchBlog(keyword);
+                }
+            }
+
+            function searchBlog(keyword){
+                var page = $scope.current_page || 1;
+                $http.post('/ajax/search_blog/', {keyword:keyword,page:page}).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        var blog_list = data['blog_list'];
+                        var has_next = data['has_next'];
+                        if(has_next){
+                            $scope.next = true
+                        }else{
+                            $scope.next = false
+                        }
+                        if(page == 1){
+                            $scope.prev = false
+                        }else{
+                            $scope.prev = true
+                        }
+                        blog_list.every(function(obj){
+                            var user_sha1 = obj.creator_sha1;
+                            var userObj = getUserDetailInfo(user_sha1);
+                            obj['name'] = userObj.name;
+                            obj['head_image'] = userObj.head_image;
+                            var comment_list = obj['comment_list'] || [];
+                            comment_list.every(function(comment_obj){
+                                var commentUserSha1 = comment_obj.creator_sha1;
+                                var commentUObject = getUserDetailInfo(commentUserSha1);
+                                comment_obj['name'] = commentUObject['name']
+                                comment_obj['head_image'] = commentUObject['head_image'];
+                                return comment_obj;
+                            })
+                            return obj;
+                        });
+
+                        $scope.blog_list = blog_list;
+                        $scope.current_page = page
+                    }
+                })
+            }
+
 
             function showBlog(page) {
                 if(page<1){
@@ -463,11 +630,30 @@
                     if (data['ret'] == '0001') {
                         console.log(data);
                         var blog_list = data['blog_list'];
+                        var has_next = data['has_next'];
+                        if(has_next){
+                            $scope.next = true
+                        }else{
+                            $scope.next = false
+                        }
+                        if(page == 1){
+                            $scope.prev = false
+                        }else{
+                            $scope.prev = true
+                        }
                         blog_list.every(function(obj){
                             var user_sha1 = obj.creator_sha1;
                             var userObj = getUserDetailInfo(user_sha1);
                             obj['name'] = userObj.name;
                             obj['head_image'] = userObj.head_image;
+                            var comment_list = obj['comment_list'] || [];
+                            comment_list.every(function(comment_obj){
+                                var commentUserSha1 = comment_obj.creator_sha1;
+                                var commentUObject = getUserDetailInfo(commentUserSha1);
+                                comment_obj['name'] = commentUObject['name']
+                                comment_obj['head_image'] = commentUObject['head_image'];
+                                return comment_obj;
+                            })
                             return obj;
                         });
 
@@ -486,7 +672,8 @@
     <script type="text/javascript" src="/Jquery/jquery.iframe-transport.js"></script>
     <script type="text/javascript" src="/Jquery/jquery.fileupload.js"></script>
     <script type="text/javascript">
-        var file_list = []
+        var file_list = [];
+        var comment_file_list = [];
         $(function () {
             // 文件上传
             $('#fileupload').fileupload({
@@ -592,14 +779,14 @@
 <div style="width: 100%;background-color: rgba(255,82,119,0.8);position: fixed;z-index: 10">
     <div class="container" style="padding: 8px 0px;">
         <div class="row nav-kit">
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(255,255,255,0.87)">COCO</span></div>
-            <div class="col-xs-7 col-sm-7 col-md-2 col-lg-2" style="text-align: center;">
+            <div class="hidden-xs hidden-sm col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(255,255,255,0.87)">COCO</span></div>
+            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2" style="text-align: center;">
                 <img style="width: 32px;height: 32px;" src="/images/icons/logo_white.png" alt=""/>
             </div>
-            <div  class="item col-xs-3 col-sm-3 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
-            <div class="item col-xs-3 col-sm-3 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
-            <div class="item col-xs-3 col-sm-3 col-md-1"><a href="#chat">消息 <span class="badge"></span></a></div>
-            <div class="item col-xs-3 col-sm-3 col-md-1"><a href="#account">帐号 <span class="badge"></span></a></div>
+            <div  class="item col-xs-2 col-sm-2 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#chat">好友 <span class="badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#account">帐号 <span class="badge"></span></a></div>
         </div>
     </div>
 </div>
