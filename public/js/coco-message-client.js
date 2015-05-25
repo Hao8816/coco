@@ -29,6 +29,7 @@ client.on('CHAT_MESSAGE',function(data) {
     message_template.find('.content').text(chat_message);
     message_template.find('.image').attr('src',friendImage);
     $('#chat-history').append(message_template)
+    $('#chat-history').scrollTop(10000)
 });
 client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     var user_sha1 = data['user_sha1'];
