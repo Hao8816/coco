@@ -28,7 +28,8 @@ client.on('CHAT_MESSAGE',function(data) {
     var message_template = $('.message_template').find('.message-item-left').clone();
     message_template.find('.content').text(chat_message);
     message_template.find('.image').attr('src',friendImage);
-    $('#chat-history').append(message_template);
+    $('#chat-history').append(message_template)
+    $('#chat-history').scrollTop(10000)
 });
 client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     var user_sha1 = data['user_sha1'];
@@ -110,7 +111,8 @@ function sendChatMessage() {
     var message_template = $('.message_template').find('.message-item-right').clone();
     message_template.find('.content').text(message);
     message_template.find('.image').attr('src',myImage);
-    $('#chat-history').append(message_template)
+    $('#chat-history').append(message_template);
+    $('#chat-history').scrollTop(10000);
     $('#chat-input').val('');
 }
 function loginMessageServer(){
