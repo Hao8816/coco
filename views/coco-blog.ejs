@@ -16,7 +16,8 @@
         border-left: 4px solid #eee;
     }
     .blog-nav li:hover{
-        border-left-color:#ff5277;
+        /*border-left-color:#ff5277;*/
+        border-left-color:#5cb85c;
     }
 
     .pagination li a, .pagination a span {
@@ -48,7 +49,7 @@
     }
     .blog-nav-bar .nav-active{
         /*border-bottom: 2px solid #ff7997;*/
-        background-color: #ff5277;
+        background-color: #5cb85c;
         font-weight: bold;
         color: rgba(255,255,255,0.87);
     }
@@ -110,8 +111,6 @@
             </div>
             <div class="row blog-nav-bar" style="margin-top: 5px;">
                 <div class="col-xs-6 col-sm-5 col-md-4">
-                    <span class="nav-item nav-active" ng-click="showAllBlog()">所有博客</span>
-                    <span class="nav-item" ng-click="showMyBlog()">我的博客</span>
                 </div>
                 <div class="col-xs-1 col-sm-3 col-md-5">
                 </div>
@@ -158,6 +157,7 @@
                         </div>
                     </div>
                 </li>
+                <li ng-show="data_empty"><p>当前主题下没有博客信息，点击 <a href="">创建博客</a> 添加博客信息。</p></li>
             </ul>
             <nav style="margin: auto;text-align: center">
                 <ul class="pagination">
@@ -186,9 +186,9 @@
                     <span>博客<a href="">{{user.nb_blog}}</a></span>
                     <span>好友<a href="">{{user.nb_friend}}</a></span>
                 </p>
-                <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
+                <span style="width: 70%;margin: 0px 15%;" class="btn btn-success">
                     <a style="color: #fff;font-size: 15px;" data-toggle="modal"
-                       data-target=".compose_blog_modal">发表博客</a>
+                       data-target=".compose_blog_modal">创建博客</a>
                 </span>
             </div>
             <div>
@@ -238,7 +238,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-danger btn-sm" ng-click="saveBlog()">发表</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="saveBlog()">发表</button>
                 </div>
             </div>
         </div>
@@ -274,7 +274,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-danger btn-sm" ng-click="saveComment()">发表</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="saveComment()">发表</button>
                 </div>
             </div>
         </div>

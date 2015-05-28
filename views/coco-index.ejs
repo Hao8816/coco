@@ -11,7 +11,7 @@
     }
     .topic-item:hover{
         /*box-shadow: 0px 0px 10px 3px #ddd;*/
-        border-left-color: #ff5277;
+        border-left-color: #5cb85c;
     }
     .topic-item .topic-link{
         text-decoration: none;
@@ -45,7 +45,7 @@
         text-decoration: none;
     }
     .topic-category .item-active{
-        background-color: #ff5277;
+        background-color: #5cb85c;
         font-weight: bold;
         color: rgba(255,255,255,0.87);
         border-radius: 15px;
@@ -128,7 +128,7 @@
                     <span>博客<a href="" ng-bind="user.nb_blog"></a></span>
                     <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
                 </p>
-                <span style="width: 70%;margin: 0px 15%;" class="btn btn-danger">
+                <span style="width: 70%;margin: 0px 15%;" class="btn btn-success">
                     <a style="color: #fff;font-size: 15px;" data-toggle="modal" data-target=".compose_topic_modal">创建主题</a>
                 </span>
             </div>
@@ -162,7 +162,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-danger btn-sm" ng-click="saveTopic()">创建</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="saveTopic()">创建</button>
                 </div>
             </div>
         </div>

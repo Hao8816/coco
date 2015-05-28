@@ -657,6 +657,10 @@
                             return obj;
                         });
 
+                        if(blog_list.length == 0){
+                            $scope.data_empty = true;
+                        }
+
                         $scope.blog_list = blog_list;
                         $scope.current_page = page
                     } else {
@@ -776,7 +780,7 @@
 
 </head>
 <body>
-<div style="width: 100%;background-color: rgba(255,82,119,0.8);position: fixed;z-index: 10">
+<div style="width: 100%;background-color: rgba(3, 169, 244, 0.8);position: fixed;z-index: 10">
     <div class="container" style="padding: 8px 0px;">
         <div class="row nav-kit">
             <div class="hidden-xs hidden-sm col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(255,255,255,0.87)">COCO</span></div>
@@ -827,7 +831,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                <button type="button" id="save_image" onclick="saveImage()" class="btn btn-danger btn-sm">确定</button>
+                <button type="button" id="save_image" onclick="saveImage()" class="btn btn-success btn-sm">确定</button>
             </div>
         </div>
     </div>
