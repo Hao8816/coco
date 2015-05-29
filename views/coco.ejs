@@ -52,10 +52,19 @@
                 if (data['ret'] == '0001') {
                     console.log(data);
                     var friend_list = data['friend_list'];
+                    // 获取前端未读信息
+                    var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
+                    unread_messages = JSON.parse(unread_messages);
+
                     friend_list.every(function(obj){
+                        var unread_message = ''
+                        if (unread_messages.hasOwnProperty(obj.sha1)){
+                            unread_message = unread_message[obj.sha1]
+                        }
                         if (obj['head_image'] == ''){
                             obj['head_image'] = 'default.jpg';
                         }
+                        obj['nb_message'] = unread_message;
                         return obj;
                     });
 
@@ -63,6 +72,7 @@
 
                     var friend_info_dict = {};
                     var all_user_info_dict = {};
+
                     friend_list.forEach(function(obj){
                         friend_info_dict[obj.sha1] = obj;
                         all_user_info_dict[obj.sha1] = obj;
@@ -70,18 +80,6 @@
 
                     localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
                     localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
-
-                    // 获取前端未读信息
-                    var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
-                    unread_messages = JSON.parse(unread_messages);
-                    for (var friend_sha1 in unread_messages){
-                        var message_number = $('div[uid='+friend_sha1+']').find('.message-badge').text() || 0;
-                        message_number = parseInt(message_number) + parseInt(unread_messages[friend_sha1]);
-                        $('div[uid='+friend_sha1+']').find('.message-badge').text(message_number);
-                    }
-                    $('.nav-kit').find('.friend-badge').text('');
-
-                } else {
 
                 }
             });

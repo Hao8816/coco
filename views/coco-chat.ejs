@@ -116,7 +116,7 @@
                     </ol>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding: 5px;cursor: pointer;text-align: center" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query | orderBy:order:true">
                         <div class="friend-item">
-                            <a style="position: absolute;top: 5px;right: 10px;"><span class="badge message-badge"></span></a>
+                            <a style="position: absolute;top: 5px;right: 10px;"><span class="badge message-badge" ng-bind="friend.nb_message"></span></a>
                             <img style="width: 40px;height: 40px;border-radius: 30px;" ng-src="/images/{{friend.head_image}}" alt=""/>
                             <span style="position:absolute;left:10px;font-size: 12px;color: rgba(0,0,0,0.87)" ng-show="friend.online==1"><em style="display: inline-block;width: 10px;height: 10px;border-radius: 5px;background-color: #4cae4c"></em></span>
                             <span style="position:absolute;left:10px;font-size: 12px;color: rgba(0,0,0,0.56)" ng-show="friend.online==0"><em style="display: inline-block;width: 10px;height: 10px;border-radius: 5px;margin-right:5px;background-color: #ccc"></em>[离线]</span>
