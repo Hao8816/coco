@@ -64,7 +64,13 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     if(message_box.hasOwnProperty('friend-message')){
 
     };
+});
 
+client.on('USER_ONLINE_STATUS',function(data){
+    console.log(data);
+    var user_sha1 = data['user_sha1'];
+    var status = data['status'];
+    updateUserOnlineStatus(user_sha1,status);
 });
 
 client.on('BLOG_MESSAGE',function(data){
@@ -208,4 +214,15 @@ function getFriendImage(friend_sha1){
     }
     return '/images/'+image_url
 
+}
+
+function updateUserOnlineStatus(user_sha1,status){
+    // 如果是新上线，更新显示状态，如果下线，显示在后面
+    if(status == 'online'){
+        $('div[uid='+user_sha1+']').find('.offline-mark').hide();
+        $('div[uid='+user_sha1+']').find('.online-mark').show();
+    }else{
+        $('div[uid='+user_sha1+']').find('.offline-mark').show();
+        $('div[uid='+user_sha1+']').find('.online-mark').hide();
+    }
 }
