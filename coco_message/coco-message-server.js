@@ -55,6 +55,7 @@ io.on('connection',function(socket){
             }
         });
         // 更新用在线状态
+        console.log('cache user oneline status:',user_sha1)
         redis_client.hset('USER_STATUS_STORE',user_sha1,"1",function(err){
             if(err){
                 console.log(err);
