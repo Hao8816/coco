@@ -59,7 +59,7 @@
                     friend_list.every(function(obj){
                         var nb_message = ''
                         if (unread_messages.hasOwnProperty(obj.sha1)){
-                            nb_message = unread_message[obj.sha1]
+                            nb_message = unread_messages[obj.sha1]
                         }
                         if (obj['head_image'] == ''){
                             obj['head_image'] = 'default.jpg';
