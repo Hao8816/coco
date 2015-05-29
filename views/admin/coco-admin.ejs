@@ -28,6 +28,10 @@
                         templateUrl:'/admin/email/',
                         controller:''
                     }).
+                    when('/invite/',{
+                        templateUrl:'/admin/invite/',
+                        controller:''
+                    }).
                     otherwise({redirectTo:'/admin/'});
         }]);
 
@@ -76,7 +80,7 @@
     </script>
     <style type="text/css">
         body{
-            background-color: #fafafa;
+            background-color: #f5f5f5;
         }
         .device-item{
             width: 60px;
@@ -121,9 +125,9 @@
 
 </head>
 <body>
-<div class="visible-xs-* hidden-sm hidden-md hidden-lg" style="text-align: center;border-bottom:1px solid #ff5277;background-color: #f50057;padding: 10px 0px;color: rgba(255,255,255,0.87)"><h4 style="margin: 0px">COCO 管理员</h4></div>
-<div style="background-color: #ff5277;width: 100%">
-    <div class="container" style="background-color: #ff5277;padding: 12px 0px;color: rgba(255,255,255,0.87)">
+<div class="visible-xs-* hidden-sm hidden-md hidden-lg" style="text-align: center;border-bottom:1px solid #ff5277;background-color: rgba(3, 169, 244, 0.8);padding: 10px 0px;color: rgba(255,255,255,0.87)"><h4 style="margin: 0px">COCO 管理员</h4></div>
+<div style="background-color: rgba(3, 169, 244, 0.8);width: 100%">
+    <div class="container" style="padding: 12px 0px;color: rgba(255,255,255,0.87)">
         <div class="row nav-kit">
             <div class="hidden-xs col-sm-4 col-md-8"><h4 style="margin: 0px">COCO 管理员</h4></div>
             <div  class="item col-xs-3 col-sm-2 col-md-1"><a href="#index">主题管理 <span class="badge topic-badge"></span></a></div>

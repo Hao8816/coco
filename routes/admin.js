@@ -12,6 +12,10 @@ router.get('/email/', function(req, res) {
   res.render('admin/coco-admin-email.ejs', { title: 'COCO Admin' });
 });
 
+router.get('/invite/', function(req, res) {
+    res.render('admin/coco-admin-invite.ejs', { title: 'COCO Admin' });
+});
+
 router.get('/message/', function(req, res) {
   res.render('admin/coco-admin-message.ejs', { title: 'COCO Admin' });
 });
