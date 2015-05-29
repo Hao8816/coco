@@ -57,14 +57,14 @@
                     unread_messages = JSON.parse(unread_messages);
 
                     friend_list.every(function(obj){
-                        var unread_message = ''
+                        var nb_message = ''
                         if (unread_messages.hasOwnProperty(obj.sha1)){
-                            unread_message = unread_message[obj.sha1]
+                            nb_message = unread_message[obj.sha1]
                         }
                         if (obj['head_image'] == ''){
                             obj['head_image'] = 'default.jpg';
                         }
-                        obj['nb_message'] = unread_message;
+                        obj['nb_message'] = nb_message;
                         return obj;
                     });
 
