@@ -38,16 +38,6 @@
     </script>
     <script type="text/javascript">
         function chatPageCtrl($scope, $http) {
-            // 获取前端未读信息
-            var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
-            unread_messages = JSON.parse(unread_messages);
-            for (var friend_sha1 in unread_messages){
-                var message_number = $('div[uid='+friend_sha1+']').find('.message-badge').text() || 0;
-                message_number = parseInt(message_number) + parseInt(unread_messages[friend_sha1]);
-                $('div[uid='+friend_sha1+']').find('.message-badge').text(message_number);
-            }
-            $('.nav-kit').find('.friend-badge').text('');
-
             $scope.chat_image = 'default.jpg'
             PAGE_INDEX = 2;
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
@@ -80,6 +70,17 @@
 
                     localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
                     localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
+
+                    // 获取前端未读信息
+                    var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
+                    unread_messages = JSON.parse(unread_messages);
+                    for (var friend_sha1 in unread_messages){
+                        var message_number = $('div[uid='+friend_sha1+']').find('.message-badge').text() || 0;
+                        message_number = parseInt(message_number) + parseInt(unread_messages[friend_sha1]);
+                        $('div[uid='+friend_sha1+']').find('.message-badge').text(message_number);
+                    }
+                    $('.nav-kit').find('.friend-badge').text('');
+
                 } else {
 
                 }
