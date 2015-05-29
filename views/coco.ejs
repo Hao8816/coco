@@ -97,6 +97,11 @@
                 var my_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
                 showChatHistory(my_sha1+'_'+friend_sha1);
                 $('div[uid='+friend_sha1+']').find('.message-badge').text('');
+
+                // 删除前端未读信息
+                var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
+                unread_messages = JSON.parse(unread_messages);
+                delete unread_messages[friend_sha1];
             }
 
             $scope.backBtn = function () {
