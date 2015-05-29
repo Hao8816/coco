@@ -220,7 +220,6 @@ function updateUserOnlineStatus(user_sha1,status){
     // 如果是新上线，更新显示状态，如果下线，显示在后面
     if(status == 'online'){
         $('div[uid='+user_sha1+']').find('.offline-mark').hide();
-        $('div[uid='+user_sha1+']').find('.online-mark').removeClass('.ng-hide').show();
         $('div[uid='+user_sha1+']').find('.online-mark').attr('ng-show','true').removeClass('ng-hide');
     }else{
         $('div[uid='+user_sha1+']').find('.offline-mark').attr('ng-show','true').removeClass('ng-hide');
