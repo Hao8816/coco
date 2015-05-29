@@ -38,12 +38,8 @@
     </script>
     <script type="text/javascript">
         function chatPageCtrl($scope, $http) {
-            var height = document.documentElement.clientHeight;
-//            $('#friend_nav_list').height(height-130)
-//            $('#chat-history').height(height-190)
-
             $scope.chat_image = 'default.jpg'
-
+            PAGE_INDEX = 2;
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             var userInfo = JSON.parse(loginUserInfo);
             $scope.user = userInfo;
@@ -128,6 +124,7 @@
 
 
         function accountPageCtrl($scope) {
+            PAGE_INDEX = 3;
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             var info = JSON.parse(loginUserInfo);
             info['time'] = new Date(parseInt(info['time'])).Format('yyyy-MM-dd')
@@ -145,7 +142,7 @@
         }
 
         function topicPageController($scope, $http) {
-
+            PAGE_INDEX = 0;
             var user_info_cache = localStorage.getItem('ALL_USER_INFO_DICT')
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
 
@@ -365,6 +362,7 @@
         }
 
         function blogPageController($scope, $http, $routeParams) {
+            PAGE_INDEX = 1;
             // 博客相关图片的上传
             // 文件上传
             $('#blog_fileupload').fileupload({
@@ -790,7 +788,7 @@
             </div>
             <div  class="item col-xs-2 col-sm-2 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
             <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#chat">好友 <span class="badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#chat">好友 <span class="badge friend-badge"></span></a></div>
             <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#account">帐号 <span class="badge"></span></a></div>
         </div>
     </div>

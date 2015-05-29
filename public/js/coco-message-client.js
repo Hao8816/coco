@@ -3,6 +3,7 @@ var client = io.connect('http://onekoko.com:8089');
 
 // 定义一个消息盒子，并且初始化在缓存中的数据
 var MESSAGE_BOX = {};
+var PAGE_INDEX = 0;
 
 client.on('connect',function(data) {
     console.log('Client has connected to the server!');
@@ -15,20 +16,23 @@ client.on('CHAT_MESSAGE',function(data) {
     var friend_sha1 = data['friend_sha1'];
     var my_sha1 = data['my_sha1'];
     var cache_key = my_sha1+'_'+friend_sha1;
-    cacheChatMessage(cache_key,data)
-    var message_number = $('div[uid='+friend_sha1+']').find('.message-badge').text();
-    if(message_number == ''){
-        message_number = 1;
-    }else{
+    cacheChatMessage(cache_key,data);
+    // 判断当前页面是不是在消息页面
+    if (PAGE_INDEX == 2){
+        var message_number = $('div[uid='+friend_sha1+']').find('.message-badge').text() || 0;
         message_number = parseInt(message_number)+1;
+        $('div[uid='+friend_sha1+']').find('.message-badge').text(message_number);
+    }else{
+        var message_number = $('.nav-kit').find('.friend-badge').text() || 0;
+        message_number = parseInt(message_number)+1;
+        $('.nav-kit').find('.friend-badge').text(message_number);
     }
-    $('div[uid='+friend_sha1+']').find('.message-badge').text(message_number);
     // 从前端的好友列表中获取好友信息
     var friendImage = getFriendImage(friend_sha1);
     var message_template = $('.message_template').find('.message-item-left').clone();
     message_template.find('.content').text(chat_message);
     message_template.find('.image').attr('src',friendImage);
-    $('#chat-history').append(message_template)
+    $('#chat-history').append(message_template);
     $('#chat-history').scrollTop(10000)
 });
 client.on('LOGIN_MESSAGE_SUCCESS',function(data){
