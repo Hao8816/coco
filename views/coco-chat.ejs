@@ -114,7 +114,7 @@
                     <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
                         <li class="active ng-binding">博客达人<span style="font-size: 12px;padding: 5px;">总共 {{nb_topic}} 未读消息</span></li>
                     </ol>
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding: 5px;cursor: pointer;text-align: center" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query | orderBy:order">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding: 5px;cursor: pointer;text-align: center" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query | orderBy:order:true">
                         <div class="friend-item">
                             <a style="position: absolute;top: 5px;right: 10px;"><span class="badge message-badge"></span></a>
                             <img style="width: 40px;height: 40px;border-radius: 30px;" ng-src="/images/{{friend.head_image}}" alt=""/>

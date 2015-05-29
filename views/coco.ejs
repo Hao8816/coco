@@ -47,7 +47,7 @@
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             var userInfo = JSON.parse(loginUserInfo);
             $scope.user = userInfo;
-            $scope.order = "online:desc";
+            $scope.order = "online";
 
             client.emit('LOGIN_MESSAGE_SERVER', {'user_sha1': userInfo.sha1});
 
