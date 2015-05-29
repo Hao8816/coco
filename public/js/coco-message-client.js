@@ -222,7 +222,7 @@ function updateUserOnlineStatus(user_sha1,status){
         $('div[uid='+user_sha1+']').find('.offline-mark').hide();
         $('div[uid='+user_sha1+']').find('.online-mark').show();
     }else{
-        $('div[uid='+user_sha1+']').find('.offline-mark').show();
+        $('div[uid='+user_sha1+']').find('.offline-mark').removeClass('.ng-hide').show();
         $('div[uid='+user_sha1+']').find('.online-mark').hide();
     }
 }
