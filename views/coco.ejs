@@ -102,6 +102,7 @@
                 var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
                 unread_messages = JSON.parse(unread_messages);
                 delete unread_messages[friend_sha1];
+                localStorage.setItem('UNREAD_MESSAGE_NUM',JSON.stringify(unread_messages));
             }
 
             $scope.backBtn = function () {
