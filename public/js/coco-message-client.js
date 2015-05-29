@@ -30,7 +30,7 @@ client.on('CHAT_MESSAGE',function(data) {
         var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
         unread_messages = JSON.parse(unread_messages);
         if (unread_messages.hasOwnProperty(friend_sha1)){
-            unread_messages = parseInt(unread_messages[friend_sha1]) + 1;
+            unread_messages[friend_sha1] = parseInt(unread_messages[friend_sha1]) + 1;
         }else{
             unread_messages[friend_sha1] = 1;
         }
