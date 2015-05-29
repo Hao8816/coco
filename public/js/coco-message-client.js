@@ -68,7 +68,7 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
 
 client.on('USER_ONLINE_STATUS',function(data){
     console.log(data);
-    var user_sha1 = data['user_sha1'];
+    var user_sha1 = data['friend_sha1'];
     var status = data['status'];
     updateUserOnlineStatus(user_sha1,status);
 });
