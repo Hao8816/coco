@@ -221,8 +221,9 @@ function updateUserOnlineStatus(user_sha1,status){
     if(status == 'online'){
         $('div[uid='+user_sha1+']').find('.offline-mark').hide();
         $('div[uid='+user_sha1+']').find('.online-mark').removeClass('.ng-hide').show();
+        $('div[uid='+user_sha1+']').find('.online-mark').attr('ng-show','true').removeClass('ng-hide');
     }else{
-        $('div[uid='+user_sha1+']').find('.offline-mark').removeClass('.ng-hide').show();
+        $('div[uid='+user_sha1+']').find('.offline-mark').attr('ng-show','true').removeClass('ng-hide');
         $('div[uid='+user_sha1+']').find('.online-mark').hide();
     }
 }
