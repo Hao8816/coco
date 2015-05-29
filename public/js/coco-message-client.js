@@ -26,6 +26,14 @@ client.on('CHAT_MESSAGE',function(data) {
         var message_number = $('.nav-kit').find('.friend-badge').text() || 0;
         message_number = parseInt(message_number)+1;
         $('.nav-kit').find('.friend-badge').text(message_number);
+        // 未读消息存到前端缓存
+        var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
+        if (unread_messages.hasOwnProperty(friend_sha1)){
+            unread_messages = parseInt(unread_messages[friend_sha1]) + 1;
+        }else{
+            unread_messages[friend_sha1] = 1;
+        }
+        localStorage.setItem('UNREAD_MESSAGE_NUM',JSON.stringify(unread_messages));
     }
     // 从前端的好友列表中获取好友信息
     var friendImage = getFriendImage(friend_sha1);
@@ -124,6 +132,11 @@ function loginMessageServer(){
     client.emit('LOGIN_MESSAGE_SERVER',{'user_name':my_name});
 }
 
+
+function updateUnreadMessageNum(){
+
+
+}
 
 
 //var room_client = io.connect('http://127.0.0.1:8089/chat_room');
