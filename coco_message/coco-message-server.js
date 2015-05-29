@@ -46,9 +46,16 @@ io.on('connection',function(socket){
     socket.on('LOGIN_MESSAGE_SERVER',function(msg){
         var user_sha1 = msg['user_sha1'];
         var socket_id = this.id;
-        console.log("user id is:",user_sha1)
+        socket['user_sha1'] = user_sha1;
+        console.log("user id is:",user_sha1);
         // 更新用户信息
         redis_client.hset('CHAT_USER_STORE',user_sha1,this.id,function(err){
+            if(err){
+                console.log(err);
+            }
+        });
+        // 更新用在线状态
+        redis_client.hset('USER_STATUS_STORE',user_sha1,"1",function(err){
             if(err){
                 console.log(err);
             }
@@ -211,7 +218,15 @@ io.on('connection',function(socket){
 
     socket.on('disconnect',function(msg){
         console.log(msg+'----');
-        io.emit('message',msg);
+        //io.emit('message',msg);
+        // 更新用在线状态
+        var user_sha1 = socket['user_sha1'];
+        redis_client.hset('USER_STATUS_STORE',user_sha1,"0",function(err){
+            if(err){
+                console.log(err);
+            }
+        });
+
     });
 });
 

@@ -4,6 +4,8 @@ var async = require('async');
 var orm = require("orm");
 var settings = require('../config/db-config');
 var email_client = require('./email-impl');
+var redis = require('redis');
+var redis_client = redis.createClient();
 
 var logger = require('./logger-impl');
 
@@ -168,7 +170,20 @@ var getFriendList = function getFriendList(req,res){
             console.log(err);
         }
         db.driver.execQuery('SELECT * FROM user',function (err, data) {
-            res.send({'info':"OK","ret":0001,"friend_list":data})
+
+            async.map(data, function(item, callback){
+                redis_client.hget('USER_STATUS_STORE',item.sha1,function(err,status){
+                    if(err){
+                        console.log(err);
+                    }
+                    item['online'] = status || 0;
+                    callback(null,item)
+                });
+            }, function(err, results){
+                // results is now an array of stats for each file
+                res.send({'info':"OK","ret":0001,"friend_list":results})
+            });
+
         });
     });
 
