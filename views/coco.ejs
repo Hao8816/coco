@@ -59,17 +59,17 @@
                         if (obj['head_image'] == ''){
                             obj['head_image'] = 'default.jpg';
                         }
-                        return obj
-                    })
+                        return obj;
+                    });
 
                     $scope.friend_list = friend_list;
 
-                    var friend_info_dict = {}
-                    var all_user_info_dict = {}
+                    var friend_info_dict = {};
+                    var all_user_info_dict = {};
                     friend_list.forEach(function(obj){
-                        friend_info_dict[obj.sha1] = obj
-                        all_user_info_dict[obj.sha1] = obj
-                    })
+                        friend_info_dict[obj.sha1] = obj;
+                        all_user_info_dict[obj.sha1] = obj;
+                    });
 
                     localStorage.setItem('FRIEND_INFO_DICT',JSON.stringify(friend_info_dict));
                     localStorage.setItem('ALL_USER_INFO_DICT',JSON.stringify(all_user_info_dict));
