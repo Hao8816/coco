@@ -77,6 +77,8 @@ io.on('connection',function(socket){
                 var message_box = JSON.parse(results['message_box'])
                 io.sockets.connected[socket_id].emit('LOGIN_MESSAGE_SUCCESS',{'user_sha1':user_sha1,'socket_id':this.id,'message_box':message_box});
             });
+
+        socket.broadcast.emit('USER_ONLINE_STATUS',{'status':"online",'friend_sha1':user_sha1});
     });
     socket.on('CHAT_MESSAGE',function(msg){
         console.log(msg);
@@ -227,6 +229,7 @@ io.on('connection',function(socket){
                 console.log(err);
             }
         });
+        socket.broadcast.emit('USER_ONLINE_STATUS',{'status':"offline",'friend_sha1':user_sha1});
 
     });
 });
