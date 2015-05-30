@@ -4,14 +4,15 @@
         /*border-radius: 3px;*/
         padding: 8px;
         /*height: 160px;*/
-        margin: 5px 0px;
+        /*margin: 5px 0px;*/
+        margin-top: 5px;
         cursor: pointer;
-        border-left: 4px solid #eee;
-
+        /*border-left: 4px solid #eee;*/
+        box-shadow: 0px 0px 2px 0px #5cb85c;
     }
     .topic-item:hover{
         /*box-shadow: 0px 0px 10px 3px #ddd;*/
-        border-left-color: #5cb85c;
+        /*border-left-color: #5cb85c;*/
     }
     .topic-item .topic-link{
         text-decoration: none;
@@ -81,47 +82,45 @@
                         </span>
                 </div>
             </div>
-            <div style="border-radius: 5px;margin-top: 5px">
-                <div class="row">
-                    <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list|filter:query">-->
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding-right: 0px;" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
-                        <div class="topic-item">
-                            <a class="topic-link" href="#/blog/{{topic.sha1}}">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left;padding-right: 0px">
-                                    <img style="width: 30px;height: 30px;border-radius:40px;" ng-src="/images/{{topic.head_image}}" alt=""/>
-                                    <span style="font-size: 12px;">{{topic.name}}</span>
-                                    <span style="position:absolute;right:15px;margin:0px;font-size: 12px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
+            <div class="" style="overflow: auto">
+                <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list|filter:query">-->
+                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding:5px;" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
+                    <div class="topic-item">
+                        <a class="topic-link" href="#/blog/{{topic.sha1}}">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left;padding-right: 0px">
+                                <img style="width: 30px;height: 30px;border-radius:40px;" ng-src="/images/{{topic.head_image}}" alt=""/>
+                                <span style="font-size: 12px;">{{topic.name}}</span>
+                                <span style="position:absolute;right:15px;margin:0px;font-size: 12px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
 
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <p style="margin:10px 0px;font-size: 12px;text-overflow: ellipsis;overflow: hidden;height: 60px;color: rgba(0,0,0,0.56)">
-                                        <span style="color:rgba(0,0,0,0.87)">{{topic.title}} </span> : {{topic.desc}}</p>
-                                    <!--<p style="margin:0px;font-size: 12px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 20px;">描述</p>-->
-                                </div>
-                                <div class="col-md-12">
-                                    <p style="text-align:right;margin:0px;font-size: 12px;color: rgba(0,0,0,0.56)">{{topic.time | date:"yyyy-MM-dd hh:mm"}}</p>
-                                </div>
                             </div>
-                            </a>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <p style="margin:10px 0px;font-size: 12px;text-overflow: ellipsis;overflow: hidden;height: 60px;color: rgba(0,0,0,0.56)">
+                                    <span style="color:rgba(0,0,0,0.87)">{{topic.title}} </span> : {{topic.desc}}</p>
+                                <!--<p style="margin:0px;font-size: 12px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 20px;">描述</p>-->
+                            </div>
+                            <div class="col-md-12">
+                                <p style="text-align:right;margin:0px;font-size: 12px;color: rgba(0,0,0,0.56)">{{topic.time | date:"yyyy-MM-dd hh:mm"}}</p>
+                            </div>
                         </div>
+                        </a>
                     </div>
-                    <nav style="margin: auto;text-align: center">
-                        <ul class="pagination">
-                            <li>
-                                <a ng-show="prev" style="cursor: pointer;" ng-click="changePage(-1)" aria-label="Previous">
-                                    <span aria-hidden="true">上一页</span>
-                                </a>
-                            </li>
-                            <li><a href="#" ng-bind="current_page"></a></li>
-                            <li>
-                                <a ng-show="next" style="cursor: pointer;" ng-click="changePage(1)" aria-label="Next">
-                                    <span aria-hidden="true">下一页</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
+                <nav style="margin: auto;text-align: center">
+                    <ul class="pagination">
+                        <li>
+                            <a ng-show="prev" style="cursor: pointer;" ng-click="changePage(-1)" aria-label="Previous">
+                                <span aria-hidden="true">上一页</span>
+                            </a>
+                        </li>
+                        <li><a href="#" ng-bind="current_page"></a></li>
+                        <li>
+                            <a ng-show="next" style="cursor: pointer;" ng-click="changePage(1)" aria-label="Next">
+                                <span aria-hidden="true">下一页</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             <div class="blog-nav-bar" style="margin-top: 5px;height:40px;background-color: #fff;border-radius: 3px;border-radius: 5px;">
                 <div class="col-xs-7 col-sm-8 col-md-9">
