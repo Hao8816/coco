@@ -66,9 +66,9 @@
                     </ol>
                 </div>
             </div>
-            <div class="row blog-nav-bar" style="margin-top: 5px;padding: 5px">
+            <div class="blog-nav-bar" style="margin-top: 5px;height:40px;background-color: #fff;border-radius: 3px;border-radius: 5px;">
                 <div class="col-xs-7 col-sm-8 col-md-9">
-                    <p class="topic-category" style="font-size: 12px">
+                    <p class="topic-category" style="font-size: 12px;margin-top: 5px;">
                         <a class="item item-active" ng-click="changeOrder(0)">全部主题</a>
                         <a class="item" ng-click="changeOrder(1)">最热主题</a>
                         <a class="item" ng-click="changeOrder(2)">最新主题</a>
@@ -81,23 +81,26 @@
                         </span>
                 </div>
             </div>
-            <div style="border-radius: 5px;">
+            <div style="border-radius: 5px;margin-top: 5px">
                 <div class="row">
                     <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list|filter:query">-->
-                    <div class="col-md-12" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding-right: 0px;" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                         <div class="topic-item">
                             <a class="topic-link" href="#/blog/{{topic.sha1}}">
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
-                                    <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{topic.head_image}}" alt=""/>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left;padding-right: 0px">
+                                    <img style="width: 30px;height: 30px;border-radius:40px;" ng-src="/images/{{topic.head_image}}" alt=""/>
+                                    <span style="font-size: 12px;">{{topic.name}}</span>
+                                    <span style="position:absolute;right:15px;margin:0px;font-size: 12px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
+
                                 </div>
-                                <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
-                                    <p style="margin:2px 0px;font-size: 14px">[{{topic.name}}] {{topic.title}}</p>
-                                    <p style="margin:0px;font-size: 12px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 20px;">描述:{{topic.desc}}</p>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <p style="margin:10px 0px;font-size: 12px;font-weight:bold;text-overflow: ellipsis;overflow: hidden;height: 60px;color: rgba(0,0,0,0.56)">
+                                        <span style="color:rgba(0,0,0,0.87)">{{topic.title}} </span> : {{topic.desc}}</p>
+                                    <!--<p style="margin:0px;font-size: 12px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 20px;">描述</p>-->
                                 </div>
-                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="text-align: right">
-                                    <p style="margin:0px;font-size: 13px;color: rgba(0,0,0,0.56)">{{topic.time | date:"yyyy-MM-dd hh:mm"}}</p>
-                                    <p style="margin:0px;font-size: 13px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</p>
+                                <div class="col-md-12">
+                                    <p style="text-align:right;margin:0px;font-size: 12px;color: rgba(0,0,0,0.56)">{{topic.time | date:"yyyy-MM-dd hh:mm"}}</p>
                                 </div>
                             </div>
                             </a>
@@ -118,6 +121,17 @@
                             </li>
                         </ul>
                     </nav>
+                </div>
+            </div>
+            <div class="blog-nav-bar" style="margin-top: 5px;height:40px;background-color: #fff;border-radius: 3px;border-radius: 5px;">
+                <div class="col-xs-7 col-sm-8 col-md-9">
+                    <p class="topic-category" style="font-size: 12px;margin-top: 5px;">
+                        <a class="item item-active" ng-click="changeOrder(0)">博客达人</a>
+                        <a class="item" ng-click="changeOrder(1)">社交达人</a>
+                        <a class="item" ng-click="changeOrder(2)"></a>
+                    </p>
+                </div>
+                <div class="col-xs-5 col-sm-4 col-md-3">
                 </div>
             </div>
         </div>
