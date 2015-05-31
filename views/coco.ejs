@@ -670,8 +670,8 @@
                         if(blog_list.length == 0){
                             $scope.data_empty = true;
                         }
-
-                        $scope.blog_list = blog_list;
+                        var prev_list = $scope.blog_list || [];
+                        $scope.blog_list = prev_list.concat(blog_list);
                         $scope.current_page = page
                     } else {
 
