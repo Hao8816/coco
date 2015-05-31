@@ -153,9 +153,9 @@ var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
     console.log(creator_sha1);
     var page = req.param('page') ||1;
-    var pageSize = 12;
+    var pageSize = 16;
     if(page == 1){
-        pageSize = 11;
+        pageSize = 15;
     }
 
     blog_models.Topic.find([ "time", "Z" ]).limit(pageSize).offset(pageSize*(page-1)).run(function(err,result){
