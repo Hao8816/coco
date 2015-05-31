@@ -159,21 +159,9 @@
                 </li>
                 <li ng-show="data_empty"><p>当前主题下没有博客信息，点击 <a href="">创建博客</a> 添加博客信息。</p></li>
             </ul>
-            <nav style="margin: auto;text-align: center">
-                <ul class="pagination">
-                    <li>
-                        <a ng-show="prev" style="cursor: pointer;" ng-click="changePage(-1)" aria-label="Previous">
-                            <span aria-hidden="true">上一页</span>
-                        </a>
-                    </li>
-                    <li><a href="#" ng-bind="current_page"></a></li>
-                    <li>
-                        <a ng-show="next" style="cursor: pointer;" ng-click="changePage(1)" aria-label="Next">
-                            <span aria-hidden="true">下一页</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <div ng-show="next" class="row">
+                <p><a ng-click="changePage(1)">更多</a></p>
+            </div>
         </div>
         <div class="col-md-3" style="height: 600px;margin-top: 20px;">
             <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
