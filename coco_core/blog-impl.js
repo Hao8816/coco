@@ -155,7 +155,7 @@ var getTopicList = function getTopicList(req,res){
     var page = req.param('page') ||1;
     var pageSize = 12;
     if(page == 1){
-        pageSize = 1;
+        pageSize = 11;
     }
 
     blog_models.Topic.find([ "time", "Z" ]).limit(pageSize).offset(pageSize*(page-1)).run(function(err,result){
