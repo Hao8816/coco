@@ -153,7 +153,8 @@ var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
     console.log(creator_sha1);
     var page = req.param('page') ||1;
-    blog_models.Topic.find([ "time", "Z" ]).limit(11).offset(11*(page-1)).run(function(err,result){
+    var pageIndex = 10 + page
+    blog_models.Topic.find([ "time", "Z" ]).limit(11).offset((10+page)*(page-1)).run(function(err,result){
         if(err){
             console.log(err);
         }
