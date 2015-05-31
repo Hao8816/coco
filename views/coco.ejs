@@ -247,13 +247,9 @@
                             }else{
                                 $scope.next = false
                             }
-                            if(page == 1){
-                                $scope.prev = false
-                            }else{
-                                $scope.prev = true
-                            }
                             $scope.current_page = page;
-                            $scope.topic_list = topic_list;
+                            var prev_list = $scope.topic_list || []
+                            $scope.topic_list = prev_list.concat(topic_list);
                             $scope.nb_topic = topic_list.length;
                             var topic_info_dict = {};
                             topic_list.forEach(function(obj){

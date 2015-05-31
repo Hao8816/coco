@@ -8,6 +8,7 @@
         margin-top: 5px;
         cursor: pointer;
         border: 1px solid #eee;
+        height: 160px;
         /*border-left: 4px solid #eee;*/
         /*box-shadow: 0px 0px 2px 0px #5cb85c;*/
     }
@@ -92,7 +93,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left;padding-right: 0px">
                                 <img style="width: 30px;height: 30px;border-radius:40px;" ng-src="/images/{{topic.head_image}}" alt=""/>
-                                <span style="font-size: 12px;">{{topic.name}} [一级]</span>
+                                <span style="font-size: 12px;">{{topic.name}}</span>
                                 <span style="position:absolute;right:15px;margin:0px;font-size: 12px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
 
                             </div>
@@ -108,21 +109,28 @@
                         </a>
                     </div>
                 </div>
-                <nav style="margin: auto;text-align: center">
-                    <ul class="pagination">
-                        <li>
-                            <a ng-show="prev" style="cursor: pointer;" ng-click="changePage(-1)" aria-label="Previous">
-                                <span aria-hidden="true">上一页</span>
-                            </a>
-                        </li>
-                        <li><a href="#" ng-bind="current_page"></a></li>
-                        <li>
-                            <a ng-show="next" style="cursor: pointer;" ng-click="changePage(1)" aria-label="Next">
-                                <span aria-hidden="true">下一页</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <div ng-show="next" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding:5px;height: 172px;text-align: center">
+                    <div class="topic-item">
+                        <a class="topic-link" ng-click="changePage(1)"  style="line-height: 150px;cursor: pointer">
+                            更多
+                        </a>
+                    </div>
+                </div>
+                <!--<nav style="margin: auto;text-align: center">-->
+                    <!--<ul class="pagination">-->
+                        <!--<li>-->
+                            <!--<a ng-show="prev" style="cursor: pointer;" ng-click="changePage(-1)" aria-label="Previous">-->
+                                <!--<span aria-hidden="true">上一页</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li><a href="#" ng-bind="current_page"></a></li>-->
+                        <!--<li>-->
+                            <!--<a ng-show="next" style="cursor: pointer;" ng-click="changePage(1)" aria-label="Next">-->
+                                <!--<span aria-hidden="true">下一页</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</nav>-->
             </div>
             <div class="blog-nav-bar" style="margin-top: 5px;height:40px;background-color: #fff;border-radius: 3px;border-radius: 5px;">
                 <div class="col-xs-7 col-sm-8 col-md-9">
