@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
+    <script type="text/javascript" src="/AngularJs/angular.js"></script>
+    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/coco-api.js"></script>
+    <title>开发文档</title>
+    <script type="text/javascript">
+        if (!library)
+            var library = {};
+
+        library.json = {
+            replacer: function(match, pIndent, pKey, pVal, pEnd) {
+                var key = '<span class=json-key>';
+                var val = '<span class=json-value>';
+                var str = '<span class=json-string>';
+                var r = pIndent || '';
+                if (pKey)
+                    r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+                if (pVal)
+                    r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+                return r + (pEnd || '');
+            },
+            prettyPrint: function(obj) {
+                var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+                return JSON.stringify(obj, null, 3)
+                        .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+                        .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                        .replace(jsonLine, library.json.replacer);
+            }
+        };
+
+        $(function(){
+            //
+            var screenHeight = $(window).height()
+            $('#index_nav').css('height',screenHeight-60);
+            $('#api_content').css('height',screenHeight-60);
+            for(var i=0;i<api_data.length;i++){
+                var dataObj = api_data[i]
+                $('#index_nav').append('<li onclick="showApiData('+i+',this)"><a href="javascript:void(0)">'+dataObj["name"]+'</a></li>');
+            }
+            $('#index_nav li:first').click();
+
+            window.onresize = function(){
+                var screenHeight = $(window).height()
+                $('#index_nav').css('height',screenHeight-60);
+                $('#api_content').css('height',screenHeight-60);
+            }
+        });
+
+        function showApiData(api_index,obj){
+            $('.item_active').removeClass('item_active')
+            $(obj).addClass('item_active');
+            var apiObject = api_data[api_index];
+            var params = library.json.prettyPrint(apiObject['params'])
+            var response = library.json.prettyPrint(apiObject['response'])
+            var template = $('#api_template').find('.api').clone();
+            template.find('.desc_data').text(apiObject['desc']);
+            template.find('.method_data').text(apiObject['method']);
+            template.find('.url_data').text(apiObject['url']);
+            template.find('.params_data').html(params);
+            template.find('.response_data').html(response);
+            var note = apiObject['note']
+            for (title in note){
+                template.find('.note_data').append('<tr class="note_line"><td class="title">'+title+'</td><td class="title">String</td><td>'+note[title]+'</td></tr>');
+            }
+            $('#api_content').html(template)
+        }
+
+
+    </script>
+    <style type="text/css">
+        body{
+            background-color: #f5f5f5;
+        }
+        .footer-link a{
+            padding: 0px 10px;
+            font-size: 13px;
+        }
+        .footer-coryright{
+            font-size: 13px;
+            color: rgba(0,0,0,0.36);
+        }
+        .nav-kit .item{
+            text-align: center;
+            margin-top: 8px;
+        }
+        .nav-kit .item a{
+            color: rgba(255,255,255,0.87);
+            text-align: center;
+        }
+        .btn a{
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+        }
+        body{
+            font-family: verdana, arial, helvetica;
+        }
+        #index_nav{
+            margin: 0;
+            padding: 0;
+            border: 1px solid #eee;
+        }
+        #index_nav li{
+            background-color: #fff;
+            list-style: none;
+            padding:8px 10px;
+            cursor: pointer;
+            margin: 1px;
+            text-align: center;
+        }
+        #index_nav li a{
+            font-size: 13px;
+            text-decoration: none;
+            color: rgba(3, 169, 244, 1);
+            /*color: rgba(0, 0, 238, 0.8);*/
+        }
+        #index_nav li:hover{
+            background-color: #eee;
+        }
+        .note_line{
+            padding: 8px 5px;
+        }
+        .note_line td{
+            padding:5px 10px;
+            font-size: 13px;
+        }
+        .note_line .title{
+            background-color: #eee;
+        }
+        .params_data,.response_data,.url_data,.method_data,.desc_data{
+            padding: 8px 15px;
+            border-radius: 7px;
+            background-color: #eee;
+            line-height: 24px;
+            font-size: 12px;
+        }
+        h2{
+            font-size: 14px;
+            line-height: 25px;
+        }
+        #index_nav .item_active{
+            background-color: #f5f5f5;
+            border-right:3px solid rgba(3, 169, 244, 0.8);
+        }
+        .data_table tr th{
+            background-color: #ddd;
+        }
+        .data_table tr th,.data_table tr td{
+            font-size: 13px;
+            padding: 3px 20px;
+            border: 1px solid #eee;
+            border-collapse: collapse;
+        }
+
+    </style>
+</head>
+<body>
+<div style="width: 100%;background-color: rgba(3, 169, 244, 0.8);position: fixed;z-index: 10">
+    <div class="container" style="padding: 8px 0px;">
+        <div class="row nav-kit">
+            <div class="hidden-xs hidden-sm col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(255,255,255,0.87)">COCO 开发文档</span></div>
+            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2" style="text-align: center;">
+                <img style="width: 32px;height: 32px;" src="/images/icons/logo_white.png" alt=""/>
+            </div>
+            <div  class="item col-xs-2 col-sm-2 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a><span class="badge topic-badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a><span class="badge blog-badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a>帮助<span class="badge friend-badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="/coco/">网站<span class="badge"></span></a></div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="padding-top: 60px;background-color: #fff">
+    <div class="row">
+        <ul class="col-md-2" id="index_nav" style="overflow: auto;margin-top: 20px;">
+        </ul>
+        <div class="col-md-10" id="api_content" style="min-height: 600px;overflow: auto"></div>
+    </div>
+    <!-- api template -->
+    <div id="api_template" style="display: none">
+        <div class="api" style="padding:0px 20px 20px 20px;">
+            <h2>函数描述</h2>
+            <p class="desc_data"></p>
+            <h2>请求路径</h2>
+            <p class="url_data"></p>
+            <h2>请求方法</h2>
+            <p class="method_data"></p>
+            <h2>请求参数</h2>
+            <pre class="params_data"></pre>
+            <h2>响应数据</h2>
+            <pre class="response_data" style="word-break: break-all"></pre>
+            <h2>字段详情</h2>
+            <table class="data_table">
+                <thead>
+                <tr>
+                    <th>返回值字段</th>
+                    <th>字段类型</th>
+                    <th>字段说明</th>
+                </tr>
+                </thead>
+                <tbody class="note_data">
+           </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" >
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-xs-12">
+            <div style="padding: 3px;text-align: center;">
+                <p class="footer-link">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">在线客服</a>
+                    <a href="#">销售联盟</a>
+                </p>
+                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号  Copyright © 2004-2014</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

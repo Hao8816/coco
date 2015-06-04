@@ -11,6 +11,7 @@ var admin = require('./routes/admin');
 var coco = require('./routes/coco');
 var api = require('./routes/api');
 var ajax = require('./routes/coco-ajax');
+var developer = require('./routes/develop');
 
 var RedisStore = require('connect-redis')(session);
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/admin', admin);
+app.use('/developer', developer);
 app.use('/coco', coco);
 app.use('/api', api);
 app.use('/ajax', ajax);
