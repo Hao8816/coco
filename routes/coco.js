@@ -6,7 +6,7 @@ var user = require('../coco_core/user-impl');
 /* GET home page. */
 router.get('/', function(req, res){
     //if(req.session.hasOwnProperty('username')){
-        res.render('coco.ejs', { title: 'COCO' });
+        res.render('coco.ejs', { title: 'COCO 博客' });
     //}else{
     //    res.render('coco-login.ejs', { title: 'COCO Login' });
     //}
