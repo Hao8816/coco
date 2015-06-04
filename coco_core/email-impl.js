@@ -6,10 +6,12 @@ var email = {};
 
 // 邮件传输对象
 var transporter = nodemailer.createTransport({
-    host:"smtp.163.com",
+    //host:"smtp.163.com",
+    host:"smtp.yeah.net",
     port:"25",
     auth: {
-        user: '15238228816@163.com',
+        //user: '15238228816@163.com',
+        user: 'onekoko@yeah.net',
         pass: 'chenhao8816'
     }
 });
@@ -37,7 +39,8 @@ var sendEmail = function sendEmail(options){
 
 var sendNotificationEmail = function sendNotificationEmail(options){
     var options = {
-        from: '15238228816@163.com ',
+        //from: '15238228816@163.com ',
+        from: 'onekoko@yeah.net',
         subject: 'COCO版本更新'
     };
     var date = new Date();
@@ -78,7 +81,8 @@ var sendNotificationEmail = function sendNotificationEmail(options){
 
 var sendValidateEmail = function sendValidateEmail(uid,address){
     var options = {
-        from: '15238228816@163.com ',
+        //from: '15238228816@163.com ',
+        from: 'onekoko@yeah.net',
         subject: 'COCO邮箱验证'
     };
     var date = new Date();
