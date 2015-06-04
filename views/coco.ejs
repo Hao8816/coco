@@ -12,6 +12,7 @@
     @@@@@@@   @@@@@@@     @@@@@@@    @@@@@@@
 
 -->
+
 <html ng-app="coco">
 <head>
     <title><%= title %></title>
@@ -30,6 +31,17 @@
     <script type="text/javascript">
         var coco_app = angular.module('coco',['ngRoute']);
         coco_app.config(['$routeProvider',function($routeProvider){
+            // check
+            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+            if (loginUserInfo == null){
+                location.href = "/coco/login/"
+            }else{
+                if (!client.connected){
+                    var userInfo = JSON.parse(loginUserInfo);
+                    client.emit('LOGIN_MESSAGE_SERVER', {'user_sha1': userInfo.sha1});
+                }
+            }
+
             $routeProvider.
                     when('/chat/',{
                         templateUrl:'/coco/chat/',
@@ -59,9 +71,6 @@
             var userInfo = JSON.parse(loginUserInfo);
             $scope.user = userInfo;
             $scope.order = "online";
-
-            client.emit('LOGIN_MESSAGE_SERVER', {'user_sha1': userInfo.sha1});
-
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
             $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
                 if (data['ret'] == '0001') {
@@ -168,6 +177,13 @@
                 ip : "192.168.1.22"
             }
             $scope.infos = other_info;
+
+
+
+            $scope.logout = function(){
+                sessionStorage.removeItem('LOGIN_USER_INFO');
+                location.href ="/coco/logout/"
+            }
 
         }
 
