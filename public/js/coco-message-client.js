@@ -208,7 +208,7 @@ function showUserInfo(){
 function getFriendImage(friend_sha1){
     var friend_list = localStorage.getItem('FRIEND_INFO_DICT');
     var friend_info_dict = JSON.parse(friend_list);
-    var image_url = 'default.jpg';
+    var image_url = 'default.png';
     if (friend_info_dict.hasOwnProperty(friend_sha1)){
         image_url = friend_info_dict[friend_sha1].head_image;
     }
