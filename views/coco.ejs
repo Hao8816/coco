@@ -65,7 +65,7 @@
     </script>
     <script type="text/javascript">
         function chatPageCtrl($scope, $http) {
-            $scope.chat_image = 'default.jpg'
+            $scope.chat_image = 'default.png'
             PAGE_INDEX = 2;
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
             var userInfo = JSON.parse(loginUserInfo);
@@ -86,7 +86,7 @@
                             nb_message = unread_messages[obj.sha1]
                         }
                         if (obj['head_image'] == ''){
-                            obj['head_image'] = 'default.jpg';
+                            obj['head_image'] = 'default.png';
                         }
                         obj['nb_message'] = nb_message;
                         return obj;
@@ -150,10 +150,10 @@
             if (user_info_dict.hasOwnProperty(usersha1)){
                 user_object = user_info_dict[usersha1]
                 if (user_object['head_image'] == ''){
-                    user_object['head_image'] = 'default.jpg';
+                    user_object['head_image'] = 'default.png';
                 }
             }else{
-                user_object['head_image'] = 'default.jpg';
+                user_object['head_image'] = 'default.png';
                 user_object['name'] = '未知';
             }
             return user_object;
@@ -224,7 +224,7 @@
                         var all_user_info_dict = {}
                         friend_list.every(function(obj){
                             if (obj['head_image'] == ''){
-                                obj['head_image'] = 'default.jpg';
+                                obj['head_image'] = 'default.png';
                             }
                             friend_info_dict[obj.sha1] = obj;
                             all_user_info_dict[obj.sha1] = obj;
@@ -471,7 +471,7 @@
                         var all_user_info_dict = {}
                         friend_list.every(function(obj){
                             if (obj['head_image'] == ''){
-                                obj['head_image'] = 'default.jpg';
+                                obj['head_image'] = 'default.png';
                             }
                             friend_info_dict[obj.sha1] = obj;
                             all_user_info_dict[obj.sha1] = obj;
