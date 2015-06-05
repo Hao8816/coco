@@ -159,5 +159,81 @@ var api_data = [
             "time" :"好友注册时间戳",
             'info': '返回状态信息'
         }
+    },
+    {
+        "name": "主题搜索",
+        "desc": "用户登录之后获取所有的主题信息",
+        "url": "http://onekoko.com:3000/api/",
+        "method": "post",
+        "params": {
+            "action":"search_topic",
+            "keyword":"测试",
+            "page":"1"
+        },
+        "response": {
+            "info":"OK",
+            "ret":0001,
+            "topic_list":[{
+                    "creator_sha1" : "208e3cbced6f0ae48ee0e7156441ec655fb494d7",
+                    "desc" : "test",
+                    "id" : 15,
+                    "images" : [],
+                    "related" :["a4864129c83174f74f066f96fe1a8ec785621a97"],
+                    "sha1" : "c84dff1bdc9de0cfa38a36836389882ddb35b650",
+                    "time" : "1427687561824",
+                    "title" : "chenhao",
+                    "update_time" : "1428839815384"
+            }]
+        },
+        "note": {
+            "ret":'状态信息，0001表示一切正常。状态信息列表参考ret list',
+            "creator_sha1" : "主题创建者的sha1",
+            "desc" : "主题的描述信息",
+            "id" : "主题的id",
+            "images" :"主题的图像信息",
+            "related" :  "主题相关的博客sha1列表",
+            "sha1" : "主题的sha1",
+            "time" : "主题创建的时间",
+            "title" : "主题title",
+            "update_time" : "主题的最后更新时间",
+            'info': '返回状态信息'
+        }
+    },
+    {
+        "name": "博客搜索",
+        "desc": "用户登录之后获取所有的主题信息",
+        "url": "http://onekoko.com:3000/api/",
+        "method": "post",
+        "params": {
+            "action":"search_blog",
+            "keyword":"测试",
+            "page":"1"
+        },
+        "response": {
+            "info":"OK",
+            "ret":0001,
+            "blog_list":[{
+                "blog_sha1" : "031f006cc9cf8b62fc2a2cbe936cf4d89abc3f51",
+                "content" : "\U6d4b\U8bd5\U6211\U7684\U8bc4\U8bba",
+                "creator_sha1" : "<null>",
+                "id" : 6,
+                "images" : [],
+                "parent_sha1" : "",
+                "sha1" : "29e2dcfbb16f63bb0254df7585a15bb6fb5e927d",
+                "time" : 1431881851734
+            }]
+        },
+        "note": {
+            "ret":'状态信息，0001表示一切正常。状态信息列表参考ret list',
+            "blog_sha1" : "博客的hash值",
+            "content" : "博客的内容",
+            "creator_sha1" : "博客的创建者",
+            "id" : "博客ID",
+            "images" : "博客的图片信息",
+            "parent_sha1" : "",
+            "sha1" : "29e2dcfbb16f63bb0254df7585a15bb6fb5e927d",
+            "time" : "博客创建的时间戳",
+            'info': '返回状态信息'
+        }
     }
 ];
