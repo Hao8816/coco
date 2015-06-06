@@ -76,6 +76,7 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
             geoc.getLocation(r.point, function(rs){
                 var addComp = rs.addressComponents;
                 $('#user_location').html('['+addComp.city+']');
+                $('#user_location_mobile').html('['+addComp.city+']');
             });
         }
         else {
