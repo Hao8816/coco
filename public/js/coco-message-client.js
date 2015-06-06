@@ -69,8 +69,7 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     var geolocation = new BMap.Geolocation();
     geolocation.getCurrentPosition(function(r){
         if(this.getStatus() == BMAP_STATUS_SUCCESS){
-            alert('您的位置：'+r.point.lng+','+r.point.lat);
-            client.emit('LOGIN_MESSAGE_SERVER', {'user_sha1': user_sha1,'location':[r.point.lng,r.point.lat]});
+            client.emit('LOCATION_UPDATE', {'user_sha1': user_sha1,'location':[r.point.lng,r.point.lat]});
         }
         else {
             alert('failed'+this.getStatus());
