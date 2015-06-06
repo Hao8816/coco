@@ -69,7 +69,14 @@ client.on('LOGIN_MESSAGE_SUCCESS',function(data){
     var geolocation = new BMap.Geolocation();
     geolocation.getCurrentPosition(function(r){
         if(this.getStatus() == BMAP_STATUS_SUCCESS){
-            client.emit('LOCATION_UPDATE', {'user_sha1': user_sha1,'location':[r.point.lng,r.point.lat]});
+            var location = {lng: r.point.lng, lat:r.point.lat}
+            client.emit('LOCATION_UPDATE', {'user_sha1': user_sha1,'location':location});
+            var geoc = new BMap.Geocoder();
+            //var point = new BMap.Point(map.getCenter().lng,map.getCenter().lat);//
+            geoc.getLocation(r.point, function(rs){
+                var addComp = rs.addressComponents;
+                $('#user_location').html('['+addComp.city+']');
+            });
         }
         else {
             alert('failed'+this.getStatus());
