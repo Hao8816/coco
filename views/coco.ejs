@@ -38,7 +38,7 @@
             if (loginUserInfo == null){
                 location.href = "/coco/login/"
             }else{
-                if (!client.connected){
+                if (!client.connected || LOGIN_STATUS == 0){
                     var userInfo = JSON.parse(loginUserInfo);
                     client.emit('LOGIN_MESSAGE_SERVER', {'user_sha1': userInfo.sha1});
                 }
