@@ -34,6 +34,18 @@ var User = db.define("user", {
 });
 
 
+// 用户信息表
+var Userlocation = db.define("location", {
+    time          : String,    // 用户位置更新时间
+    user_sha1     : String,    // 用户的sha1
+    city          : String,    // 解析出来的地址
+    longitude     : String,    // 经度
+    latitude      : String     // 纬度
+}, {
+    // with in model method
+});
+
+
 // 用户的好友关系
 var Friendship = db.define("friend",{
     time          : String,    // 用户注册的创建的时间
@@ -64,5 +76,6 @@ db.sync();
 user_models['User'] = User;
 user_models['Friendship'] = Friendship;
 user_models['Userconcern'] = Userconcern;
+user_models['Userlocation'] = Userlocation;
 
 module.exports = user_models;
