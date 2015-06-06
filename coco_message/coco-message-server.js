@@ -219,6 +219,18 @@ io.on('connection',function(socket){
         socket.broadcast.emit('TOPIC_MESSAGE',{'action':action,'topic_sha1':topic_sha1});
     });
 
+
+    socket.on('LOCATION_UPDATE',function(msg){
+        var user_sha1 = msg['user_sha1'];
+        var location = msg['location'];
+        //缓存用户位置信息
+        redis_client.hset("USER_LOCATION_STORE",user_sha1,JSON.stringify(location),function(err){
+            if(err){
+                logger.error("get cache user info error:",err);
+            }
+        });
+    });
+
     socket.on('disconnect',function(msg){
         console.log(msg+'----');
         //io.emit('message',msg);
