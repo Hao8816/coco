@@ -4,6 +4,7 @@ var client = io.connect('http://onekoko.com:8089');
 // 定义一个消息盒子，并且初始化在缓存中的数据
 var MESSAGE_BOX = {};
 var PAGE_INDEX = 0;
+var LOGIN_STATUS = 0;
 
 client.on('connect',function(data) {
     console.log('Client has connected to the server!');
@@ -45,6 +46,7 @@ client.on('CHAT_MESSAGE',function(data) {
     $('#chat-history').scrollTop(10000)
 });
 client.on('LOGIN_MESSAGE_SUCCESS',function(data){
+    LOGIN_STATUS = 1;
     var user_sha1 = data['user_sha1'];
     var socket_id = data['socket_id'];
     $('#my_name').attr('uid',user_sha1);
