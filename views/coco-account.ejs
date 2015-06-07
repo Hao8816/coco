@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-md-4" style="text-align: center;height: 260px;line-height: 260px;position: relative">
                         <img id="user_head_image" ng-src="/images/{{user.head_image}}" style="width: 180px;height: 180px;border-radius: 180px;" alt=""/>
-                        <a style="position:absolute;color: #000;font-size: 15px;line-height: 180px;left: 42%;top: 17%;cursor: pointer" data-toggle="modal" data-target=".upload_image_modal">换头像</a>
+                        <a ng-show="user.mine" style="position:absolute;color: #000;font-size: 15px;line-height: 180px;left: 42%;top: 17%;cursor: pointer" data-toggle="modal" data-target=".upload_image_modal">换头像</a>
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-8" style="font-size: 15px;">
                         <div style="padding: 30px;">
@@ -93,7 +93,7 @@
                     <p>当前登录账号: <a href="" ng-bind="infos.name"></a></p>
                     <p>登录IP: <a href="" ng-bind="infos.ip"></a></p>
                 <span style="width: 70%;margin: 10px 15%;" class="btn btn-success">
-                    <a style="color: #fff;font-size: 15px;" ng-click="logout()">切换账号</a>
+                    <a ng-show="user.mine" style="color: #fff;font-size: 15px;" ng-click="logout()">切换账号</a>
                 </span>
                 </div>
             </div>
