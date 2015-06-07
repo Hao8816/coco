@@ -57,9 +57,9 @@
                         templateUrl:'/coco/index/',
                         controller:''
                     }).
-                    when('/account/',{
+                    when('/account/:user_sha1',{
                         templateUrl:'/coco/account/',
-                        controller:''
+                        controller:'accountPageCtrl'
                     }).
                     otherwise({redirectTo:'/index/'});
         }]);
@@ -164,18 +164,31 @@
 
 
 
-        function accountPageCtrl($scope) {
+        function accountPageCtrl($scope,$http,$routeParams) {
             PAGE_INDEX = 3;
-            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
-            var info = JSON.parse(loginUserInfo);
-            info['time'] = new Date(parseInt(info['time'])).Format('yyyy-MM-dd')
-            $scope.user = info;
+            var user_sha1 = $routeParams.user_sha1;
+            if (user_sha1 == 'me'){
+                // 如果点击用户是当前用户
+                var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+                var info = JSON.parse(loginUserInfo);
+                info['time'] = new Date(parseInt(info['time'])).Format('yyyy-MM-dd')
+                $scope.user = info;
+            }else{
+                $http.post('/ajax/get_user_info/', {user_sha1: user_sha1}).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        var info = data['user_info'];
+                        $scope.user = info;
+                    }
+                })
+
+
+            }
 
             var date = new Date().getTime();
             var other_info = {
                 location : "北京",
                 date : date,
-                name : info['name'],
+                //name : info['name'],
                 ip : "192.168.1.22"
             }
             $scope.infos = other_info;
@@ -834,7 +847,7 @@
             <div  class="item col-xs-2 col-sm-2 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
             <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
             <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#chat">好友 <span class="badge friend-badge"></span></a></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#account">帐号 <span class="badge"></span></a></div>
+            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#account/me">帐号 <span class="badge"></span></a></div>
         </div>
     </div>
 </div>

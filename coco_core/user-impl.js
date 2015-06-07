@@ -138,12 +138,13 @@ var setUserImage = function setUserImage(req,res){
 
 
 var getUserInfo = function getUserInfo(req,res){
-    user_models.User.get({name:'chenhao'},function(err,result){
+    var user_sha1 = req.param('user_sha1');
+    user_models.User.find({sha1:user_sha1},function(err,result){
         if(err){
             console.log(err);
         }
         console.log(result[0].content);
-        res.send({'info':"OK","ret":0001,"friend_list":result})
+        res.send({'info':"OK","ret":0001,"user_info":result[0]})
     })
 };
 

@@ -68,6 +68,12 @@ router.post('/validate_account/',function(req,res){
 });
 
 
+router.post('/get_user_info/',function(req,res){
+    user.getUserInfo(req,res);
+});
+
+
+
 
 
 /* GET home page. */
