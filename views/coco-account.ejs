@@ -89,11 +89,11 @@
                 </div>
                 <p>多云转阴</p>
 
-                <div style="margin-top: 15px;border-top: 1px solid #ddd;padding: 10px;">
+                <div ng-show="user.mine" style="margin-top: 15px;border-top: 1px solid #ddd;padding: 10px;">
                     <p>当前登录账号: <a href="" ng-bind="infos.name"></a></p>
                     <p>登录IP: <a href="" ng-bind="infos.ip"></a></p>
                 <span style="width: 70%;margin: 10px 15%;" class="btn btn-success">
-                    <a ng-show="user.mine" style="color: #fff;font-size: 15px;" ng-click="logout()">切换账号</a>
+                    <a style="color: #fff;font-size: 15px;" ng-click="logout()">切换账号</a>
                 </span>
                 </div>
             </div>
