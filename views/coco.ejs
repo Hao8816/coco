@@ -172,11 +172,13 @@
                 var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
                 var info = JSON.parse(loginUserInfo);
                 info['time'] = new Date(parseInt(info['time'])).Format('yyyy-MM-dd')
+                info['mine'] = true;
                 $scope.user = info;
             }else{
                 $http.post('/ajax/get_user_info/', {user_sha1: user_sha1}).success(function (data) {
                     if (data['ret'] == '0001') {
                         var info = data['user_info'];
+                        info['mine'] = false;
                         $scope.user = info;
                     }
                 })
