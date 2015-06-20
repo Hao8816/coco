@@ -96,13 +96,19 @@
 <div style="width: 100%;background-color: #f5f5f5">
     <div class="container" style="padding: 12px 0px;">
         <div class="row nav-kit">
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(3, 169, 244,1)">COCO</span></div>
-
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="text-align: center;">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="item hidden-lg hidden-md col-xs-3 col-sm-3" style="text-align: left"><a style="padding: 0px 5px" href="/coco/register/">注册</a></div>
+            <div class="hidden-sm hidden-xs col-sm-3 col-md-3 col-lg-3">
+                <span style="font-size: 24px;color: rgba(3, 169, 244,1)">COCO</span>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center">
                 <img style="width: 40px;height: 40px;" src="/images/icons/logo_bg.png" alt=""/>
             </div>
-            <div class="item col-xs-2 col-sm-2 col-md-offset-3 col-md-1 col-lg-offset-3 col-lg-1"><a href="/coco/help/">帮助</a></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1 col-lg-1"><a href="/coco/login/">登录</a></div>
+            <div class="item col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <a data-toggle="modal" style="cursor: pointer;padding: 0px 5px" data-target=".login_modal" >登录</a>
+                <a class="hidden-xs hidden-sm" style="padding: 0px 5px" href="/coco/register/">注册</a>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
         </div>
     </div>
 </div>
@@ -111,10 +117,10 @@
     <div class="row" style="margin-top: 0px;">
         <div ng-controller="registerCtrl">
             <div class="row" style="padding-top: 60px;padding-bottom: 60px">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: center">
+                <div class="hidden-sm hidden-xs col-md-6 col-lg-6" style="text-align: center">
                     <img src="/images/icons/adpic.png" alt=""/>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="margin-top: 20px;" id="register_area">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin-top: 20px;" id="register_area">
                     <form style="padding: 10px;">
                         <div class="form-group">
                             <label for="exampleInputEmail1">用户名</label>
