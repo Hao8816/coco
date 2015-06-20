@@ -20,6 +20,10 @@ router.get('/message/', function(req, res) {
   res.render('admin/coco-admin-message.ejs', { title: 'COCO Admin' });
 });
 
+router.get('/user/', function(req, res) {
+  res.render('admin/coco-admin-user.ejs', { title: 'COCO Admin' });
+});
+
 // 发送邮件
 router.post("/ajax/send_email/",function(req,res){
   var options = req.param('options');
