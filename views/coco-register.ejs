@@ -28,44 +28,50 @@
     <script type="text/javascript" src="/rsa/sha1.js"></script>
 </head>
 <style type="text/css">
-    body{
+    body {
         /*background-color: #fafafa;*/
     }
-    .nav-kit .item{
+
+    .nav-kit .item {
         font-size: 14px;
         font-weight: bold;
         margin-top: 10px;
         text-align: right;
     }
-    .nav-kit .item a{
-        color: rgba(3, 169, 244,1)
+
+    .nav-kit .item a {
+        color: rgba(3, 169, 244, 1)
     }
-    .footer-link a{
+
+    .footer-link a {
         padding: 0px 10px;
         font-size: 13px;
     }
-    .footer-coryright{
+
+    .footer-coryright {
         font-size: 13px;
-        color: rgba(0,0,0,0.36);
+        color: rgba(0, 0, 0, 0.36);
     }
-    pre{
+
+    pre {
         background-color: #fff;
         border: none;
         padding: 8px 5px;
         width: 90%;
     }
-    .form-group label,.checkbox label{
-        color: rgba(255,255,255,1);
+
+    .form-group label, .checkbox label {
+        color: rgba(255, 255, 255, 1);
     }
 
 </style>
 <script type="text/javascript">
-    function registerCtrl($scope,$http){
-        $scope.submit = function(){
+    function registerCtrl($scope, $http) {
+        $scope.submit = function () {
             console.log($scope.user)
             var password1 = $scope.user.password1;
             var password2 = $scope.user.password2;
-            if (password1 != password2){
+            if (password1 != password2) {
                 alert('Password error')
                 return;
             }
@@ -79,9 +85,9 @@
 //            var encrypt_password = RSA.encrypt(password, $key);
             //console.log(encrypt_password)
             var userInfo = $scope.user;
-            $http.post('/ajax/register/',userInfo).success(function(data){
-                if(data['ret'] == '0001'){
-                    $scope.user = {name:'',email:'',phone:'',password1:'',password2:''}
+            $http.post('/ajax/register/', userInfo).success(function (data) {
+                if (data['ret'] == '0001') {
+                    $scope.user = {name: '', email: '', phone: '', password1: '', password2: ''}
                     $('#register_area').html('<p style="color: rgba(255,255,255,0.8);font-size: 26px;">恭喜你！注册成功</p><p style="color: rgba(255,255,255,0.8);font-size: 16px;">请注意查收邮件，点击邮箱的激活链接来激活你的账号</p>');
 
                 }
@@ -97,7 +103,9 @@
     <div class="container" style="padding: 12px 0px;">
         <div class="row nav-kit">
             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
-            <div class="item hidden-lg hidden-md col-xs-3 col-sm-3" style="text-align: left"><a style="padding: 0px 5px" href="/coco/register/">注册</a></div>
+            <div class="item hidden-lg hidden-md col-xs-3 col-sm-3" style="text-align: left"><a style="padding: 0px 5px"
+                                                                                                href="/coco/register/">注册</a>
+            </div>
             <div class="hidden-sm hidden-xs col-sm-3 col-md-3 col-lg-3">
                 <span style="font-size: 24px;color: rgba(3, 169, 244,1)">COCO</span>
             </div>
@@ -105,7 +113,7 @@
                 <img style="width: 40px;height: 40px;" src="/images/icons/logo_bg.png" alt=""/>
             </div>
             <div class="item col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <a data-toggle="modal" style="cursor: pointer;padding: 0px 5px" data-target=".login_modal" >登录</a>
+                <a data-toggle="modal" style="cursor: pointer;padding: 0px 5px" data-target=".login_modal">登录</a>
                 <a class="hidden-xs hidden-sm" style="padding: 0px 5px" href="/coco/register/">注册</a>
             </div>
             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
@@ -113,10 +121,9 @@
     </div>
 </div>
 <div style="width: 100%;background-color: rgba(3, 169, 244, 0.8);">
-<div class="container" style="min-height: 604px">
-    <div class="row" style="margin-top: 0px;">
+    <div class="container" style="min-height: 604px">
         <div ng-controller="registerCtrl">
-            <div class="row" style="padding-top: 60px;padding-bottom: 60px">
+            <div class="row" style="padding-top: 20px;padding-bottom: 20px">
                 <div class="hidden-sm hidden-xs col-md-6 col-lg-6" style="text-align: center">
                     <img src="/images/icons/adpic.png" alt=""/>
                 </div>
@@ -124,23 +131,28 @@
                     <form style="padding: 10px;">
                         <div class="form-group">
                             <label for="exampleInputEmail1">用户名</label>
-                            <input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1" placeholder="用户昵称">
+                            <input ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1"
+                                   placeholder="用户昵称">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">邮箱</label>
-                            <input ng-model="user.email" type="text" class="form-control" id="exampleInputPassword1" placeholder="邮箱地址">
+                            <input ng-model="user.email" type="text" class="form-control" id="exampleInputPassword1"
+                                   placeholder="邮箱地址">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">手机</label>
-                            <input ng-model="user.phone" type="text" class="form-control" id="exampleInputPassword1" placeholder="手机号码">
+                            <input ng-model="user.phone" type="text" class="form-control" id="exampleInputPassword1"
+                                   placeholder="手机号码">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">密码</label>
-                            <input ng-model="user.password1" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
+                            <input ng-model="user.password1" type="password" class="form-control"
+                                   id="exampleInputPassword1" placeholder="密码">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">重复密码</label>
-                            <input ng-model="user.password2" type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
+                            <input ng-model="user.password2" type="password" class="form-control"
+                                   id="exampleInputPassword1" placeholder="密码">
                         </div>
                         <div class="checkbox">
                             <label>
@@ -148,13 +160,13 @@
                             </label>
                         </div>
                         <button style="float: right" class="btn btn-default" ng-click="submit()">点击注册</button>
-                        <p style="font-size: 13px;color: rgba(255,255,255,1);padding: 8px 1px;">已经有账号？<a href="/coco/login/">点击登录</a></p>
+                        <p style="font-size: 13px;color: rgba(255,255,255,1);padding: 8px 1px;">已经有账号？<a
+                                    href="/coco/login/">点击登录</a></p>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <div class="container-fluid" style="background-color: #eee">
     <div class="row">
@@ -166,7 +178,8 @@
                     <a href="#">在线客服</a>
                     <a href="#">销售联盟</a>
                 </p>
-                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号  Copyright © 2004-2014</p>
+
+                <p class="footer-coryright">网络文化经营许可证京网文[2011]0168-061号 Copyright © 2004-2014</p>
             </div>
         </div>
     </div>
