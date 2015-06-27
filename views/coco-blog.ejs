@@ -12,12 +12,15 @@
         /*box-shadow: 0px 0px 5px 1px #ddd;*/
         /*border-radius: 5px;*/
         /*border: 1px solid #eee;*/
-        padding: 10px;
-        border-left: 4px solid #eee;
+        padding: 5px;
+        /*border-left: 4px solid #eee;*/
+    }
+    .blog-nav li .index{
+        margin: 0px;
     }
     .blog-nav li:hover{
         /*border-left-color:#ff5277;*/
-        border-left-color:#5cb85c;
+        /*border-left-color:#5cb85c;*/
     }
 
     .pagination li a, .pagination a span {
@@ -107,15 +110,15 @@
 </style>
 
 
-<div class="container">
+<div class="container" style="background-color: #fff;border-radius: 3px;">
     <div class="row">
         <div class="col-md-9">
             <!--<h4>博客列表</h4>-->
             <div class="row">
-                <div class="col-md-12" style="margin-top: 20px;">
+                <div class="col-md-12" style="margin-top: 10px;">
                     <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
-                        <li><a href="#index/">所有主题</a></li>
-                        <li class="active">主题:{{topic.title}}</li>
+                        <li><a href="#index/">所有分类</a></li>
+                        <li class="active">{{topic.title}}</li>
                     </ol>
                 </div>
             </div>
@@ -131,14 +134,14 @@
                 </div>
             </div>
             <ul class="blog-nav">
-                <li ng-repeat="blog in blog_list | filter:query">
-                    <p>{{blog.title}}</p>
-                    <div class="row">
+                <li ng-repeat="blog in blog_list | filter:query" style="background-color: #f5f5f5">
+                    <p class="index">{{blog.title}}</p>
+                    <div class="row" ng-show="index_collapse">
                         <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
                             <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" alt=""/>
                         </div>
                         <div class="col-xs-7 col-sm-7 col-md-9 col-lg-9">
-                            <p style="font-size: 14px">[{{blog.name}}]</p>
+                            <p style="font-size: 14px;margin: 2px 0px">[{{blog.name}}]</p>
                             <p style="margin:0px;font-size: 13px;color: rgba(0,0,0,0.56);">{{blog.content}}</p>
                             <div class="image-item" ng-repeat="image in blog.images">
                                 <a href="/images/{{image}}" data-lightbox="image" data-title="this">
