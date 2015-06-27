@@ -423,6 +423,7 @@
 
         function blogPageController($scope, $http, $routeParams) {
             PAGE_INDEX = 1;
+            $scope.index_collapse = true
             // 博客相关图片的上传
             // 文件上传
             $('#blog_fileupload').fileupload({
@@ -840,23 +841,105 @@
 
 </head>
 <body>
-<div style="width: 100%;background-color: rgba(3, 169, 244, 0.8);position: fixed;z-index: 10">
-    <div class="container" style="padding: 8px 0px;">
-        <div class="row nav-kit">
-            <div class="hidden-xs hidden-sm col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(255,255,255,0.87);float: left">COCO</span><span id="user_location" style="margin-left:10px;font-size: 14px;color: #fff;line-height: 35px;"></span></div>
-            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2" style="text-align: center;">
-                <img style="width: 32px;height: 32px;" src="/images/icons/logo_white.png" alt=""/>
-                <!--<span class="hidden-md hidden-lg" style="position: fixed;top: 50px;left: 10px;font-size: 14px;" id="user_location_mobile"></span>-->
-            </div>
-            <div  class="item col-xs-2 col-sm-2 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#chat">好友 <span class="badge friend-badge"></span></a></div>
-            <div class="item col-xs-2 col-sm-2 col-md-1"><a href="#account/me">帐号 <span class="badge"></span></a></div>
-        </div>
+<div class="container-fluid" style="color: #fff">
+    <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-collapse">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" style="color: rgba(3, 169, 244, 1);padding: 10px 30px" href="#"><img style="width: 30px;height: 30px;display: inline-block" src="/images/icons/logo_bg.png" alt=""><span style="padding: 6px 10px;float: right">COCO</span></a>
     </div>
-</div>
+    <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a id="drop1" style="cursor: pointer" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    分类
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="drop1">
+                    <li><a href="#index">数码科技</a></li>
+                    <li><a href="#">编程技术</a></li>
+                    <li><a href="#">创业</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">我的分类</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a id="drop2" style="cursor: pointer" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    社区
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="drop2">
+                    <li><a href="#blog/0">博客</a></li>
+                    <li><a href="#chat">达人</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">我的博客</a></li>
+                </ul>
+            </li>
 
-<div class="" ng-view style="padding-top: 40px">
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input style="border-radius: 20px;width: 260px" type="text" class="form-control" placeholder="搜索">
+            </div>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li id="fat-menu" class="dropdown">
+                <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    设置
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="drop3">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </li>
+            <li id="fat-menu" class="dropdown">
+                <a href="">登录</a>
+            </li>
+        </ul>
+    </div><!-- /.nav-collapse -->
+</div>
+<!--<div style="width: 100%;background-color: rgba(3, 169, 244, 0.8);position: fixed;z-index: 10">-->
+    <!--<div class="container" style="padding: 8px 0px;">-->
+        <!--<div class="row nav-kit">-->
+            <!--<div class="col-xs-3">-->
+                <!--<img style="width: 32px;height: 32px;" src="/images/icons/logo_white.png" alt=""/>-->
+                <!--<div class="dropdown">-->
+                    <!--<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--Dropdown trigger-->
+                        <!--<span class="caret"></span>-->
+                    <!--</button>-->
+                    <!--<ul class="dropdown-menu" aria-labelledby="dLabel">-->
+                        <!--<li>-->
+
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class=""></div>-->
+
+            <!--<div class="hidden-xs hidden-sm col-xs-5 col-sm-5 col-md-5 col-lg-5"><span style="font-size: 24px;color: rgba(255,255,255,0.87);float: left">COCO</span><span id="user_location" style="margin-left:10px;font-size: 14px;color: #fff;line-height: 35px;"></span></div>-->
+            <!--<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2" style="text-align: center;">-->
+                <!--<img style="width: 32px;height: 32px;" src="/images/icons/logo_white.png" alt=""/>-->
+                <!--&lt;!&ndash;<span class="hidden-md hidden-lg" style="position: fixed;top: 50px;left: 10px;font-size: 14px;" id="user_location_mobile"></span>&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div  class="item col-xs-2 col-sm-2 col-md-offset-1 col-md-1 col-lg-offset-1 col-lg-1"><a href="#index">主题 <span class="badge topic-badge"></span></a></div>-->
+            <!--<div class="item col-xs-2 col-sm-2 col-md-1"><a href="#blog/0">博客 <span class="badge blog-badge"></span></a></div>-->
+            <!--<div class="item col-xs-2 col-sm-2 col-md-1"><a href="#chat">好友 <span class="badge friend-badge"></span></a></div>-->
+            <!--<div class="item col-xs-2 col-sm-2 col-md-1"><a href="#account/me">帐号 <span class="badge"></span></a></div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="" ng-view style="padding-top: 40px;padding-bottom:40px;background-color: rgba(3, 169, 244, 0.8);">
 
 </div>
 <div class="container-fluid" >
