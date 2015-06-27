@@ -18,6 +18,8 @@
         padding: 10px;
         font-weight: bold;
         border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        color: rgba(0,0,0,0.8);
     }
     .blog-nav li:hover{
         /*border-left-color:#ff5277;*/
@@ -145,7 +147,7 @@
             <!--<h4>博客列表</h4>-->
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list | filter:query" style="">
-                    <p class="index"><span>{{index_mark}}</span>{{blog.title}}</p>
+                    <p class="index" ng-click="collapseBlog(this)"><span>{{index_mark}}</span>{{blog.title}}</p>
                     <div class="row" ng-show="index_collapse" style="padding-top: 8px">
                         <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
                             <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" alt=""/>
@@ -188,7 +190,7 @@
                 <p style="text-align: center;cursor: pointer;margin: 0px;" ng-click="changePage(1)">查看更多</p>
             </div>
         </div>
-        <div class="col-md-3" style="height: 600px;margin-top: 20px;">
+        <div class="col-md-3" style="min-height: 600px;margin-top: 20px;">
             <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
                 <div style="text-align: center;line-height: 100px;">
                     <img style="height: 80px;width: 80px;border-radius: 80px;" ng-src="/images/{{user.head_image}}"

@@ -542,6 +542,16 @@
                 $('.blog-category').find('.item').eq(mode_type).addClass('item-active');
             }
 
+            $scope.collapseBlog = function(obj){
+                if (obj.index_collapse){
+                    obj.index_collapse = false
+                    obj.index_mark = ' + '
+                }else{
+                    obj.index_collapse = true
+                    obj.index_mark = ' - '
+                }
+            }
+
 
             $scope.saveBlog = function () {
                 var title = $scope.blog.title;
