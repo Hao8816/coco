@@ -31,6 +31,14 @@ router.post("/ajax/send_email/",function(req,res){
   res.send({'info':"OK","ret":0001});
 });
 
+// 发送邮件
+router.post("/ajax/send_invitation_email/",function(req,res){
+  var options = req.param('options');
+  email.sendInvitationEmail(options);
+  res.send({'info':"OK","ret":0001});
+});
+
+
 router.get("/ajax/all_users/",function(req,res){
   user.getAllUserList(req,res)
 });
