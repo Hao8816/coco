@@ -132,12 +132,13 @@
             </div>
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list | filter:query">
+                    <p>{{blog.title}}</p>
                     <div class="row">
                         <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
                             <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" alt=""/>
                         </div>
                         <div class="col-xs-7 col-sm-7 col-md-9 col-lg-9">
-                            <p style="font-size: 14px">[{{blog.name}}] {{blog.title}}</p>
+                            <p style="font-size: 14px">[{{blog.name}}]</p>
                             <p style="margin:0px;font-size: 13px;color: rgba(0,0,0,0.56);">{{blog.content}}</p>
                             <div class="image-item" ng-repeat="image in blog.images">
                                 <a href="/images/{{image}}" data-lightbox="image" data-title="this">
