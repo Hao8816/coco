@@ -20,6 +20,12 @@ router.get('/blog/', function(req, res) {
     res.render('coco-blog.ejs', { title: 'COCO Blog' });
 });
 
+
+router.get('/message/', function(req, res) {
+    res.render('coco-message.ejs', { title: 'COCO Blog' });
+});
+
+
 router.get('/login/', function(req, res) {
     res.render('coco-login.ejs', { title: 'COCO Login' });
 });
