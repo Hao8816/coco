@@ -17,7 +17,7 @@
         margin: 0px;
         padding: 10px;
         font-weight: bold;
-        border-bottom: 1px solid #ddd;
+        /*border-bottom: 1px solid #ddd;*/
         cursor: pointer;
         color: rgba(0,0,0,0.8);
     }
@@ -101,13 +101,12 @@
     }
 
     .more-blog{
-        background-color: #eee;
-        margin-top: 5px;
         padding: 5px 0px;
         border-radius: 3px;
+        margin-bottom: 8px;
     }
     .more-blog:hover{
-        background-color: #ddd;
+        background-color: #f5f5f5;
 
     }
 </style>
@@ -143,12 +142,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9" style="border-right: 1px solid #ddd;border-bottom: 1px solid #ddd">
             <!--<h4>博客列表</h4>-->
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list | filter:query" style="">
                     <p class="index" ng-click="collapseBlog(this)"><span>{{index_mark}}</span>{{blog.title}}</p>
-                    <div class="row" ng-show="index_collapse" style="padding-top: 8px">
+                    <div class="row" ng-show="index_collapse" style="padding-top: 8px;padding-bottom:8px;border-bottom: 1px solid #ddd">
                         <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
                             <img style="width: 40px;height: 40px;border-radius:40px;" ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" alt=""/>
                         </div>
