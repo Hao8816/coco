@@ -54,7 +54,7 @@
                         templateUrl:'/coco/blog/',
                         controller:'blogPageController'
                     }).
-                    when('/index/',{
+                    when('/topic/:type',{
                         templateUrl:'/coco/index/',
                         controller:''
                     }).
@@ -68,6 +68,15 @@
                     }).
                     otherwise({redirectTo:'/index/'});
         }]);
+
+        var TOPIC_TYPE = {
+            "0":"科技",
+            "1":"编程",
+            "2":"设计",
+            "3":"创业",
+            "4":"其他",
+            "-1":"全部"
+        }
 
     </script>
     <script type="text/javascript">
@@ -221,8 +230,10 @@
             return user_obj;
         }
 
-        function topicPageController($scope, $http) {
+        function topicPageController($scope, $http,$routeParams) {
             PAGE_INDEX = 0;
+            var type = $routeParams.type;
+            $scope.topic_type = TOPIC_TYPE[type];
             var user_info_cache = localStorage.getItem('ALL_USER_INFO_DICT')
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
 
@@ -295,7 +306,7 @@
                 $scope.next = true;
                 //if(topic_info_cache == null){
                     $('.topic-badge').text('');
-                    $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1,page:page}).success(function (data) {
+                    $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1,page:page,type:type}).success(function (data) {
                         if (data['ret'] == '0001') {
                             console.log(data);
                             var topic_list = data['topic_list'];
@@ -913,12 +924,13 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="drop1">
-                    <li><a href="#index">科技</a></li>
-                    <li><a href="#">编程</a></li>
-                    <li><a href="#">设计</a></li>
-                    <li><a href="#">创业</a></li>
+                    <li><a href="#topic/0">科技</a></li>
+                    <li><a href="#topic/1">编程</a></li>
+                    <li><a href="#topic/2">设计</a></li>
+                    <li><a href="#topic/3">创业</a></li>
+                    <li><a href="#topic/4">其他</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">我的分类 <span class="badge topic-badge"></span></a></li>
+                    <li><a href="#topic/-1">所有分类 <span class="badge topic-badge"></span></a></li>
                 </ul>
             </li>
             <li class="dropdown">
