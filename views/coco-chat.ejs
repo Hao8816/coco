@@ -109,11 +109,14 @@
 <div class="container main-container" ng-controller="chatPageCtrl">
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-9 " style="border-radius:5px;">
+            <div class="col-md-12" style="margin-top: 10px;">
+                <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
+                    <li><a href="#index/">达人广场</a></li>
+                    <li class="active ng-binding">全部</li>
+                </ol>
+            </div>
             <div id="all_friend_list" class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height: 500px;">
-                    <ol style="margin: 0px;padding: 10px 5px" class="breadcrumb">
-                        <li class="active ng-binding">博客达人<span style="font-size: 12px;padding: 5px;">总共 {{nb_topic}} 未读消息</span></li>
-                    </ol>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding: 5px;cursor: pointer;text-align: center" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query | orderBy:order:true">
                         <div class="friend-item">
                             <a style="position: absolute;top: 5px;right: 10px;"><span class="badge message-badge">{{friend.nb_message}}</span></a>
