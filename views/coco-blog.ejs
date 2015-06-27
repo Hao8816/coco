@@ -103,7 +103,6 @@
     .more-blog{
         padding: 5px 0px;
         border-radius: 3px;
-        margin-bottom: 8px;
     }
     .more-blog:hover{
         background-color: #f5f5f5;
@@ -114,25 +113,20 @@
 
 <div class="container main-container">
     <div class="row">
-        <div class="col-md-4" style="margin-top: 10px;">
+        <div class="col-md-12" style="margin-top: 10px;">
             <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
                 <li><a href="#index/">所有分类</a></li>
                 <li class="active">{{topic.title}}</li>
+                <span style="font-size: 13px;"> - {{topic.desc}}</span>
             </ol>
-        </div>
-        <div class="col-md-4" style="margin-top: 10px;text-align: center">
-            <p class="blog-category" style="font-size: 12px;margin-top: 5px;">
-                <a class="item item-active" ng-click="changeBlogMode(0)">目录</a>
-                <a class="item" ng-click="changeBlogMode(1)">内容</a>
-            </p>
-        </div>
-        <div class="col-md-4" style="margin-top: 10px;">
-
         </div>
     </div>
     <div class="row blog-nav-bar" style="margin-top: 5px;padding-bottom: 5px;border-bottom: 1px solid #ddd">
         <div class="col-xs-7 col-sm-8 col-md-9">
-            <p style="font-size: 13px;color: rgba(0,0,0,0.56)">{{topic.desc}}</p>
+            <p class="blog-category" style="font-size: 12px;margin-top: 5px;">
+                <a class="item item-active" ng-click="changeBlogMode(0)">目录</a>
+                <a class="item" ng-click="changeBlogMode(1)">内容</a>
+            </p>
         </div>
         <div class="col-xs-5 col-sm-4 col-md-3">
             <input ng-model="query" style="margin: 5px 0px" class="form-control input-sm" ng-keydown="enterSearchBlog(event)" placeholder="搜索博客" type="text"/>
@@ -142,7 +136,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9" style="border-right: 1px solid #ddd;border-bottom: 1px solid #ddd">
+        <div class="col-md-9" style="border-right: 1px solid #ddd;border-bottom: 1px solid #ddd;min-height: 600px">
             <!--<h4>博客列表</h4>-->
             <ul class="blog-nav">
                 <li ng-repeat="blog in blog_list | filter:query" style="">
@@ -185,7 +179,7 @@
                 </li>
                 <li ng-show="data_empty"><p>当前主题下没有博客信息，点击 <a href="">创建博客</a> 添加博客信息。</p></li>
             </ul>
-            <div class="more-blog" ng-show="next">
+            <div class="more-blog row" ng-show="next">
                 <p style="text-align: center;cursor: pointer;margin: 0px;" ng-click="changePage(1)">查看更多</p>
             </div>
         </div>
