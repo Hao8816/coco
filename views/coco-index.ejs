@@ -7,10 +7,11 @@
         /*margin: 5px 0px;*/
         margin-top: 5px;
         cursor: pointer;
-        border: 1px solid #ddd;
+        border: 1px solid #ccc;
         height: 260px;
         /*border-left: 4px solid #eee;*/
-        box-shadow: 0px 0px 10px 0px #ccc
+        box-shadow: 0px 0px 10px 0px #ccc;
+        background-image: url("/images/pictures/topic_bg.jpg");
     }
     .topic-item:hover{
         /*box-shadow: 0px 0px 10px 3px #ddd;*/
@@ -42,18 +43,15 @@
         margin: 0;
     }
     .topic-category .item{
-        padding: 3px 10px;
-        margin: 0px 5px;
-        font-size: 14px;
+        padding: 4px 15px;
         cursor: pointer;
+        font-size: 14px;
+        border-radius: 15px;
         text-decoration: none;
+        font-weight: bold;
     }
     .topic-category .item-active{
-        background-color: #5cb85c;
-        font-weight: bold;
-        color: rgba(255,255,255,0.87);
-        border-radius: 15px;
-
+        background-color: #ddd;
     }
 
 
@@ -63,29 +61,28 @@
     <div class="row">
         <div class="col-md-12" style="margin-top: 10px;">
             <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
-                <li><a href="#index/">我的主题</a></li>
-                <!--<li class="active"></li>-->
+                <li><a href="#index/">我的分类</a></li>
+                <li class="active">全部</li>
             </ol>
         </div>
     </div>
-    <div class="blog-nav-bar row" style="margin-top: 5px;padding-bottom: 5px;border-bottom: 1px solid #ddd">
-        <div class="col-xs-8 col-sm-8 col-md-9">
+    <div class="row blog-nav-bar" style="margin-top: 5px;padding-bottom: 5px;border-bottom: 1px solid #ddd">
+        <div class="col-xs-7 col-sm-8 col-md-9">
             <p class="topic-category" style="font-size: 12px;margin-top: 5px;">
                 <a class="item item-active" ng-click="changeOrder(0)">全部</a>
                 <a class="item" ng-click="changeOrder(1)">最热</a>
                 <a class="item" ng-click="changeOrder(2)">最新</a>
             </p>
         </div>
-        <div class="col-xs-4 col-sm-4 col-md-3">
-            <input style="margin: 5px 0px;border-radius: 15px;border-color:#ff7997;" ng-model="query" ng-keydown="enterSearchTopic(event)" class="form-control input-sm" placeholder="搜索主题" type="text">
-                        <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
-                            <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
-                        </span>
+        <div class="col-xs-5 col-sm-4 col-md-3">
+            <input ng-model="query" style="margin: 5px 0px;border-radius: 15px;" class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索博客" type="text"/>
+                    <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
+                        <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
+                    </span>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9">
-
+        <div class="col-md-9" style="border-right: 1px solid #ddd;border-bottom: 1px solid #ddd;min-height: 600px">
             <div class="" style="overflow: auto">
                 <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list|filter:query">-->
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding:5px;" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
