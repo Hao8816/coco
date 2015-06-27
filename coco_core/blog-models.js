@@ -61,7 +61,9 @@ var Topic = db.define("topic", {
     images        : Object,    // 博客的图片信息: Object,
     creator_sha1  : String,    // 创建者信息
     related       : Object,    // 和主题相关的主题
-    update_time   : String     // 主题的最近更新时间
+    update_time   : String,    // 主题的最近更新时间
+    type          : String,    // 主题的分类 0 是科技 1 是编程 2 是设计 3是创业 4是其他
+    tags          : Object     // 主题的标签功能
 
 }, {
     // with in model method

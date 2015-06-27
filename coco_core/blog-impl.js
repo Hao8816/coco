@@ -61,6 +61,7 @@ var saveTopic = function saveTopic(req,res){
     var sha1 = SHA1(date_time);
     var topic_title = req.param('title')||"";
     var topic_desc = req.param('desc')||"";
+    var type = req.param('type')|| 4;
     var creator_sha1 = req.param('creator_sha1');
     blog_models.Topic.create([{
         time          : date_time.toString(),       // 微博创建的时间
@@ -69,7 +70,8 @@ var saveTopic = function saveTopic(req,res){
         desc          : topic_desc,      // 主题的描述
         images        : [],              // 博客的图片信息: Object,
         creator_sha1  : creator_sha1,    // 创建者信息
-        related       : []               // 和主题相关的主题
+        related       : [],               // 和主题相关的主题
+        type          : type              // 和主题大分类
 
     }],function (err,item){
         console.log(err);
@@ -152,13 +154,18 @@ var getBlogList = function getBlogList(req,res){
 var getTopicList = function getTopicList(req,res){
     var creator_sha1 = req.param('creator_sha1');
     console.log(creator_sha1);
-    var page = req.param('page') ||1;
+    var page = req.param('page') || 1;
+    var type = req.param('type') || -1;
     var pageSize = 16;
     if(page == 1){
         pageSize = 15;
     }
+    var query = {};
+    if (type != -1){
+        query = {"type":type}
+    }
 
-    blog_models.Topic.find([ "time", "Z" ]).limit(pageSize).offset(pageSize*(page-1)).run(function(err,result){
+    blog_models.Topic.find(query,[ "time", "Z" ]).limit(pageSize).offset(pageSize*(page-1)).run(function(err,result){
         if(err){
             console.log(err);
         }
