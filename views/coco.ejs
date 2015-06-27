@@ -439,7 +439,8 @@
 
         function blogPageController($scope, $http, $routeParams) {
             PAGE_INDEX = 1;
-            $scope.index_collapse = true
+            $scope.index_collapse = false
+            $scope.index_mark = ' + '
             // 博客相关图片的上传
             // 文件上传
             $('#blog_fileupload').fileupload({
@@ -528,6 +529,19 @@
                 // 显示所有的主题
                 showBlog(1);
             }
+
+            $scope.changeBlogMode = function(mode_type){
+                if(mode_type){
+                    $scope.index_collapse = true;
+                    $scope.index_mark = ' - '
+                }else{
+                    $scope.index_collapse = false;
+                    $scope.index_mark = ' + '
+                }
+                $('.blog-category').find('.item-active').removeClass('item-active');
+                $('.blog-category').find('.item').eq(mode_type).addClass('item-active');
+            }
+
 
             $scope.saveBlog = function () {
                 var title = $scope.blog.title;
@@ -855,6 +869,17 @@
             background-color: #fff;
             border-radius: 3px;
             padding-bottom: 20px;
+        }
+        .blog-category .item{
+            padding: 4px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius:15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .blog-category .item-active{
+            background-color: #ddd;
         }
     </style>
 
