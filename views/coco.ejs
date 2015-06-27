@@ -74,9 +74,7 @@
         function chatPageCtrl($scope, $http) {
             $scope.chat_image = 'default.png'
             PAGE_INDEX = 2;
-            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
-            var userInfo = JSON.parse(loginUserInfo);
-            $scope.user = userInfo;
+            $scope.user = getLoginUserInfo();
             $scope.order = "online";
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
             $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
@@ -209,13 +207,27 @@
 
         }
 
+        function getLoginUserInfo(){
+            var user_obj = {}
+            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
+            if (loginUserInfo){
+                user_obj = JSON.parse(loginUserInfo);
+            }else{
+                user_obj['head_image'] = "default.png";
+                user_obj['nb_topic'] = 0;
+                user_obj['nb_blog'] = 0;
+                user_obj['nb_friend'] = 0;
+            }
+            return user_obj;
+        }
+
         function topicPageController($scope, $http) {
             PAGE_INDEX = 0;
             var user_info_cache = localStorage.getItem('ALL_USER_INFO_DICT')
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
 
             var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
-            $scope.user = JSON.parse(loginUserInfo);
+            $scope.user = getLoginUserInfo();
 
 
             $scope.changeOrder = function(index) {
@@ -465,9 +477,7 @@
 
             var user_info_cache = localStorage.getItem('ALL_USER_INFO_DICT')
             var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
-
-            var loginUserInfo = sessionStorage.getItem('LOGIN_USER_INFO');
-            $scope.user = JSON.parse(loginUserInfo);
+            $scope.user = getLoginUserInfo();
 
             // 博客主题的信息
             var topic_sha1 = $routeParams.topic_sha1;
