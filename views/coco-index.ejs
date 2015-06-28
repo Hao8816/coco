@@ -74,17 +74,16 @@
             </p>
         </div>
         <div class="col-xs-5 col-sm-4 col-md-3">
-            <input ng-model="query" style="margin: 5px 0px;border-radius: 15px;" class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索博客" type="text"/>
+            <input ng-model="query" style="margin: 5px 0px;border-radius: 15px;" class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索主题" type="text"/>
                     <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
                         <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
                     </span>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9" style="border-right: 1px solid #ddd;border-bottom: 1px solid #ddd;min-height: 600px">
+        <div class="col-md-12" style="border-right: 1px solid #ddd;border-bottom: 1px solid #ddd;min-height: 600px">
             <div class="" style="overflow: auto">
-                <!--<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" ng-repeat="topic in topic_list|filter:query">-->
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding:5px;" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
+                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" style="padding:5px;" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                     <div class="topic-item">
                         <a class="topic-link" href="#/blog/{{topic.sha1}}">
                         <div class="row">
@@ -105,7 +104,7 @@
                         </a>
                     </div>
                 </div>
-                <div ng-show="next" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding:5px;height: 172px;text-align: center">
+                <div ng-show="next" class="col-xs-6 col-sm-4 col-md-3 col-lg-2" style="padding:5px;height: 172px;text-align: center">
                     <div class="topic-item">
                         <a class="topic-link" ng-click="changePage(1)"  style="line-height: 150px;cursor: pointer">
                             更多
@@ -114,32 +113,32 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3" style="margin-top: 20px;">
-            <div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">
-                <div style="text-align: center;line-height: 100px;">
-                    <img style="height: 80px;width: 80px;border-radius: 80px;" ng-src="/images/{{user.head_image}}" alt=""/>
-                </div>
-                <p style="text-align: center">
-                    <span>主题<a href="" ng-bind="user.nb_topic"></a></span>
-                    <span>博客<a href="" ng-bind="user.nb_blog"></a></span>
-                    <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
-                </p>
-                <span style="width: 70%;margin: 0px 15%;" class="btn btn-success">
-                    <a style="color: #fff;font-size: 15px;" data-toggle="modal" data-target=".compose_topic_modal">创建主题</a>
-                </span>
-            </div>
-            <div>
-                <h5>活跃用户</h5>
-                <div style="border-radius: 5px;background-color: #fff;padding: 5px;">
-                    <div class="friend-item" style="width: 25%;display: inline-block;text-align: center" ng-repeat="friend in friend_list">
-                        <a href="#account/{{friend.sha1}}">
-                            <img title="{{friend.name}}" style="width: 60%;margin:0 10%;border-radius: 100%;border: 1px solid #f5f5f5" src="/images/{{friend.head_image}}" alt=""/>
-                            <span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" ng-bind="friend.name"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--<div class="col-md-3" style="margin-top: 20px;">-->
+            <!--<div style="background-color: #fff;border-radius: 5px;height: 200px;padding: 10px 0px;">-->
+                <!--<div style="text-align: center;line-height: 100px;">-->
+                    <!--<img style="height: 80px;width: 80px;border-radius: 80px;" ng-src="/images/{{user.head_image}}" alt=""/>-->
+                <!--</div>-->
+                <!--<p style="text-align: center">-->
+                    <!--<span>主题<a href="" ng-bind="user.nb_topic"></a></span>-->
+                    <!--<span>博客<a href="" ng-bind="user.nb_blog"></a></span>-->
+                    <!--<span>好友<a href="" ng-bind="user.nb_friend"></a></span>-->
+                <!--</p>-->
+                <!--<span style="width: 70%;margin: 0px 15%;" class="btn btn-success">-->
+                    <!--<a style="color: #fff;font-size: 15px;" data-toggle="modal" data-target=".compose_topic_modal">创建主题</a>-->
+                <!--</span>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<h5>活跃用户</h5>-->
+                <!--<div style="border-radius: 5px;background-color: #fff;padding: 5px;">-->
+                    <!--<div class="friend-item" style="width: 25%;display: inline-block;text-align: center" ng-repeat="friend in friend_list">-->
+                        <!--<a href="#account/{{friend.sha1}}">-->
+                            <!--<img title="{{friend.name}}" style="width: 60%;margin:0 10%;border-radius: 100%;border: 1px solid #f5f5f5" src="/images/{{friend.head_image}}" alt=""/>-->
+                            <!--<span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" ng-bind="friend.name"></span>-->
+                        <!--</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
     <div class="modal fade compose_topic_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
