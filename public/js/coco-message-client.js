@@ -24,9 +24,9 @@ client.on('CHAT_MESSAGE',function(data) {
         message_number = parseInt(message_number)+1;
         $('div[uid='+friend_sha1+']').find('.message-badge').text(message_number);
     }else{
-        var message_number = $('.nav-kit').find('.friend-badge').text() || 0;
+        var message_number = $('#main-nav').find('.friend-badge').text() || 0;
         message_number = parseInt(message_number)+1;
-        $('.nav-kit').find('.friend-badge').text(message_number);
+        $('#main-nav').find('.friend-badge').text(message_number);
         // 未读消息存到前端缓存
         var unread_messages = localStorage.getItem("UNREAD_MESSAGE_NUM") || '{}';
         unread_messages = JSON.parse(unread_messages);
