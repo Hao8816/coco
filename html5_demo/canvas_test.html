@@ -33,7 +33,7 @@
 
         var canvas = document.getElementById('clock_canvas');
         var cxt = canvas.getContext('2d');
-        cxt.clearRect(0, 0, canvas.width, canvas.height);
+        cxt.clearRect(0, 0, 400, 400);
         cxt.restore();
 
         var s_offset = 4;
@@ -42,8 +42,8 @@
 
         var x_offset;
         var y_offset;
-        x_offset = 200*Math.tan(second*6);
-        y_offset = x_offset*Math.tan(second*6);
+        x_offset = 180*Math.sin(second*6);
+        y_offset = 180*Math.cos(second*6);
 
 
         console.log(cxt);
@@ -57,16 +57,17 @@
 
         // 秒针
         cxt.moveTo(200+s_offset,200-s_offset);
-        cxt.lineTo(200+x_offset,30+x_offset);
+        cxt.lineTo(200+x_offset,200-y_offset);
 
         cxt.moveTo(200-s_offset,200-s_offset);
-        cxt.lineTo(200+x_offset,30+x_offset);
+        cxt.lineTo(200+x_offset,200-y_offset);
 
         cxt.moveTo(200+s_offset,200-s_offset);
         cxt.lineTo(200,200);
 
         cxt.moveTo(200-s_offset,200-s_offset);
         cxt.lineTo(200,200);
+
 
         // 分针
         cxt.moveTo(200+m_offset,200-m_offset);
