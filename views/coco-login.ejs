@@ -202,178 +202,7 @@
                 <span style="font-size: 24px;color: rgba(3, 169, 244,1)">一颗网</span>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center">
-                <!--<img style="width: 40px;height: 40px;" src="/images/icons/logo_bg.png" alt=""/>-->
-                <div>
-                    <canvas id="clock_canvas" width="400" height="400" style="margin: auto;">
-
-
-                    </canvas>
-
-                </div>
-
-                <script type="text/javascript">
-                    drawClock();
-
-
-
-                    // 更新每一帧的画面
-
-                    function drawClock(){
-
-                        var date = new Date();
-
-                        var second = date.getSeconds();
-                        var minute = date.getMinutes();
-                        var hour = date.getHours();
-
-                        var canvas = document.getElementById('clock_canvas');
-                        var cxt = canvas.getContext('2d');
-                        cxt.clearRect(0, 0, 400, 400);
-                        cxt.restore();
-
-                        var s_offset = 4;
-                        var m_offset = 4;
-                        var h_offset = 6;
-
-                        var x_offset;
-                        var y_offset;
-
-
-                        // 根据秒针的位置，获取偏移量
-                        var s_m_offset = getOffset(second,0);
-                        var m_m_offset = getOffset(minute,1);
-                        var h_m_offset = getOffset(hour,2);
-                        // 分别取出指针的位置
-                        var s_x_offset = s_m_offset['x'];
-                        var s_y_offset = s_m_offset['y'];
-                        var m_x_offset = m_m_offset['x'];
-                        var m_y_offset = m_m_offset['y'];
-                        var h_x_offset = h_m_offset['x'];
-                        var h_y_offset = h_m_offset['y'];
-
-
-                        console.log(cxt);
-
-                        // 表芯
-                        cxt.beginPath()
-
-                        cxt.fillStyle = "#03a9f4";
-
-                        cxt.arc(200,200,6,0,360);
-                        cxt.stroke();
-                        cxt.closePath()
-//
-
-
-                        // 表盘
-                        cxt.beginPath()
-                        cxt.arc(200,200,180,0,360);
-                        cxt.stroke()
-
-
-                        // 秒针
-                        cxt.beginPath()
-                        cxt.moveTo(200+s_offset,200-s_offset);
-                        cxt.lineTo(200+s_x_offset,200-s_y_offset);
-
-                        cxt.moveTo(200-s_offset,200-s_offset);
-                        cxt.lineTo(200+s_x_offset,200-s_y_offset);
-
-                        cxt.moveTo(200+s_offset,200-s_offset);
-                        cxt.lineTo(200,200);
-
-                        cxt.moveTo(200-s_offset,200-s_offset);
-                        cxt.lineTo(200,200);
-
-                        cxt.closePath();
-
-                        cxt.fillStyle = "#000000"
-                        cxt.fill()
-                        cxt.stroke()
-
-
-
-
-                        // 分针
-                        cxt.moveTo(200+m_offset,200-m_offset);
-                        cxt.lineTo(200+m_x_offset,200-m_y_offset);
-
-                        cxt.moveTo(200-m_offset,200-m_offset);
-                        cxt.lineTo(200+m_x_offset,200-m_y_offset);
-
-                        cxt.moveTo(200+m_offset,200-m_offset);
-                        cxt.lineTo(200,200);
-
-                        cxt.moveTo(200+m_offset,200+m_offset);
-                        cxt.lineTo(200,200);
-
-
-                        // 时针
-                        cxt.moveTo(200+h_offset,200-h_offset);
-                        cxt.lineTo(200+h_x_offset,200-h_y_offset);
-
-                        cxt.moveTo(200-h_offset,200-h_offset);
-                        cxt.lineTo(200+h_x_offset,200-h_y_offset);
-
-                        cxt.moveTo(200+h_offset,200+h_offset);
-                        cxt.lineTo(200,200);
-
-                        cxt.moveTo(200-h_offset,200+h_offset);
-                        cxt.lineTo(200,200);
-                        cxt.closePath();
-
-                        // 刻度
-                        cxt.strokeText("12",193,14)
-                        cxt.strokeText("3",390,203)
-                        cxt.strokeText("6",197,393)
-                        cxt.strokeText("9",7,193)
-                        var time = new Date()
-
-                        cxt.fillText(time,100,320)
-                        cxt.fillText("To Be NO.1",175,80)
-
-                        cxt.stroke();
-//        cxt.save()
-                    }
-
-                    // 计算指针的位置，返回指针的偏移量
-                    function getOffset(count,type){
-                        var long = 180;
-                        switch (type){
-                            case 0:
-                                long=180;
-                                break;
-                            case 1:
-                                long=140;
-                                break;
-                            case 2:
-                                long=100;
-                                break;
-                            default:
-                                long=180;
-                                break;
-                        }
-
-                        var angle = 2*Math.PI / 360;
-                        if (0<=count<15) {
-                            x_offset = long * Math.sin(count *6*angle);
-                            y_offset = long * Math.cos(count *6*angle);
-                        }else if (15<=count<30) {
-                            x_offset = long * Math.sin(count *6*angle);
-                            y_offset = -long * Math.cos(count *6*angle);
-                        }else if(30<=count<45) {
-                            x_offset = -long * Math.sin(count *6*angle);
-                            y_offset = long * Math.cos(count *6*angle);
-                        }else if(45<=count<60) {
-                            x_offset = -long * Math.sin(count *6*angle);
-                            y_offset = -long * Math.cos(count *6*angle);
-                        }
-                        return {'x':x_offset,'y':y_offset}
-                    }
-
-                    window.setInterval(drawClock,1000)
-
-                </script>
+                <img style="width: 40px;height: 40px;" src="/images/icons/logo_bg.png" alt=""/>
             </div>
             <div class="item col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <!--<a data-toggle="modal" style="cursor: pointer;padding: 0px 5px" data-target=".login_modal" >登录</a>-->
@@ -389,7 +218,178 @@
             <div  style="margin: 0;padding: 20px">
                 <div class="row">
                     <div class="hidden-sm hidden-xs col-md-6 col-lg-6" style="text-align: center">
-                        <img src="/images/icons/adpic.png" alt=""/>
+                        <!--<img src="/images/icons/adpic.png" alt=""/>-->
+                        <div>
+                            <canvas id="clock_canvas" width="400" height="400" style="margin: auto;">
+
+
+                            </canvas>
+
+                        </div>
+
+                        <script type="text/javascript">
+                            drawClock();
+
+
+
+                            // 更新每一帧的画面
+
+                            function drawClock(){
+
+                                var date = new Date();
+
+                                var second = date.getSeconds();
+                                var minute = date.getMinutes();
+                                var hour = date.getHours();
+
+                                var canvas = document.getElementById('clock_canvas');
+                                var cxt = canvas.getContext('2d');
+                                cxt.clearRect(0, 0, 400, 400);
+                                cxt.restore();
+
+                                var s_offset = 4;
+                                var m_offset = 4;
+                                var h_offset = 6;
+
+                                var x_offset;
+                                var y_offset;
+
+
+                                // 根据秒针的位置，获取偏移量
+                                var s_m_offset = getOffset(second,0);
+                                var m_m_offset = getOffset(minute,1);
+                                var h_m_offset = getOffset(hour,2);
+                                // 分别取出指针的位置
+                                var s_x_offset = s_m_offset['x'];
+                                var s_y_offset = s_m_offset['y'];
+                                var m_x_offset = m_m_offset['x'];
+                                var m_y_offset = m_m_offset['y'];
+                                var h_x_offset = h_m_offset['x'];
+                                var h_y_offset = h_m_offset['y'];
+
+
+                                console.log(cxt);
+
+                                // 表芯
+                                cxt.beginPath()
+
+                                cxt.fillStyle = "#03a9f4";
+
+                                cxt.arc(200,200,6,0,360);
+                                cxt.stroke();
+                                cxt.closePath()
+//
+
+
+                                // 表盘
+                                cxt.beginPath()
+                                cxt.arc(200,200,180,0,360);
+                                cxt.stroke()
+
+
+                                // 秒针
+                                cxt.beginPath()
+                                cxt.moveTo(200+s_offset,200-s_offset);
+                                cxt.lineTo(200+s_x_offset,200-s_y_offset);
+
+                                cxt.moveTo(200-s_offset,200-s_offset);
+                                cxt.lineTo(200+s_x_offset,200-s_y_offset);
+
+                                cxt.moveTo(200+s_offset,200-s_offset);
+                                cxt.lineTo(200,200);
+
+                                cxt.moveTo(200-s_offset,200-s_offset);
+                                cxt.lineTo(200,200);
+
+                                cxt.closePath();
+
+                                cxt.fillStyle = "#000000"
+                                cxt.fill()
+                                cxt.stroke()
+
+
+
+
+                                // 分针
+                                cxt.moveTo(200+m_offset,200-m_offset);
+                                cxt.lineTo(200+m_x_offset,200-m_y_offset);
+
+                                cxt.moveTo(200-m_offset,200-m_offset);
+                                cxt.lineTo(200+m_x_offset,200-m_y_offset);
+
+                                cxt.moveTo(200+m_offset,200-m_offset);
+                                cxt.lineTo(200,200);
+
+                                cxt.moveTo(200+m_offset,200+m_offset);
+                                cxt.lineTo(200,200);
+
+
+                                // 时针
+                                cxt.moveTo(200+h_offset,200-h_offset);
+                                cxt.lineTo(200+h_x_offset,200-h_y_offset);
+
+                                cxt.moveTo(200-h_offset,200-h_offset);
+                                cxt.lineTo(200+h_x_offset,200-h_y_offset);
+
+                                cxt.moveTo(200+h_offset,200+h_offset);
+                                cxt.lineTo(200,200);
+
+                                cxt.moveTo(200-h_offset,200+h_offset);
+                                cxt.lineTo(200,200);
+                                cxt.closePath();
+
+                                // 刻度
+                                cxt.strokeText("12",193,14)
+                                cxt.strokeText("3",390,203)
+                                cxt.strokeText("6",197,393)
+                                cxt.strokeText("9",7,193)
+                                var time = new Date()
+
+                                cxt.fillText(time,100,320)
+                                cxt.fillText("To Be NO.1",175,80)
+
+                                cxt.stroke();
+//        cxt.save()
+                            }
+
+                            // 计算指针的位置，返回指针的偏移量
+                            function getOffset(count,type){
+                                var long = 180;
+                                switch (type){
+                                    case 0:
+                                        long=180;
+                                        break;
+                                    case 1:
+                                        long=140;
+                                        break;
+                                    case 2:
+                                        long=100;
+                                        break;
+                                    default:
+                                        long=180;
+                                        break;
+                                }
+
+                                var angle = 2*Math.PI / 360;
+                                if (0<=count<15) {
+                                    x_offset = long * Math.sin(count *6*angle);
+                                    y_offset = long * Math.cos(count *6*angle);
+                                }else if (15<=count<30) {
+                                    x_offset = long * Math.sin(count *6*angle);
+                                    y_offset = -long * Math.cos(count *6*angle);
+                                }else if(30<=count<45) {
+                                    x_offset = -long * Math.sin(count *6*angle);
+                                    y_offset = long * Math.cos(count *6*angle);
+                                }else if(45<=count<60) {
+                                    x_offset = -long * Math.sin(count *6*angle);
+                                    y_offset = -long * Math.cos(count *6*angle);
+                                }
+                                return {'x':x_offset,'y':y_offset}
+                            }
+
+                            window.setInterval(drawClock,1000)
+
+                        </script>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="text-align: left">
                         <h2 style="color:rgba(255,255,255,0.8);padding: 10px 0px;font-size: 36px;">一颗网</h2>
