@@ -188,15 +188,11 @@
             });
         }
     }
-    $(function(){
-        <script type="text/javascript">
+    $(function() {
         drawClock();
-
-
-
         // 更新每一帧的画面
 
-        function drawClock(){
+        function drawClock() {
 
             var date = new Date();
 
@@ -218,9 +214,9 @@
 
 
             // 根据秒针的位置，获取偏移量
-            var s_m_offset = getOffset(second,0);
-            var m_m_offset = getOffset(minute,1);
-            var h_m_offset = getOffset(hour,2);
+            var s_m_offset = getOffset(second, 0);
+            var m_m_offset = getOffset(minute, 1);
+            var h_m_offset = getOffset(hour, 2);
             // 分别取出指针的位置
             var s_x_offset = s_m_offset['x'];
             var s_y_offset = s_m_offset['y'];
@@ -237,7 +233,7 @@
 
             cxt.fillStyle = "#03a9f4";
 
-            cxt.arc(200,200,6,0,360);
+            cxt.arc(200, 200, 6, 0, 360);
             cxt.stroke();
             cxt.closePath()
 //
@@ -245,23 +241,23 @@
 
             // 表盘
             cxt.beginPath()
-            cxt.arc(200,200,180,0,360);
+            cxt.arc(200, 200, 180, 0, 360);
             cxt.stroke()
 
 
             // 秒针
             cxt.beginPath()
-            cxt.moveTo(200+s_offset,200-s_offset);
-            cxt.lineTo(200+s_x_offset,200-s_y_offset);
+            cxt.moveTo(200 + s_offset, 200 - s_offset);
+            cxt.lineTo(200 + s_x_offset, 200 - s_y_offset);
 
-            cxt.moveTo(200-s_offset,200-s_offset);
-            cxt.lineTo(200+s_x_offset,200-s_y_offset);
+            cxt.moveTo(200 - s_offset, 200 - s_offset);
+            cxt.lineTo(200 + s_x_offset, 200 - s_y_offset);
 
-            cxt.moveTo(200+s_offset,200-s_offset);
-            cxt.lineTo(200,200);
+            cxt.moveTo(200 + s_offset, 200 - s_offset);
+            cxt.lineTo(200, 200);
 
-            cxt.moveTo(200-s_offset,200-s_offset);
-            cxt.lineTo(200,200);
+            cxt.moveTo(200 - s_offset, 200 - s_offset);
+            cxt.lineTo(200, 200);
 
             cxt.closePath();
 
@@ -270,34 +266,32 @@
             cxt.stroke()
 
 
-
-
             // 分针
-            cxt.moveTo(200+m_offset,200-m_offset);
-            cxt.lineTo(200+m_x_offset,200-m_y_offset);
+            cxt.moveTo(200 + m_offset, 200 - m_offset);
+            cxt.lineTo(200 + m_x_offset, 200 - m_y_offset);
 
-            cxt.moveTo(200-m_offset,200-m_offset);
-            cxt.lineTo(200+m_x_offset,200-m_y_offset);
+            cxt.moveTo(200 - m_offset, 200 - m_offset);
+            cxt.lineTo(200 + m_x_offset, 200 - m_y_offset);
 
-            cxt.moveTo(200+m_offset,200-m_offset);
-            cxt.lineTo(200,200);
+            cxt.moveTo(200 + m_offset, 200 - m_offset);
+            cxt.lineTo(200, 200);
 
-            cxt.moveTo(200+m_offset,200+m_offset);
-            cxt.lineTo(200,200);
+            cxt.moveTo(200 + m_offset, 200 + m_offset);
+            cxt.lineTo(200, 200);
 
 
             // 时针
-            cxt.moveTo(200+h_offset,200-h_offset);
-            cxt.lineTo(200+h_x_offset,200-h_y_offset);
+            cxt.moveTo(200 + h_offset, 200 - h_offset);
+            cxt.lineTo(200 + h_x_offset, 200 - h_y_offset);
 
-            cxt.moveTo(200-h_offset,200-h_offset);
-            cxt.lineTo(200+h_x_offset,200-h_y_offset);
+            cxt.moveTo(200 - h_offset, 200 - h_offset);
+            cxt.lineTo(200 + h_x_offset, 200 - h_y_offset);
 
-            cxt.moveTo(200+h_offset,200+h_offset);
-            cxt.lineTo(200,200);
+            cxt.moveTo(200 + h_offset, 200 + h_offset);
+            cxt.lineTo(200, 200);
 
-            cxt.moveTo(200-h_offset,200+h_offset);
-            cxt.lineTo(200,200);
+            cxt.moveTo(200 - h_offset, 200 + h_offset);
+            cxt.lineTo(200, 200);
             cxt.closePath();
 
             // 刻度
@@ -307,47 +301,48 @@
 //            cxt.strokeText("9",7,193)
             var time = new Date()
 
-            cxt.fillText(time,100,320)
-            cxt.fillText("To Be NO.1",175,80)
+            cxt.fillText(time, 100, 320)
+            cxt.fillText("To Be NO.1", 175, 80)
 
             cxt.stroke();
 //        cxt.save()
         }
 
         // 计算指针的位置，返回指针的偏移量
-        function getOffset(count,type){
+        function getOffset(count, type) {
             var long = 180;
-            switch (type){
+            switch (type) {
                 case 0:
-                    long=180;
+                    long = 180;
                     break;
                 case 1:
-                    long=140;
+                    long = 140;
                     break;
                 case 2:
-                    long=100;
+                    long = 100;
                     break;
                 default:
-                    long=180;
+                    long = 180;
                     break;
             }
 
-            var angle = 2*Math.PI / 360;
-            if (0<=count<15) {
-                x_offset = long * Math.sin(count *6*angle);
-                y_offset = long * Math.cos(count *6*angle);
-            }else if (15<=count<30) {
-                x_offset = long * Math.sin(count *6*angle);
-                y_offset = -long * Math.cos(count *6*angle);
-            }else if(30<=count<45) {
-                x_offset = -long * Math.sin(count *6*angle);
-                y_offset = long * Math.cos(count *6*angle);
-            }else if(45<=count<60) {
-                x_offset = -long * Math.sin(count *6*angle);
-                y_offset = -long * Math.cos(count *6*angle);
+            var angle = 2 * Math.PI / 360;
+            if (0 <= count < 15) {
+                x_offset = long * Math.sin(count * 6 * angle);
+                y_offset = long * Math.cos(count * 6 * angle);
+            } else if (15 <= count < 30) {
+                x_offset = long * Math.sin(count * 6 * angle);
+                y_offset = -long * Math.cos(count * 6 * angle);
+            } else if (30 <= count < 45) {
+                x_offset = -long * Math.sin(count * 6 * angle);
+                y_offset = long * Math.cos(count * 6 * angle);
+            } else if (45 <= count < 60) {
+                x_offset = -long * Math.sin(count * 6 * angle);
+                y_offset = -long * Math.cos(count * 6 * angle);
             }
-            return {'x':x_offset,'y':y_offset}
+            return {'x': x_offset, 'y': y_offset}
         }
+    }
 
         window.setInterval(drawClock,1000)
 
