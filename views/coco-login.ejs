@@ -188,7 +188,9 @@
             });
         }
     }
-    $(function() {
+
+    $(function(){
+
         drawClock();
         // 更新每一帧的画面
 
@@ -343,10 +345,8 @@
             return {'x': x_offset, 'y': y_offset}
         }
         window.setInterval(drawClock,1000)
-    }
-
-
-
+    })
+    
 </script>
 <body>
 <div style="width: 100%;background-color: #f5f5f5">
