@@ -233,7 +233,6 @@
             // 表芯
             cxt.beginPath()
 
-            cxt.fillStyle = "#03a9f4";
 
             cxt.arc(200, 200, 6, 0, 360);
             cxt.stroke();
@@ -243,12 +242,13 @@
 
             // 表盘
             cxt.beginPath()
-            cxt.arc(200, 200, 180, 0, 360);
+            cxt.arc(200, 200, 205, 0, 360);
             cxt.stroke()
-
-
+            
             // 秒针
             cxt.beginPath()
+            cxt.fillStyle = "#ffffff";
+
             cxt.moveTo(200 + s_offset, 200 - s_offset);
             cxt.lineTo(200 + s_x_offset, 200 - s_y_offset);
 
@@ -263,11 +263,12 @@
 
             cxt.closePath();
 
-            cxt.fillStyle = "#000000"
+//            cxt.fillStyle = "#ffffff"
             cxt.fill()
             cxt.stroke()
 
-
+            cxt.beginPath()
+            cxt.fillStyle = "#ffffff";
             // 分针
             cxt.moveTo(200 + m_offset, 200 - m_offset);
             cxt.lineTo(200 + m_x_offset, 200 - m_y_offset);
@@ -294,13 +295,15 @@
 
             cxt.moveTo(200 - h_offset, 200 - h_offset);
             cxt.lineTo(200, 200);
+            cxt.fillStyle = "#ffffff"
+            cxt.fill()
             cxt.closePath();
 
             // 刻度
-//            cxt.strokeText("12",193,14)
-//            cxt.strokeText("3",390,203)
-//            cxt.strokeText("6",197,393)
-//            cxt.strokeText("9",7,193)
+            cxt.strokeText("12",193,14)
+            cxt.strokeText("3",390,203)
+            cxt.strokeText("6",197,393)
+            cxt.strokeText("9",7,193)
             var time = new Date()
 
             cxt.fillText(time, 100, 320)
@@ -373,12 +376,12 @@
         <div class="row" style="margin-top: 0px;padding-bottom: 20px;">
             <div  style="margin: 0;padding: 20px">
                 <div class="row">
-                    <div class="col-md-12 col-lg-12" style="text-align: center">
+                    <div class="col-md-7 col-lg-7" style="text-align: center">
                         <!--<img src="/images/icons/adpic.png" alt=""/>-->
                         <canvas id="clock_canvas" width="400" height="400" style="margin: auto;">
                         </canvas>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="text-align: left">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="text-align: left">
                         <h2 style="color:rgba(255,255,255,0.8);padding: 10px 0px;font-size: 36px;">一颗网</h2>
                         <h2 style="color:rgba(255,255,255,0.8);padding: 10px 0px">记录你成长的历程</h2>
                         <p style="font-size: 18px;color: rgba(255,255,255,0.8)">开启你的博客之旅</p>
