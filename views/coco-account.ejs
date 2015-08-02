@@ -44,9 +44,9 @@
     }
 </style>
 
-<div class="container main-container" ng-controller="accountPageCtrl">
+<div class="container" ng-controller="accountPageCtrl">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 box-area">
             <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
                 <span>个人信息</span>
             </div>
@@ -79,8 +79,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3" style="margin-top: 20px;">
-            <div style="background-color: #fff;border-radius: 5px;padding: 10px;">
+        <div class="col-md-3">
+            <div class="box-area" style="background-color: #fff;border-radius: 5px;padding: 10px;">
                 <p>当前位置：<a ng-bind="infos.location">北京</a></p>
                 <p>{{infos.date | date:"yyyy-MM-dd hh:mma"}}</p>
                 <p>天气</p>
