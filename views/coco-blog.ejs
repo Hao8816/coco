@@ -138,7 +138,7 @@
                 </div>
                 <!--<h4>博客列表</h4>-->
                 <ul class="blog-nav" style="background-color: #eee;overflow: auto">
-                    <li class="col-xs-12" ng-repeat="blog in blog_list | filter:query" style="margin: 5px 0px">
+                    <li class="col-xs-12" ng-repeat="blog in blog_list | filter:query" style="margin-bottom: 10px">
                         <div class="row" style="padding-top: 20px;padding-bottom:20px;border-bottom: 1px solid #f5f5f5">
                             <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="text-align: center;padding-right: 0px">
                                 <img style="width: 40px;height: 40px;border-radius:40px;border: 1px solid #ddd" ng-src="/images/{{blog.head_image}}" title="{{blog.name}}" alt=""/>
@@ -184,7 +184,7 @@
 
         </div>
         <div class="col-md-3 box-area">
-            <div class="box-item">
+            <div class="row">
                 <div style="text-align: center;line-height: 100px;">
                     <img style="height: 80px;width: 80px;border-radius: 80px;" ng-src="/images/{{user.head_image}}"
                          alt=""/>
@@ -201,7 +201,7 @@
             </div>
             <div>
                 <h5>活跃用户</h5>
-                <div style="border-radius: 5px;background-color: #fff;padding: 5px;">
+                <div class="row" style="border-radius: 5px;background-color: #fff;padding: 5px;">
                     <div class="friend-item" style="width: 25%;display: inline-block;text-align: center" ng-repeat="friend in friend_list">
                         <a href="#account/{{friend.sha1}}">
                             <img style="width: 60%;margin:0 10%;border-radius: 100%;border: 1px solid #f5f5f5" src="/images/{{friend.head_image}}" alt=""/>
