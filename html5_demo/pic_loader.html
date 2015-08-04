@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="lib/jquery-lib-2.11.js"></script>
+    <title></title>
+    <style type="text/css">
+        .main{
+            width: 580px;
+            height: 300px;
+            background-color: #eee;
+            margin: auto;
+            position: relative;
+
+        }
+        .main li{
+            position: absolute;
+            list-style: none;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0px 0px 3px 2px #ddd;
+        }
+        .main li img{
+            width: 100%;
+            height: 100%;
+        }
+        .item0{
+            width: 60px;
+            height: 60px;
+            left: -70px;
+            bottom: 100px;
+        }
+        .item1{
+            width: 80px;
+            height: 80px;
+            left: 10px;
+            bottom: 100px;
+        }
+        .item2{
+            width: 100px;
+            height: 100px;
+            left: 110px;
+            bottom: 100px;
+        }
+        .item3{
+            width: 120px;
+            height: 120px;
+            left: 230px;
+            bottom: 100px;
+        }
+        .item4{
+            width: 100px;
+            height: 100px;
+            left: 370px;
+            bottom: 100px;
+        }
+        .item5{
+            width: 80px;
+            height: 80px;
+            left: 490px;
+            bottom: 100px;
+        }
+        .item6{
+            width: 60px;
+            height: 60px;
+            left: 590px;
+            bottom: 100px;
+        }
+
+    </style>
+    <script type="text/javascript">
+
+        var item0 = {width: "60px",height: "60px",left: "-70px",bottom: "100px"};
+        var item1 = {width: "80px",height: "80px",left: "10px",bottom: "100px"};
+        var item2 = {width: "100px",height: "100px",left: "110px",bottom: "100px"};
+        var item3 = {width: "120px",height: "120px",left: "230px",bottom: "100px"};
+        var item4 = {width: "100px",height: "100px",left: "370px",bottom: "100px"};
+        var item5 = {width: "80px",height: "80px",left: "490px",bottom: "100px"};
+        var item6 = {width: "60px",height: "60px",left: "590px",bottom: "100px"};
+
+
+        function changeItem(type){
+            if($('.main li:animated').length){
+                return
+            }
+
+            if (type == 0){
+                $(".item0").animate(item6,500);
+                $(".item1").animate(item0,500);
+                $(".item2").animate(item1,500);
+                $(".item3").animate(item2,500);
+                $(".item4").animate(item3,500);
+                $(".item5").animate(item4,500);
+                $(".item6").animate(item5,500);
+                var item_temp =  $(".item6")
+                $(".item0").attr("class","item6")
+                $(".item1").attr("class","item0")
+                $(".item2").attr("class","item1")
+                $(".item3").attr("class","item2")
+                $(".item4").attr("class","item3")
+                $(".item5").attr("class","item4")
+                item_temp.attr("class","item5")
+            }else{
+                $(".item0").animate(item1,500);
+                $(".item1").animate(item2,500);
+                $(".item2").animate(item3,500);
+                $(".item3").animate(item4,500);
+                $(".item4").animate(item5,500);
+                $(".item5").animate(item6,500);
+                $(".item6").animate(item0,500);
+
+                var item_temp =  $(".item6")
+                $(".item5").attr("class","item6")
+                $(".item4").attr("class","item5")
+                $(".item3").attr("class","item4")
+                $(".item2").attr("class","item3")
+                $(".item1").attr("class","item2")
+                $(".item0").attr("class","item1")
+                item_temp.attr("class","item0")
+
+
+            }
+
+
+
+
+        }
+
+    </script>
+</head>
+<body>
+<div class="main">
+    <ul>
+        <li class="item0"><img src="media/0.png" alt=""/></li>
+        <li class="item1"><img src="media/1.png" alt=""/></li>
+        <li class="item2"><img src="media/2.png" alt=""/></li>
+        <li class="item3"><img src="media/3.png" alt=""/></li>
+        <li class="item4"><img src="media/4.png" alt=""/></li>
+        <li class="item5"><img src="media/5.png" alt=""/></li>
+        <li class="item6"><img src="media/6.png" alt=""/></li>
+    </ul>
+    <p>
+        <a onclick="changeItem(0)">上一个</a>
+        <a onclick="changeItem(1)">下一个</a>
+    </p>
+</div>
+
+</body>
+</html>
