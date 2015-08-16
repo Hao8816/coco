@@ -46,13 +46,13 @@
             // 文件上传
             $('#fileupload').fileupload({
                 url:'/ajax/upload/',
-                progressInterval: 50,
-                bitrateInterval: 50,
+                progressInterval: 10,
+                bitrateInterval: 10,
                 sequentialUploads: true,
                 dataType: 'json',
                 progress:function(e,data){
                     console.log(data)
-                    var process = (data.bitrate/(data.total*1024)).toFixed(2)+"%"
+                    var process = (data.loaded/data.total).toFixed(2)+"%"
                     $('#upload_process').text("当前进度"+process)
                 },
                 done: function (e, data) {
