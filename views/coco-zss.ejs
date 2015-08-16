@@ -35,7 +35,6 @@
         }
         #upload_files_area{
             margin-top: 10px;
-            border: 1px solid #ccc;
         }
         .box img {
             max-width: 100%;
@@ -55,6 +54,10 @@
                     $('.upload-title').text('重新选择');
                     $('#fileupload').attr("imagesha1",data.result['sha1']);
                 }
+            });
+            $('#fileupload').bind('fileuploadprogress', function (e, data) {
+                console.log(data.bitrate);
+                $('#upload_process').text("已上传"+Math.floor(data.bitrate/1024)+"KB")
             });
         });
 
@@ -143,6 +146,7 @@
                                        style="width: 100px;height: 40px;margin:0px;opacity: 0;position: absolute;top: 0px;"
                                        multiple>
                             </div>
+                            <p id="upload_process"></p>
                             <div id="upload_files_area">
                             </div>
                         </div>
