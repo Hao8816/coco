@@ -64,9 +64,9 @@
             });
         });
 
-        function showUploadedWorks($scope,$http){
+        function showUploadedWorks($scope,$http) {
             var page = 1;
-            $http.post('/ajax/get_work_list/', {user_sha1: "",page:page}).success(function (data) {
+            $http.post('/ajax/get_work_list/', {user_sha1: "", page: page}).success(function (data) {
                 if (data['ret'] == '0001') {
                     console.log(data);
                     $scope.work_list = data["work_list"]
@@ -75,15 +75,19 @@
                 }
             });
 
-            $scope.addWork = function(){
+            $scope.addWork = function () {
                 var user_sha1 = "";
                 var file_sha1 = $('#fileupload').attr("imagesha1");
                 var note = $scope.work.note;
-                $http.post('/ajax/add_work/', {user_sha1: "",file_sha1:file_sha1,note:note}).success(function (data) {
+                $http.post('/ajax/add_work/', {
+                    user_sha1: "",
+                    file_sha1: file_sha1,
+                    note: note
+                }).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);
                         $scope.work.note = "";
-                        $('#fileupload').attr("imagesha1","");
+                        $('#fileupload').attr("imagesha1", "");
                         $('#upload_files_area').empty()
                         $('.upload_picture_modal').modal("hide")
                     } else {
@@ -91,6 +95,7 @@
                     }
                 });
             }
+        }
     </script>
 </head>
 <body>
