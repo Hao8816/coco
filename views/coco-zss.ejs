@@ -48,16 +48,17 @@
                 url:'/ajax/upload/',
                 sequentialUploads: true,
                 dataType: 'json',
+                progress:function(e,data){
+                    console.log(data)
+                    var process = (data.bitrate/(data.total*1024)).toFixed(2)+"%"
+                    $('#upload_process').text("当前进度"+process)
+                },
                 done: function (e, data) {
                     var image_url = "/images/"+data.result['sha1'];
                     $('#upload_files_area').html('<img style="max-width:220px;max-height:220px;" src='+image_url+'>');
                     $('.upload-title').text('重新选择');
                     $('#fileupload').attr("imagesha1",data.result['sha1']);
                 }
-            });
-            $('#fileupload').bind('fileuploadprogress', function (e, data) {
-                console.log(data.bitrate);
-                $('#upload_process').text("已上传"+Math.floor(data.bitrate/1024)+"KB")
             });
         });
 
