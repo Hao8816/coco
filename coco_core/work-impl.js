@@ -49,8 +49,23 @@ var getWorkList = function getWorkList(req,res){
 
 };
 
+var deleteWork = function deleteWork(req,res){
+    var file_sha1 = req.param('file_sha1');
+    var user_sha1 = req.param('user_sha1');
+    work_models.Works.find({"file_sha1":file_sha1}).remove(function(err){
+        if(err){
+            console.log(err);
+        }
+        res.send({'info':"OK","ret":0001})
+
+    });
+};
+
+
+
 work.createWork = createWork;
 work.getWorkList = getWorkList;
+work.deleteWork = deleteWork;
 
 module.exports = work;
 
