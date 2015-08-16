@@ -52,7 +52,7 @@
                 dataType: 'json',
                 progress:function(e,data){
                     console.log(data)
-                    var process = (data.loaded/data.total).toFixed(2)+"%"
+                    var process = ((data.loaded/data.total).toFixed(2))*100+"%"
                     $('#upload_process').text("当前进度"+process)
                 },
                 done: function (e, data) {
