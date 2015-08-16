@@ -8,6 +8,11 @@ router.get('/', function(req, res){
     res.render('coco.ejs', { title: 'COCO 博客' });
 });
 
+/* GET home page. */
+router.get('/zss/', function(req, res){
+    res.render('coco-zss.ejs', { title: '张闪闪的作品' });
+});
+
 router.get('/chat/', function(req, res) {
     res.render('coco-chat.ejs', { title: 'COCO Chat' });
 });

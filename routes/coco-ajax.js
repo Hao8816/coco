@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var blog = require('../coco_core/blog-impl');
 var user = require('../coco_core/user-impl');
+var work = require('../coco_core/work-impl');
 var search = require('../coco_core/search-impl');
 
 var fs = require('fs');
@@ -72,9 +73,13 @@ router.post('/get_user_info/',function(req,res){
     user.getUserInfo(req,res);
 });
 
+router.post('/add_work/',function(req,res){
+    work.createWork(req,res);
+});
 
-
-
+router.post('/get_work_list/',function(req,res){
+    work.getWorkList(req,res)
+});
 
 /* GET home page. */
 router.post('/upload/',jfum.postHandler.bind(jfum),function(req, res) {
