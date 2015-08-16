@@ -46,6 +46,8 @@
             // 文件上传
             $('#fileupload').fileupload({
                 url:'/ajax/upload/',
+                progressInterval: 50,
+                bitrateInterval: 50,
                 sequentialUploads: true,
                 dataType: 'json',
                 progress:function(e,data){
