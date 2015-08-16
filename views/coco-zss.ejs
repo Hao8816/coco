@@ -36,6 +36,9 @@
         #upload_files_area{
             margin-top: 10px;
         }
+        #upload_process{
+            margin-top: 10px;
+        }
         .box img {
             max-width: 100%;
             border: 1px solid #f4f4f4;
@@ -65,15 +68,19 @@
         });
 
         function showUploadedWorks($scope,$http) {
-            var page = 1;
-            $http.post('/ajax/get_work_list/', {user_sha1: "", page: page}).success(function (data) {
-                if (data['ret'] == '0001') {
-                    console.log(data);
-                    $scope.work_list = data["work_list"]
-                } else {
 
-                }
-            });
+            function getWorkList(){
+                $http.post('/ajax/get_work_list/', {user_sha1: "", page: 1}).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        console.log(data);
+                        $scope.work_list = data["work_list"]
+                    } else {
+
+                    }
+                });
+            }
+
+            getWorkList()
 
             $scope.addWork = function () {
                 var user_sha1 = "";
@@ -88,12 +95,32 @@
                         console.log(data);
                         $scope.work.note = "";
                         $('#fileupload').attr("imagesha1", "");
-                        $('#upload_files_area').empty()
-                        $('.upload_picture_modal').modal("hide")
+                        $('#upload_files_area').empty();
+                        $('.upload_picture_modal').modal("hide");
+                        getWorkList()
                     } else {
 
                     }
                 });
+            }
+
+            $scope.deleteWork = function (obj) {
+                var confirm_win = window.confirm("确定删除作品吗？")
+                if (confirm_win){
+                    var file_sha1 = obj.work.file_sha1;
+                    $http.post('/ajax/delete_work/', {
+                        user_sha1: "",
+                        file_sha1: file_sha1
+                    }).success(function (data) {
+                        if (data['ret'] == '0001') {
+                            console.log(data);
+                            getWorkList();
+                        } else {
+
+                        }
+                    });
+
+                }
             }
         }
     </script>
@@ -118,7 +145,8 @@
                     </a>
                     <p style="padding: 5px 10px;;margin-top: 10px;margin-bottom: 0px" ng-bind="work.note"></p>
                     <div style="padding: 5px;border-top: 1px solid #F2F2F2;background: #FAFAFA;">
-                        <p style="margin: 0px;text-align: right;padding: 3px;font-size: 12px;color: #666;">{{work.time | date:"yyyy-MM-dd"}}</p>
+                        <p style="margin: 0px;padding: 3px;font-size: 12px;color: #666;">{{work.time | date:"yyyy-MM-dd"}}
+                            <a style="float: right" sha1="{{work.file_sha1}}" href="javascript:void(0)" ng-click="deleteWork(this)">删除</a></p>
                     </div>
                 </div>
             </div>

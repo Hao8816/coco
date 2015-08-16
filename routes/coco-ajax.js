@@ -81,6 +81,12 @@ router.post('/get_work_list/',function(req,res){
     work.getWorkList(req,res)
 });
 
+router.post('/delete_work/',function(req,res){
+    work.deleteWork(req,res)
+});
+
+
+
 /* GET home page. */
 router.post('/upload/',jfum.postHandler.bind(jfum),function(req, res) {
     //console.log(req.jfum.files)
