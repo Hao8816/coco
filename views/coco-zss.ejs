@@ -90,14 +90,23 @@
                 }
             });
 
-
-            var $grid = $('.grid').imagesLoaded( function() {
-                $grid.masonry({
-                    itemSelector: '.grid-item',
-                    percentPosition: true,
-                    columnWidth: '.grid-sizer'
-                });
+            var $grid = $('.grid').masonry({
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                columnWidth: '.grid-sizer'
             });
+/           $grid.imagesLoaded().progress( function() {
+                $grid.masonry('layout');
+            });
+
+
+//            var $grid = $('.grid').imagesLoaded( function() {
+//                $grid.masonry({
+//                    itemSelector: '.grid-item',
+//                    percentPosition: true,
+//                    columnWidth: '.grid-sizer'
+//                });
+//            });
         });
 
         function showUploadedWorks($scope,$http) {
@@ -171,9 +180,8 @@
                 <span>PICTURE</span></p>
         </div>
         <div id="image_container" class="row">
-
             <div class="grid">
-                <!--<div class="grid-sizer col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>-->
+                <div class="grid-sizer"></div>
                 <div class="grid-item col-xs-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="work in work_list">
                     <a href="/images/{{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">
                         <img src="/images/{{work.file_sha1}}">
