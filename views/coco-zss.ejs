@@ -64,13 +64,15 @@
             });
 
 
-            imagesLoaded('#image_container', function() {
-                var container = document.querySelector('#image_container');
-                var msnry = new Masonry(container, {
-                    itemSelector: '.box'
-                });
+            var $container = $('#image_container');
+            $container.imagesLoaded( function(){
+                $container.masonry({
+                            itemSelector : '.box',
+                gutterWidth : 20,
+                isAnimated: true
             });
         });
+
 
         function showUploadedWorks($scope,$http) {
 
