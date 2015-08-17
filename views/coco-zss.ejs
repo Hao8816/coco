@@ -48,7 +48,7 @@
 
         .grid-sizer,
         .grid-item {
-            width: 33.333%;
+            width: 25%;
         }
 
         .grid-item {
@@ -173,8 +173,8 @@
         <div id="image_container" class="row">
 
             <div class="grid">
-                <div class="grid-sizer"></div>
-                <div class="grid-item" ng-repeat="work in work_list">
+                <div class="grid-sizer col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>
+                <div class="grid-item col-xs-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="work in work_list">
                     <img src="/images/{{work.file_sha1}}">
                 </div>
             </div>
