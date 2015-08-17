@@ -23,19 +23,11 @@
         }
         .box{
             margin-bottom: 20px;
-
-            float: left;
-            width: 220px;
         }
         .box-item {
             margin: 5px -1px;
             /*padding: 2px;*/
             box-shadow: 0px 0px 5px 2px #ddd;
-        }
-        .box-item:hover{
-        }
-        .box-item{
-            /*border: 1px solid #999;*/
         }
         #upload_files_area{
             margin-top: 10px;
@@ -69,6 +61,14 @@
                     $('.upload-title').text('重新选择');
                     $('#fileupload').attr("imagesha1",data.result['sha1']);
                 }
+            });
+
+
+            imagesLoaded('#image_container', function() {
+                var container = document.querySelector('#image_container');
+                var msnry = new Masonry(container, {
+                    itemSelector: '.box'
+                });
             });
         });
 
@@ -195,16 +195,5 @@
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">
-    imagesLoaded('#image_container', function() {
-        var container = document.querySelector('#image_container');
-        var msnry = new Masonry(container, {
-            itemSelector: '.box'
-        });
-    });
-</script>
-
 </body>
 </html>
