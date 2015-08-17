@@ -41,8 +41,10 @@
             border: 1px solid #f4f4f4;
         }
 
-        .grid-item { width: 200px; }
-        .grid-item--width2 { width: 400px; }
+        .grid-sizer,
+        .grid-item { width: 20%; }
+        /* 2 columns */
+        .grid-item--width2 { width: 40%; }
 
     </style>
     <script type="text/javascript">
@@ -77,10 +79,12 @@
 //                });
 //            });
             $('.grid').masonry({
-                // options
+                // set itemSelector so .grid-sizer is not used in layout
                 itemSelector: '.grid-item',
-                columnWidth: 200
-            });
+                // use element for option
+                columnWidth: '.grid-sizer',
+                percentPosition: true
+            })
         });
 
 
