@@ -1,142 +1,144 @@
+<style type="text/css">
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
-    <style type="text/css">
-        * {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
+    /* force scrollbar */
+    html {
+        overflow-y: scroll;
+    }
 
-        /* force scrollbar */
-        html { overflow-y: scroll; }
+    body {
+        font-family: sans-serif;
+    }
 
-        body {
-            font-family: sans-serif;
-        }
+    /* ---- isotope ---- */
 
-        /* ---- isotope ---- */
+    .grid {
+        background: #DDD;
+    }
 
-        .grid {
-            background: #DDD;
-        }
+    /* clear fix */
+    .grid:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
 
-        /* clear fix */
-        .grid:after {
-            content: '';
-            display: block;
-            clear: both;
-        }
+    /* ---- .grid-item ---- */
 
-        /* ---- .grid-item ---- */
+    .grid-sizer,
+    .grid-item {
+        width: 25%;
+        margin-top: 20px;
+    }
 
-        .grid-sizer,
-        .grid-item {
-            width: 25%;
-            margin-top: 20px;
-        }
+    .grid-item {
+        float: left;
+    }
 
-        .grid-item {
-            float: left;
-        }
+    .grid-item img {
+        display: block;
+        max-width: 100%;
+    }
 
-        .grid-item img {
-            display: block;
-            max-width: 100%;
-        }
+    #upload_files_area {
+        margin-top: 10px;
+    }
 
+    #upload_process {
+        margin-top: 10px;
+    }
 
-        #upload_files_area{
-            margin-top: 10px;
-        }
-        #upload_process{
-            margin-top: 10px;
-        }
-
-    </style>
-    <script type="text/javascript">
-        $(function () {
-            // 文件上传
-            $('#fileupload').fileupload({
-                url:'/ajax/upload/',
-                progressInterval: 100,
-                bitrateInterval: 100,
-                sequentialUploads: true,
-                dataType: 'json',
-                progress:function(e,data){
-                    console.log(data)
-                    var process = ((data.loaded/data.total).toFixed(2))*100+"%"
-                    $('#upload_process').text("当前进度"+process)
-                },
-                done: function (e, data) {
-                    var image_url = "/images/"+data.result['sha1'];
-                    $('#upload_files_area').html('<img style="max-width:220px;max-height:220px;" src='+image_url+'>');
-                    $('.upload-title').text('重新选择');
-                    $('#fileupload').attr("imagesha1",data.result['sha1']);
-                }
-            });
-
-            var $grid = $('.grid').masonry({
-                itemSelector: '.grid-item',
-                percentPosition: true,
-                columnWidth: '.grid-sizer'
-            });
-            // layout Isotope after each image loads
-            $grid.imagesLoaded().progress( function() {
-                $grid.masonry();
-            });
+</style>
+<script type="text/javascript">
+    $(function () {
+        // 文件上传
+        $('#fileupload').fileupload({
+            url: '/ajax/upload/',
+            progressInterval: 100,
+            bitrateInterval: 100,
+            sequentialUploads: true,
+            dataType: 'json',
+            progress: function (e, data) {
+                console.log(data)
+                var process = ((data.loaded / data.total).toFixed(2)) * 100 + "%"
+                $('#upload_process').text("当前进度" + process)
+            },
+            done: function (e, data) {
+                var image_url = "/images/" + data.result['sha1'];
+                $('#upload_files_area').html('<img style="max-width:220px;max-height:220px;" src=' + image_url + '>');
+                $('.upload-title').text('重新选择');
+                $('#fileupload').attr("imagesha1", data.result['sha1']);
+            }
         });
-    </script>
+
+        var $grid = $('.grid').masonry({
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            columnWidth: '.grid-sizer'
+        });
+        // layout Isotope after each image loads
+        $grid.imagesLoaded().progress(function () {
+            $grid.masonry();
+        });
+    });
+</script>
 <div style="border-top: 2px solid #000;width: 100%;background-color: rgba(0,0,0,0.6)">
-    <div class="container">
-        <h3 style="color: #fff">作品详情<span class="btn btn-success btn-sm pull-right">
+    <h3 style="color: #fff">作品详情<span class="btn btn-success btn-sm pull-right">
                     <a style="color: #fff;font-size: 15px;" data-toggle="modal"
                        data-target=".upload_picture_modal">上传作品</a>
                 </span></h3>
 
-        <div id="image_container" class="row">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="work in work_list">
-                <a href="/images/{{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">
-                    <img class="img-responsive" src="/images/{{work.file_sha1}}">
-                </a>
-                <div style="padding: 5px;border-top: 1px solid #F2F2F2;background: #FAFAFA;">
-                    <p style="margin: 0px;padding: 3px;font-size: 12px;color: #666;">{{work.note}}
-                        <a style="float: right" sha1="{{work.file_sha1}}" href="javascript:void(0)" ng-click="deleteWork(this)">删除</a></p>
-                </div>
+    <div id="image_container" class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="work in work_list">
+            <a href="/images/{{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">
+                <img class="img-responsive" src="/images/{{work.file_sha1}}">
+            </a>
+
+            <div style="padding: 5px;border-top: 1px solid #F2F2F2;background: #FAFAFA;">
+                <p style="margin: 0px;padding: 3px;font-size: 12px;color: #666;">{{work.note}}
+                    <a style="float: right" sha1="{{work.file_sha1}}" href="javascript:void(0)"
+                       ng-click="deleteWork(this)">删除</a></p>
             </div>
         </div>
-        <div class="modal fade upload_picture_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-md">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">传作品</h4>
-                    </div>
-                    <div class="modal-body" style="min-height: 300px;">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">描述</label>
+    </div>
+    <div class="modal fade upload_picture_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">传作品</h4>
+                </div>
+                <div class="modal-body" style="min-height: 300px;">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">描述</label>
                             <textarea ng-model="work.note" class="form-control" placeholder="博客内容"
                                       rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">图片</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">图片</label>
 
-                            <div class="upload-btn"
-                                 style="height: 40px;width: 100px;border-radius:2px;cursor:pointer;background-color:#eee;text-align: center;position: relative;font-size: 16px;line-height: 40px;">
-                                <span class="upload-title">选择照片</span>
-                                <input id="fileupload" type="file"
-                                       style="width: 100px;height: 40px;margin:0px;opacity: 0;position: absolute;top: 0px;"
-                                       multiple>
-                            </div>
-                            <p id="upload_process"></p>
-                            <div id="upload_files_area">
-                            </div>
+                        <div class="upload-btn"
+                             style="height: 40px;width: 100px;border-radius:2px;cursor:pointer;background-color:#eee;text-align: center;position: relative;font-size: 16px;line-height: 40px;">
+                            <span class="upload-title">选择照片</span>
+                            <input id="fileupload" type="file"
+                                   style="width: 100px;height: 40px;margin:0px;opacity: 0;position: absolute;top: 0px;"
+                                   multiple>
+                        </div>
+                        <p id="upload_process"></p>
+
+                        <div id="upload_files_area">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-success btn-sm" ng-click="addWork()">提交</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="addWork()">提交</button>
                 </div>
             </div>
         </div>
