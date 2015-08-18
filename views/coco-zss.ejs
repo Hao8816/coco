@@ -83,6 +83,26 @@
 
     </style>
     <script type="text/javascript">
+        $(function(){
+            $('#fileupload').fileupload({
+                url: '/ajax/upload/',
+                progressInterval: 100,
+                bitrateInterval: 100,
+                sequentialUploads: true,
+                dataType: 'json',
+                progress: function (e, data) {
+                    console.log(data)
+                    var process = ((data.loaded / data.total).toFixed(2)) * 100 + "%"
+                    $('#upload_process').text("当前进度" + process)
+                },
+                done: function (e, data) {
+                    var image_url = "/images/" + data.result['sha1'];
+                    $('#upload_files_area').html('<img style="max-width:220px;max-height:220px;" src=' + image_url + '>');
+                    $('.upload-title').text('重新选择');
+                    $('#fileupload').attr("imagesha1", data.result['sha1']);
+                }
+            });
+        })
         function showUploadedWorks($scope,$http,$routeParams) {
             var work_id = $routeParams.work_id
 
