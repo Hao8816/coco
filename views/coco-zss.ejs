@@ -83,19 +83,6 @@
 
     </style>
     <script type="text/javascript">
-        $(function(){
-            var $grid = $('.grid').masonry({
-                itemSelector: '.grid-item',
-                percentPosition: true,
-                columnWidth: '.grid-sizer'
-            });
-            // layout Isotope after each image loads
-            $grid.imagesLoaded().progress( function() {
-                $grid.masonry();
-            });
-
-        })
-
         function showUploadedWorks($scope,$http,$routeParams) {
             var work_id = $routeParams.work_id
 
@@ -104,6 +91,15 @@
                     if (data['ret'] == '0001') {
                         console.log(data);
                         $scope.work_list = data["work_list"]
+                        var $grid = $('.grid').masonry({
+                            itemSelector: '.grid-item',
+                            percentPosition: true,
+                            columnWidth: '.grid-sizer'
+                        });
+                        // layout Isotope after each image loads
+                        $grid.imagesLoaded().progress( function() {
+                            $grid.masonry();
+                        });
                     } else {
 
                     }
