@@ -172,13 +172,13 @@
 <body>
 <div style="border-top: 2px solid #000;width: 100%;background-color: rgba(0,0,0,0.6)" ng-controller="showUploadedWorks">
     <div class="container">
-        <h3 style="">张闪闪的个人作品 <span class="btn btn-success btn-sm pull-right">
+        <h3 style="color: #fff">张闪闪的个人作品 <span class="btn btn-success btn-sm pull-right">
                     <a style="color: #fff;font-size: 15px;" data-toggle="modal"
                        data-target=".upload_picture_modal">上传作品</a>
                 </span></h3>
 
         <div class="clearfix">
-            <p style="color: rgba(255,0,0,0.56);font-size: 20px;padding: 15px 3px 5px 3px;margin:0px;">图片
+            <p style="color: rgba(1,1,1,0.56);font-size: 20px;padding: 15px 3px 5px 3px;margin:0px;">图片
                 <span>PICTURE</span></p>
         </div>
         <div id="image_container" class="row">
@@ -195,19 +195,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 box" ng-repeat="work in work_list">-->
-                <!--<div class="box-item">-->
-                    <!--<a href="/images/{{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">-->
-                        <!--<img src="/images/{{work.file_sha1}}">-->
-                    <!--</a>-->
-                    <!--<p style="padding: 5px 10px;;margin-top: 10px;margin-bottom: 0px" ng-bind="work.note"></p>-->
-                    <!--<div style="padding: 5px;border-top: 1px solid #F2F2F2;background: #FAFAFA;">-->
-                        <!--<p style="margin: 0px;padding: 3px;font-size: 12px;color: #666;">{{work.time | date:"yyyy-MM-dd"}}-->
-                            <!--<a style="float: right" sha1="{{work.file_sha1}}" href="javascript:void(0)" ng-click="deleteWork(this)">删除</a></p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
         </div>
         <div class="modal fade upload_picture_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
              aria-hidden="true">
