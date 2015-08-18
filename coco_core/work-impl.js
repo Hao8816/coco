@@ -37,9 +37,9 @@ var createWork = function createWork(req,res){
 
 
 var getWorkList = function getWorkList(req,res){
-
+    var file_sha1 = req.param('work_id');
     // get work list from redis
-    work_models.Works.all([ "time", "Z" ],function(err,result){
+    work_models.Works.find({"work_id":work_id},[ "time", "Z" ],function(err,result){
         if(err){
             console.log(err);
         }
