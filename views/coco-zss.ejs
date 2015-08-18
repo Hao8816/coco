@@ -18,35 +18,56 @@
     <script type="text/javascript" src="/Jquery/jquery.fileupload.js"></script>
 
     <style type="text/css">
-        body{
-            /*background-image: url("/images/bg_black.png");*/
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
         }
-        .box{
-            margin-top: 15px;
 
+        /* force scrollbar */
+        html { overflow-y: scroll; }
+
+        body {
+            font-family: sans-serif;
         }
-        .box-item {
-            margin: 5px -1px;
-            /*padding: 2px;*/
-            box-shadow: 0px 0px 5px 2px #ddd;
+
+        /* ---- isotope ---- */
+
+        .grid {
+            background: #DDD;
+        }
+
+        /* clear fix */
+        .grid:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* ---- .grid-item ---- */
+
+        .grid-sizer,
+        .grid-item {
+            width: 33.333%;
+        }
+
+        .grid-item {
+            float: left;
+        }
+
+        .grid-item img {
+            display: block;
+            max-width: 100%;
+        }
 
 
-        }
-        .box-item:hover{
-        }
-        .box-item{
-            /*border: 1px solid #999;*/
-        }
         #upload_files_area{
             margin-top: 10px;
         }
         #upload_process{
             margin-top: 10px;
         }
-        .box img {
-            max-width: 100%;
-            border: 1px solid #f4f4f4;
-        }
+
     </style>
     <script type="text/javascript">
         $(function () {
@@ -69,6 +90,25 @@
                     $('#fileupload').attr("imagesha1",data.result['sha1']);
                 }
             });
+
+            var $grid = $('.grid').masonry({
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                columnWidth: '.grid-sizer'
+            });
+            // layout Isotope after each image loads
+            $grid.imagesLoaded().progress( function() {
+                $grid.masonry();
+            });
+
+
+//            var $grid = $('.grid').imagesLoaded( function() {
+//                $grid.masonry({
+//                    itemSelector: '.grid-item',
+//                    percentPosition: true,
+//                    columnWidth: '.grid-sizer'
+//                });
+//            });
         });
 
         function showUploadedWorks($scope,$http) {
@@ -142,8 +182,9 @@
                 <span>PICTURE</span></p>
         </div>
         <div id="image_container" class="row">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 box" ng-repeat="work in work_list">
-                <div class="box-item">
+            <div class="grid">
+                <div class="grid-sizer"></div>
+                <div class="grid-item col-xs-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="work in work_list">
                     <a href="/images/{{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">
                         <img src="/images/{{work.file_sha1}}">
                     </a>
@@ -154,6 +195,19 @@
                     </div>
                 </div>
             </div>
+
+            <!--<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 box" ng-repeat="work in work_list">-->
+                <!--<div class="box-item">-->
+                    <!--<a href="/images/{{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">-->
+                        <!--<img src="/images/{{work.file_sha1}}">-->
+                    <!--</a>-->
+                    <!--<p style="padding: 5px 10px;;margin-top: 10px;margin-bottom: 0px" ng-bind="work.note"></p>-->
+                    <!--<div style="padding: 5px;border-top: 1px solid #F2F2F2;background: #FAFAFA;">-->
+                        <!--<p style="margin: 0px;padding: 3px;font-size: 12px;color: #666;">{{work.time | date:"yyyy-MM-dd"}}-->
+                            <!--<a style="float: right" sha1="{{work.file_sha1}}" href="javascript:void(0)" ng-click="deleteWork(this)">删除</a></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <div class="modal fade upload_picture_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
              aria-hidden="true">
@@ -196,14 +250,14 @@
 </div>
 
 
-<script type="text/javascript">
-    imagesLoaded('#image_container', function() {
-        var container = document.querySelector('#image_container');
-        var msnry = new Masonry(container, {
-            itemSelector: '.box-item'
-        });
-    });
-</script>
+<!--<script type="text/javascript">-->
+    <!--imagesLoaded('#image_container', function() {-->
+        <!--var container = document.querySelector('#image_container');-->
+        <!--var msnry = new Masonry(container, {-->
+            <!--itemSelector: '.box-item'-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
 
 </body>
 </html>
