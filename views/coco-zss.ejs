@@ -115,7 +115,8 @@
                 $http.post('/ajax/add_work/', {
                     user_sha1: "",
                     file_sha1: file_sha1,
-                    note: note
+                    note: note,
+                    work_id: work_id
                 }).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);

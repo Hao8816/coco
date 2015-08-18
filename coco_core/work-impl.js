@@ -22,12 +22,14 @@ var createWork = function createWork(req,res){
     var date_time = new Date().getTime();
     var user_sha1 = req.param('user_sha1');
     var file_sha1 = req.param('file_sha1');
+    var work_id = req.param('work_id');
     var note = req.param('note');
     work_models.Works.create([{
         time          : date_time,    // 用户注册的创建的时间
         user_sha1     : user_sha1,         // 用户的sha1
         note          : note,         // 用户名
-        file_sha1     : file_sha1      // 密码
+        file_sha1     : file_sha1,      // 密码
+        work_id       : work_id      // 分类
     }],function (err,item){
 
     });
