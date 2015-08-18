@@ -188,9 +188,8 @@
                     <a href="/images/{{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">
                         <img src="/images/{{work.file_sha1}}">
                     </a>
-                    <p style="padding: 5px 10px;;margin-top: 10px;margin-bottom: 0px" ng-bind="work.note"></p>
                     <div style="padding: 5px;border-top: 1px solid #F2F2F2;background: #FAFAFA;">
-                        <p style="margin: 0px;padding: 3px;font-size: 12px;color: #666;">{{work.time | date:"yyyy-MM-dd"}}
+                        <p style="margin: 0px;padding: 3px;font-size: 12px;color: #666;">{{work.note}}
                             <a style="float: right" sha1="{{work.file_sha1}}" href="javascript:void(0)" ng-click="deleteWork(this)">删除</a></p>
                     </div>
                 </div>
