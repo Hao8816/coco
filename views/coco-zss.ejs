@@ -83,6 +83,19 @@
 
     </style>
     <script type="text/javascript">
+        $(function(){
+            var $grid = $('.grid').masonry({
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                columnWidth: '.grid-sizer'
+            });
+            // layout Isotope after each image loads
+            $grid.imagesLoaded().progress( function() {
+                $grid.masonry();
+            });
+
+        })
+
         function showUploadedWorks($scope,$http,$routeParams) {
             var work_id = $routeParams.work_id
 
