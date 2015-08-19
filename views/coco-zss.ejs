@@ -108,27 +108,29 @@
 
         function addWorkController($scope,$http){
 
-            var user_sha1 = "";
-            var file_sha1 = $('#fileupload').attr("imagesha1");
-            var work_id = $('.upload_picture_modal').attr("work_id");
-            var note = $scope.work.note;
-            $http.post('/ajax/add_work/', {
-                user_sha1: "",
-                file_sha1: file_sha1,
-                note: note,
-                work_id: work_id
-            }).success(function (data) {
-                if (data['ret'] == '0001') {
-                    console.log(data);
-                    $scope.work.note = "";
-                    $('#fileupload').attr("imagesha1", "");
-                    $('#upload_files_area').empty();
-                    $('.upload_picture_modal').modal("hide");
-                    getWorkList()
-                } else {
+            $scope.addWork = function(){
+                var user_sha1 = "";
+                var file_sha1 = $('#fileupload').attr("imagesha1");
+                var work_id = $('.upload_picture_modal').attr("work_id");
+                var note = $scope.work.note;
+                $http.post('/ajax/add_work/', {
+                    user_sha1: "",
+                    file_sha1: file_sha1,
+                    note: note,
+                    work_id: work_id
+                }).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        console.log(data);
+                        $scope.work.note = "";
+                        $('#fileupload').attr("imagesha1", "");
+                        $('#upload_files_area').empty();
+                        $('.upload_picture_modal').modal("hide");
+                        getWorkList()
+                    } else {
 
-                }
-            });
+                    }
+                });
+            }
         }
 
 
