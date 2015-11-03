@@ -156,9 +156,9 @@ var getTopicList = function getTopicList(req,res){
     console.log(creator_sha1);
     var page = req.param('page') || 1;
     var type = req.param('type') || -1;
-    var pageSize = 16;
+    var pageSize = 12;
     if(page == 1){
-        pageSize = 15;
+        pageSize = 11;
     }
     var query = {};
     if (type != -1){
