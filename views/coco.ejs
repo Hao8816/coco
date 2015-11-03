@@ -926,36 +926,31 @@
 
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" style="margin: 0;background-color: #2b2d34">
+
+<div class="navbar navbar-default navbar-fixed-top" style="background-color: #fff;padding-top: 10px;padding-bottom: 10px">
     <div class="container">
-        <div class="navbar-header" style="min-width: 100px">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
+        <div id="navbar-header" class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/welcome/"><i class="glyphicon glyphicon-tree-deciduous"></i>一颗网</a>
+            <a class="navbar-brand" href="index.html">
+                <img width="30" src="/images/icons/toys.png" alt=""/>
+                <span>一颗网</span>
+            </a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-
                 <li class="active"><a href="#topic/-1">首页 <span class="sr-only">(current)</span></a></li>
-
-
                 <li><a href="#blog/0">博客</a></li>
-
-
-                <li><a href="#chat"">达人</a></li>
-
-
+                <li><a href="#chat">达人</a></li>
                 <li><a href="#message">消息</a></li>
-
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#account/me">账号</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置<span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/account_info/">账号信息</a></li>
                         <li><a href="/security_settings/">安全设置</a></li>
@@ -964,68 +959,11 @@
                         <li><a href="/logout/">退出系统</a></li>
                     </ul>
                 </li>
-
             </ul>
         </div>
     </div>
-</nav>
+</div>
 
-<!--<nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">-->
-    <!--<div class="container">-->
-        <!--<div class="navbar-header">-->
-            <!--<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">-->
-                <!--<i style="color: #eee" class="glyphicon glyphicon-th-large"></i>-->
-            <!--</button>-->
-            <!--<a class="navbar-brand" style="color: #eee;padding: 10px 30px" href="#"><img style="width: 30px;height: 30px;display: inline-block" src="/images/icons/logo_bg.png" alt=""><span style="padding: 6px 10px;float: right">COCO</span></a>-->
-        <!--</div>-->
-        <!--<div class="collapse navbar-collapse">-->
-            <!--<ul class="nav navbar-nav">-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#topic/-1" style="cursor: pointer" >-->
-                        <!--首页-->
-                        <!--<span class="badge topic-badge"></span>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#blog/0" style="cursor: pointer" >-->
-                        <!--博客-->
-                        <!--<span class="badge blog-badge"></span>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#chat">-->
-                        <!--达人-->
-                        <!--<span class="badge friend-badge"></span>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#message" >-->
-                        <!--a-->
-                        <!--<span class="badge message-badge"></span>-->
-                    <!--</a>-->
-                <!--</li>-->
-
-            <!--</ul>-->
-            <!--&lt;!&ndash;<form class="navbar-form navbar-left" role="search">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<input style="border-radius: 20px;" type="text" class="form-control" placeholder="搜索">&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;</form>&ndash;&gt;-->
-
-            <!--<ul class="nav navbar-nav navbar-right">-->
-                <!--<li id="fat-menu" class="dropdown">-->
-                    <!--<a href="#account/me" style="cursor: pointer" >-->
-                        <!--账号-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li id="fat-menu" class="dropdown">-->
-                    <!--<a href="">登录</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-
-    <!--</div>-->
-<!--</nav>-->
 <div class="" ng-view style="padding-top: 40px;padding-bottom:40px;">
 </div>
 <div class="container-fluid" >

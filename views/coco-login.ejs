@@ -19,8 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=0, maximum-scale=0, user-scalable=no">
     <link rel="SHORTCUT ICON" href="/images/icons/web_logo.ico">
     <link rel="BOOKMARK" href="/images/icons/web_logo.ico">
-    <meta name="description" content="一颗网 COCO博客 不一样的博客 onekoko.com" />
-    <meta name="keywords" content="一颗网 COCO博客 不一样的博客 onekoko.com" />
+    <meta name="description" content="一颗网 COCO博客 不一样的博客 onekoko.com"/>
+    <meta name="keywords" content="一颗网 COCO博客 不一样的博客 onekoko.com"/>
     <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
     <script type="text/javascript" src="/AngularJs/angular.js"></script>
     <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
@@ -28,128 +28,172 @@
     <script type="text/javascript" src="/rsa/sha1.js"></script>
 </head>
 <style type="text/css">
-    body{
+    body {
         /*background-color: #fafafa;*/
+        font-family: "华文细黑";
     }
-    .nav-kit a{
-        color: rgba(255,255,255,0.87);
+
+    .nav-kit a {
+        color: rgba(255, 255, 255, 0.87);
     }
-    .footer-link a{
+
+    .footer-link a {
         padding: 0px 10px;
         font-size: 13px;
+        color: #009688;
     }
-    .footer-coryright{
+
+    .footer-coryright {
         font-size: 13px;
-        color: rgba(0,0,0,0.36);
+        color: rgba(0, 0, 0, 0.36);
     }
-    .nav-kit .item{
+
+    .nav-kit .item {
         font-size: 14px;
         font-weight: bold;
         margin-top: 10px;
         text-align: right;
     }
-    .nav-kit .item a{
-        color: rgba(3, 169, 244,1)
+
+    .nav-kit .item a {
+        color: rgba(3, 169, 244, 1)
     }
-    pre{
+
+    pre {
         background-color: #fff;
         border: none;
         padding: 8px 5px;
         width: 90%;
     }
-    .ad-items .item{
+
+    .ad-items .item {
         text-align: center;
-        line-height: 80px;
-        /*height: 160px;*/
+        line-height: 100px;
         border-radius: 50px;
-        border: 1px solid #ff5277;
-        background-color: #fafafa;
+        background-color: #fff;
         display: inline-block;
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
         margin: 30px auto;
         cursor: pointer;
     }
-    .ad-items .item img{
-        height: 50px;
-        width: 50px;
+
+    .ad-items .item img {
+        height: 70px;
+        width: 70px;
     }
-    .ad-items .warp{
+    .warp .desc{
+        color: #666;
+        font-size: 13px;
+    }
+
+    .ad-items .warp {
         text-align: center;
     }
-    .ad-items .item:hover{
-        background-color: #eee;
+
+    .ad-items .item:hover {
+        background-color: #f5f5f5;
     }
-    .ad-items .item .desc{
+
+    .ad-items .item .desc {
         text-decoration: none;
-        color: rgba(0,0,0,0.56);
+        color: #999
         /*text-align: left;*/
     }
-    .tech-desc .tip{
+
+    .tech-desc .tip {
         padding: 5px 10px;
-        color: rgba(0,0,0,0.56);
+        color: rgba(0, 0, 0, 0.56);
         display: inline-block;
         height: 200px;
-        border:  1px dotted #ff5277;
-        border-radius: 5px;
-        margin: 5px 0px;
+        margin: 15px 0px;
+        border: 1px solid #f1f1f1;
     }
-    .tech-desc .tip .title{
+
+    .tech-desc .tip .title {
         text-align: center;
         font-size: 16px;
-        border-bottom: 1px solid #ddd;
         padding: 5px;
         border-radius: 3px;
     }
 
-    .tech-desc .tip .desc{
+    .tech-desc .tip .title a{
+        color: #666;
+    }
+
+    .tech-desc .tip .desc {
         height: 120px;
         text-overflow: ellipsis;
         overflow: hidden;
-
+        color: #999;
+        font-size: 13px;
+        padding: 5px 10px;
+        line-height: 22px;
     }
-    .carousel-control.right, .carousel-control.left{
+
+    .carousel-control.right, .carousel-control.left {
         background-image: none;
     }
-    .carousel-indicators li{
+
+    .carousel-indicators li {
         background-color: #999;
     }
-    .carousel-indicators .active{
+
+    .carousel-indicators .active {
         background-color: #666;
     }
-    .ad-items .ad-title{
+
+    .ad-title {
         position: relative;
+        color: #009688;
+        font-size: 16px;
+        border-bottom: 1px dashed #009688;
+        padding: 25px 10px;
+        text-align: center;
     }
-    .ad-items .ad-title::before{
+
+    .ad-items .ad-title::before {
         position: absolute;
         content: "";
         height: 1px;
         background-color: #000;
 
     }
+
     .app-desc {
         text-align: center;
     }
-    .app-desc img{
+
+    .app-desc img {
         width: 60px;
         height: 60px;
     }
-    #site-center{
-        background-color:rgba(3, 169, 244, 0.8);
+
+    #site-center {
+        background-color: rgba(3, 169, 244, 0.8);
+    }
+
+    .nav .sign-in a {
+        display: inline-block;
+        padding: 5px 25px;
+        border: 1px solid #09c;
+        border-radius: 5px;
+        color: #09c;
+        margin: 10px;
     }
 </style>
 <script type="text/javascript">
-    function loginCtrl($scope,$http){
-        $scope.login = function(){
+    function loginCtrl($scope, $http) {
+        $scope.login = function () {
             var password = sha1($scope.user.password);
             var encrypt_password = sha1(password);
             $scope.user.password = encrypt_password;
             var userInfo = $scope.user;
             loginMain(userInfo)
         }
-        $scope.enterLogin = function(e){
+        $scope.enterLogin = function (e) {
             var e = e || window.event
-            if (e.keyCode == 13){
+            if (e.keyCode == 13) {
                 var password = sha1($scope.user.password);
                 var encrypt_password = sha1(password);
                 $scope.user.password = encrypt_password;
@@ -158,30 +202,30 @@
             }
         }
 
-        function loginMain(userInfo){
+        function loginMain(userInfo) {
             $scope.error = false
             // 检查用户名
             var username = userInfo.name;
-            if (username == "" || userInfo.password == ""){
+            if (username == "" || userInfo.password == "") {
                 $scope.message = "请检查用户名输入格式"
                 return
             }
 
-            $http.post('/ajax/login/',userInfo).success(function(data){
-                if(data['ret'] == '0001'){
+            $http.post('/ajax/login/', userInfo).success(function (data) {
+                if (data['ret'] == '0001') {
                     $scope.user.name = '';
                     $scope.user.password = '';
-                    if (data['user']['head_image'] == ''){
+                    if (data['user']['head_image'] == '') {
                         data['user']['head_image'] = 'default.jpg'
                     }
                     var loginUserInfo = JSON.stringify(data['user'])
-                    sessionStorage.setItem('LOGIN_USER_SHA1',data['user']['sha1']);
-                    sessionStorage.setItem('LOGIN_USER_INFO',loginUserInfo);
+                    sessionStorage.setItem('LOGIN_USER_SHA1', data['user']['sha1']);
+                    sessionStorage.setItem('LOGIN_USER_INFO', loginUserInfo);
                     location.href = '/coco/';
-                }else if(data['ret'] == '1002'){
+                } else if (data['ret'] == '1002') {
                     $scope.error = true
                     $scope.message = "你的账号尚未激活，请到邮箱点击激活链接，完成账号激活"
-                }else{
+                } else {
                     $scope.error = true
                     $scope.message = "请检查用户名或者密码"
                 }
@@ -189,381 +233,209 @@
         }
     }
 
-    $(function(){
-
-        drawClock();
-        // 更新每一帧的画面
-
-        function drawClock() {
-
-            var date = new Date();
-
-            var second = date.getSeconds();
-            var minute = date.getMinutes();
-            var hour = (60/12)*date.getHours();
-
-            var canvas = document.getElementById('clock_canvas');
-            var cxt = canvas.getContext('2d');
-            cxt.clearRect(0, 0, 400, 400);
-            cxt.restore();
-
-            var s_offset = 4;
-            var m_offset = 4;
-            var h_offset = 6;
-
-            var x_offset;
-            var y_offset;
-
-
-            // 根据秒针的位置，获取偏移量
-            var s_m_offset = getOffset(second, 0);
-            var m_m_offset = getOffset(minute, 1);
-            var h_m_offset = getOffset(hour, 2);
-            // 分别取出指针的位置
-            var s_x_offset = s_m_offset['x'];
-            var s_y_offset = s_m_offset['y'];
-            var m_x_offset = m_m_offset['x'];
-            var m_y_offset = m_m_offset['y'];
-            var h_x_offset = h_m_offset['x'];
-            var h_y_offset = h_m_offset['y'];
-
-
-            console.log(cxt);
-
-            // 表芯
-            cxt.beginPath()
-
-
-            cxt.arc(200, 200, 6, 0, 360);
-            cxt.stroke();
-            cxt.closePath()
-//
-
-
-            // 表盘
-            cxt.beginPath()
-            cxt.arc(200, 200, 205, 0, 360);
-            cxt.stroke()
-
-            // 秒针
-            cxt.beginPath()
-            cxt.fillStyle = "#ffffff";
-
-            cxt.moveTo(200 + s_offset, 200 - s_offset);
-            cxt.lineTo(200 + s_x_offset, 200 - s_y_offset);
-
-            cxt.moveTo(200 - s_offset, 200 - s_offset);
-            cxt.lineTo(200 + s_x_offset, 200 - s_y_offset);
-
-            cxt.moveTo(200 + s_offset, 200 - s_offset);
-            cxt.lineTo(200, 200);
-
-            cxt.moveTo(200 - s_offset, 200 - s_offset);
-            cxt.lineTo(200, 200);
-
-            cxt.closePath();
-
-//            cxt.fillStyle = "#ffffff"
-            cxt.fill()
-            cxt.stroke()
-
-            cxt.beginPath()
-            cxt.fillStyle = "#ffffff";
-            // 分针
-            cxt.moveTo(200 + m_offset, 200 - m_offset);
-            cxt.lineTo(200 + m_x_offset, 200 - m_y_offset);
-
-            cxt.moveTo(200 - m_offset, 200 - m_offset);
-            cxt.lineTo(200 + m_x_offset, 200 - m_y_offset);
-
-            cxt.moveTo(200 + m_offset, 200 - m_offset);
-            cxt.lineTo(200, 200);
-
-            cxt.moveTo(200 + m_offset, 200 + m_offset);
-            cxt.lineTo(200, 200);
-
-
-            // 时针
-            cxt.moveTo(200 + h_offset, 200 - h_offset);
-            cxt.lineTo(200 + h_x_offset, 200 - h_y_offset);
-
-            cxt.moveTo(200 - h_offset, 200 - h_offset);
-            cxt.lineTo(200 + h_x_offset, 200 - h_y_offset);
-
-            cxt.moveTo(200 + h_offset, 200 - h_offset);
-            cxt.lineTo(200, 200);
-
-            cxt.moveTo(200 - h_offset, 200 - h_offset);
-            cxt.lineTo(200, 200);
-            cxt.fillStyle = "#ffffff"
-            cxt.fill()
-            cxt.closePath();
-
-            // 刻度
-            cxt.strokeText("12",193,14)
-            cxt.strokeText("3",390,203)
-            cxt.strokeText("6",197,393)
-            cxt.strokeText("9",7,193)
-            var time = new Date()
-
-            cxt.fillText(time, 100, 320)
-            cxt.fillText("To Be NO.1", 175, 80)
-
-            cxt.stroke();
-//        cxt.save()
-        }
-
-        // 计算指针的位置，返回指针的偏移量
-        function getOffset(count, type) {
-            var long = 180;
-            switch (type) {
-                case 0:
-                    long = 180;
-                    break;
-                case 1:
-                    long = 140;
-                    break;
-                case 2:
-                    long = 100;
-                    break;
-                default:
-                    long = 180;
-                    break;
-            }
-
-            var angle = 2 * Math.PI / 360;
-            if (0 <= count < 15) {
-                x_offset = long * Math.sin(count * 6 * angle);
-                y_offset = long * Math.cos(count * 6 * angle);
-            } else if (15 <= count < 30) {
-                x_offset = long * Math.sin(count * 6 * angle);
-                y_offset = -long * Math.cos(count * 6 * angle);
-            } else if (30 <= count < 45) {
-                x_offset = -long * Math.sin(count * 6 * angle);
-                y_offset = long * Math.cos(count * 6 * angle);
-            } else if (45 <= count < 60) {
-                x_offset = -long * Math.sin(count * 6 * angle);
-                y_offset = -long * Math.cos(count * 6 * angle);
-            }
-            return {'x': x_offset, 'y': y_offset}
-        }
-        window.setInterval(drawClock,1000)
-    })
-
 </script>
 <body>
-<div style="width: 100%;background-color: #f5f5f5">
-    <div class="container" style="padding: 12px 0px;">
-        <div class="row nav-kit">
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
-            <div class="item hidden-lg hidden-md col-xs-3 col-sm-3" style="text-align: left"><a style="padding: 0px 5px" href="/coco/register/">注册</a></div>
-            <div class="hidden-sm hidden-xs col-sm-3 col-md-3 col-lg-3">
-                <span style="font-size: 24px;color: rgba(3, 169, 244,1)">一颗网</span>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center">
-                <img style="width: 40px;height: 40px;" src="/images/icons/logo_bg.png" alt=""/>
-            </div>
-            <div class="item col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <!--<a data-toggle="modal" style="cursor: pointer;padding: 0px 5px" data-target=".login_modal" >登录</a>-->
-                <a class="hidden-xs hidden-sm" style="padding: 0px 5px" href="/coco/register/">注册</a>
-            </div>
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+<div class="navbar navbar-default navbar-fixed-top" style="background-color: #fff;padding-top: 10px;padding-bottom: 10px">
+    <div class="container">
+        <div id="navbar-header" class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">
+                <img width="30" src="/images/icons/toys.png" alt=""/>
+                <span>一颗网</span>
+            </a>
+        </div>
+        <div id="navbar-menu" class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <li><a href="/coco/">一颗网</a></li>
+                <li><a href="#feature">特性</a></li>
+                <li><a href="#product">产品</a></li>
+                <li><a href="#about">关于技术</a></li>
+                <li class="sign-in"><a href="/coco/register/">注册</a></li>
+            </ul>
         </div>
     </div>
 </div>
-<div id="site-center" style="width: 100%;background-color: #00b38a">
+<div id="" style="width: 100%;margin-top: 83px">
     <div class="container">
         <div class="row" style="margin-top: 0px;padding-bottom: 20px;">
-            <div  style="margin: 0;padding: 20px">
-                <div class="row">
-                    <div class="col-md-7 col-lg-7" style="text-align: center">
-                        <!--<img src="/images/icons/adpic.png" alt=""/>-->
-                        <canvas id="clock_canvas" width="400" height="400" style="margin: auto;">
-                        </canvas>
-                    </div>
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="text-align: left">
-                        <h2 style="color:rgba(255,255,255,0.8);padding: 10px 0px;font-size: 36px;">一颗网</h2>
-                        <h2 style="color:rgba(255,255,255,0.8);padding: 10px 0px">记录你成长的历程</h2>
-                        <p style="font-size: 18px;color: rgba(255,255,255,0.8)">开启你的博客之旅</p>
-                        <p><a href="/coco/">进入应用</a></p>
-                    </div>
-                </div>
+            <div style="margin: 0;padding: 20px;height: 600px;background-color: #f1f1f1">
+
             </div>
         </div>
     </div>
 </div>
 <div class="container">
-    <div class="row ad-items" style="margin-bottom: 40px;padding-top: 20px">
+    <p id="feature" class="ad-title">产品特性</p>
+    <div class="row ad-items" style="margin-bottom: 120px;padding-top: 60px">
         <div class="col-xs-6 col-sm-3 col-md-3 warp">
             <a class="item">
-                <img src="/images/icons/pin-drop.png" alt=""/>
-            </a>
-     <p class="desc">基于地理位置的分享</p>
-        </div>
-        <div class="col-xs-6 col-sm-3 col-md-3 warp">
-            <a class="item">
-                <img src="/images/icons/local-offer.png" alt=""/>
+                <img src="/images/icons/colours.png" alt=""/>
             </a>
             <p class="desc">基于标签的分类和查找</p>
         </div>
         <div class="col-xs-6 col-sm-3 col-md-3 warp">
             <a class="item">
-                <img src="/images/icons/group.png" alt=""/>
+                <img src="/images/icons/megaphone.png" alt=""/>
             </a>
+
             <p class="desc">基于社交网络的分享</p>
         </div>
         <div class="col-xs-6 col-sm-3 col-md-3 warp">
             <a class="item">
-                <img src="/images/icons/redeem.png" alt=""/>
+                <img src="/images/icons/location.png" alt=""/>
             </a>
+            <p class="desc">基于地理位置的分享</p>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3 warp">
+            <a class="item">
+                <img src="/images/icons/lock.png" alt=""/>
+            </a>
+
             <p class="desc">基于用户行为习惯的推荐</p>
         </div>
     </div>
-    <div class="row ad-items" style="margin-bottom: 40px;">
-        <p class="ad-title" style="font-size: 16px;font-weight: bold;color: #ff5277;padding: 10px">产品介绍</p>
-        <div class="col-md-12">
-            <p style="padding: 10px;color: rgba(0,0,0,0.56)">
-                COCO致力于构建一个实时的博客系统，在博客中融入社交元素，提供好友，分享，实时聊天等功能。在内容结构上，使用主题来管理博客，通过标签来对主题和博客进行分类，方便查询和阅读。从应用的结构上，我们除了网站，还提供Android和IOS的客户端，方便用户的操作。（现阶段只开发出来了网站）
-            </p>
-        </div>
+    <p id="product" class="ad-title">应用展示</p>
+    <div class="row ad-items" style="margin-bottom: 40px;height: 400px">
     </div>
+    <p id="about" class="ad-title">技术介绍</p>
     <div class="row ad-items" style="margin-bottom: 40px;">
-        <p class="ad-title" style="font-size: 16px;font-weight: bold;color: #ff5277;padding: 10px">应用展示</p>
-
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="app-desc">
-                        <img src="/images/icons/html5.png">
-
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="app-desc">
-                        <img src="/images/icons/apple.png">
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="app-desc">
-                        <img src="/images/icons/android.png">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row ad-items" style="margin-bottom: 40px;">
-        <p class="ad-title" style="font-size: 16px;font-weight: bold;color: #ff5277;padding: 10px">
-            技术介绍</p>
         <div class="col-md-12">
             <div class="row tech-desc">
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="col-xs-6 col-sm-4">
                     <div class="tip">
-                    <p class="title"><a href="http://angularjs.apjs.net/" target="_blank">AngularJS</a></p>
-                    <p class="desc">
-                    前端框架 : <a href="http://angularjs.apjs.net/" target="_blank">AngularJS</a> 诞生于2009年，由Misko Hevery
-                    等人创建，后为Google所收购。是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVVM、模块化、自动化双向数据绑定、语义化标签、依赖注入，等等。
-                    </p>
-                        </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                    <p class="title"><a href="http://www.w3school.com.cn/html5/html_5_webstorage.asp" target="_blank">HTML5 Web 存储</a></p>
-                    <p class="desc">
-                    前端缓存 : <a href="http://www.w3school.com.cn/html5/html_5_webstorage.asp" target="_blank">HTML 5 Web
-                        存储</a> HTML5 提供了两种在客户端存储数据的新方法：localStorage - 没有时间限制的数据存储,sessionStorage - 针对一个 session 的数据存储.
-                    </p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                    <p class="title"><a href="http://expressjs.com/" target="_blank">Express</a></p>
-                    <p class="desc">
-                    后端框架 : <a href="http://expressjs.com/" target="_blank">Express</a> 是一个简洁而灵活的 node.js Web应用框架,
-                    提供一系列强大特性帮助你创建各种Web应用。
-                    </p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                    <p class="title"><a href="http://nginx.org/" target="_blank">Nginx</a></p>
-                    <p class="desc">
-                    HTTP服务器 : <a href="http://nginx.org/" target="_blank">Nginx</a> ("engine x") 是一个高性能的 HTTP 和 反向代理
-                    服务器，也是一个 IMAP/POP3/SMTP 代理服务器。因它的稳定性、丰富的功能集、示例配置文件和低系统资源的消耗而闻名。
-                    </p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                    <p class="title"><a href="http://socket.io/" target="_blank">Socket.IO</a></p>
-                    <p class="desc">
-                    消息服务器 : <a href="http://socket.io/" target="_blank">Socket.IO</a> enables real-time bidirectional
-                    event-based communication.It works on every platform, browser or device, focusing equally on
-                    reliability and speed.
-                    </p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                    <p class="title"><a href="http://redis.io/" target="_blank">Redis</a></p>
-                    <p class="desc">
-                    缓存服务器 : <a href="http://redis.io/" target="_blank">Redis</a>
-                    是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set
-                    有序集合)和hash（哈希类型）。
-                    </p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                    <p class="title"><a href="https://www.elastic.co/learn/" target="_blank">ElasticSearch</a></p>
-                    <p class="desc">
-                    索引服务器 : <a href="https://www.elastic.co/learn/" target="_blank">ElasticSearch</a>
-                    是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful
-                    web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是第二流行的企业搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。
-                    </p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                    <p class="title"><a href="http://www.postfix.org/" target="_blank">Postfix</a></p>
-                    <p class="desc">
-                    邮件服务器 : <a href="http://www.postfix.org/" target="_blank">Postfix</a>
-                    是一种电子邮件服务器，它是由任职于IBM华生研究中心（T.J. Watson Research Center）的荷兰籍研究员Wietse Venema为了改良sendmail邮件服务器而产生的。
-                    </p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                    <p class="title"><a href="http://www.mysql.com/" target="_blank">MySQL</a></p>
-                    <p class="desc">
-                    数据库服务器 : <a href="http://www.mysql.com/" target="_blank">MySQL</a> 是一个关系型数据库管理系统，由瑞典 MySQL AB
-                    公司开发，目前属于 Oracle 公司。MySQL 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS (Relational Database
-                    Management System，关系数据库管理系统) 应用软件之一。
-                    </p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <div class="tip">
-                        <p class="title"><a href="http://baike.baidu.com/subview/61075/13876199.htm" target="_blank">Swift</a></p>
+                        <p class="title"><a href="http://angularjs.apjs.net/" target="_blank">AngularJS</a></p>
+
                         <p class="desc">
-                            Swift : <a href="http://baike.baidu.com/subview/61075/13876199.htm" target="_blank">Swift</a>
+                            前端框架 : <a href="http://angularjs.apjs.net/" target="_blank">AngularJS</a> 诞生于2009年，由Misko
+                            Hevery
+                            等人创建，后为Google所收购。是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVVM、模块化、自动化双向数据绑定、语义化标签、依赖注入，等等。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="http://www.w3school.com.cn/html5/html_5_webstorage.asp"
+                                            target="_blank">HTML5 Web 存储</a></p>
+
+                        <p class="desc">
+                            前端缓存 : <a href="http://www.w3school.com.cn/html5/html_5_webstorage.asp" target="_blank">HTML
+                                5 Web
+                                存储</a> HTML5 提供了两种在客户端存储数据的新方法：localStorage - 没有时间限制的数据存储,sessionStorage - 针对一个 session
+                            的数据存储.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="http://expressjs.com/" target="_blank">Express</a></p>
+
+                        <p class="desc">
+                            后端框架 : <a href="http://expressjs.com/" target="_blank">Express</a> 是一个简洁而灵活的 node.js
+                            Web应用框架,
+                            提供一系列强大特性帮助你创建各种Web应用。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="http://nginx.org/" target="_blank">Nginx</a></p>
+
+                        <p class="desc">
+                            HTTP服务器 : <a href="http://nginx.org/" target="_blank">Nginx</a> ("engine x") 是一个高性能的 HTTP 和
+                            反向代理
+                            服务器，也是一个 IMAP/POP3/SMTP 代理服务器。因它的稳定性、丰富的功能集、示例配置文件和低系统资源的消耗而闻名。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="http://socket.io/" target="_blank">Socket.IO</a></p>
+
+                        <p class="desc">
+                            消息服务器 : <a href="http://socket.io/" target="_blank">Socket.IO</a> enables real-time
+                            bidirectional
+                            event-based communication.It works on every platform, browser or device, focusing equally on
+                            reliability and speed.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="http://redis.io/" target="_blank">Redis</a></p>
+
+                        <p class="desc">
+                            缓存服务器 : <a href="http://redis.io/" target="_blank">Redis</a>
+                            是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted
+                            set
+                            有序集合)和hash（哈希类型）。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="https://www.elastic.co/learn/" target="_blank">ElasticSearch</a></p>
+
+                        <p class="desc">
+                            索引服务器 : <a href="https://www.elastic.co/learn/" target="_blank">ElasticSearch</a>
+                            是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful
+                            web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是第二流行的企业搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="http://www.postfix.org/" target="_blank">Postfix</a></p>
+
+                        <p class="desc">
+                            邮件服务器 : <a href="http://www.postfix.org/" target="_blank">Postfix</a>
+                            是一种电子邮件服务器，它是由任职于IBM华生研究中心（T.J. Watson Research Center）的荷兰籍研究员Wietse
+                            Venema为了改良sendmail邮件服务器而产生的。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="http://www.mysql.com/" target="_blank">MySQL</a></p>
+
+                        <p class="desc">
+                            数据库服务器 : <a href="http://www.mysql.com/" target="_blank">MySQL</a> 是一个关系型数据库管理系统，由瑞典 MySQL
+                            AB
+                            公司开发，目前属于 Oracle 公司。MySQL 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS (Relational Database
+                            Management System，关系数据库管理系统) 应用软件之一。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="tip">
+                        <p class="title"><a href="http://baike.baidu.com/subview/61075/13876199.htm" target="_blank">Swift</a>
+                        </p>
+
+                        <p class="desc">
+                            Swift : <a href="http://baike.baidu.com/subview/61075/13876199.htm"
+                                       target="_blank">Swift</a>
                             苹果于2014年WWDC（苹果开发者大会）发布的新开发语言，可与Objective-C*共同运行于Mac OS和iOS平台，用于搭建基于苹果平台的应用程序。
                         </p>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="col-xs-6 col-sm-4">
                     <div class="tip">
-                    <p class="title"><a href="http://git-scm.com/download/" target="_blank">Git</a></p>
-                    <p class="desc">
-                    版本管理工具 : <a href="http://git-scm.com/download/" target="_blank">Git</a>
-                    是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。
-                    </p>
+                        <p class="title"><a href="http://git-scm.com/download/" target="_blank">Git</a></p>
+
+                        <p class="desc">
+                            版本管理工具 : <a href="http://git-scm.com/download/" target="_blank">Git</a>
+                            是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container-fluid" style="background-color: #eee">
+<div class="container-fluid" style="border-top: 1px solid #f1f1f1">
     <div class="row">
         <div class="col-xs-12" style="margin-top: 20px;">
             <div style="padding: 3px;text-align: center;">

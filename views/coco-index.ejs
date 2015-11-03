@@ -1,77 +1,47 @@
-<style type="text/css">
-    .topic-item{
-        /*border-radius: 3px;*/
-        padding: 30px;
-        /*height: 160px;*/
-        /*margin: 5px 0px;*/
-        margin-top: 5px;
-        cursor: pointer;
-        border: 1px solid #ddd;
-        height: 260px;
-        /*border-left: 4px solid #eee;*/
-        /*box-shadow: 0px 0px 10px 0px #ccc;*/
-        /*background-color: orange;*/
-    }
-    .topic-item:hover{
-        box-shadow: 0px 0px 10px 3px #ccc;
-        /*border-left-color: #5cb85c;*/
-        /*background-color: #ddd;*/
-    }
-    .topic-item .topic-link{
-        text-decoration: none;
-    }
-    .friend-item{
-        padding-top: 5px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+<!DOCTYPE html>
+<!--
 
-    .friend-item:hover{
-        background-color: #eee;
-    }
-    .concren-item{
-        list-style: none;
-        padding: 8px;
-        cursor: pointer;
-    }
-    .concren-item:hover{
-        background-color: #eee;
-    }
-    .topic-category{
-        padding: 5px;
-        margin: 0;
-    }
-    .topic-category .item{
-        padding: 4px 10px;
-        cursor: pointer;
-        font-size: 14px;
-        border-radius: 15px;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    .topic-category .item-active{
-        background-color: #ddd;
-    }
+    欢迎大家使用COCO V 1.0
 
+    @@@@@@@   @@@@@@@     @@@@@@@    @@@@@@@
+   @         @       @   @          @       @
+   @         @       @   @          @       @
+   @         @       @   @          @       @
+   @         @       @   @          @       @
+   @         @       @   @          @       @
+    @@@@@@@   @@@@@@@     @@@@@@@    @@@@@@@
 
+-->
 
-
-</style>
-
+<html ng-app>
+<head>
+    <title>一颗网 COCO博客 onekoko.com 不一样的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0, maximum-scale=0, user-scalable=no">
+    <link rel="SHORTCUT ICON" href="/images/icons/web_logo.ico">
+    <link rel="BOOKMARK" href="/images/icons/web_logo.ico">
+    <meta name="description" content="一颗网 COCO博客 不一样的博客 onekoko.com"/>
+    <meta name="keywords" content="一颗网 COCO博客 不一样的博客 onekoko.com"/>
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css"/>
+    <script type="text/javascript" src="/AngularJs/angular.js"></script>
+    <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
+    <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/rsa/sha1.js"></script>
+</head>
+<body>
 <div class="container">
     <div class="row">
         <div class="col-xs-9">
             <div class="box-area" style="height: auto">
                 <!--<div class="row">-->
-                    <div class="col-md-12" style="margin-top: 10px;">
-                        <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
-                            <li><a href="#topic/-1">所有分类</a></li>
-                            <li class="active">{{topic_type}}</li>
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
+                        <li><a href="#topic/-1">所有分类</a></li>
+                        <li class="active">{{topic_type}}</li>
                             <span class="btn btn-success btn-sm pull-right">
                             <a style="color: #fff;" data-toggle="modal" data-target=".compose_topic_modal">添加主题</a>
                             </span>
-                        </ol>
-                    </div>
+                    </ol>
+                </div>
                 <!--</div>-->
                 <div class="blog-nav-bar" style="margin-top: 5px;padding-bottom: 5px;">
                     <div class="col-xs-7 col-sm-8 col-md-9">
@@ -82,23 +52,31 @@
                         </p>
                     </div>
                     <div class="col-xs-5 col-sm-4 col-md-3">
-                        <input ng-model="query" style="margin: 5px 0px;border-radius: 15px;" class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索主题" type="text"/>
-                    <span class="search-btn" style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
+                        <input ng-model="query" style="margin: 5px 0px;border-radius: 15px;"
+                               class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索主题"
+                               type="text"/>
+                    <span class="search-btn"
+                          style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
                         <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
                     </span>
                     </div>
                 </div>
                 <div class="">
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding:5px;" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="padding:5px;"
+                         ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                         <div class="topic-item">
                             <a class="topic-link" href="#/blog/{{topic.sha1}}">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center">
-                                        <img style="width: 30px;height: 30px;border-radius:40px;" ng-src="/images/{{topic.head_image}}" alt=""/>
+                                        <img style="width: 30px;height: 30px;border-radius:40px;"
+                                             ng-src="/images/{{topic.head_image}}" alt=""/>
+
                                         <p style="font-size: 12px;color: #666;padding: 2px">{{topic.name}}</p>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <h4 style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden">{{topic.title}}</h4>
+                                        <h4 style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden">
+                                            {{topic.title}}</h4>
+
                                         <p style="margin:10px 0px;font-size: 12px;text-overflow: ellipsis;overflow: hidden;height: 72px;color: rgba(0,0,0,0.56)">
                                             <span style="color:rgba(0,0,0,0.87)"></span>{{topic.desc}}</p>
                                         <!--<p style="margin:0px;font-size: 12px;color: rgba(0,0,0,0.56);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;height: 20px;">描述</p>-->
@@ -112,9 +90,10 @@
                     </div>
                 </div>
 
-                <div ng-show="next" class="col-xs-6 col-sm-4 col-md-3 col-lg-2" style="padding:5px;height: 172px;text-align: center">
+                <div ng-show="next" class="col-xs-6 col-sm-4 col-md-3 col-lg-2"
+                     style="padding:5px;height: 172px;text-align: center">
                     <div class="topic-item">
-                        <a class="topic-link" ng-click="changePage(1)"  style="line-height: 150px;cursor: pointer">
+                        <a class="topic-link" ng-click="changePage(1)" style="line-height: 150px;cursor: pointer">
                             更多
                         </a>
                     </div>
@@ -129,11 +108,13 @@
 </div>
 
 <div class="container main-container">
-    <div class="modal fade compose_topic_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal fade compose_topic_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">创建主题</h4>
                 </div>
                 <div class="modal-body" style="height: 220px;">
@@ -141,7 +122,8 @@
                         <div class="col-xs-9">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">主题</label>
-                                <input ng-model="topic.title" type="text" class="form-control" id="exampleInputEmail1" placeholder="为你的博客写一段标题">
+                                <input ng-model="topic.title" type="text" class="form-control" id="exampleInputEmail1"
+                                       placeholder="为你的博客写一段标题">
                             </div>
                         </div>
                         <div class="col-xs-3">
@@ -171,5 +153,5 @@
         </div>
     </div>
 </div>
-
-
+</body>
+</html>
