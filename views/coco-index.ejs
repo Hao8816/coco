@@ -1,34 +1,24 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12" style="background-color: #fff">
-            <!--<div class="row blog-nav-bar" style="margin-top: 5px;">-->
-                <!--<div class="col-xs-7 col-sm-8 col-md-9">-->
-                    <!--<ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">-->
-                        <!--<li><a href="#topic/-1">所有分类</a></li>-->
-                        <!--<li class="active">{{topic_type}}</li>-->
-                    <!--</ol>-->
-                <!--</div>-->
-                <!--<div class="col-xs-5 col-sm-4 col-md-3">-->
-                    <!--<input ng-model="query" style="margin: 5px 0px;border-radius: 15px;"-->
-                           <!--class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索主题"-->
-                           <!--type="text"/>-->
-                    <!--<span class="search-btn"-->
-                          <!--style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">-->
-                        <!--<i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>-->
-                    <!--</span>-->
-                <!--</div>-->
-            <!--</div>-->
-            <div class="row">
-                <p class="topic-category" style="font-size: 12px;">
+            <div class="row topic-category">
+                <div class="col-xs-10 col-sm-10 col-md-4">
                     <a class="item item-active" ng-click="changeOrder(0)">全部</a>
                     <a class="item" ng-click="changeOrder(1)">最热</a>
                     <a class="item" ng-click="changeOrder(2)">最新</a>
+                </div>
+                <div class="hidden-xs hidden-sm col-md-4">
+                    <input ng-model="query" style="border-radius: 15px;width: 280px;margin: auto;text-align: center"
+                           class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索主题"
+                           type="text"/>
+                </div>
+                <div class="col-xs-2 col-md-4">
                     <span class="btn btn-sm btn-default pull-right">
                         <a data-toggle="modal" data-target=".compose_topic_modal"><i class="glyphicon glyphicon-plus"></i>创建分类</a>
                     </span>
-                </p>
+                </div>
             </div>
-            <div class="row">
+            <div class="row" style="padding-bottom: 10px;padding-top: 10px">
                 <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                     <div class="topic-item">
                         <a class="topic-link" href="#/blog/{{topic.sha1}}">
