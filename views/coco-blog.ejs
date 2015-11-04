@@ -37,12 +37,17 @@
         text-align: right;
         margin: 0;
     }
-
-    .oprate-bar span {
-        padding: 0px 15px;
-        color: rgba(0, 0, 0, 0.56);
+    .oprate-bar .reply,
+    .oprate-bar .like{
+        color: #009688;
         font-size: 13px;
         cursor: pointer;
+        padding: 0px 10px;
+        display: inline-block;
+    }
+    .oprate-bar .time{
+        color: #999;
+        font-size: 13px;
     }
 
     .oprate-bar span:hover {
@@ -51,7 +56,6 @@
 
     .blog-nav-bar {
         padding: 0px 5px;
-
     }
 
     .blog-nav-bar .nav-item {
@@ -164,9 +168,9 @@
                     </span>
                 </div>
             </div>
-            <div class="row" ng-repeat="blog in blog_list | filter:query" style="margin-bottom: 10px;background-color: #fff;padding-top: 15px;padding-bottom: 15px">
-                <div class="col-xs-1" style="text-align: center;">
-                    <img class="img-responsive" style="border-radius: 2px;margin: auto" ng-src="/images/{{blog.head_image}}"
+            <div class="row" ng-repeat="blog in blog_list | filter:query" style="margin-bottom: 10px;background-color: #fff;padding:15px 5px">
+                <div class="col-xs-1" style="padding: 0px;text-align: center">
+                    <img class="img-responsive" style="max-width:40px;border-radius: 2px;margin: auto;width: 100%" ng-src="/images/{{blog.head_image}}"
                          title="{{blog.name}}" alt=""/>
                 </div>
                 <div class="col-xs-11">
@@ -186,11 +190,10 @@
                             <span class="time">{{comment.time | date:"yyyy-MM-dd hh:mm"}}</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="oprate-bar" style="padding-top: 10px;">
-                        <span class="pull-left">{{blog.time | date:"yyyy-MM-dd hh:mm"}}</span>
-                        <a style="cursor: pointer" ng-click="showCommentModal(this)">评论</a><span>收藏</span>
+                        <span class="time pull-left">{{blog.time | date:"yyyy-MM-dd hh:mm"}}</span>
+                        <a class="reply" ng-click="showCommentModal(this)">评论</a>
+                        <a class="like">收藏</a>
                     </p>
                 </div>
                 <li ng-show="data_empty"><p style="padding: 10px">当前主题下没有博客信息，点击 <a href="">创建博客</a> 添加博客信息。</p></li>
