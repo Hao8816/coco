@@ -1,25 +1,24 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
-            <div class="box-area" style="height: auto;">
-                <div class="row blog-nav-bar" style="margin-top: 5px;padding: 5px 15px 10px 15px;">
-                    <div class="col-xs-7 col-sm-8 col-md-9">
-                        <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
-                            <li><a href="#topic/-1">所有分类</a></li>
-                            <li class="active">{{topic_type}}</li>
-                        </ol>
-                    </div>
-                    <div class="col-xs-5 col-sm-4 col-md-3">
-                        <input ng-model="query" style="margin: 5px 0px;border-radius: 15px;"
-                               class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索主题"
-                               type="text"/>
-                        <span class="search-btn"
-                              style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
-                            <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
-                        </span>
-                    </div>
+        <div class="col-xs-12 box-area" style="background-color: #fff">
+            <div class="row blog-nav-bar" style="margin-top: 5px;padding: 5px 15px 10px 15px;">
+                <div class="col-xs-7 col-sm-8 col-md-9">
+                    <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
+                        <li><a href="#topic/-1">所有分类</a></li>
+                        <li class="active">{{topic_type}}</li>
+                    </ol>
                 </div>
-                <div class="row" style="background-color: #fff;margin: 0px;padding-top: 10px;padding-bottom: 30px">
+                <div class="col-xs-5 col-sm-4 col-md-3">
+                    <input ng-model="query" style="margin: 5px 0px;border-radius: 15px;"
+                           class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索主题"
+                           type="text"/>
+                    <span class="search-btn"
+                          style="display: inline-block;position: absolute;top: 6px;right: 18px;padding: 5px 10px">
+                        <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="background-color: #fff;margin: 0px;padding-top: 10px;padding-bottom: 30px">
                     <p class="topic-category" style="font-size: 12px;margin-top: 5px;">
                         <a class="item item-active" ng-click="changeOrder(0)">全部</a>
                         <a class="item" ng-click="changeOrder(1)">最热</a>
@@ -62,7 +61,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
