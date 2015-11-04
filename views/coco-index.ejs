@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 box-area" style="background-color: #fff">
-            <div class="row blog-nav-bar" style="margin-top: 5px;padding: 5px 15px 10px 15px;">
+            <div class="row blog-nav-bar" style="margin-top: 5px;">
                 <div class="col-xs-7 col-sm-8 col-md-9">
                     <ol style="margin: 0px;padding: 10px 5px;background-color: transparent" class="breadcrumb">
                         <li><a href="#topic/-1">所有分类</a></li>
@@ -27,6 +27,7 @@
                             <a data-toggle="modal" data-target=".compose_topic_modal"><i class="glyphicon glyphicon-plus"></i>创建分类</a>
                         </span>
                     </p>
+                <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4"
                          ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                         <div class="topic-item">
@@ -51,6 +52,8 @@
                                 </div>
                             </a>
                         </div>
+                </div>
+
                     </div>
                     <div ng-show="next" class="col-xs-6 col-sm-4"
                          style="text-align: center">
