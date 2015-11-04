@@ -24,9 +24,9 @@
                         <a class="item item-active" ng-click="changeOrder(0)">全部</a>
                         <a class="item" ng-click="changeOrder(1)">最热</a>
                         <a class="item" ng-click="changeOrder(2)">最新</a>
-                        <span class="btn btn-sm btn-default">
-                            <a data-toggle="modal" data-target=".compose_topic_modal">创建主题</a>
-                            </span>
+                        <span class="btn btn-sm btn-default pull-right">
+                            <a data-toggle="modal" data-target=".compose_topic_modal"><i class="glyphicon glyphicon-plus"></i>创建主题</a>
+                        </span>
                     </p>
                     <div class="col-xs-12 col-sm-6 col-md-4"
                          ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
