@@ -203,45 +203,40 @@
                 <p style="text-align: center;cursor: pointer;margin: 0px;" ng-click="changePage(1)">查看更多</p>
             </div>
         </div>
-        <div class="col-md-3 box-area">
-            <div class="row">
-                <p><h5 style="font-size: 13px;color: #009688;padding: 10px">分类下共有13篇博客，浏览量10020次</h5></p>
-                <!--MOB SHARE BEGIN-->
-                <div class="-mob-share-ui-button -mob-share-open">我来分享</div>
-                <div class="-mob-share-ui" style="display: none">
-                    <ul class="-mob-share-list">
-                        <li class="-mob-share-weibo"><p>新浪微博</p></li>
-                        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
-                        <li class="-mob-share-qzone"><p>QQ空间</p></li>
-                        <li class="-mob-share-qq"><p>QQ好友</p></li>
-                        <li class="-mob-share-weixin"><p>微信</p></li>
-                        <li class="-mob-share-douban"><p>豆瓣</p></li>
-                        <li class="-mob-share-renren"><p>人人网</p></li>
-                    </ul>
-                    <div class="-mob-share-close">取消</div>
-                </div>
-                <div class="-mob-share-ui-bg"></div>
-                <!--MOB SHARE END-->
-                <span style="width: 70%;margin: 10px 15%;" class="btn btn-default">
-                    <a style="font-size: 15px;" data-toggle="modal"
-                       data-target=".compose_blog_modal">写博客</a>
-                </span>
+        <div class="col-md-3">
+            <p><h5 style="font-size: 13px;color: #009688;padding: 10px">分类下共有13篇博客，浏览量10020次</h5></p>
+            <!--MOB SHARE BEGIN-->
+            <div class="-mob-share-ui-button -mob-share-open">我来分享</div>
+            <div class="-mob-share-ui" style="display: none">
+                <ul class="-mob-share-list">
+                    <li class="-mob-share-weibo"><p>新浪微博</p></li>
+                    <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+                    <li class="-mob-share-qzone"><p>QQ空间</p></li>
+                    <li class="-mob-share-qq"><p>QQ好友</p></li>
+                    <li class="-mob-share-weixin"><p>微信</p></li>
+                    <li class="-mob-share-douban"><p>豆瓣</p></li>
+                    <li class="-mob-share-renren"><p>人人网</p></li>
+                </ul>
+                <div class="-mob-share-close">取消</div>
             </div>
+            <div class="-mob-share-ui-bg"></div>
+            <!--MOB SHARE END-->
+            <span style="width: 70%;margin: 10px 15%;" class="btn btn-default">
+                <a style="font-size: 15px;" data-toggle="modal"
+                   data-target=".compose_blog_modal">写博客</a>
+            </span>
             <div>
-                <h5 style="color: #009688">参与列表</h5>
-
-                <div class="row" style="border-radius: 5px;background-color: #fff;padding: 5px;">
-                    <div class="friend-item" style="width: 25%;display: inline-block;text-align: center"
-                         ng-repeat="friend in friend_list">
-                        <a href="#account/{{friend.sha1}}">
-                            <img style="width: 60%;margin:0 10%;border-radius: 100%;border: 1px solid #f5f5f5"
-                                 src="/images/{{friend.head_image}}" alt=""/>
-                            <span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"
-                                  ng-bind="friend.name"></span>
-                        </a>
-                    </div>
-                </div>
+            <h5 style="color: #009688">参与列表</h5>
+            <div class="friend-item" style="width: 25%;display: inline-block;text-align: center"
+                 ng-repeat="friend in friend_list">
+                <a href="#account/{{friend.sha1}}">
+                    <img style="width: 60%;margin:0 10%;border-radius: 100%;border: 1px solid #f5f5f5"
+                         src="/images/{{friend.head_image}}" alt=""/>
+                    <span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"
+                          ng-bind="friend.name"></span>
+                </a>
             </div>
+        </div>
         </div>
     </div>
     <div class="modal fade compose_blog_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
