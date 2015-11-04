@@ -46,36 +46,38 @@
 
 <div class="container" ng-controller="accountPageCtrl">
     <div class="row">
-        <div class="col-md-9 box-area">
-            <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;">
-                <span>个人信息</span>
-            </div>
-            <div style="border-radius: 5px;margin-top: 5px;background-color: #fff">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-md-4" style="text-align: center;height: 260px;line-height: 260px;position: relative">
-                        <img id="user_head_image" ng-src="/images/{{user.head_image}}" style="width: 180px;height: 180px;border-radius: 180px;" alt=""/>
-                        <a ng-show="user.mine" style="position:absolute;color: #000;font-size: 15px;line-height: 180px;left: 42%;top: 17%;cursor: pointer" data-toggle="modal" data-target=".upload_image_modal">换头像</a>
-                    </div>
-                    <div class="col-xs-12 col-sm-8 col-md-8" style="font-size: 15px;">
-                        <div style="padding: 30px;">
-                            <h3>{{user.name}}</h3>
-                            <p style="color: rgba(0,0,0,0.56)"><span>邮箱 : </span><span ng-bind="user.email"></span></p>
-                            <p style="color: rgba(0,0,0,0.56)"><span>手机 : </span><span ng-bind="user.phone"></span></p>
-                            <p style="color: rgba(0,0,0,0.56)"><span>注册时间 : </span><span ng-bind="user.time"></span></p>
-                            <p class="info-item" style="color: rgba(0,0,0,0.56)">
-                                <span>主题<a href="" ng-bind="user.nb_topic"></a></span>
-                                <span>博客<a href="" ng-bind="user.nb_blog"></a></span>
-                                <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
-                            </p>
+        <div class="col-md-9">
+            <div class="box-area">
+                <div style="padding:8px;background-color: #fff;border-radius: 5px;">
+                    <span>个人信息</span>
+                </div>
+                <div style="border-radius: 5px;margin-top: 5px;background-color: #fff">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-4" style="text-align: center;height: 260px;line-height: 260px;position: relative">
+                            <img id="user_head_image" ng-src="/images/{{user.head_image}}" style="width: 180px;height: 180px;border-radius: 180px;" alt=""/>
+                            <a ng-show="user.mine" style="position:absolute;color: #000;font-size: 15px;line-height: 180px;left: 42%;top: 17%;cursor: pointer" data-toggle="modal" data-target=".upload_image_modal">换头像</a>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-8" style="font-size: 15px;">
+                            <div style="padding: 30px;">
+                                <h3>{{user.name}}</h3>
+                                <p style="color: rgba(0,0,0,0.56)"><span>邮箱 : </span><span ng-bind="user.email"></span></p>
+                                <p style="color: rgba(0,0,0,0.56)"><span>手机 : </span><span ng-bind="user.phone"></span></p>
+                                <p style="color: rgba(0,0,0,0.56)"><span>注册时间 : </span><span ng-bind="user.time"></span></p>
+                                <p class="info-item" style="color: rgba(0,0,0,0.56)">
+                                    <span>主题<a href="" ng-bind="user.nb_topic"></a></span>
+                                    <span>博客<a href="" ng-bind="user.nb_blog"></a></span>
+                                    <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;clear: both;width: 100%">
-                <span>详细信息</span>
-            </div>
-            <div class="hidden-xs" style="border-radius: 5px;height: 400px;background-color: #fff;margin-top: 5px">
-                <div class="row">
+                <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;clear: both;width: 100%">
+                    <span>详细信息</span>
+                </div>
+                <div class="hidden-xs" style="border-radius: 5px;height: 400px;background-color: #fff;margin-top: 5px">
+                    <div class="row">
+                    </div>
                 </div>
             </div>
         </div>
