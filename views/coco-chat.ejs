@@ -99,7 +99,7 @@
 </style>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-md-9 " style="border-radius:5px;">
+        <div id="all_friend_list"  class="col-xs-12 col-md-9">
             <div class="blog-nav-bar row">
                 <div class="col-xs-5 col-sm-7 col-md-8">
                     <ol style="margin: 0px;padding: 5px;background-color: transparent" class="breadcrumb">
@@ -113,7 +113,7 @@
                     </span>
                 </div>
             </div>
-            <div id="all_friend_list" class="row" style="background-color: #fff">
+            <div class="row" style="background-color: #fff">
                 <div class="col-xs-12 col-sm-6 col-md-4" style="padding: 5px;cursor: pointer;" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query | orderBy:order:true">
                     <div class="friend-item">
                         <img class="image" ng-src="/images/{{friend.head_image}}" alt=""/>
@@ -126,6 +126,27 @@
                             <span>主题 <a href="">{{friend.nb_topic}}</a></span>
                             <span>好友 <a href="">{{friend.nb_friend}}</a></span>
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  id="current_chat_area" style="display: none;" class="col-xs-12 col-md-9">
+            <div class="blog-nav-bar row">
+                <div class="col-xs-5 col-sm-7 col-md-8">
+                    <ol style="margin: 0px;padding: 5px;background-color: transparent" class="breadcrumb">
+                        <li><a ng-click="backBtn()">朋友圈</a></li>
+                        <li><img style="height: 30px;width: 30px;border-radius: 30px;margin-left: 10px" ng-src="/images/{{chat_image}}" alt=""/><a href="" id="friend_name" fid="{{fid}}" ng-bind="chat_name"></a></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div id="chat-history" style="height: 510px;overflow-y:auto;background-color:#fff;border: 1px solid #eee"></div>
+                <div style="padding: 10px 0px;background-color: #ddd;overflow: auto">
+                    <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+                        <input placeholder="请输入消息内容" id="chat-input" style="width:98%;padding:0px 1%;height: 34px;box-shadow: none;border:none;outline: none;margin: 0px" onkeydown="bindEnterKeySend(event)" />
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2" style="">
+                        <span id="send_message_btn" class="btn btn-success" onclick="sendChatMessage()">发送</span>
                     </div>
                 </div>
             </div>
