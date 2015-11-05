@@ -974,10 +974,10 @@
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top" style="background-color: #fff;padding-top: 10px;padding-bottom: 10px">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #fff;padding-top: 10px;padding-bottom: 10px">
     <div class="container">
         <div id="navbar-header" class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-menu" aria-expanded="false">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -987,7 +987,7 @@
                 <span>一颗网</span>
             </a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbar-collapse-menu">
             <ul class="nav navbar-nav">
                 <li><a href="#topic/-1">分类</a></li>
                 <li><a href="#blog/0">博客</a></li>
@@ -1009,7 +1009,7 @@
             </ul>
         </div>
     </div>
-</div>
+</nav>
 
 <div class="" ng-view style="margin-top:93px;padding-bottom:20px;">
 </div>
