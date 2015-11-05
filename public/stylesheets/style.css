@@ -166,6 +166,9 @@ a{
     margin-top:73px;
     padding-bottom:20px;
   }
+  .coco-padding{
+    padding-left: 8px;
+  }
 }
 @media (min-width: 768px) {
   #coco-header{
@@ -208,7 +211,7 @@ a{
 }
 
 .friend-item:hover{
-  background-color: #4cae4c;
+
 }
 
 
