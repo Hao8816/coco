@@ -47,57 +47,47 @@
 <div class="container" ng-controller="accountPageCtrl">
     <div class="row">
         <div class="col-md-9">
-            <div class="box-area">
-                <div style="padding:8px;background-color: #fff;border-radius: 5px;">
-                    <span>个人信息</span>
+            <div class="blog-nav-bar row">
+                <div class="col-xs-5 col-sm-7 col-md-8">
+                    <ol style="margin: 0px;padding: 5px;background-color: transparent" class="breadcrumb">
+                        <li><a href="#chat/">个人信息</a></li>
+                    </ol>
                 </div>
-                <div style="border-radius: 5px;margin-top: 5px;background-color: #fff">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4" style="text-align: center;height: 260px;line-height: 260px;position: relative">
-                            <img id="user_head_image" ng-src="/images/{{user.head_image}}" style="width: 180px;height: 180px;border-radius: 180px;" alt=""/>
-                            <a ng-show="user.mine" style="position:absolute;color: #000;font-size: 15px;line-height: 180px;left: 42%;top: 17%;cursor: pointer" data-toggle="modal" data-target=".upload_image_modal">换头像</a>
-                        </div>
-                        <div class="col-xs-12 col-sm-8 col-md-8" style="font-size: 15px;">
-                            <div style="padding: 30px;">
-                                <h3>{{user.name}}</h3>
-                                <p style="color: rgba(0,0,0,0.56)"><span>邮箱 : </span><span ng-bind="user.email"></span></p>
-                                <p style="color: rgba(0,0,0,0.56)"><span>手机 : </span><span ng-bind="user.phone"></span></p>
-                                <p style="color: rgba(0,0,0,0.56)"><span>注册时间 : </span><span ng-bind="user.time"></span></p>
-                                <p class="info-item" style="color: rgba(0,0,0,0.56)">
-                                    <span>主题<a href="" ng-bind="user.nb_topic"></a></span>
-                                    <span>博客<a href="" ng-bind="user.nb_blog"></a></span>
-                                    <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="row" style="background-color: #fff">
+                <div class="col-xs-12 col-sm-4 col-md-3" style="text-align: center;height: 200px;line-height: 200px;position: relative;">
+                    <img id="user_head_image" ng-src="/images/{{user.head_image}}" style="width: 120px;height: 120px;border-radius: 60px;background-color: #f5f5f5" alt=""/>
+                    <a ng-show="user.mine" style="position: absolute;bottom: 0px;width: 100%;left: 0px;cursor: pointer" class="btn" data-toggle="modal" data-target=".upload_image_modal">更换头像</a>
                 </div>
-                <div style="padding:8px;background-color: #fff;margin-top: 20px;border-radius: 5px;clear: both;width: 100%">
-                    <span>详细信息</span>
-                </div>
-                <div class="hidden-xs" style="border-radius: 5px;height: 400px;background-color: #fff;margin-top: 5px">
-                    <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-8" style="font-size: 15px;">
+                    <div style="padding: 20px 10px;">
+                        <h3>{{user.name}}</h3>
+                        <p style="color: rgba(0,0,0,0.56)"><span>邮箱 : </span><span ng-bind="user.email"></span></p>
+                        <p style="color: rgba(0,0,0,0.56)"><span>手机 : </span><span ng-bind="user.phone"></span></p>
+                        <p style="color: rgba(0,0,0,0.56)"><span>注册时间 : </span><span ng-bind="user.time"></span></p>
+                        <p class="info-item" style="color: rgba(0,0,0,0.56)">
+                            <span>主题<a href="" ng-bind="user.nb_topic"></a></span>
+                            <span>博客<a href="" ng-bind="user.nb_blog"></a></span>
+                            <span>好友<a href="" ng-bind="user.nb_friend"></a></span>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="box-area" style="background-color: #fff;border-radius: 5px;padding: 10px;">
-                <p>当前位置：<a ng-bind="infos.location">北京</a></p>
-                <p>{{infos.date | date:"yyyy-MM-dd hh:mma"}}</p>
-                <p>天气</p>
-                <div style="text-align: center">
-                    <img src="/images/weather/cloud.png" alt=""/>
-                </div>
+            <p class="coco-title">当前位置：<a ng-bind="infos.location">北京</a></p>
+            <p>{{infos.date | date:"yyyy-MM-dd hh:mma"}}</p>
+            <p class="coco-title">天气</p>
+            <div style="text-align: center;padding: 10px">
+                <img src="/images/weather/cloud.png" alt=""/>
                 <p>多云转阴</p>
-
-                <div ng-show="user.mine" style="margin-top: 15px;border-top: 1px solid #ddd;padding: 10px;">
-                    <p>当前登录账号: <a href="" ng-bind="infos.name"></a></p>
-                    <p>登录IP: <a href="" ng-bind="infos.ip"></a></p>
-                <span style="width: 70%;margin: 10px 15%;" class="btn btn-success">
-                    <a style="color: #fff;font-size: 15px;" ng-click="logout()">切换账号</a>
-                </span>
-                </div>
+            </div>
+            <div ng-show="user.mine" style="margin-top: 15px;border-top: 1px solid #ddd;">
+                <p>当前登录账号: <a href="" ng-bind="infos.name"></a></p>
+                <p>登录IP: <a href="" ng-bind="infos.ip"></a></p>
+            <span style="width: 80%;margin: 10px 10%;" class="btn btn-default">
+                <a style="font-size: 15px;" ng-click="logout()">切换账号</a>
+            </span>
             </div>
         </div>
     </div>

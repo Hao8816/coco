@@ -169,6 +169,9 @@ a{
   .coco-padding{
     padding-left: 8px;
   }
+  .friend-item{
+    border-bottom:1px solid #f1f1f1 ;
+  }
 }
 @media (min-width: 768px) {
   #coco-header{
@@ -180,13 +183,21 @@ a{
     margin-top:93px;
     padding-bottom:20px;
   }
+  .friend-item:hover{
+    background-color: #f8f8f8;
+    border-radius: 3px;
+  }
+}
+.coco-title{
+  font-size: 13px;
+  color: #009688;
+  padding: 10px 0px;
 }
 
 
 .friend-item{
     padding-left: 60px;
     background-color: #fff;
-    border-bottom:1px solid #f1f1f1 ;
     margin:0px;
     position: relative;
     padding-top: 5px;

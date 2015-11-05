@@ -49,30 +49,30 @@
             }
 
             $routeProvider.
-                    when('/chat/',{
-                        templateUrl:'/coco/chat/',
-                        controller:'chatPageController'
-                    }).
-                    when('/blog/:topic_sha1',{
-                        templateUrl:'/coco/blog/',
-                        controller:'blogPageController'
-                    }).
-                    when('/topic/:type',{
-                        templateUrl:'/coco/index/',
-                        controller:'topicPageController'
-                    }).
-                    when('/message/',{
-                        templateUrl:'/coco/message/',
-                        controller:''
-                    }).
-                    when('/account/:user_sha1',{
-                        templateUrl:'/coco/account/',
-                        controller:'accountPageController'
-                    }).
-                    otherwise({redirectTo:'/topic/-1'});
+                when('/chat/',{
+                    templateUrl:'/coco/chat/',
+                    controller:'chatPageController'
+                }).
+                when('/blog/:topic_sha1',{
+                    templateUrl:'/coco/blog/',
+                    controller:'blogPageController'
+                }).
+                when('/topic/:type',{
+                    templateUrl:'/coco/index/',
+                    controller:'topicPageController'
+                }).
+                when('/message/',{
+                    templateUrl:'/coco/message/',
+                    controller:''
+                }).
+                when('/account/:user_sha1',{
+                    templateUrl:'/coco/account/',
+                    controller:'accountPageController'
+                }).
+                otherwise({redirectTo:'/topic/-1'});
 
+            // 收起导航菜单
             $(".navbar-nav li").click(function(){
-                // 收起导航菜单
                 $(".navbar-collapse").removeClass('in');
             })
 
