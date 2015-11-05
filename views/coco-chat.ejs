@@ -141,12 +141,12 @@
             </div>
             <div class="row">
                 <div id="chat-history" style="height: 450px;overflow-y:auto;background-color:#fff;border: 1px solid #eee"></div>
-                <div style="padding: 10px 0px;background-color: #ddd;overflow: auto">
-                    <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+                <div style="padding: 10px 0px;background-color: #f8f8f8;overflow: auto">
+                    <div class="col-xs-10" style="padding-right: 0px">
                         <input placeholder="请输入消息内容" id="chat-input" style="width:98%;padding:0px 1%;height: 34px;box-shadow: none;border:none;outline: none;margin: 0px" onkeydown="bindEnterKeySend(event)" />
                     </div>
-                    <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2" style="">
-                        <span id="send_message_btn" class="btn btn-success" onclick="sendChatMessage()">发送</span>
+                    <div class="col-xs-2" style="">
+                        <span style="width: 100%" id="send_message_btn" class="btn btn-success" onclick="sendChatMessage()">发送</span>
                     </div>
                 </div>
             </div>
