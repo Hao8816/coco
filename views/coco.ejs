@@ -69,6 +69,12 @@
                         controller:'accountPageController'
                     }).
                     otherwise({redirectTo:'/topic/-1'});
+
+            $(".navbar-nav li").click(function(){
+                // 收起导航菜单
+                $(".navbar-collapse").removeClass('in');
+            })
+
         }]);
 
         var TOPIC_TYPE = {
