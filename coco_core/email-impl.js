@@ -6,13 +6,12 @@ var email = {};
 
 // 邮件传输对象
 var transporter = nodemailer.createTransport({
-    host:"smtp.163.com",
-    //host:"smtp.yeah.net",
+    host:"mail.onekoko.com",
+    from:"mail.onekoko.com",
     port:"25",
     auth: {
-        user: '15238228816@163.com',
-        //user: 'onekoko@yeah.net',
-        pass: 'chenhao8816'
+        user: 'coco',
+        pass: 'chenhao'
     }
 });
 
@@ -31,8 +30,6 @@ var sendEmail = function sendEmail(options){
 // 发送消息提醒邮件
 var sendNotificationEmail = function sendNotificationEmail(options){
     var options = {
-        //from: '15238228816@163.com ',
-        from: 'onekoko@yeah.net',
         subject: 'COCO版本更新'
     };
     var date = new Date();
@@ -74,8 +71,6 @@ var sendNotificationEmail = function sendNotificationEmail(options){
 // 发送注册之后邮件验证
 var sendValidateEmail = function sendValidateEmail(uid,address){
     var options = {
-        from: '15238228816@163.com ',
-        //from: 'onekoko@yeah.net',
         subject: 'COCO邮箱验证'
     };
     var date = new Date();
@@ -108,8 +103,6 @@ var sendValidateEmail = function sendValidateEmail(uid,address){
 // 发送邀请注册邮件
 var sendInvitationEmail = function sendInvitationEmail(address){
     var options = {
-        from: '15238228816@163.com ',
-        //from: 'onekoko@yeah.net',
         subject: 'COCO邮箱验证'
     };
     var date = new Date();
