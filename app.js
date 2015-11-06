@@ -42,8 +42,6 @@ app.use('/coco', coco);
 app.use('/api', api);
 app.use('/ajax', ajax);
 
-
-
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -58,7 +56,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.render('error.ejs', {
             message: err.message,
             error: err
         });
@@ -69,7 +67,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('error.ejs', {
         message: err.message,
         error: {}
     });

@@ -1,3 +1,27 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+
+<style type="text/css">
+    @-webkit-keyframes rotate {
+        from {-webkit-transform:rotate(0deg);}
+        to {-webkit-transform:rotate(360deg);}
+    }
+    #spinner {
+        height: 50px;
+        width: 50px;
+        overflow: hidden;
+        -webkit-mask-image: url("data:image/png[...]");
+        -webkit-mask-size: 30px 30px;
+        -webkit-animation-name: rotate;
+        -webkit-animation-duration: 3.5s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+    }
+
+</style>
+<div style="width: 500px;margin: auto;text-align: center">
+    <a href="/coco/" style="display: inline-block;text-decoration: none">
+        <h2 style="padding: 20px;color: #009688">关注一颗网，给您不同的体验</h2>
+        <h3><img id="spinner" width="50" style="display: inline-block" src="/images/icons/toys.png" alt=""></h3>
+        <h1 style="color: #999;padding: 60px"><%= error.status %> <%= message %></h1>
+        <img class="img-responsive" height="160" style="margin-top: 30px" src="/images/icons/welcome.png" alt=""/>
+    </a>
+</div>
