@@ -333,3 +333,10 @@ a{
   color: #999;
   margin-left: 10px;
 }
+
+.navbar-default .navbar-nav > li > a.navbar-active{
+  color: #009688;
+  font-size: 15px;
+  font-weight: bold;
+}
+
