@@ -6,11 +6,10 @@ var email = {};
 
 // 邮件传输对象
 var transporter = nodemailer.createTransport({
-    host:"mail.onekoko.com",
-    from:"mail.onekoko.com",
+    host:"onekoko.com",
     port:"25",
     auth: {
-        user: 'coco',
+        user: 'chenhao',
         pass: 'chenhao'
     }
 });
