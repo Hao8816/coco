@@ -6,6 +6,15 @@ var io = require('socket.io')(https);
 var async = require('async');
 var logger = require('../coco_core/logger-impl');
 
+var options = {
+    key: fs.readFileSync('ssl.key'),
+    cert: fs.readFileSync('ssl.cet')
+    //requestCert: true,
+    //ca: [ fs.readFileSync('client-cert.pem') ]
+};
+
+
+
 var sub = redis.createClient();
 var pub = redis.createClient();
 
