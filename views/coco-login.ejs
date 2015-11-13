@@ -223,7 +223,6 @@
         $scope.login = function () {
             var password = sha1($scope.user.password);
             var encrypt_password = sha1(password);
-            var type = 0;
             $scope.user.password = encrypt_password;
             var userInfo = $scope.user;
             loginMain(userInfo)
@@ -233,7 +232,6 @@
             if (e.keyCode == 13) {
                 var password = sha1($scope.user.password);
                 var encrypt_password = sha1(password);
-                var type = 0;
                 $scope.user.password = encrypt_password;
                 var userInfo = $scope.user;
                 loginMain(userInfo)
@@ -248,6 +246,7 @@
                 $scope.message = "请检查用户名输入格式"
                 return
             }
+            userInfo["type"] = 0
 
             $http.post('/ajax/login/', userInfo).success(function (data) {
                 if (data['ret'] == '0001') {
