@@ -7,8 +7,8 @@ var async = require('async');
 var logger = require('../coco_core/logger-impl');
 var fs = require('fs');
 var options = {
-    key: fs.readFileSync('ssl.key'),
-    cert: fs.readFileSync('ssl.cet')
+    key: fs.readFileSync('/home/chenhao/coco/coco_message/ssl.key'),
+    cert: fs.readFileSync('/home/chenhao/coco/coco_message/ssl.cet')
     //requestCert: true,
     //ca: [ fs.readFileSync('client-cert.pem') ]
 };
