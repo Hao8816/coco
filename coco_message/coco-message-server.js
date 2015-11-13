@@ -1,10 +1,15 @@
 //var app = require('express')();
 var redis = require('redis');
 var redis_client = redis.createClient();
-var https = require('https');
-var io = require('socket.io')(https);
+//var https = require('https');
+//var io = require('socket.io')(https);
 var async = require('async');
 var logger = require('../coco_core/logger-impl');
+
+var app = require('https').createServer()
+var io = require('socket.io')(app);
+
+app.listen(8089);
 
 var sub = redis.createClient();
 var pub = redis.createClient();
@@ -257,6 +262,6 @@ io.on('error',function(socket){
 
 
 //// 创建httpserver
-https.listen(8089,function(){
-    console.log('start message server successfully, port 8089');
-});
+//https.listen(8089,function(){
+//    console.log('start message server successfully, port 8089');
+//});
