@@ -56,17 +56,21 @@ var createUser = function createUser(req,res){
 
 var loginUser = function loginUser(req,res){
     var name = req.param('name')
-    if (req.param('password_app')){
-        var password = SHA1(SHA1(req.param('password_app')))
-    }else{
+    var type = parseInt(req.param('type'))
+    if (type == 0){
         var password = req.param('password')
+    }else{
+        var password = SHA1(SHA1(req.param('password')))
     }
+    console.log(password)
     user_models.User.find({name:name,password:password},function(err,result){
+        console.log(password)
         if(err){
             console.log(err);
             res.send({'info':"ERROR","ret":1001})
             return
         }
+        console.log(result)
         if (result[0]!=null){
             if (result[0].status == 1){
                 // 更新sessiong

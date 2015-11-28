@@ -16,7 +16,7 @@
 <html ng-app>
 <head>
     <title>一颗网 COCO博客 onekoko.com 不一样的博客</title>
-    <meta name="viewport" content="width=device-width, initial-scale=0, maximum-scale=0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
     <link rel="SHORTCUT ICON" href="/images/icons/web_logo.ico">
     <link rel="BOOKMARK" href="/images/icons/web_logo.ico">
     <meta name="description" content="一颗网 COCO博客 不一样的博客 onekoko.com"/>
@@ -26,250 +26,261 @@
     <script type="text/javascript" src="/Jquery/jquery-lib-2.11.js"></script>
     <script type="text/javascript" src="/bootstrap3/js/bootstrap.js"></script>
     <script type="text/javascript" src="/rsa/sha1.js"></script>
-</head>
-<style type="text/css">
-    body {
-        /*background-color: #fafafa;*/
-        font-family: "华文细黑";
-    }
+    <style type="text/css">
+        body {
+            /*background-color: #fafafa;*/
+            font-family: "华文细黑";
+        }
 
-    .nav-kit a {
-        color: rgba(255, 255, 255, 0.87);
-    }
+        .nav-kit a {
+            color: rgba(255, 255, 255, 0.87);
+        }
 
-    .footer-link a {
-        padding: 0px 10px;
-        font-size: 13px;
-        color: #009688;
-    }
+        .footer-link a {
+            padding: 0px 10px;
+            font-size: 13px;
+            color: #009688;
+        }
 
-    .footer-coryright {
-        font-size: 13px;
-        color: rgba(0, 0, 0, 0.36);
-    }
+        .footer-coryright {
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.36);
+        }
 
-    .nav-kit .item {
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: 10px;
-        text-align: right;
-    }
+        .nav-kit .item {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: right;
+        }
 
-    .nav-kit .item a {
-        color: rgba(3, 169, 244, 1)
-    }
+        .nav-kit .item a {
+            color: rgba(3, 169, 244, 1)
+        }
 
-    pre {
-        background-color: #fff;
-        border: none;
-        padding: 8px 5px;
-        width: 90%;
-    }
-
-    .ad-items .item {
-        text-align: center;
-        line-height: 100px;
-        border-radius: 50px;
-        background-color: #fff;
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-        margin: 0px auto;
-        cursor: pointer;
-    }
-
-    .ad-items .item img {
-        height: 70px;
-        width: 70px;
-    }
-    .warp .desc{
-        color: #666;
-        font-size: 13px;
-    }
-
-    .ad-items .warp {
-        text-align: center;
-    }
-
-    .ad-items .item:hover {
-        background-color: #f5f5f5;
-    }
-
-    .ad-items .item .desc {
-        text-decoration: none;
-        color: #999
-        /*text-align: left;*/
-    }
-
-    .tech-desc .tip {
-        padding: 5px 10px;
-        color: rgba(0, 0, 0, 0.56);
-        display: inline-block;
-        height: 200px;
-        margin: 15px 0px;
-        border: 1px solid #f1f1f1;
-    }
-
-    .tech-desc .tip .title {
-        text-align: center;
-        font-size: 16px;
-        padding: 5px;
-        border-radius: 3px;
-    }
-
-    .tech-desc .tip .title a{
-        color: #666;
-    }
-
-    .tech-desc .tip .desc {
-        height: 120px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        color: #999;
-        font-size: 13px;
-        padding: 5px 10px;
-        line-height: 22px;
-    }
-
-    .carousel-control.right, .carousel-control.left {
-        background-image: none;
-    }
-
-    .carousel-indicators li {
-        background-color: #999;
-    }
-
-    .carousel-indicators .active {
-        background-color: #666;
-    }
-
-    .ad-title {
-        position: relative;
-        color: #009688;
-        font-size: 16px;
-        border-bottom: 1px dashed #009688;
-        padding: 25px 10px;
-        text-align: center;
-    }
-
-    .ad-items .ad-title::before {
-        position: absolute;
-        content: "";
-        height: 1px;
-        background-color: #000;
-
-    }
-
-    .app-desc {
-        text-align: center;
-    }
-
-    .app-desc img {
-        width: 60px;
-        height: 60px;
-    }
-
-    #site-center {
-        background-color: rgba(3, 169, 244, 0.8);
-    }
-
-    .nav .sign-in a {
-        display: inline-block;
-        padding: 5px 25px;
-        border: 1px solid #09c;
-        border-radius: 5px;
-        color: #09c;
-        margin: 10px;
-    }
-    .coco-welcome{
-        text-decoration:none;
-        color:#009688;
-        display: inline-block;
-        padding:4px 35px;
-        border-radius: 8px;
-        border: 1px solid #009688;
-        line-height: 40px;
-        font-size: 16px;
-        background-color: #fff;
-        margin-top: 10px;
-    }
-
-    .coco-welcome:hover{
-        background-color: #f5f5f5;
-    }
-
-    @media (max-width: 767px) {
-        #coco-header{
-            padding-top: 5px;
-            padding-bottom: 5px;
+        pre {
             background-color: #fff;
+            border: none;
+            padding: 8px 5px;
+            width: 90%;
         }
-    }
-    @media (min-width: 768px) {
-        #coco-header{
-            padding-top: 10px;
-            padding-bottom: 10px;
+
+        .ad-items .item {
+            text-align: center;
+            line-height: 100px;
+            border-radius: 50px;
             background-color: #fff;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin: 0px auto;
+            cursor: pointer;
         }
-    }
-    .coco-title{
-        font-size: 13px;
-        color: #009688;
-        padding: 10px 0px;
-    }
-</style>
-<script type="text/javascript">
-    function loginCtrl($scope, $http) {
-        $scope.login = function () {
-            var password = sha1($scope.user.password);
-            var encrypt_password = sha1(password);
-            $scope.user.password = encrypt_password;
-            var userInfo = $scope.user;
-            loginMain(userInfo)
+
+        .ad-items .item img {
+            height: 70px;
+            width: 70px;
         }
-        $scope.enterLogin = function (e) {
-            var e = e || window.event
-            if (e.keyCode == 13) {
+        .warp .desc{
+            color: #666;
+            font-size: 13px;
+        }
+
+        .ad-items .warp {
+            text-align: center;
+        }
+
+        .ad-items .item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .ad-items .item .desc {
+            text-decoration: none;
+            color: #999
+            /*text-align: left;*/
+        }
+
+        .tech-desc .tip {
+            padding: 5px 10px;
+            color: rgba(0, 0, 0, 0.56);
+            display: inline-block;
+            height: 200px;
+            margin: 15px 0px;
+            border: 1px solid #f1f1f1;
+        }
+
+        .tech-desc .tip .title {
+            text-align: center;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .tech-desc .tip .title a{
+            color: #666;
+        }
+
+        .tech-desc .tip .desc {
+            height: 120px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: #999;
+            font-size: 13px;
+            padding: 5px 10px;
+            line-height: 22px;
+        }
+
+        .carousel-control.right, .carousel-control.left {
+            background-image: none;
+        }
+
+        .carousel-indicators li {
+            background-color: #999;
+        }
+
+        .carousel-indicators .active {
+            background-color: #666;
+        }
+
+        .ad-title {
+            position: relative;
+            color: #009688;
+            font-size: 16px;
+            border-bottom: 1px dashed #009688;
+            padding: 25px 10px;
+            text-align: center;
+        }
+
+        .ad-items .ad-title::before {
+            position: absolute;
+            content: "";
+            height: 1px;
+            background-color: #000;
+
+        }
+
+        .app-desc {
+            text-align: center;
+        }
+
+        .app-desc img {
+            width: 60px;
+            height: 60px;
+        }
+
+        #site-center {
+            background-color: rgba(3, 169, 244, 0.8);
+        }
+
+        .nav .sign-in a {
+            display: inline-block;
+            padding: 5px 25px;
+            border: 1px solid #09c;
+            border-radius: 5px;
+            color: #09c;
+            margin: 10px;
+        }
+        .coco-welcome{
+            text-decoration:none;
+            color:#009688;
+            display: inline-block;
+            padding:4px 35px;
+            border-radius: 8px;
+            border: 1px solid #009688;
+            line-height: 40px;
+            font-size: 16px;
+            background-color: #fff;
+            margin-top: 10px;
+        }
+
+        .coco-welcome:hover{
+            background-color: #f5f5f5;
+        }
+
+        @media (max-width: 767px) {
+            #coco-header{
+                padding-top: 5px;
+                padding-bottom: 5px;
+                background-color: #fff;
+            }
+        }
+        @media (min-width: 768px) {
+            #coco-header{
+                padding-top: 10px;
+                padding-bottom: 10px;
+                background-color: #fff;
+            }
+        }
+        .coco-title{
+            font-size: 13px;
+            color: #009688;
+            padding: 10px 0px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8d31392d1f3650777acc4eb49a862eaa";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+
+        function loginCtrl($scope, $http) {
+            $scope.login = function () {
                 var password = sha1($scope.user.password);
                 var encrypt_password = sha1(password);
                 $scope.user.password = encrypt_password;
                 var userInfo = $scope.user;
                 loginMain(userInfo)
             }
-        }
-
-        function loginMain(userInfo) {
-            $scope.error = false
-            // 检查用户名
-            var username = userInfo.name;
-            if (username == "" || userInfo.password == "") {
-                $scope.message = "请检查用户名输入格式"
-                return
+            $scope.enterLogin = function (e) {
+                var e = e || window.event
+                if (e.keyCode == 13) {
+                    var password = sha1($scope.user.password);
+                    var encrypt_password = sha1(password);
+                    $scope.user.password = encrypt_password;
+                    var userInfo = $scope.user;
+                    loginMain(userInfo)
+                }
             }
 
-            $http.post('/ajax/login/', userInfo).success(function (data) {
-                if (data['ret'] == '0001') {
-                    $scope.user.name = '';
-                    $scope.user.password = '';
-                    if (data['user']['head_image'] == '') {
-                        data['user']['head_image'] = 'default.jpg'
-                    }
-                    var loginUserInfo = JSON.stringify(data['user'])
-                    sessionStorage.setItem('LOGIN_USER_SHA1', data['user']['sha1']);
-                    sessionStorage.setItem('LOGIN_USER_INFO', loginUserInfo);
-                    location.href = '/coco/';
-                } else if (data['ret'] == '1002') {
-                    $scope.error = true
-                    $scope.message = "你的账号尚未激活，请到邮箱点击激活链接，完成账号激活"
-                } else {
-                    $scope.error = true
-                    $scope.message = "请检查用户名或者密码"
+            function loginMain(userInfo) {
+                $scope.error = false
+                // 检查用户名
+                var username = userInfo.name;
+                if (username == "" || userInfo.password == "") {
+                    $scope.message = "请检查用户名输入格式"
+                    return
                 }
-            });
-        }
-    }
+                userInfo["type"] = 0
 
-</script>
+                $http.post('/ajax/login/', userInfo).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        $scope.user.name = '';
+                        $scope.user.password = '';
+                        if (data['user']['head_image'] == '') {
+                            data['user']['head_image'] = 'default.jpg'
+                        }
+                        var loginUserInfo = JSON.stringify(data['user'])
+                        sessionStorage.setItem('LOGIN_USER_SHA1', data['user']['sha1']);
+                        sessionStorage.setItem('LOGIN_USER_INFO', loginUserInfo);
+                        location.href = '/coco/';
+                    } else if (data['ret'] == '1002') {
+                        $scope.error = true
+                        $scope.message = "你的账号尚未激活，请到邮箱点击激活链接，完成账号激活"
+                    } else {
+                        $scope.error = true
+                        $scope.message = "请检查用户名或者密码"
+                    }
+                });
+            }
+        }
+
+    </script>
+
+</head>
 <body>
 <nav id="coco-header" class="navbar navbar-default navbar-fixed-top">
     <div class="container">

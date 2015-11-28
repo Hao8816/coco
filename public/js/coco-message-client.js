@@ -1,5 +1,5 @@
 //var client = io.connect('http://127.0.0.1:8089');
-var client = io.connect('http://onekoko.com:8089');
+var client = io.connect('https://onekoko.com:8089',{secure: true});
 
 // 定义一个消息盒子，并且初始化在缓存中的数据
 var MESSAGE_BOX = {};

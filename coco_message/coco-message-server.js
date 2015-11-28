@@ -1,10 +1,22 @@
 //var app = require('express')();
 var redis = require('redis');
 var redis_client = redis.createClient();
-//var http = require('http').Server(app);
-//var io = require('socket.io')(http);
+//var https = require('https');
+//var io = require('socket.io')(https);
 var async = require('async');
 var logger = require('../coco_core/logger-impl');
+var fs = require('fs');
+var options = {
+    key: fs.readFileSync('/home/chenhao/coco/coco_message/key_nopass.key'),
+    cert: fs.readFileSync('/home/chenhao/coco/coco_message/ssl.crt')
+    //requestCert: true,
+    //ca: [ fs.readFileSync('client-cert.pem') ]
+};
+
+var app = require('https').createServer(options)
+var io = require('socket.io')(app);
+
+app.listen(8089);
 
 var sub = redis.createClient();
 var pub = redis.createClient();
@@ -16,7 +28,7 @@ var pub = redis.createClient();
 //    console.log('Chat Message Received')
 //})
 
-var io = require('socket.io')(8089);
+//var io = require('socket.io')(8089);
 var redisClient = require('socket.io-redis');
 io.adapter(redisClient({ host: 'localhost', port: 6379 }));
 
@@ -272,6 +284,6 @@ io.on('error',function(socket){
 
 
 //// 创建httpserver
-//http.listen(8089,function(){
+//https.listen(8089,function(){
 //    console.log('start message server successfully, port 8089');
 //});
