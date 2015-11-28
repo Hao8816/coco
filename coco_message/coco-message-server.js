@@ -231,6 +231,21 @@ io.on('connection',function(socket){
         });
     });
 
+
+    socket.on('UNREAD_MESSAGES',function(msg) {
+        var user_sha1 = msg['user_sha1'];
+        // 查询用户未读信息
+        var unread_messages = {}
+        unread_messages["chat_message"] = 10
+        unread_messages["topic_message"] = 5
+        unread_messages["contact_message"] = 3
+        unread_messages["system_message"] = 2
+
+        socket.emit("UNREAD_MESSAGES_RESPONSE",unread_messages);
+        //io.sockets.connected[socket_id].emit('LOGIN_MESSAGE_SUCCESS',{});
+
+    });
+
     socket.on('disconnect',function(msg){
         console.log(msg+'----');
         //io.emit('message',msg);
