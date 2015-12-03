@@ -254,7 +254,6 @@ io.on('connection',function(socket){
         unread_messages["system_message"] = 2
 
         socket.emit("UNREAD_MESSAGES_RESPONSE",unread_messages);
-        //io.sockets.connected[socket_id].emit('LOGIN_MESSAGE_SUCCESS',{});
 
     });
 
