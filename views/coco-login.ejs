@@ -67,27 +67,28 @@
 
         .ad-items .item {
             text-align: center;
-            line-height: 100px;
-            border-radius: 50px;
+            line-height: 120px;
+            border-radius: 60px;
             background-color: #fff;
             display: inline-block;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             margin: 0px auto;
             cursor: pointer;
         }
 
+        .ad-items .warp{
+            margin: 30px 0px;
+            font-size: 14px;
+        }
+
         .ad-items .item img {
-            height: 100px;
-            width: 100px;
+            height: 120px;
+            width: 120px;
         }
         .warp .desc{
             color: #666;
-            font-size: 13px;
-        }
-
-        .ad-items .warp {
-            text-align: center;
+            margin: 4px 0px;
         }
 
         .ad-items .item:hover {
@@ -104,9 +105,10 @@
             padding: 5px 10px;
             color: rgba(0, 0, 0, 0.56);
             display: inline-block;
-            height: 200px;
+            height: 160px;
             margin: 15px 0px;
-            border: 1px solid #f1f1f1;
+            border: 1px dashed #009688;
+            border-radius: 2px;
         }
 
         .tech-desc .tip .title {
@@ -121,10 +123,10 @@
         }
 
         .tech-desc .tip .desc {
-            height: 120px;
+            height: 90px;
             text-overflow: ellipsis;
             overflow: hidden;
-            color: #999;
+            color: #666;
             font-size: 13px;
             padding: 5px 10px;
             line-height: 22px;
@@ -145,10 +147,11 @@
         .ad-title {
             position: relative;
             color: #009688;
-            font-size: 16px;
-            border-bottom: 1px dashed #009688;
+            font-size: 18px;
             padding: 25px 10px;
             text-align: center;
+            margin: 0px;
+            font-weight: bold;
         }
 
         .ad-items .ad-title::before {
@@ -175,7 +178,7 @@
         .nav .sign-in a {
             display: inline-block;
             padding: 5px 25px;
-            border: 1px solid #09c;
+            border: 1px solid #009688;
             border-radius: 5px;
             color: #09c;
             margin: 10px;
@@ -216,6 +219,20 @@
             color: #009688;
             padding: 10px 0px;
         }
+
+        #navbar-menu ul li{
+            padding: 0px 5px;
+        }
+        #navbar-menu ul li a{
+            color: #009688;
+        }
+        
+        #welcome_background{
+            background-image: url("/images/pictures/welcome_bg.jpg");
+            background-position: 0px 0px;
+            background-repeat: no-repeat;
+        }
+
     </style>
     <script type="text/javascript">
 
@@ -290,76 +307,148 @@
             </button>
             <a class="navbar-brand" style="padding: 10px">
                 <img width="30" src="/images/icons/toys.png" alt=""/>
-                <span>一颗网</span>
             </a>
         </div>
         <div id="navbar-menu" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li><a href="/coco/">一颗网</a></li>
+                <li><a href="#login">一颗网</a></li>
                 <li><a href="#feature">特性</a></li>
                 <li><a href="#product">产品</a></li>
-                <li><a data-toggle="modal" data-target=".login_modal">登录</a></li>
+                <!--<li><a data-toggle="modal" data-target=".login_modal">登录</a></li>-->
                 <li class="sign-in"><a href="/coco/register/">注册</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<div id="" style="width: 100%;margin-top: 70px;">
+<p id="login" class="ad-title">用户登录</p>
+
+<div id="welcome_background" style="width: 100%;margin-top: 0px;height: 600px;background-color: #e5e5e5">
     <div class="container-fluid">
         <div class="row" ng-controller="loginCtrl">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="margin-top: 120px;text-align: center;margin-bottom: 120px">
-                <img class="img-responsive" src="/images/icons/welcome.png" alt=""/>
-                <a class="coco-welcome" data-toggle="modal" data-target=".login_modal" style="text-decoration: none">快速体验COCO博客</a>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-1">
+                <h1 style="margin-top: 140px;margin-bottom:40px;color: #009688">一颗网</h1>
+                <h3>不是所有的花都带刺，可玫瑰做到了</h3>
+                <h3>不是所有的树都挺拔，可白杨做到了</h3>
+                <p style="font-size: 20px;margin-top: 40px">Do what you say, say what you do</p>
+                <p style="text-align: right;font-size: 20px">——Just do it</p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2">
+                <div class="modal-body" style="min-height: 280px;margin:160px auto;max-width: 360px;background-color: #fff;border-radius: 5px;border: 1px solid #e5e5e5" ng-controller="loginCtrl">
+                    <div style="padding: 20px;border-radius: 5px;">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">用户名</label>
+                            <input style="padding: 16px 10px" ng-model="user.name" type="text" class="form-control" id="exampleInputEmail1"
+                                   placeholder="用户名">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">密码</label>
+                            <input style="padding: 16px 10px" ng-model="user.password" ng-keydown="enterLogin(event)" type="password"
+                                   class="form-control" id="exampleInputPassword1" placeholder="密码">
+                        </div>
+                        <p style="font-size: 13px;color: red" ng-show="error" ng-bind="message"></p>
+                        <button style="float: right;background-color: #45D8BE;width: 100%;margin-top: 18px;height: 36px;border: none;font-size: 16px" class="btn btn-success" ng-click="login()">登录</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <div class="container">
     <p id="feature" class="ad-title">产品特性</p>
-    <div class="row ad-items" style="margin-bottom: 60px;padding-top: 60px">
-        <div class="col-xs-6 col-sm-4 col-md-2 warp">
-            <a class="item">
-                <img src="/images/pictures/compose.gif" alt=""/>
-            </a>
-            <p class="desc">创建话题</p>
+    <div class="row ad-items" style="margin-bottom: 60px;padding-top: 60px;text-align: left">
+        <div class="col-xs-6 warp">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a class="item">
+                        <img src="/images/pictures/compose.gif" alt=""/>
+                    </a>
+                </div>
+                <div class="col-xs-8">
+                    <h4>我的话题</h4>
+                    <p class="desc">创建自己感兴趣的话题，邀请你的好友一起加入话题</p>
+                    <p class="desc">关注话题，了解话题最新动态</p>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 warp">
-            <a class="item">
-                <img src="/images/pictures/message.gif" alt=""/>
-            </a>
-            <p class="desc">实时消息</p>
+        <div class="col-xs-6 warp">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a class="item">
+                        <img src="/images/pictures/message.gif" alt=""/>
+                    </a>
+                </div>
+                <div class="col-xs-8">
+                    <h4>实时消息</h4>
+                    <p class="desc">选择好友，通过网站，app进行聊天</p>
+                    <p class="desc">话题更新通知，回复评论通知</p>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 warp">
-            <a class="item">
-                <img src="/images/pictures/location.gif" alt=""/>
-            </a>
-            <p class="desc">位置服务</p>
+        <div class="col-xs-6 warp">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a class="item">
+                        <img src="/images/pictures/location.gif" alt=""/>
+                    </a>
+                </div>
+                <div class="col-xs-8">
+                    <h4>位置服务</h4>
+                    <p class="desc">基于位置，推荐附近热门话题</p>
+                    <p class="desc">推荐附近好友</p>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 warp">
-            <a class="item">
-                <img src="/images/pictures/device.gif" alt=""/>
-            </a>
-
-            <p class="desc">响应式设计</p>
+        <div class="col-xs-6 warp">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a class="item">
+                        <img src="/images/pictures/device.gif" alt=""/>
+                    </a>
+                </div>
+                <div class="col-xs-8">
+                    <h4>响应式设计</h4>
+                    <p class="desc">网站完美适配各种设备屏幕</p>
+                    <p class="desc">在不同屏幕下给你不同的体验</p>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 warp">
-            <a class="item">
-                <img src="/images/pictures/search.gif" alt=""/>
-            </a>
-
-            <p class="desc">快速搜索</p>
+        <div class="col-xs-6 warp">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a class="item">
+                        <img src="/images/pictures/search.gif" alt=""/>
+                    </a>
+                </div>
+                <div class="col-xs-8">
+                    <h4>快速搜索</h4>
+                    <p class="desc">关键词搜索话题，评论相关内容</p>
+                    <p class="desc">搜索附近好友</p>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 warp">
-            <a class="item">
-                <img src="/images/pictures/love.gif" alt=""/>
-            </a>
-
-            <p class="desc">智能推荐</p>
+        <div class="col-xs-6 warp">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a class="item">
+                        <img src="/images/pictures/love.gif" alt=""/>
+                    </a>
+                </div>
+                <div class="col-xs-8">
+                    <h4>智能推荐</h4>
+                    <p class="desc">根据关注话题，系统推荐你可能感兴趣的内容</p>
+                    <p class="desc">根据你的兴趣标签，推荐话题，好友</p>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+<div class="container-fluid">
     <p id="product" class="ad-title">应用展示</p>
-    <div class="row ad-items" style="margin-bottom: 40px;height: 400px">
+    <div class="row ad-items" style="margin-bottom: 40px;height: 600px;background-color: #45D8BE">
     </div>
+
+</div>
+<div class="container">
     <p id="about" class="ad-title">技术介绍</p>
     <div class="row ad-items" style="margin-bottom: 40px;">
         <div class="col-md-12">
@@ -494,7 +583,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid" style="border-top: 1px solid #f1f1f1">
+<div class="container-fluid" style="border-top: 1px solid #f1f1f1;background-color: #f5f5f5">
     <div class="row">
         <div class="col-xs-12" style="margin-top: 20px;">
             <div style="padding: 3px;text-align: center;">
