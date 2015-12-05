@@ -176,7 +176,7 @@ a{
     background-color: #fff;
   }
   #coco-body{
-    margin-top:93px;
+    margin-top:80px;
     padding-bottom:20px;
   }
   .friend-item:hover{
@@ -185,11 +185,24 @@ a{
   }
   .topic-item{
     border: 1px solid #f1f1f1;
-    margin: 10px 0px;
-    padding: 10px;
-    border-radius: 3px;
+    margin: 0px 0px;
+    padding: 5px 10px;
   }
 }
+
+.topic-item .userinfo{
+    padding-left: 56px;
+}
+
+.topic-item .image{
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border-radius: 18px;
+  left: 15px;
+  top: 5px;
+}
+
 .coco-title{
   font-size: 13px;
   color: #009688;
@@ -336,7 +349,7 @@ a{
 
 .navbar-default .navbar-nav > li > a.navbar-active{
   color: #009688;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
 }
 
