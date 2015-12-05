@@ -163,11 +163,6 @@ a{
   .friend-item{
     border-bottom:1px solid #f1f1f1 ;
   }
-  .topic-item{
-    border-bottom: 1px solid #f1f1f1;
-    margin: 0px 0px 15px 0px;
-  }
-
 }
 @media (min-width: 768px) {
   #coco-header{
@@ -183,11 +178,12 @@ a{
     background-color: #f8f8f8;
     border-radius: 3px;
   }
-  .topic-item{
-    border: 1px solid #f1f1f1;
-    margin: 0px 0px;
-    padding: 5px 10px;
-  }
+}
+
+.topic-item{
+  border-bottom: 1px solid #f1f1f1;
+  margin: 0px 0px;
+  padding: 5px 10px;
 }
 
 .topic-item .userinfo{
