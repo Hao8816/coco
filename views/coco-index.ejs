@@ -6,17 +6,17 @@
                 <div class="topic-item" style="background-color: #fff">
                     <a class="topic-link" href="#/blog/{{topic.sha1}}">
                         <div class="row">
-                            <div class="col-xs-8 userinfo">
+                            <div class="col-xs-10 userinfo">
                                 <img class="image" ng-src="/images/{{topic.head_image}}" alt=""/>
-                                <p style="font-size: 12px;color: #666;padding: 2px;margin: 0px">{{topic.name}}</p>
+                                <p style="font-size: 12px;color: #333;padding: 2px;margin: 0px">{{topic.name}}</p>
                                 <h5 style="margin: 0px">{{topic.title}}</h5>
+                                <p style="margin:5px 0px;font-size: 13px;white-space: pre-line;color: #666">{{topic.desc}}</p>
                             </div>
-                            <div class="col-md-4" style="text-align: right">
+                            <div class="col-md-2" style="text-align: right">
                                 <span style="display:inline-block;margin:10px 0px;font-size: 12px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <p style="margin:10px 0px;font-size: 12px;text-overflow: ellipsis;overflow: hidden;height: 20px;color: #999">
-                                    <span style="color:rgba(0,0,0,0.87)"></span>{{topic.desc}}</p>
+
                             </div>
                         </div>
                     </a>
