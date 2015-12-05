@@ -182,12 +182,13 @@ a{
 
 .topic-item{
   border-bottom: 1px solid #e3e3e3;
-  margin: 0px 0px;
-  padding: 5px 10px;
-}
+  margin: 5px 0px;
+  padding: 10px;
 
+}
 .topic-item .userinfo{
     padding-left: 56px;
+    position: relative;
 }
 
 .topic-item .image{

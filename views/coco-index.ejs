@@ -5,19 +5,14 @@
             <div class="row" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                 <div class="topic-item" style="background-color: #fff">
                     <a class="topic-link" href="#/blog/{{topic.sha1}}">
-                        <div class="row">
-                            <div class="col-xs-10 userinfo">
-                                <img class="image" ng-src="/images/{{topic.head_image}}" alt=""/>
-                                <p style="font-size: 12px;color: #333;padding: 2px;margin: 0px">{{topic.name}}</p>
-                                <h5 style="margin: 0px">{{topic.title}}</h5>
-                                <p style="margin:5px 0px;font-size: 13px;white-space: pre-line;color: #666">{{topic.desc}}</p>
-                            </div>
-                            <div class="col-md-2" style="text-align: right">
-                                <span style="display:inline-block;margin:10px 0px;font-size: 12px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                            </div>
+                        <div class="userinfo">
+                            <img class="image" ng-src="/images/{{topic.head_image}}" alt=""/>
+                            <p style="font-size: 12px;color: #333;padding: 2px;margin: 0px">{{topic.name}}</p>
+                            <h5 style="margin: 0px">{{topic.title}}</h5>
+                            <p style="margin:5px 0px;font-size: 13px;white-space: pre-line;color: #666">{{topic.desc}}</p>
+                        </div>
+                        <div class="" style="text-align: right">
+                            <span style="display:inline-block;margin:10px 0px;font-size: 12px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
                         </div>
                     </a>
                 </div>
@@ -32,21 +27,20 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-4">
-            <div style="padding: 15px;background-color: #fff">
-                <div class="col-xs-10 col-sm-10 col-md-4">
-                    <a class="item item-active" ng-click="changeOrder(0)">全部</a>
-                    <a class="item" ng-click="changeOrder(1)">最热</a>
-                    <a class="item" ng-click="changeOrder(2)">最新</a>
-                </div>
-                <div class="hidden-xs hidden-sm col-md-4">
-                    <input ng-model="query" style="border-radius: 15px;width: 280px;margin: auto;text-align: center"
-                           class="form-control input-sm" ng-keydown="enterSearchTopic(event)" placeholder="搜索主题"
-                           type="text"/>
-                </div>
-                <div class="col-xs-2 col-md-4">
-                    <span class="btn btn-sm btn-default pull-right">
-                        <a data-toggle="modal" data-target=".compose_topic_modal"><i class="glyphicon glyphicon-plus"></i>创建分类</a>
+            <div style="padding: 10px;margin:10px 0px;">
+                <div>
+                    <span class="btn btn-sm btn-default" style="width: 100%">
+                        <a data-toggle="modal" data-target=".compose_topic_modal"><i class="glyphicon glyphicon-plus"></i>创建话题</a>
                     </span>
+                </div>
+                <ul>
+                    <li><a class="item item-active" ng-click="changeOrder(0)">全部</a></li>
+                    <li><a class="item" ng-click="changeOrder(1)">最热</a></li>
+                    <li><a class="item" ng-click="changeOrder(2)">最新</a></li>
+                </ul>
+                <div class="">
+                    <input type="text" class="form-control input-sm" ng-keydown="enterSearchTopic(event)">
+
                 </div>
             </div>
         </div>
@@ -60,13 +54,13 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">创建主题</h4>
+                    <h4 class="modal-title">创建话题</h4>
                 </div>
                 <div class="modal-body" style="height: 220px;">
                     <div class="row">
                         <div class="col-xs-9">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">主题</label>
+                                <label for="exampleInputEmail1">话题</label>
                                 <input ng-model="topic.title" type="text" class="form-control" id="exampleInputEmail1"
                                        placeholder="为你的博客写一段标题">
                             </div>
