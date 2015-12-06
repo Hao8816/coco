@@ -274,8 +274,8 @@
                         $scope.order = "sha1";
                         break;
                 }
-                $('.blog-nav-bar').find('.item-active').removeClass('item-active');
-                $('.blog-nav-bar').find('.item').eq(index).addClass('item-active');
+                $('.topic-nav').find('.item-active').removeClass('item-active');
+                $('.topic-nav').find('.item').eq(index).addClass('item-active');
             }
 
             if(user_info_cache == null){
@@ -322,7 +322,7 @@
                 var topic_info_cache = localStorage.getItem('TOPIC_INFO_LIST');
                 $scope.prev = true;
                 $scope.next = true;
-                //if(topic_info_cache == null){
+                if(topic_info_cache == null){
                     $('.topic-badge').text('');
                     $http.post('/ajax/get_topic_list/', {creator_sha1: creator_sha1,page:page,type:type}).success(function (data) {
                         if (data['ret'] == '0001') {
@@ -355,11 +355,11 @@
 
                         }
                     });
-//                }else{
-//                    var topic_list = JSON.parse(topic_info_cache);
-//                    $scope.nb_topic = topic_list.length;
-//                    $scope.topic_list = topic_list;
-//                }
+                }else{
+                    var topic_list = JSON.parse(topic_info_cache);
+                    $scope.nb_topic = topic_list.length;
+                    $scope.topic_list = topic_list;
+                }
             }
 
             $scope.enterSearchTopic = function(e){
@@ -526,7 +526,7 @@
 
 
             if(user_info_cache == null){
-                $http.post('/ajax/get_friend_list/', {creator_sha1: creator_sha1}).success(function (data) {
+                $http.post('/ajax/get_topic_users/', {creator_sha1: creator_sha1}).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);
                         var friend_list = data['friend_list'];
@@ -984,25 +984,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/coco/" style="padding: 10px;margin-right: 15px">
+            <a class="navbar-brand" href="/coco/" style="padding: 10px;">
                 <img id="spinner" width="30" src="/images/icons/toys.png" alt=""/>
                 <span>一颗网</span>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-menu">
 
-            <ul class="nav navbar-nav">
-                <li><a href="#topic/-1">话题</a></li>
-                <li><a href="#blog/0">博客</a></li>
-                <li><a href="#chat">好友</a></li>
-                <li><a href="#message">消息</a></li>
-            </ul>
             <div class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="搜索话题，好友，消息">
                 </div>
-                <!--<button type="submit" class="btn btn-default">搜索</button>-->
             </div>
+
+            <ul class="nav navbar-nav">
+                <li><a href="#topic/-1">话题</a></li>
+                <li><a href="#blog/0">博客</a></li>
+                <li><a href="#chat">朋友圈</a></li>
+                <li><a href="#message">消息</a></li>
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#account/me">账号</a></li>

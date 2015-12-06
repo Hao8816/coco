@@ -78,14 +78,9 @@ a{
   padding: 15px 0px;
   background-color: #f8f8f8;
 }
-.blog-nav-bar .item{
-  padding:6px 15px;
-  border-radius: 3px;
-  cursor: pointer;
-  display: inline-block;
-}
-.blog-nav-bar .item-active{
-  background-color: #ddd;
+.topic-nav .item-active{
+  background-color: #009688;
+  color: #fff;
 }
 
 .-mob-share-list{
@@ -180,9 +175,28 @@ a{
   }
 }
 
+.topic-nav{
+  margin: 0px;
+  padding: 8px;
+  list-style: none;
+  background-color: #f8f8f8;
+}
+.topic-nav li{
+  display: inline-block;
+  width: 70px;
+  text-align: center;
+}
+.topic-nav .item{
+  display: inline-block;
+  width: 100%;
+  padding: 5px 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .topic-item{
   border-bottom: 1px solid #e3e3e3;
-  margin: 5px 0px;
+  margin: 0px 0px 8px 0px;
   padding: 10px;
 
 }

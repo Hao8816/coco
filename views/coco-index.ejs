@@ -1,14 +1,20 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-8">
-            <h5 style="color: #009688">话题动态</h5>
+            <div class="row">
+                <ul class="topic-nav">
+                    <li><a class="item item-active" ng-click="changeOrder(0)">全部</a></li>
+                    <li><a class="item" ng-click="changeOrder(1)">最热</a></li>
+                    <li><a class="item" ng-click="changeOrder(2)">最新</a></li>
+                </ul>
+            </div>
             <div class="row" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                 <div class="topic-item" style="background-color: #fff">
                     <a class="topic-link" href="#/blog/{{topic.sha1}}">
                         <div class="userinfo">
                             <img class="image" ng-src="/images/{{topic.head_image}}" alt=""/>
-                            <p style="font-size: 12px;color: #333;padding: 2px;margin: 0px">{{topic.name}}</p>
-                            <h5 style="margin: 0px">{{topic.title}}</h5>
+                            <span style="font-size: 12px;color: #333;padding: 2px;margin: 0px">{{topic.name}}</span>
+                            <span style="margin: 0px">{{topic.title}}</span>
                             <p style="margin:5px 0px;font-size: 13px;white-space: pre-line;color: #666">{{topic.desc}}</p>
                         </div>
                         <div class="" style="text-align: right">
@@ -27,21 +33,19 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-4">
+            <div style="padding: 10px;margin:0px 10px;">
+                <h5 class="coco-title">分类下共有13篇博客，浏览量10020次</h5>
+                <span style="width: 80%;margin: 0px 10%;" class="btn btn-default">
+                    <a style="font-size: 15px" data-toggle="modal" data-target=".compose_topic_modal">创建话题</a>
+                </span>
+                <h5 class="coco-title">你可能感兴趣的话题</h5>
+            </div>
             <div style="padding: 10px;margin:10px 0px;">
-                <div>
-                    <span class="btn btn-sm btn-default" style="width: 100%">
-                        <a data-toggle="modal" data-target=".compose_topic_modal"><i class="glyphicon glyphicon-plus"></i>创建话题</a>
-                    </span>
-                </div>
-                <ul>
-                    <li><a class="item item-active" ng-click="changeOrder(0)">全部</a></li>
-                    <li><a class="item" ng-click="changeOrder(1)">最热</a></li>
-                    <li><a class="item" ng-click="changeOrder(2)">最新</a></li>
-                </ul>
-                <div class="">
-                    <input type="text" class="form-control input-sm" ng-keydown="enterSearchTopic(event)">
 
-                </div>
+                <!--<div class="">-->
+                    <!--<input type="text" class="form-control input-sm" ng-keydown="enterSearchTopic(event)">-->
+
+                <!--</div>-->
             </div>
         </div>
     </div>
