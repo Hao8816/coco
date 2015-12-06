@@ -28,8 +28,8 @@
                         {{blog.title}}</p>
                     <p style="margin: 3px 0px;font-size: 13px;color: rgba(0,0,0,0.56);white-space: pre-line;">{{blog.content}}</p>
                     <div class="image-item" ng-repeat="image in blog.images">
-                        <a href="/images/{{image}}" data-lightbox="image" data-title="this">
-                            <img style="max-width: 150px;max-height: 150px;margin: 5px;" src="/images/{{image}}"
+                        <a href="/coco/origin_file?sha1={{image}}" data-lightbox="image" data-title="this">
+                            <img style="max-width: 150px;max-height: 150px;margin: 5px;" src="/coco/file?sha1={{image}}"
                                  alt=""/>
                         </a>
                     </div>

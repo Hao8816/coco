@@ -89,7 +89,8 @@ var File = db.define("file",{
     type          : String,    // 文件类型
     path          : String,    // 文件的存储路径
     creator_sha1  : String,    // 创建者信息
-    blog_sha1     : String     // 文件所属的博客的sha1
+    blog_sha1     : String,    // 文件所属的博客的sha1
+    content       : Buffer     // 文件内容
 },{
 
     // with in model method

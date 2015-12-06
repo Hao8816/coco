@@ -3,7 +3,9 @@ var user_models = require('./user-models');
 var async = require('async');
 var search = require('./search-impl');
 var logger = require('./logger-impl');
+var MongoCache = require('./mongodb-impl');
 var SHA1 = require('sha1');
+var zlib = require('zlib');
 
 var blog={};
 var saveBlog = function saveBlog(req,res){
@@ -187,12 +189,49 @@ var deleteFile = function deleteFile(req,res){
             console.log(err);
         }
         res.send({'info':"OK","ret":0001})
-
     });
 };
 
+// 获取原图内容
+var getOriginFile = function getOriginFile(req,res){
+    var file_sha1 = req.param('sha1');
+    var usersha1 = req.param('usersha1');
+
+    // 从Mongodb中获取文件内容
+    MongoCache.getFile(req,res);
+};
+
+// 获取缩略图
+var getFile = function getFile(req,res){
+    var file_sha1 = req.param('sha1');
+    console.log(file_sha1)
+    blog_models.File.find({"sha1":file_sha1}).run(function(err,result){
+        if(err){
+            console.log(err);
+        }
+        if (result.length==1){
+            var file_content = result[0].content;
+            var file_name = result[0].name;
+            var type_array = file_name.split(".");
+            var file_type = type_array[type_array.length - 1];
+            res.writeHead(200, {'Content-type' : 'image/png'});
+            var file_buffer = new Buffer(file_content);
+            res.write(file_buffer);
+            res.end();
+
+        }else{
+            res.write('Can not find file');
+            res.end();
+        }
+    });
+};
+
+
 var saveFile = function saveFile(obj){
     var date_time = new Date().getTime();
+    // 将文件内容保存在mongodb
+    MongoCache.saveFile({sha1:obj.sha1,content:obj.content});
+    // 将文件信息持久化到数据库
     blog_models.File.create([{
         time          : date_time.toString(),    // 微博创建的时间
         sha1          : obj['sha1'],    // blog的sha1
@@ -200,8 +239,9 @@ var saveFile = function saveFile(obj){
         size          : obj['size'],    // 文件的大小
         type          : obj['mime'],    // 文件类型
         path          : obj['path'],    // 文件的存储路径
-        creator_sha1  : "",    // 创建者信息
-        blog_sha1     : ""     // 文件所属的博客的sha1
+        creator_sha1  : "",             // 创建者信息
+        blog_sha1     : "",             // 文件所属的博客的sha1
+        content       : obj['resize_content']    //文件缩略图的内容
 
     }],function (err,item){
         console.log(err);
@@ -256,6 +296,8 @@ blog.saveTopic = saveTopic;
 blog.getBlogList = getBlogList;
 blog.getTopicList = getTopicList;
 blog.saveFile = saveFile;
+blog.getFile = getFile;
+blog.getOriginFile = getOriginFile;
 blog.deleteFile = deleteFile;
 blog.saveComment = saveComment;
 blog.getBlogCommentList = getBlogCommentList;

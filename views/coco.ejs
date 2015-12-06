@@ -477,7 +477,7 @@
                 sequentialUploads: true,
                 dataType: 'json',
                 done: function (e, data) {
-                    var image_url = "/images/"+data.result['sha1'];
+                    var image_url = "/coco/file?sha1="+data.result['sha1'];
                     var file =  data['result'];
                     var file_size =  (file['size']/1024).toFixed(1) + 'KB'
                     $('#blog_files_area').append('<p class="file-item" style="margin: 2px;font-size: 13px;padding: 5px"><span style="display: inline-block;max-width: 60%;overflow: hidden;text-overflow: ellipsis">'+file["name"]+'</span><a style="cursor: pointer;float: right" onclick="deleteFile(this)" file_sha1="'+file['sha1']+'" style="float: right" >删除</a><span style="float: right;padding: 0px 10px">'+file_size+'</span></p>');
@@ -993,7 +993,7 @@
 
             <div class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="搜索话题，好友，消息">
+                    <input type="text" ng-keydown="enterSearchTopic(event)" class="form-control" placeholder="搜索话题，好友，消息">
                 </div>
             </div>
 

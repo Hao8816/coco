@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var user = require('../coco_core/user-impl');
+var blog = require('../coco_core/blog-impl');
 
 
 /* GET home page. */
@@ -59,6 +60,16 @@ router.get('/active/account/', function(req, res) {
     user.activeUserAccount(req,res);
 });
 
+
+/* 读取文件内容  */
+router.get('/file',function(req,res){
+    blog.getFile(req,res)
+});
+
+/* 读取文件内容  */
+router.get('/origin_file',function(req,res){
+    blog.getOriginFile(req,res)
+});
 
 router.post('/api/', function(req, res) {
     var params = req.param('data')

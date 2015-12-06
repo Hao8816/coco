@@ -4,12 +4,14 @@ var blog = require('../coco_core/blog-impl');
 var user = require('../coco_core/user-impl');
 var work = require('../coco_core/work-impl');
 var search = require('../coco_core/search-impl');
-
+var zlib = require('zlib');
 var fs = require('fs');
+var gm = require('gm');
+
 var SHA1 = require('sha1')
 var JFUM = require('jfum');
 var jfum = new JFUM({
-    minFileSize: 20,                      // 200 kB
+    minFileSize: 1,                      // 1kB
     maxFileSize: 5242880,                     // 5 mB
     acceptFileTypes: /\.(gif|jpe?g|png)$/i    // gif, jpg, jpeg, png
 });
@@ -88,7 +90,7 @@ router.post('/delete_work/',function(req,res){
 
 
 
-/* GET home page. */
+/* 文件上传接口 */
 router.post('/upload/',jfum.postHandler.bind(jfum),function(req, res) {
     //console.log(req.jfum.files)
     // Check if upload failed or was aborted
@@ -107,7 +109,6 @@ router.post('/upload/',jfum.postHandler.bind(jfum),function(req, res) {
                     // file.errors[j].code
                     // file.errors[j].message
                 }
-
             } else {
                 var tempFilePath = file.path;
                 var fileName = file.name;
@@ -118,16 +119,20 @@ router.post('/upload/',jfum.postHandler.bind(jfum),function(req, res) {
                 var fileType = typeArray[typeArray.length - 1]
                 var sha1 = fileSha1+"."+fileType
                 file['sha1'] = sha1
-                fs.writeFileSync("public/images/"+sha1,tempFile)
-                // 保存文件的信息
-                blog.saveFile(file)
+                file["content"] = tempFile.toString('base64');
+                gm(tempFilePath).resize(300, 300).toBuffer('PNG',function (err, buffer) {
+                    if (err) {
+                        return handle(err);
+                    }
+                    file["resize_content"] = buffer;//.toString('base64');
+                    blog.saveFile(file)
+                })
             }
-            console.log(file)
             res.send(file);
         }
     }
-
 });
+
 
 
 module.exports = router;
