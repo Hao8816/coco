@@ -107,7 +107,7 @@
                 <!--</div>-->
             </div>
             <div class="row" style="background-color: #fff" id="all-users">
-                <div class="col-xs-12 col-sm-6 col-md-4" style="padding: 5px;cursor: pointer;" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query | orderBy:order:true">
+                <div class="col-xs-12 col-sm-6" style="padding: 5px;cursor: pointer;" ng-click="openChat(this)" uid="{{friend.sha1}}" class="item" ng-repeat="friend in friend_list | filter:query | orderBy:order:true">
                     <div class="friend-item">
                         <img class="image" ng-src="/images/{{friend.head_image}}" alt=""/>
                         <p class="name">{{friend.name}}</p>
