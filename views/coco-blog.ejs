@@ -9,14 +9,14 @@
                         <span style="font-size: 13px;"> - {{topic.desc}}</span>
                     </ol>
                 </div>
-                <div class="hidden-xs hidden-sm col-md-3">
-                    <input ng-model="query" style="margin: 0px" class="form-control input-sm"
-                           ng-keydown="enterSearchBlog(event)" placeholder="搜索博客" type="text"/>
-                    <span class="search-btn"
-                          style="display: inline-block;position: absolute;top: 2px;right: 18px;padding: 5px 10px">
-                        <i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>
-                    </span>
-                </div>
+                <!--<div class="hidden-xs hidden-sm col-md-3">-->
+                    <!--<input ng-model="query" style="margin: 0px" class="form-control input-sm"-->
+                           <!--ng-keydown="enterSearchBlog(event)" placeholder="搜索博客" type="text"/>-->
+                    <!--<span class="search-btn"-->
+                          <!--style="display: inline-block;position: absolute;top: 2px;right: 18px;padding: 5px 10px">-->
+                        <!--<i style="color:#ff7997" title="点击搜索" class="glyphicon glyphicon-search"></i>-->
+                    <!--</span>-->
+                <!--</div>-->
             </div>
             <div class="row" ng-repeat="blog in blog_list | filter:query" style="margin-bottom: 10px;background-color: #fff;padding:15px 5px;border-bottom: 1px solid #e3e3e3;border-top: 1px solid #fff">
                 <div class="col-xs-1" style="padding: 0px;text-align: center">

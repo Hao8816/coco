@@ -180,6 +180,7 @@ a{
   padding: 8px;
   list-style: none;
   background-color: #f8f8f8;
+  text-align: center;
 }
 .topic-nav li{
   display: inline-block;
@@ -210,7 +211,7 @@ a{
   height: 30px;
   width: 30px;
   border-radius: 18px;
-  left: 15px;
+  left: 5px;
   top: 5px;
 }
 
