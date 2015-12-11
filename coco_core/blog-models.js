@@ -31,7 +31,7 @@ var Blog = db.define("blog", {
 var BlogAction = db.define("blog_action", {
     time          : String,    // 微博创建的时间
     sha1          : String,    // blog的sha1
-    creator_sha1  : String,    // 博客的创建者信息
+    user_sha1     : String,    // 用户的sha1
     action_type   : String     // 0 评论 1分享 2点赞 3点踩
 }, {
     // with in model method
@@ -69,12 +69,12 @@ var Topic = db.define("topic", {
     // with in model method
 });
 
-// 博客信息表
+// 话题－用户权限信息表
 var TopicAction = db.define("topic_action", {
     time          : String,    // 微博创建的时间
     sha1          : String,    // blog的sha1
-    creator_sha1  : String,    // 博客的创建者信息
-    action_type   : String     // 0 查看 1 参与 2分享
+    user_sha1     : String,    // 用户的sha1
+    action_type   : String     // 0 查看 1 关注 2分享
 }, {
     // with in model method
 });
