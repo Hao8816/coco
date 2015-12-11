@@ -20,9 +20,9 @@
                         <p style="margin-top: 10px">
                             <span style="font-size: 13px;color: #999">{{topic.time | date:"yyyy-MM-dd hh:mm"}}</span>
                             <span style="float:right;display:inline-block;margin:0px 10px 0px 0px;font-size: 13px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
+                            <a style="display: inline-block;padding: 5px 10px;margin:0px 10px;border: 1px solid #009688" ng-click="careTopic()">点击关注</a>
                         </p>
                     </div>
-
                 </div>
             </div>
             <div ng-show="next" class="col-xs-12 col-sm-6 col-md-4"
