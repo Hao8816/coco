@@ -500,7 +500,7 @@
                     $('#blog_files_area').append('<p class="file-item" style="margin: 2px;font-size: 13px;padding: 5px"><span style="display: inline-block;max-width: 60%;overflow: hidden;text-overflow: ellipsis">'+file["name"]+'</span><a style="cursor: pointer;float: right" onclick="deleteFile(this)" file_sha1="'+file['sha1']+'" style="float: right" >删除</a><span style="float: right;padding: 0px 10px">'+file_size+'</span></p>');
                     file_list.push(file)
                 }
-            })
+            });
 
 
             // 删除已经上传的文件
@@ -528,6 +528,8 @@
 
             // 博客主题的信息
             var topic_sha1 = $routeParams.topic_sha1;
+            // 获取关注列表
+            getCareList();
 
             // 显示博客列表
             $scope.blog_list = [];
@@ -599,7 +601,7 @@
             };
 
 
-            $scope.getCareList = function(){
+            function getCareList(){
                 $http.post('/ajax/get_care_list/', {
                     topic_sha1:topic_sha1
                 }).success(function (data) {
