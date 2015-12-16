@@ -32,6 +32,14 @@ router.post('/get_blog_list/', function(req, res) {
     blog.getBlogList(req,res);
 });
 
+router.post('/care_topic',function(req,res){
+   blog.careTopic(req,res);
+});
+
+router.post('/get_care_list/',function(req,res){
+   blog.getTopicCare(req,res);
+});
+
 router.post('/get_friend_list/', function(req, res) {
     user.getFriendList(req,res);
 });

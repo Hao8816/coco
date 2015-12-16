@@ -95,6 +95,55 @@ var saveTopic = function saveTopic(req,res){
     });
 };
 
+// 关注主题的信息
+var careTopic = function careTopic(req,res){
+    var date_time = new Date().getTime();
+    var sha1 = SHA1(date_time);
+    var topic_sha1 = req.param('topic_sha1')||"";
+    var action_type = req.param('action_type')|| 4;
+    var user_sha1 = req.param('user_sha1');
+    blog_models.TopicAction.create([{
+        time          : date_time.toString(),     // 创建的时间
+        sha1          : topic_sha1,               // topic的sha1
+        user_sha1     : user_sha1,                // 关注着者信息
+        action_type   : action_type               // action 类型
+    }],function (err,item){
+        console.log(err);
+        res.send({'info':"OK","ret":0001})
+    });
+};
+
+// 获取主题的关注列表
+var getTopicCare = function getTopicCare(req,res){
+    var topic_sha1 = req.param('topic_sha1');
+    blog_models.TopicAction.find({sha1:topic_sha1},[ "time", "Z" ]).run(function(err,result){
+        if (err){
+            logger.error(err);
+        }
+        var care_list = [];
+        // 遍历博客列表，取得博客里面的回复
+        async.each(result, function(obj,callback) {
+            user_models.User.find({sha1:obj.user_sha1},function(err,results){
+                if (err){
+                    logger.error(err)
+                }
+                if (results.length == 1){
+                    care_list.push(results[0]);
+                }
+                callback()
+            });
+        }, function(err){
+            if( err ) {
+                console.log('A file failed to process');
+            } else {
+                logger.error("blog_result:",result)
+                res.send({'info':"OK","ret":0001,"care_list":care_list})
+            }
+        });
+    });
+};
+
+
 var getBlogList = function getBlogList(req,res){
     var creator_sha1 = req.param('creator_sha1');
     var topic_sha1 = req.param('topic_sha1');
@@ -292,6 +341,8 @@ var getBlogCommentList = function getBlogCommentList(req,res){
 
 
 blog.saveBlog = saveBlog;
+blog.careTopic = careTopic;
+blog.getTopicCare = getTopicCare;
 blog.saveTopic = saveTopic;
 blog.getBlogList = getBlogList;
 blog.getTopicList = getTopicList;
