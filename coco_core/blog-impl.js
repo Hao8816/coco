@@ -100,7 +100,7 @@ var careTopic = function careTopic(req,res){
     var date_time = new Date().getTime();
     var sha1 = SHA1(date_time);
     var topic_sha1 = req.param('topic_sha1')||"";
-    var action_type = req.param('action_type')|| 4;
+    var action_type = req.param('action_type')|| 1;
     var user_sha1 = req.param('user_sha1');
     blog_models.TopicAction.create([{
         time          : date_time.toString(),     // 创建的时间

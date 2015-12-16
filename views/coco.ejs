@@ -315,13 +315,7 @@
             $scope.changePage = function(offset){
                 var page = $scope.current_page + offset;
                 showTopic(page);
-            }
-
-            // 关注博客
-            $scope.careTopic = function(){
-                alert("关注话题");
-
-            }
+            };
 
             function showTopic(page) {
                 var creator_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
@@ -405,6 +399,23 @@
                     }
                 })
             }
+
+
+            $scope.careTopic = function(topic_object){
+                var user_sha1 = sessionStorage.getItem('LOGIN_USER_SHA1');
+                var topic_sha1 = topic_object.topic.sha1;
+                $http.post('/ajax/care_topic/', {
+                    topic_sha1:topic_sha1,
+                    user_sha1:user_sha1
+                }).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        console.log(data);
+
+                    } else {
+
+                    }
+                });
+            };
 
 
             $scope.saveTopic = function () {
@@ -585,7 +596,21 @@
                     obj.index_collapse = true
                     obj.index_mark = ' - '
                 }
-            }
+            };
+
+
+            $scope.getCareList = function(){
+                $http.post('/ajax/get_care_list/', {
+                    topic_sha1:topic_sha1
+                }).success(function (data) {
+                    if (data['ret'] == '0001') {
+                        console.log(data);
+
+                    } else {
+
+                    }
+                });
+            };
 
 
             $scope.saveBlog = function () {

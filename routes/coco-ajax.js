@@ -32,7 +32,7 @@ router.post('/get_blog_list/', function(req, res) {
     blog.getBlogList(req,res);
 });
 
-router.post('/care_topic',function(req,res){
+router.post('/care_topic/',function(req,res){
    blog.careTopic(req,res);
 });
 
