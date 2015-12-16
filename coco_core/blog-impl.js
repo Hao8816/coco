@@ -128,7 +128,7 @@ var getTopicCare = function getTopicCare(req,res){
                     logger.error(err)
                 }
                 if (results.length == 1){
-                    care_list.push(results[0]);
+                    obj = results[0];
                 }
                 callback()
             });
@@ -136,8 +136,7 @@ var getTopicCare = function getTopicCare(req,res){
             if( err ) {
                 console.log('A file failed to process');
             } else {
-                logger.error("blog_result:",result)
-                res.send({'info':"OK","ret":0001,"care_list":care_list})
+                res.send({'info':"OK","ret":0001,"care_list":result})
             }
         });
     });
