@@ -128,7 +128,7 @@ var getTopicCare = function getTopicCare(req,res){
                     logger.error(err)
                 }
                 if (results.length == 1){
-                    obj = results[0];
+                    obj["name"] = results[0].name;
                 }
                 callback()
             });
