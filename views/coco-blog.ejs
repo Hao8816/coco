@@ -24,9 +24,9 @@
                          title="{{blog.name}}" alt=""/>
                 </div>
                 <div class="col-xs-11 coco-padding">
-                    <p style="font-size: 15px;margin: 0px;color: rgba(0,0,0,0.87)">[{{blog.name}}]
+                    <p style="font-size: 15px;margin: 0px;color: #333">[{{blog.name}}]
                         {{blog.title}}</p>
-                    <p style="margin: 3px 0px;font-size: 13px;color: rgba(0,0,0,0.56);white-space: pre-line;line-height: 22px">{{blog.content}}</p>
+                    <p style="margin: 3px 0px;color: #333;white-space: pre-line;">{{blog.content}}</p>
                     <div class="image-item" ng-repeat="image in blog.images">
                         <a href="/coco/origin_file?sha1={{image}}" data-lightbox="image" data-title="this">
                             <img style="max-width: 150px;max-height: 150px;margin: 2px;" src="/coco/file?sha1={{image}}"
