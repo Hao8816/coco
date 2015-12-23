@@ -20,7 +20,7 @@
             </div>
             <div class="row" ng-repeat="blog in blog_list | filter:query" style="margin-bottom: 10px;background-color: #fff;padding:15px 5px;border-bottom: 1px solid #e3e3e3;border-top: 1px solid #fff">
                 <div class="col-xs-1" style="padding: 0px;text-align: center">
-                    <img class="img-responsive" style="max-width:40px;border-radius: 2px;margin: 2px auto;width: 100%" ng-src="/images/{{blog.head_image}}"
+                    <img class="img-responsive" style="max-width:40px;max-height:40px;border-radius: 2px;margin: 2px auto;width: 100%" ng-src="/images/{{blog.head_image}}"
                          title="{{blog.name}}" alt=""/>
                 </div>
                 <div class="col-xs-11 coco-padding">
