@@ -98,18 +98,28 @@ var saveTopic = function saveTopic(req,res){
 // 关注主题的信息
 var careTopic = function careTopic(req,res){
     var date_time = new Date().getTime();
-    var sha1 = SHA1(date_time);
     var topic_sha1 = req.param('topic_sha1')||"";
     var action_type = req.param('action_type')|| 1;
     var user_sha1 = req.param('user_sha1');
-    blog_models.TopicAction.create([{
-        time          : date_time.toString(),     // 创建的时间
-        sha1          : topic_sha1,               // topic的sha1
-        user_sha1     : user_sha1,                // 关注着者信息
-        action_type   : action_type               // action 类型
-    }],function (err,item){
-        console.log(err);
-        res.send({'info':"OK","ret":0001})
+
+    // 查询关注是否已经存在
+    blog_models.TopicAction.exists({ user_sha1: user_sha1,sha1: topic_sha1 }, function (err, exists) {
+        if (err){
+            logger.error(e)
+        }
+        if (exists){
+            res.send({'info':"ACTION EXIST","ret":1001})
+        }else{
+            blog_models.TopicAction.create([{
+                time          : date_time.toString(),     // 创建的时间
+                sha1          : topic_sha1,               // topic的sha1
+                user_sha1     : user_sha1,                // 关注着者信息
+                action_type   : action_type               // action 类型
+            }],function (err,item){
+                console.log(err);
+                res.send({'info':"OK","ret":0001})
+            });
+        }
     });
 };
 
