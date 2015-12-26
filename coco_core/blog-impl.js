@@ -129,6 +129,7 @@ var getTopicCare = function getTopicCare(req,res){
                 }
                 if (results.length == 1){
                     obj["name"] = results[0].name;
+                    obj["head_image"] = results[0].head_image;
                 }
                 callback()
             });

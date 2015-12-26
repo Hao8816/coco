@@ -607,7 +607,7 @@
                 }).success(function (data) {
                     if (data['ret'] == '0001') {
                         console.log(data);
-
+                        $scope.care_list = data["care_list"];
                     } else {
 
                     }
