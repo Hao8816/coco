@@ -234,7 +234,27 @@ var getTopicList = function getTopicList(req,res){
         if(result.length<10){
             has_next = false;
         }
-        res.send({'info':"OK","ret":0001,"topic_list":result,"has_next":has_next})
+        // 遍历博客列表，取得博客里面的回复
+        async.each(result, function(obj,callback) {
+            user_models.User.find({sha1:obj.creator_sha1},function(err,results){
+                if (err){
+                    logger.error(err)
+                }
+                if (results.length == 1){
+                    obj["name"] = results[0].name;
+                    obj["head_image"] = results[0].head_image;
+                }
+                callback()
+            });
+        }, function(err){
+            if( err ) {
+                console.log('A file failed to process');
+            } else {
+                res.send({'info':"OK","ret":0001,"topic_list":result,"has_next":has_next})
+            }
+        });
+
+        //res.send({'info':"OK","ret":0001,"topic_list":result,"has_next":has_next})
 
     });
 };
