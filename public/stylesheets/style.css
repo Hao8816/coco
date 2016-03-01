@@ -233,7 +233,10 @@ a{
   margin: 0px 0px 8px 0px;
   padding: 10px;
   border-radius: 5px;
-
+  cursor: pointer;
+}
+.topic-item:hover{
+  background-color: #fff;
 }
 .topic-item .userinfo{
     padding-left: 50px;
