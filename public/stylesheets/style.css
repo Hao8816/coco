@@ -230,9 +230,8 @@ a{
 
 .topic-item{
   border-top: 1px solid #e1e1e1;
-  margin: 0px 0px 8px 0px;
+  margin: 0px;
   padding: 10px;
-  border-radius: 5px;
   cursor: pointer;
 }
 .topic-item:hover{
