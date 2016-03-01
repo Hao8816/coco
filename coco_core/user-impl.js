@@ -119,6 +119,7 @@ var validateAccount = function validateAccount(req,res){
 var setUserImage = function setUserImage(req,res){
     var imagesha1 = req.param('imagesha1')
     var usersha1 = req.param('usersha1')
+    console.log(req.param)
     user_models.User.find({sha1:usersha1},function(err,result){
         if(err){
             console.log(err);

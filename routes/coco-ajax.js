@@ -96,8 +96,6 @@ router.post('/delete_work/',function(req,res){
     work.deleteWork(req,res)
 });
 
-
-
 /* 文件上传接口 */
 router.post('/upload/',jfum.postHandler.bind(jfum),function(req, res) {
     //console.log(req.jfum.files)
