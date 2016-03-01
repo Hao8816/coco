@@ -183,7 +183,6 @@ a{
   #coco-header{
     padding-top: 4px;
     padding-bottom: 4px;
-    background-color: #fff;
   }
   #coco-body{
     margin-top:73px;
@@ -198,9 +197,8 @@ a{
 }
 @media (min-width: 768px) {
   #coco-header{
-    padding-top: 6px;
-    padding-bottom: 6px;
-    background-color: #fff;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
   #coco-body{
     margin-top:80px;
