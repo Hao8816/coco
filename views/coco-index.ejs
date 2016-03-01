@@ -10,11 +10,12 @@
             </div>
             <div class="row" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                 <div class="topic-item">
+                    <a href="#/blog/{{topic.sha1}}">
                     <div class="userinfo">
                         <img class="image" ng-src="/images/{{topic.head_image}}" alt=""/>
                         <p style="margin: 0px">
                             <span style="color: #333;">[{{topic.name}}]</span>
-                            <a href="#/blog/{{topic.sha1}}">{{topic.title}}</a>
+                            {{topic.title}}
                             <!--<a style="display: inline-block;padding: 2px 5px;margin:0px 10px;border: 1px solid #009688;float: right;font-size: 12px;" ng-click="careTopic(this)"><i class="glyphicon glyphicon-heart"></i>关注</a>-->
                         </p>
                         <p style="margin:3px 0px;white-space: pre-line;color: #333">{{topic.desc}}</p>
@@ -23,6 +24,7 @@
                             <span style="float:right;display:inline-block;margin:0px 10px 0px 0px;font-size: 13px;color: rgba(0,0,0,0.56)">博客 ({{topic.related.length}})</span>
                         </p>
                     </div>
+                    </a>
                 </div>
             </div>
             <div ng-show="next" class="col-xs-12 col-sm-6 col-md-4"
