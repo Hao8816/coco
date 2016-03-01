@@ -10,7 +10,7 @@
             </div>
             <div class="row" ng-repeat="topic in topic_list|filter:query | orderBy:order:true">
                 <div class="topic-item">
-                    <a href="#/blog/{{topic.sha1}}">
+                    <a href="#/blog/{{topic.sha1}}" style="text-decoration: none">
                     <div class="userinfo">
                         <img class="image" ng-src="/images/{{topic.head_image}}" alt=""/>
                         <p style="margin: 0px">
