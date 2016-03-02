@@ -632,31 +632,31 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-lg-6">
-            <video id="source" width="100%" height="480" autoplay></video>
-            <button id="snapTrigger">Snap Photo</button>
-            <button id="uploadTrigger">Upload Photo</button>
-        </div>
-        <div class="col-md-6 col-lg-6">
-            <canvas id="snapshot" width="600" height="460"></canvas>
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
-    var video = document.querySelector('#source');
-    var sourceConfig = { "video" : true };
-    if(navigator.webkitGetUserMedia) {
-        navigator.webkitGetUserMedia(sourceConfig, function(stream) {
-            video.src = window.webkitURL.createObjectURL(stream);
-            video.play();
-        }, defaultErrHandle);
-    }
+<!--<div class="container">-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-6 col-lg-6">-->
+            <!--<video id="source" width="100%" height="480" autoplay></video>-->
+            <!--<button id="snapTrigger">Snap Photo</button>-->
+            <!--<button id="uploadTrigger">Upload Photo</button>-->
+        <!--</div>-->
+        <!--<div class="col-md-6 col-lg-6">-->
+            <!--<canvas id="snapshot" width="600" height="460"></canvas>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<script type="text/javascript">-->
+    <!--var video = document.querySelector('#source');-->
+    <!--var sourceConfig = { "video" : true };-->
+    <!--if(navigator.webkitGetUserMedia) {-->
+        <!--navigator.webkitGetUserMedia(sourceConfig, function(stream) {-->
+            <!--video.src = window.webkitURL.createObjectURL(stream);-->
+            <!--video.play();-->
+        <!--}, defaultErrHandle);-->
+    <!--}-->
 
-    function defaultErrHandle(err){
-        alert(err)
-    }
-</script>
+    <!--function defaultErrHandle(err){-->
+        <!--alert(err)-->
+    <!--}-->
+<!--</script>-->
 </body>
 </html>
