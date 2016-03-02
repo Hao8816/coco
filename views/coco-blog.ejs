@@ -53,22 +53,21 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h5 class="hidden-xs coco-title">参与列表</h5>
-            <div class="hidden-xs" class="friend-item" style="width: 25%;display: inline-block;text-align: center"
-                 ng-repeat="care in care_list">
-                <a href="#account/{{care.sha1}}">
-                    <img style="width: 40px;height: 40px;margin:0 10%;border-radius: 100%;border: 1px solid #f5f5f5"
-                         src="/images/{{care.head_image}}" alt=""/>
+            <div style="padding: 10px;margin:0px 10px;">
+                <h5 class="hidden-xs coco-title">参与列表</h5>
+                <div class="hidden-xs" class="friend-item" style="width: 25%;display: inline-block;text-align: center"
+                     ng-repeat="care in care_list">
+                    <a href="#account/{{care.sha1}}">
+                        <img style="width: 40px;height: 40px;margin:0 10%;border-radius: 100%;border: 1px solid #f5f5f5"
+                             src="/images/{{care.head_image}}" alt=""/>
                     <span style="font-size:13px;color:rgba(0,0,0,0.56);display: inline-block;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"
                           ng-bind="care.name"></span>
-                </a>
-            </div>
-            <div style="padding: 10px;margin:0px 10px;">
+                    </a>
+                </div>
                 <h5 class="coco-title">分类下共有13篇博客，浏览量10020次</h5>
-            <span style="width: 80%;margin: 0px 10%;" class="btn btn-default">
-                <a style="font-size: 15px;" data-toggle="modal"
-                   data-target=".compose_blog_modal">写博客</a>
-            </span>
+                <span style="width: 80%;margin: 0px 10%;" class="btn btn-default">
+                    <a style="font-size: 15px;" data-toggle="modal" data-target=".compose_blog_modal">写博客</a>
+                </span>
                 <h5 class="coco-title">分享到:</h5>
                 <ul class="-mob-share-list">
                     <li class="-mob-share-weixin" title="微信"></li>
