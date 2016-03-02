@@ -236,20 +236,6 @@
     </style>
     <script type="text/javascript">
 
-
-        var video = document.querySelector('#source');
-        var sourceConfig = { "video" : true };
-        if(navigator.webkitGetUserMedia) {
-            navigator.webkitGetUserMedia(sourceConfig, function(stream) {
-                video.src = window.webkitURL.createObjectURL(stream);
-                video.play();
-            }, defaultErrHandle);
-        }
-
-        function defaultErrHandle(err){
-            alert(err)
-        }
-
         var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
@@ -658,5 +644,19 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var video = document.querySelector('#source');
+    var sourceConfig = { "video" : true };
+    if(navigator.webkitGetUserMedia) {
+        navigator.webkitGetUserMedia(sourceConfig, function(stream) {
+            video.src = window.webkitURL.createObjectURL(stream);
+            video.play();
+        }, defaultErrHandle);
+    }
+
+    function defaultErrHandle(err){
+        alert(err)
+    }
+</script>
 </body>
 </html>
