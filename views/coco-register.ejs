@@ -94,21 +94,15 @@
         function registerCtrl($scope, $http) {
             $scope.submit = function () {
                 console.log($scope.user)
-                var password1 = $scope.user.password1;
-                var password2 = $scope.user.password2;
-                if (password1 != password2) {
-                    alert('Password error')
-                    return;
-                }
-                var password = sha1(password1)
+                var password = $scope.user.password;
+
+                var password = sha1(password)
                 var encrypt_password = sha1(password)
                 $scope.user.password = encrypt_password;
-                $scope.user.password1 = encrypt_password
-                $scope.user.password2 = encrypt_password
                 var userInfo = $scope.user;
                 $http.post('/ajax/register/', userInfo).success(function (data) {
                     if (data['ret'] == '0001') {
-                        $scope.user = {name: '', email: '', phone: '', password1: '', password2: ''}
+                        $scope.user = {name: '', email: '', phone: '', password: ''}
                         $('#register_area').html('<p style="color: rgba(255,255,255,0.8);font-size: 26px;">恭喜你！注册成功</p><p style="color: rgba(255,255,255,0.8);font-size: 16px;">请注意查收邮件，点击邮箱的激活链接来激活你的账号</p>');
                     }
                 });
@@ -167,11 +161,6 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">密码</label>
                             <input ng-model="user.password1" type="password" class="form-control"
-                                   id="exampleInputPassword1" placeholder="密码">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">重复密码</label>
-                            <input ng-model="user.password2" type="password" class="form-control"
                                    id="exampleInputPassword1" placeholder="密码">
                         </div>
                         <div class="checkbox">
