@@ -1,0 +1,26 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  max-width: 800px;
+  margin: auto;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+
+.btn{
+  padding: 6px 15px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+}
+#app{
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <% include basic_include.ejs %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p class="text-right">- 冰心</p>
+    <div id="start_app"></div>
+    <script type="text/babel">
+ var start_btn = {
+                border:"1px solid #ddd",
+                textAlign:"center",
+                margin:"100px auto",
+                width:"260px",
+                padding:"10px"
+
+            }
+
+        // tutorial1.js
+      var CommentBox = React.createClass({
+        render: function() {
+          return (
+            <div className="commentBox">
+              Hello, world! I am a CommentBox.
+            </div>
+          );
+        }
+      });
+      ReactDOM.render(
+        <CommentBox />,
+        document.getElementById('start_app')
+      );
+
+    </script>
+  </body>
+</html>

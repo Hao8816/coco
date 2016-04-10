@@ -1,7 +1,7 @@
 // mongoose 链接
 var async = require('async');
 var mongoose = require('mongoose');
-var MongoCache = {}
+var MongoCache = {};
 
 var db = mongoose.createConnection('mongodb://127.0.0.1:8085/coco');
 
