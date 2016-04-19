@@ -62,8 +62,8 @@
 
 <div id="image_container">
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="work in work_list" style="margin: 10px 0px">
-        <a href="/images/{{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">
-            <img class="img-responsive" src="/images/{{work.file_sha1}}">
+        <a href="/coco/file?sha1={{work.file_sha1}}" data-lightbox="image" data-title="{{work.note}}">
+            <img class="img-responsive" src="/coco/file?sha1={{work.file_sha1}}">
         </a>
 
         <div style="padding: 5px;border-top: 1px solid #F2F2F2;background: #FAFAFA;">

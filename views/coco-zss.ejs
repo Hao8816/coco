@@ -111,7 +111,7 @@
                     $('#upload_process').text("当前进度" + process)
                 },
                 done: function (e, data) {
-                    var image_url = "/images/" + data.result['sha1'];
+                    var image_url = "/coco/file?sha1=" + data.result['sha1'];
                     $('#upload_files_area').html('<img style="max-width:220px;max-height:220px;" src=' + image_url + '>');
                     $('.upload-title').text('重新选择');
                     $('#fileupload').attr("imagesha1", data.result['sha1']);
