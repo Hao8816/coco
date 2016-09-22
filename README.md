@@ -7,17 +7,10 @@ COCO 是一个基于Nodejs Express，Socket.Io,AngularJs,Bootstrap3构建的一�
 web application framework for node
  [Express](http://expressjs.com/)
 
-#### Socket.IO
+
+#### 添加对个人作品管理和个人中心的支持
+
 ----
-Socket.IO enables real-time bidirectional event-based communication. It works on every platform, browser or device, focusing equally on reliability。
-
-
-
-#### AngularJs
-----
-
-
-#### Bootstrap3
-----
-this 
-
+添加用户简历表格
+添加用户动态的表格
+添加好友关系的表格

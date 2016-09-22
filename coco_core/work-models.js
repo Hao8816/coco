@@ -24,6 +24,17 @@ var Works = db.define("works", {
 });
 
 
+// 用户创建作品集合
+var Category = db.define("category", {
+    time          : String,    // 作品的上传时间
+    creator_sha1  : String,    // 用户的sha1
+    note          : String,    // 作品的描述
+    file_sha1     : String     // 文件的sha1
+}, {
+    // with in model method
+});
+
+
 db.sync();
 
 works_models['Works'] = Works;
