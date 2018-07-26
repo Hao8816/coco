@@ -309,7 +309,6 @@ var getFile = function getFile(req,res){
 var saveFile = function saveFile(obj){
     var date_time = new Date().getTime();
     // 将文件内容保存在mongodb
-    MongoCache.saveFile({sha1:obj.sha1,content:obj.content});
     // 将文件信息持久化到数据库
     blog_models.File.create([{
         time          : date_time.toString(),    // 微博创建的时间
